@@ -1,0 +1,7 @@
+{
+  "name": "iptvthesmarters",
+  "description": "Comprehensive IPTV setup guides, device walkthroughs, and technical support documentation with visual accessibility.",
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

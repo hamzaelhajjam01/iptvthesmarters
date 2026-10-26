@@ -1,0 +1,570 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.join(__dirname, '..');
+const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
+
+const productsHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro</title>
+  <meta name="description" content="Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://iptv-the-smarters-pro.ai.studio/products/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro">
+  <meta property="og:description" content="Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.">
+  <meta property="og:url" content="https://iptv-the-smarters-pro.ai.studio/products/">
+  <meta property="og:image" content="https://iptv-the-smarters-pro.ai.studio/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://iptv-the-smarters-pro.ai.studio/og-image.jpg">
+  <link rel="stylesheet" href="/assets/css/product-pages.css?v=1">
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260907-9">
+  <style>
+    .directory {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 60px 0 100px;
+    }
+    .dir-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 56px;
+    }
+    .dir-header h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin: 12px 0 16px;
+    }
+    .dir-header p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .featured-guides {
+      background: linear-gradient(135deg, rgba(123, 63, 228, 0.1), rgba(95, 21, 205, 0.05));
+      border: 1px solid rgba(123, 63, 228, 0.25);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 56px;
+    }
+    .featured-guides h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .featured-card {
+      background: rgba(17, 17, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .featured-card:hover {
+      border-color: #7B3FE4;
+      background: rgba(123, 63, 228, 0.15);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .featured-card strong {
+      display: block;
+      color: #f1f5f9;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .featured-card span {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .dir-section {
+      margin-bottom: 56px;
+    }
+    .dir-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dir-section p.sec-desc {
+      font-size: 15px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 12px;
+    }
+    .topic-card {
+      background: #111114;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 16px 18px;
+      color: #e2e8f0;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .topic-card:hover {
+      border-color: #7B3FE4;
+      background: #181524;
+      transform: translateY(-1px);
+    }
+    .topic-card strong {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ddd6fe;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .topic-card:hover strong {
+      color: #fff;
+    }
+    .topic-card span {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+    .topic-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #a78bfa;
+      margin-bottom: 6px;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://iptv-the-smarters-pro.ai.studio/products/#webpage",
+        "url": "https://iptv-the-smarters-pro.ai.studio/products/",
+        "name": "IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro",
+        "description": "Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://iptv-the-smarters-pro.ai.studio/products/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://iptv-the-smarters-pro.ai.studio/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products & Topics",
+            "item": "https://iptv-the-smarters-pro.ai.studio/products/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="kw-header">
+    <a class="kw-brand" href="/">IPTV Smarters Pro</a>
+    <nav>
+      <a href="/iptv-services/">IPTV Services</a>
+      <a href="/channels/">Channels</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
+      <a href="/products/" class="is-active" style="color:#a78bfa;">Products</a>
+    </nav>
+    <a class="kw-trial" href="/?trial=true">Free Trial</a>
+  </header>
+
+  <main class="directory">
+    <div class="dir-header">
+      <span class="eyebrow">Solutions Directory</span>
+      <h1>IPTV Solutions & Knowledge Base</h1>
+      <p>Browse authoritative resources covering hardware video encoders, third-party player applications, streaming protocols, troubleshooting walkthroughs, and verified subscription packages.</p>
+    </div>
+
+    <!-- Essential Setup Guides Hub -->
+    <div class="featured-guides">
+      <h2>Recommended Setup Guides</h2>
+      <div class="featured-grid">
+        <a href="/guides/how-to-activate-iptv-smarters-pro/" class="featured-card">
+          <strong>Activation Guide</strong>
+          <span>Complete walkthrough for activating IPTV Smarters Pro with Xtream Codes or M3U.</span>
+        </a>
+        <a href="/guides/install-iptv-smarters-pro-on-firestick/" class="featured-card">
+          <strong>Firestick Installation</strong>
+          <span>Sideload and configure IPTV Smarters Pro on Amazon Fire TV Stick 4K & Max.</span>
+        </a>
+        <a href="/guides/iptv-smarters-pro-failed-to-authorize-fix/" class="featured-card">
+          <strong>Failed to Authorize Fix</strong>
+          <span>Diagnostic steps for resolving server authorization and portal rejection errors.</span>
+        </a>
+        <a href="/guides/iptv-smarters-pro-keeps-buffering-fixes/" class="featured-card">
+          <strong>Buffer Elimination Guide</strong>
+          <span>Buffer tuning, hardware acceleration, and ISP throttling workarounds.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 1. Hardware Video Encoders -->
+    <section class="dir-section">
+      <div class="topic-badge">Hardware & Broadcasting</div>
+      <h2>Hardware Video Encoders & Ingestion Systems</h2>
+      <p class="sec-desc">Hardware streaming encoders convert physical HDMI or SDI video feeds into digital IP streams for local LANs, hotels, campuses, or CDN distribution. Note: Hardware encoders generate streams; they are not consumer viewing subscriptions.</p>
+      <div class="topic-grid">
+        <a href="/products/iptv-encoder/" class="topic-card">
+          <strong>IPTV Video Encoder Guide</strong>
+          <span>Core principles of hardware video capture, compression, and IP streaming.</span>
+        </a>
+        <a href="/products/hdmi-encoder-for-iptv/" class="topic-card">
+          <strong>HDMI to IPTV Encoders</strong>
+          <span>Connecting HDMI video sources to local IP networks and digital signage.</span>
+        </a>
+        <a href="/products/4k-iptv-encoder/" class="topic-card">
+          <strong>4K HEVC IPTV Encoders</strong>
+          <span>High-density 2160p encoding with H.265 compression and Gigabit Ethernet.</span>
+        </a>
+        <a href="/products/sdi-iptv-encoder/" class="topic-card">
+          <strong>SDI Broadcast Encoders</strong>
+          <span>Professional 3G/12G-SDI video capture for studios, OB vans, and event venues.</span>
+        </a>
+        <a href="/products/srt-iptv-encoder/" class="topic-card">
+          <strong>SRT Protocol Encoders</strong>
+          <span>Low-latency, packet-loss resilient streaming across public internet connections.</span>
+        </a>
+        <a href="/products/low-latency-iptv-encoder/" class="topic-card">
+          <strong>Low-Latency Encoders</strong>
+          <span>Sub-second glass-to-glass video latency for interactive live events and sports.</span>
+        </a>
+        <a href="/products/multicast-iptv-encoder/" class="topic-card">
+          <strong>Multicast LAN Encoders</strong>
+          <span>UDP/RTP IGMP multicast transmission for enterprise and corporate campuses.</span>
+        </a>
+        <a href="/products/best-4-channel-iptv-encoder/" class="topic-card">
+          <strong>4-Channel Multi-Input Encoders</strong>
+          <span>High-density 1U encoding units for multiple concurrent HDMI or SDI feeds.</span>
+        </a>
+        <a href="/products/rack-mount-iptv-encoder/" class="topic-card">
+          <strong>Rackmount Encoder Systems</strong>
+          <span>19-inch 1U/2U server rack hardware with redundant dual power supplies.</span>
+        </a>
+        <a href="/products/iptv-encoder-for-hotel/" class="topic-card">
+          <strong>Hospitality Hotel Encoders</strong>
+          <span>In-room TV distribution systems interfacing with hotel PMS middleware.</span>
+        </a>
+        <a href="/products/best-encoder-for-iptv/" class="topic-card">
+          <strong>Encoder Buyer\'s Guide</strong>
+          <span>Comparing standalone compact units with enterprise modular encoding systems.</span>
+        </a>
+        <a href="/products/compare-iptv-encoders-for-professional-use/" class="topic-card">
+          <strong>Professional Encoder Comparison</strong>
+          <span>Matrix evaluation of chipsets, latency, firmware stability, and protocols.</span>
+        </a>
+        <a href="/products/h-264-hdmi-iptv-encoder/" class="topic-card">
+          <strong>H.264 / AVC HDMI Encoders</strong>
+          <span>Universal client playback compatibility across legacy TVs and mobile apps.</span>
+        </a>
+        <a href="/products/hevc-hdmi-iptv-encoder/" class="topic-card">
+          <strong>HEVC / H.265 HDMI Encoders</strong>
+          <span>50% bandwidth reduction for efficient high-definition network transmission.</span>
+        </a>
+        <a href="/products/broadcast-iptv-encoder/" class="topic-card">
+          <strong>Broadcast-Grade Encoders</strong>
+          <span>SMPTE compliance, genlock reference timing, and multi-track audio embedding.</span>
+        </a>
+        <a href="/products/professional-hdmi-iptv-encoder/" class="topic-card">
+          <strong>Commercial-Grade HDMI Encoders</strong>
+          <span>24/7 continuous operation, fanless heat dissipation, and static IP management.</span>
+        </a>
+        <a href="/products/live-streaming-iptv-encoder/" class="topic-card">
+          <strong>Live Streaming Encoders</strong>
+          <span>Simultaneous multi-destination streaming to CDNs, YouTube, and local LANs.</span>
+        </a>
+        <a href="/products/pvi-encoder-iptv/" class="topic-card">
+          <strong>Pro Video Instruments Review</strong>
+          <span>Commercial AV distribution equipment and VeCOAX RF/IP hardware review.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. Player Applications & Device Walkthroughs -->
+    <section class="dir-section">
+      <div class="topic-badge">Software & Players</div>
+      <h2>Player Applications & Multi-Device Compatibility</h2>
+      <p class="sec-desc">Player applications provide the user interface on your screen. Discover how to configure IPTV Smarters Pro subscription credentials on top player software across Smart TVs, Firestick, Apple devices, and PCs.</p>
+      <div class="topic-grid">
+        <a href="/products/iptv-smarters-pro/" class="topic-card">
+          <strong>IPTV Smarters Pro Player</strong>
+          <span>The flagship media player with multi-screen, EPG, and parental control features.</span>
+        </a>
+        <a href="/products/tivimate-iptv-player/" class="topic-card">
+          <strong>TiviMate IPTV Player</strong>
+          <span>Modern Android TV guide layout with Xtream Codes integration and multi-view.</span>
+        </a>
+        <a href="/products/smart-iptv/" class="topic-card">
+          <strong>Smart IPTV (SIPTV)</strong>
+          <span>LG webOS and Samsung Tizen TV setup via MAC address playlist upload.</span>
+        </a>
+        <a href="/products/iplay/" class="topic-card">
+          <strong>iPlay for Apple TV & iOS</strong>
+          <span>iCloud playlist syncing, custom channel groups, and subtitle support.</span>
+        </a>
+        <a href="/products/iptvx/" class="topic-card">
+          <strong>IPTVX for Apple Ecosystem</strong>
+          <span>Netflix-style UI for Apple TV, iPhone, iPad, and Mac with Xtream Codes API.</span>
+        </a>
+        <a href="/products/iptv-player-for-windows/" class="topic-card">
+          <strong>IPTV Player for Windows</strong>
+          <span>Desktop viewing solutions with GPU hardware decoding on Windows 10 & 11.</span>
+        </a>
+        <a href="/products/marinios-iptv/" class="topic-card">
+          <strong>Maritime & Offshore IPTV</strong>
+          <span>Buffer tuning and bandwidth optimization for Starlink and offshore yachts.</span>
+        </a>
+        <a href="/products/iptv-smart-player/" class="topic-card">
+          <strong>IPTV Smart Player</strong>
+          <span>Lightweight multi-platform streaming app with quick channel zapping.</span>
+        </a>
+        <a href="/products/ipexo-iptv-player-code/" class="topic-card">
+          <strong>IPEXO Player Setup</strong>
+          <span>Activation code pairing, playlist management, and connection setup.</span>
+        </a>
+        <a href="/products/iptv-app/" class="topic-card">
+          <strong>IPTV App Directory</strong>
+          <span>Comprehensive comparison of client playback applications by operating system.</span>
+        </a>
+        <a href="/products/iptv-editor/" class="topic-card">
+          <strong>IPTV Playlist Editor</strong>
+          <span>Reordering channel bouquets, hiding unwanted groups, and merging EPGs.</span>
+        </a>
+        <a href="/products/iptv-stream-player/" class="topic-card">
+          <strong>IPTV Stream Player</strong>
+          <span>Hardware decoding settings, aspect ratio adjustments, and stream cache tuning.</span>
+        </a>
+        <a href="/products/veplayer-iptv-decoder/" class="topic-card">
+          <strong>VEPlayer IPTV Decoder</strong>
+          <span>MPEG-TS stream parsing and video rendering optimization.</span>
+        </a>
+        <a href="/products/playtv/" class="topic-card">
+          <strong>PlayTV Streaming Guide</strong>
+          <span>Mobile and tablet touch controls with picture-in-picture mode.</span>
+        </a>
+        <a href="/products/smartiflix-iptv/" class="topic-card">
+          <strong>Smartiflix Application</strong>
+          <span>VOD catalog browsing, subtitle selection, and Xtream Codes login.</span>
+        </a>
+        <a href="/products/iptv-schedule/" class="topic-card">
+          <strong>EPG & Schedule Management</strong>
+          <span>XMLTV guide synchronization, timezone offsets, and missing guide fixes.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. Protocols, Playlists & Diagnostics -->
+    <section class="dir-section">
+      <div class="topic-badge">Protocols & Formats</div>
+      <h2>Streaming Protocols, Playlists & Diagnostics</h2>
+      <p class="sec-desc">Understand playlist syntaxes, API connections, network delivery mechanisms, and immediate error diagnosis.</p>
+      <div class="topic-grid">
+        <a href="/products/iptv-smarters-failed-to-authorize/" class="topic-card">
+          <strong>Failed to Authorize Diagnosis</strong>
+          <span>Troubleshooting syntax errors, trailing slashes, expired tokens, and ISP port blocks.</span>
+        </a>
+        <a href="/products/xtream-iptv/" class="topic-card">
+          <strong>Xtream Codes API Architecture</strong>
+          <span>Structured Portal URL, Port, Username, and Password authentication benefits.</span>
+        </a>
+        <a href="/products/m3u-iptv/" class="topic-card">
+          <strong>M3U & M3U8 Playlist Formats</strong>
+          <span>Dissecting #EXTINF headers, stream directives, and tokenized URL parsing.</span>
+        </a>
+        <a href="/products/public-iptv-playlist/" class="topic-card">
+          <strong>Public vs. Private Playlists</strong>
+          <span>Why free public M3U links fail and how private credentials guarantee 60fps feeds.</span>
+        </a>
+        <a href="/products/home-telecom-m3u/" class="topic-card">
+          <strong>Telecom ISP IPTV Delivery</strong>
+          <span>Modem bridge configurations, VLAN tagging, and set-top box isolation.</span>
+        </a>
+        <a href="/products/m3u-player/" class="topic-card">
+          <strong>M3U Player Selection</strong>
+          <span>Fast playlist parsing and custom stream cache buffer configurations.</span>
+        </a>
+        <a href="/products/iptv-playlist/" class="topic-card">
+          <strong>Playlist Management Guide</strong>
+          <span>Organizing channel bouquets, categorizing VODs, and troubleshooting sync errors.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. Technology, Legal & Architecture -->
+    <section class="dir-section">
+      <div class="topic-badge">Architecture & Legal</div>
+      <h2>Technology Standards, Architecture & Communities</h2>
+      <p class="sec-desc">Comprehensive insights into Internet Protocol Television history, infrastructure, legality, and open-source projects.</p>
+      <div class="topic-grid">
+        <a href="/products/what-is-iptv/" class="topic-card">
+          <strong>What is IPTV?</strong>
+          <span>Core technological principles: comparing IPTV with OTT and traditional broadcast.</span>
+        </a>
+        <a href="/products/internet-protocol-television/" class="topic-card">
+          <strong>IPTV Network Architecture</strong>
+          <span>Headends, middleware clusters, content delivery networks, and subscriber terminals.</span>
+        </a>
+        <a href="/products/is-iptv-legal/" class="topic-card">
+          <strong>IPTV Legality & Safety Guide</strong>
+          <span>Copyright compliance, licensed broadcasting frameworks, and consumer safety.</span>
+        </a>
+        <a href="/products/iptv-headend/" class="topic-card">
+          <strong>IPTV Headend Infrastructure</strong>
+          <span>Satellite reception, transcoding arrays, multiplexing, and IP stream gateways.</span>
+        </a>
+        <a href="/products/headend-iptv/" class="topic-card">
+          <strong>Local Headend Installation</strong>
+          <span>Signal aggregation and local IP distribution for private properties and campuses.</span>
+        </a>
+        <a href="/products/iptv-org/" class="topic-card">
+          <strong>IPTV-Org Open-Source Project</strong>
+          <span>Exploring the GitHub public domain channel directory and integration tips.</span>
+        </a>
+        <a href="/products/github-iptv/" class="topic-card">
+          <strong>GitHub IPTV Tools & Repositories</strong>
+          <span>Developer scripts, EPG grabbers, playlist parsers, and automation tools.</span>
+        </a>
+        <a href="/products/iptv-reddit/" class="topic-card">
+          <strong>Reddit Community Insights</strong>
+          <span>Navigating r/IPTV discussions, avoiding affiliate scams, and finding honest advice.</span>
+        </a>
+        <a href="/products/iptv-equipment/" class="topic-card">
+          <strong>Essential Hardware Checklist</strong>
+          <span>Gigabit streaming boxes, Wi-Fi 6 routers, shielded Cat6 cabling, and remotes.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5. Commercial Packages & Regional Solutions -->
+    <section class="dir-section">
+      <div class="topic-badge">Subscriptions & Regions</div>
+      <h2>Verified Subscriptions & Regional Channel Solutions</h2>
+      <p class="sec-desc">High-performance subscription packages with anti-freeze server clusters, 99.9% uptime, and regional channel coverage.</p>
+      <div class="topic-grid">
+        <a href="/products/best-iptv/" class="topic-card">
+          <strong>Best IPTV Service 2026</strong>
+          <span>Comprehensive comparison of server uptime, sports bitrates, and customer support.</span>
+        </a>
+        <a href="/products/best-iptv-service-2026/" class="topic-card">
+          <strong>2026 Quality Standards</strong>
+          <span>60fps live sports feeds, 4K UHD movies, and 24/7 WhatsApp assistance.</span>
+        </a>
+        <a href="/products/iptv-providers/" class="topic-card">
+          <strong>Provider Selection Framework</strong>
+          <span>Evaluating server redundancy, multi-device concurrency, and refund policies.</span>
+        </a>
+        <a href="/products/best-iptv-reddit/" class="topic-card">
+          <strong>Reddit Community Favorites</strong>
+          <span>Key community criteria: trial availability, anti-freeze tech, and payment safety.</span>
+        </a>
+        <a href="/products/iptv-usa/" class="topic-card">
+          <strong>IPTV USA Channels</strong>
+          <span>Regional network affiliates (ABC, CBS, NBC, FOX) and US major sports passes.</span>
+        </a>
+        <a href="/products/iptv-uk/" class="topic-card">
+          <strong>IPTV UK Solutions</strong>
+          <span>UK Premier League, BBC/ITV channels, and UK ISP throttling workarounds.</span>
+        </a>
+        <a href="/products/iptv-france/" class="topic-card">
+          <strong>IPTV France & Ligue 1</strong>
+          <span>French national networks, Canal+, beIN Sports, and French VOD cinema.</span>
+        </a>
+        <a href="/products/indian-iptv/" class="topic-card">
+          <strong>Indian Regional Channels</strong>
+          <span>Hindi, Tamil, Telugu, and Punjabi channels with live international cricket.</span>
+        </a>
+        <a href="/products/iptv-italiane-4k/" class="topic-card">
+          <strong>Italian 4K Television</strong>
+          <span>RAI 4K, Sky Italia, Serie A football coverage, and Italian EPG guide data.</span>
+        </a>
+        <a href="/products/lista-iptv-de-pago-con-canales-en-vivo/" class="topic-card">
+          <strong>Spanish & Latin Channels</strong>
+          <span>La Liga Santander, Copa Libertadores, and Latin American regional bouquets.</span>
+        </a>
+        <a href="/products/ip-tv-sat-n-al/" class="topic-card">
+          <strong>Turkish IPTV Solutions</strong>
+          <span>Turkish Süper Lig, Digiturk, beIN Sports Turkey, and Turkish support.</span>
+        </a>
+        <a href="/products/ip-televizija/" class="topic-card">
+          <strong>Balkan IP Televizija</strong>
+          <span>Croatian, Serbian, and Bosnian national channels with Arena Sport coverage.</span>
+        </a>
+        <a href="/products/4k-iptv/" class="topic-card">
+          <strong>4K Ultra HD Streaming</strong>
+          <span>High-bitrate 3840x2160 streams with HDR10 color and uncompressed audio.</span>
+        </a>
+        <a href="/products/4k-live-iptv/" class="topic-card">
+          <strong>4K Live Sports Streaming</strong>
+          <span>Smooth 60fps live football, basketball, and racing broadcasts.</span>
+        </a>
+        <a href="/products/iptv-subscription/" class="topic-card">
+          <strong>Subscription Tier Guide</strong>
+          <span>Choosing device concurrency (1, 2, or 3 screens) and billing durations.</span>
+        </a>
+        <a href="/products/iptv-free-trial/" class="topic-card">
+          <strong>Free Trial Testing</strong>
+          <span>Testing server latency, channel zapping speed, and device compatibility.</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>IPTV Smarters Pro</strong>
+      <p>Subscription guidance, device setup, pricing and support.</p>
+    </div>
+    <nav>
+      <a href="/products/">All product topics</a>
+      <a href="/guides/">All guides</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <p>© 2026 IPTV Smarters Pro</p>
+  </footer>
+  <script src="/assets/js/site-interactions.js?v=20260907-7" defer></script>
+</body>
+</html>
+`;
+
+fs.writeFileSync(path.join(sourceDir, 'products', 'index.html'), productsHtml, 'utf8');
+console.log('Successfully generated curated /products/index.html directory!');
+process.exit(0);

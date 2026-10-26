@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iptv-the-smarters-pro.ai.studio/sitemap.xml

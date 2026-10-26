@@ -1,0 +1,20 @@
+{
+  "keyword_rows": 184,
+  "unique_keywords": 184,
+  "generated_pages": 184,
+  "http_failures": 0,
+  "metadata_failures": 0,
+  "schema_failures": 0,
+  "directory_links": 184,
+  "sitemap_urls": 244,
+  "desktop_overflow": false,
+  "mobile_overflow": false,
+  "pricing_cards": 5,
+  "faq_items_per_page": 3,
+  "order_modal": true,
+  "whatsapp_brand": true,
+  "whatsapp_devices": true,
+  "prepared_message_contains_please": false,
+  "browser_errors": 0,
+  "tested": "2026-09-07 03:31:23"
+}

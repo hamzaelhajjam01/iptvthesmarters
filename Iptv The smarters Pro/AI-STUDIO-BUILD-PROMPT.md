@@ -1,0 +1,3 @@
+# Prompt for Google AI Studio Build mode
+
+Import this complete static project and preserve every existing route, asset, metadata tag, JSON-LD block, `robots.txt`, `sitemap.xml`, and `llms.txt`. Keep the brand name `IPTV Smarters Pro`, the main accent `#7B3FE4`, the deeper gradient `#5F15CD`, and the existing WhatsApp ordering behavior. Do not convert the 184 routes under `/products/` into client-only routes. Each clean URL must return its own server-rendered HTML and HTTP 200 when opened directly. Preserve the crawlable `/products/` directory and responsive five/three/two/one-column pricing layouts. Before deployment, report any route that cannot be hosted as a direct URL and any public file that the platform does not serve from the root.

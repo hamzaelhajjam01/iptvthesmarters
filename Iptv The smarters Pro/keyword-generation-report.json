@@ -1,0 +1,17 @@
+{
+  "source_csv": "C:\\Users\\boulh\\Downloads\\table-export-184-rows.csv",
+  "source_rows": 184,
+  "unique_keywords": 184,
+  "generated_product_pages": 184,
+  "total_indexable_routes": 244,
+  "origin": "https://iptv-smarters-pro.ai.studio",
+  "clusters": {
+    "Device setup": 2,
+    "Encoder hardware": 44,
+    "IPTV education": 85,
+    "Plans and providers": 42,
+    "Playlist and login": 9,
+    "Troubleshooting": 2
+  },
+  "generated": "2026-09-07"
+}
