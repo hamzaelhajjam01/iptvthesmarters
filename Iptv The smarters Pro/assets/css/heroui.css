@@ -613,3 +613,36 @@ header {
 .carousel-btn:active {
   transform: scale(0.94);
 }
+
+
+/* ==========================================================================
+   Carousel Container Max-Width & Centered Box Rules
+   ========================================================================== */
+
+#vod-entertainment-hub {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#vod-entertainment-hub .carousel-container {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  border-radius: var(--heroui-radius-xl, 18px) !important;
+}
+
+#vod-entertainment-hub .carousel-track {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Specifically constrain Live Sports carousel section */
+#vod-entertainment-hub > div:last-child {
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
