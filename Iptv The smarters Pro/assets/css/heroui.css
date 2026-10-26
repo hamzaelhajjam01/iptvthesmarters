@@ -1,0 +1,258 @@
+/* ==========================================================================
+   HeroUI (formerly NextUI) Design System & Tokens Theme
+   https://heroui.com
+   ========================================================================== */
+
+:root {
+  /* HeroUI Core Semantic Palette (Dark Mode Base) */
+  --heroui-background: #000000;
+  --heroui-foreground: #ECEDEE;
+  
+  /* HeroUI Content Surfaces */
+  --heroui-content1: #18181B; /* Cards, Modals */
+  --heroui-content2: #27272A; /* Inputs, Secondary Surfaces */
+  --heroui-content3: #3F3F46; /* Subtle hover surfaces */
+  --heroui-content4: #52525B; /* Active borders / dividers */
+
+  /* HeroUI Primary Accent (Electric Indigo / Violet) */
+  --heroui-primary: #7828C8;
+  --heroui-primary-50: #F2EAFA;
+  --heroui-primary-100: #E4D4F4;
+  --heroui-primary-200: #C9A9E9;
+  --heroui-primary-300: #AE7EDE;
+  --heroui-primary-400: #9353D3;
+  --heroui-primary-500: #7828C8;
+  --heroui-primary-600: #6020A0;
+  --heroui-primary-700: #481878;
+  --heroui-primary-800: #301050;
+  --heroui-primary-900: #180828;
+  --heroui-primary-foreground: #FFFFFF;
+
+  /* HeroUI Success & Feedback */
+  --heroui-success: #17C964;
+  --heroui-success-foreground: #000000;
+  --heroui-warning: #F5A524;
+  --heroui-danger: #F31260;
+
+  /* HeroUI Radius Tokens */
+  --heroui-radius-sm: 8px;
+  --heroui-radius-md: 12px;
+  --heroui-radius-lg: 14px;
+  --heroui-radius-xl: 18px;
+  --heroui-radius-full: 9999px;
+
+  /* HeroUI Shadows & Glows */
+  --heroui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --heroui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --heroui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --heroui-shadow-primary: 0 4px 14px 0 rgba(120, 40, 200, 0.39);
+  --heroui-shadow-primary-hover: 0 6px 20px rgba(120, 40, 200, 0.55);
+
+  /* Typography & Transitions */
+  --heroui-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --heroui-transition-default: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --heroui-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base & Canvas Overrides
+   ========================================================================== */
+html, body {
+  background-color: var(--heroui-background) !important;
+  color: var(--heroui-foreground) !important;
+  font-family: var(--heroui-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   HeroUI Navbar Component Styles
+   ========================================================================== */
+.kw-header,
+header {
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ==========================================================================
+   HeroUI Card Component Styles
+   ========================================================================== */
+.plan-card,
+.pricing-diamond-slot .diamond-panel,
+.kw-plan,
+.kw-copy section,
+.faq-item,
+.related-card {
+  background-color: var(--heroui-content1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--heroui-radius-xl) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 20px -2px rgba(0, 0, 0, 0.5) !important;
+  transition: transform var(--heroui-transition-default), 
+              box-shadow var(--heroui-transition-default), 
+              border-color var(--heroui-transition-default) !important;
+}
+
+.plan-card:hover,
+.pricing-diamond-slot .diamond-panel:hover,
+.kw-plan:hover,
+.kw-copy section:hover,
+.related-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(147, 83, 211, 0.45) !important;
+  box-shadow: 0 0 0 1px rgba(120, 40, 200, 0.25), 0 12px 30px -4px rgba(0, 0, 0, 0.7), 0 0 25px rgba(120, 40, 200, 0.2) !important;
+}
+
+/* Featured / Popular Tier Card */
+.is-popular,
+.plan-card.is-popular,
+.kw-plan.is-popular {
+  border-color: var(--heroui-primary) !important;
+  box-shadow: 0 0 0 1px var(--heroui-primary), 0 8px 32px rgba(120, 40, 200, 0.35) !important;
+  position: relative;
+}
+
+/* ==========================================================================
+   HeroUI Button Components (Solid, Shadow, Flat variants)
+   ========================================================================== */
+.buy-now-btn,
+.kw-trial,
+.hero-actions a:not(:nth-child(2)),
+.tm-submit,
+.om-go {
+  background: var(--heroui-primary) !important;
+  color: var(--heroui-primary-foreground) !important;
+  border-radius: var(--heroui-radius-lg) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--heroui-shadow-primary) !important;
+  border: none !important;
+  cursor: pointer;
+  transition: transform var(--heroui-transition-fast), 
+              background-color var(--heroui-transition-fast), 
+              box-shadow var(--heroui-transition-fast) !important;
+}
+
+.buy-now-btn:hover,
+.kw-trial:hover,
+.hero-actions a:not(:nth-child(2)):hover,
+.tm-submit:hover,
+.om-go:hover {
+  background: var(--heroui-primary-400) !important;
+  box-shadow: var(--heroui-shadow-primary-hover) !important;
+  transform: translateY(-2px) scale(1.01) !important;
+}
+
+.buy-now-btn:active,
+.kw-trial:active,
+.hero-actions a:active {
+  transform: scale(0.97) !important;
+}
+
+/* Secondary Button (Bordered / Flat Variant) */
+.hero-actions a:nth-child(2) {
+  background: var(--heroui-content2) !important;
+  color: var(--heroui-foreground) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--heroui-radius-lg) !important;
+  font-weight: 600 !important;
+  transition: all var(--heroui-transition-fast) !important;
+}
+
+.hero-actions a:nth-child(2):hover {
+  background: var(--heroui-content3) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   HeroUI Chip / Badge Component
+   ========================================================================== */
+.kw-badge,
+.plan-pill,
+.diamond-badge {
+  background: var(--heroui-primary) !important;
+  color: var(--heroui-primary-foreground) !important;
+  border-radius: var(--heroui-radius-full) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  box-shadow: 0 2px 10px rgba(120, 40, 200, 0.5) !important;
+  border: none !important;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(120, 40, 200, 0.15) !important;
+  color: var(--heroui-primary-300) !important;
+  border: 1px solid rgba(174, 126, 222, 0.3) !important;
+  border-radius: var(--heroui-radius-full) !important;
+  padding: 4px 14px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   HeroUI Tabs / Segmented Controls
+   ========================================================================== */
+.device-toggle {
+  background: var(--heroui-content1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--heroui-radius-full) !important;
+  padding: 4px !important;
+}
+
+.device-tab {
+  border-radius: var(--heroui-radius-full) !important;
+  transition: all var(--heroui-transition-fast) !important;
+  font-weight: 600 !important;
+  color: #A1A1AA !important;
+}
+
+.device-tab.is-active {
+  color: #FFFFFF !important;
+}
+
+.device-tab.is-active .device-tab-bg {
+  background: var(--heroui-primary) !important;
+  border-radius: var(--heroui-radius-full) !important;
+  box-shadow: 0 2px 12px rgba(120, 40, 200, 0.45) !important;
+}
+
+/* ==========================================================================
+   HeroUI Accordion (FAQ Items)
+   ========================================================================== */
+.faq-item {
+  border-radius: var(--heroui-radius-lg) !important;
+  background: var(--heroui-content1) !important;
+  margin-bottom: 8px !important;
+}
+
+.faq-item[open] {
+  border-color: rgba(147, 83, 211, 0.4) !important;
+  background: #1c1826 !important;
+}
+
+.faq-item[open] .faq-q {
+  color: var(--heroui-primary-300) !important;
+}
+
+.faq-num {
+  border-radius: var(--heroui-radius-md) !important;
+  background: rgba(120, 40, 200, 0.15) !important;
+  color: var(--heroui-primary-300) !important;
+  border: 1px solid rgba(174, 126, 222, 0.25) !important;
+}
+
+/* ==========================================================================
+   HeroUI Modals & Dialogs
+   ========================================================================== */
+#trial-modal,
+#om-card,
+#sf3 {
+  background: var(--heroui-content1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--heroui-radius-xl) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(120, 40, 200, 0.2) !important;
+}
