@@ -256,3 +256,158 @@ header {
   border-radius: var(--heroui-radius-xl) !important;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(120, 40, 200, 0.2) !important;
 }
+
+
+/* ==========================================================================
+   Knowledge Hub & Setup Guide Cards (HeroUI / NextUI Card Components)
+   ========================================================================== */
+
+#seo-knowledge-hub {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+#seo-knowledge-hub .grid,
+.knowledge-hub-grid {
+  display: grid !important;
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+@media (min-width: 640px) {
+  #seo-knowledge-hub .grid,
+  .knowledge-hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #seo-knowledge-hub .grid,
+  .knowledge-hub-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Individual Guide Card (HeroUI Card Specification) */
+#seo-knowledge-hub a.group,
+.guide-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding: 1.25rem 1.35rem !important;
+  background-color: var(--heroui-content1, #18181B) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--heroui-radius-xl, 16px) !important;
+  text-decoration: none !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 220ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-height: 140px !important;
+}
+
+#seo-knowledge-hub a.group:hover,
+.guide-card:hover {
+  transform: translateY(-4px) !important;
+  background-color: #1f1f24 !important;
+  border-color: rgba(147, 83, 211, 0.5) !important;
+  box-shadow: 0 0 0 1px rgba(120, 40, 200, 0.3), 
+              0 12px 30px -4px rgba(0, 0, 0, 0.7), 
+              0 0 20px rgba(120, 40, 200, 0.22) !important;
+}
+
+/* Category Badge / Eyebrow inside Card */
+#seo-knowledge-hub a.group > span:first-child,
+.guide-card-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--heroui-primary-300, #AE7EDE) !important;
+  background: rgba(120, 40, 200, 0.12) !important;
+  border: 1px solid rgba(174, 126, 222, 0.22) !important;
+  border-radius: var(--heroui-radius-full, 9999px) !important;
+  padding: 3px 10px !important;
+  margin-bottom: 0.75rem !important;
+  width: fit-content !important;
+}
+
+/* Card Title */
+#seo-knowledge-hub a.group h3,
+.guide-card-title {
+  font-size: 0.9375rem !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: #FFFFFF !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.01em !important;
+  transition: color 200ms ease !important;
+}
+
+#seo-knowledge-hub a.group:hover h3,
+.guide-card:hover .guide-card-title {
+  color: var(--heroui-primary-300, #C9A9E9) !important;
+}
+
+/* Card Description */
+#seo-knowledge-hub a.group p,
+.guide-card-desc {
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
+  color: #A1A1AA !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Featured Topics Pill Chips */
+#seo-knowledge-hub .flex-wrap a {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 6px 14px !important;
+  border-radius: var(--heroui-radius-full, 9999px) !important;
+  background: var(--heroui-content1, #18181B) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #D4D4D8 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 180ms ease !important;
+}
+
+#seo-knowledge-hub .flex-wrap a:hover {
+  background: var(--heroui-content2, #27272A) !important;
+  border-color: rgba(147, 83, 211, 0.4) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+#seo-knowledge-hub a[href="/guides/"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: var(--heroui-radius-full, 9999px) !important;
+  background: rgba(120, 40, 200, 0.12) !important;
+  border: 1px solid rgba(174, 126, 222, 0.25) !important;
+  color: var(--heroui-primary-300, #AE7EDE) !important;
+  text-decoration: none !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  transition: all 180ms ease !important;
+}
+
+#seo-knowledge-hub a[href="/guides/"]:hover {
+  background: rgba(120, 40, 200, 0.22) !important;
+  border-color: rgba(174, 126, 222, 0.45) !important;
+  color: #FFFFFF !important;
+  transform: translateX(3px) !important;
+}
