@@ -81,3 +81,5 @@ html[lang=ar] body,html[lang=ar] .font-display,html[lang=ar] .hero-title,html[la
 .device-toggle{max-width:100%;flex-wrap:wrap;justify-content:center;border-radius:20px;row-gap:4px}
 .device-tab{padding:9px 14px;font-size:.8125rem}
 }
+
+.locale-banner{display:none !important;visibility:hidden !important;pointer-events:none !important}

@@ -285,6 +285,8 @@ function updateLanguageLandingPage(lang) {
   html = html.replace(/href="\/terms\/"/g, `href="${p}terms/"`);
   html = html.replace(/href="\/refund\/"/g, `href="${p}refund/"`);
 
+  // Strip any rogue locale-banner
+  html = html.replace(/<div class="locale-banner"[\s\S]*?<\/div>/g, '');
   // Update header with localized header & switcher
   html = html.replace(/<header class="site-header[\s\S]*?<\/header>/, buildHeader(lang, 'home'));
   // Update ais-lang-toggle-init in head
