@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
 
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://thesmartersiptv.com/sitemap.xml
+Sitemap: https://thesmartersiptv.com/sitemap-pages.xml
+Sitemap: https://thesmartersiptv.com/sitemap-guides.xml
+Sitemap: https://thesmartersiptv.com/sitemap-products.xml
+Sitemap: https://thesmartersiptv.com/sitemap-legal.xml
