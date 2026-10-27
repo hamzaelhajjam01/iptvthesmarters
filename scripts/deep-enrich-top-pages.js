@@ -98,7 +98,7 @@ function enrichFailedToAuthorize() {
   // Update JSON-LD schema
   const schemaRegex = /"@type": "FAQPage",[\s\S]*?"mainEntity": \[[^\]]+\]/;
   const newSchema = `"@type": "FAQPage",
-          "@id": "https://iptvthesmarters.vercel.app/products/iptv-smarters-failed-to-authorize/#faq",
+          "@id": "https://thesmartersiptv.com/products/iptv-smarters-failed-to-authorize/#faq",
           "mainEntity": [
             {
               "@type": "Question",

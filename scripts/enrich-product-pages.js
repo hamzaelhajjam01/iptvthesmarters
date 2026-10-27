@@ -442,7 +442,7 @@ for (const item of retainedKeywords) {
   html = html.replace(/<section class="faq">[\s\S]*?<\/section>/i, newFaq);
 
   // 5. Update JSON-LD FAQPage schema in the document head
-  const canonicalUrl = `https://iptv-the-smarters-pro.ai.studio${item.path}`;
+  const canonicalUrl = `https://thesmartersiptv.com${item.path}`;
   const schemaObj = {
     "@context": "https://schema.org",
     "@graph": [
@@ -461,7 +461,7 @@ for (const item of retainedKeywords) {
         "provider": {
           "@type": "Organization",
           "name": "IPTV Smarters Pro",
-          "url": "https://iptv-the-smarters-pro.ai.studio"
+          "url": "https://thesmartersiptv.com"
         },
         "offers": {
           "@type": "AggregateOffer",
@@ -480,13 +480,13 @@ for (const item of retainedKeywords) {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://iptv-the-smarters-pro.ai.studio/"
+            "item": "https://thesmartersiptv.com/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Products",
-            "item": "https://iptv-the-smarters-pro.ai.studio/products/"
+            "item": "https://thesmartersiptv.com/products/"
           },
           {
             "@type": "ListItem",

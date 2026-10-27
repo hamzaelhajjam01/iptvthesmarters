@@ -90,7 +90,7 @@ for (const [srcPath, destPath] of Object.entries(consolidations)) {
   const filePath = path.join(sourceDir, relFile);
   if (!fs.existsSync(filePath)) continue;
 
-  const targetUrl = `https://iptv-the-smarters-pro.ai.studio${destPath}`;
+  const targetUrl = `https://thesmartersiptv.com${destPath}`;
   const targetName = destPath.replace(/^\/products\//, '').replace(/\/$/, '').replace(/-/g, ' ');
 
   const redirectHtml = `<!doctype html>

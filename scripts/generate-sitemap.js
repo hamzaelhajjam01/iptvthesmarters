@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.join(__dirname, '..');
 const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
-const BASE_URL = 'https://iptvthesmarters.vercel.app';
+const BASE_URL = 'https://thesmartersiptv.com';
 const TODAY = new Date().toISOString().split('T')[0];
 
 // Import consolidated redirect mappings so 301s are NOT in sitemap

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iptvthesmarters.vercel.app/sitemap.xml
+Sitemap: https://thesmartersiptv.com/sitemap.xml

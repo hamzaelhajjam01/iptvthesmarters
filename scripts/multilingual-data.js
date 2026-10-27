@@ -3,7 +3,7 @@
  * Incorporating DataForSEO Keywords and Native Nuances across 10 Global Locales
  */
 
-export const BASE_URL = 'https://iptvthesmarters.vercel.app';
+export const BASE_URL = 'https://thesmartersiptv.com';
 
 export const LANGUAGES = [
   {

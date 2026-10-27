@@ -9,13 +9,13 @@ const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
 /**
  * Replace base domain across all files
- * @param {string} newOrigin e.g. "https://iptvthesmarters.vercel.app" or "https://iptvthesmarters.com"
+ * @param {string} newOrigin e.g. "https://thesmartersiptv.com" or "https://iptvthesmarters.com"
  */
 export function updateProductionOrigin(newOrigin) {
   const cleanOrigin = newOrigin.replace(/\/+$/, '');
   const oldOrigins = [
-    'https://iptv-the-smarters-pro.ai.studio',
-    'https://iptv-smarters-pro.ai.studio'
+    'https://thesmartersiptv.com',
+    'https://thesmartersiptv.com'
   ];
 
   console.log(`Updating site base origin to: ${cleanOrigin}`);
@@ -50,6 +50,6 @@ export function updateProductionOrigin(newOrigin) {
 
 // CLI runner if invoked directly
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const target = process.argv[2] || 'https://iptvthesmarters.vercel.app';
+  const target = process.argv[2] || 'https://thesmartersiptv.com';
   updateProductionOrigin(target);
 }

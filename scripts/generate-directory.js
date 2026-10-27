@@ -15,14 +15,14 @@ const productsHtml = `<!doctype html>
   <title>IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro</title>
   <meta name="description" content="Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://iptv-the-smarters-pro.ai.studio/products/">
+  <link rel="canonical" href="https://thesmartersiptv.com/products/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro">
   <meta property="og:description" content="Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.">
-  <meta property="og:url" content="https://iptv-the-smarters-pro.ai.studio/products/">
-  <meta property="og:image" content="https://iptv-the-smarters-pro.ai.studio/og-image.jpg">
+  <meta property="og:url" content="https://thesmartersiptv.com/products/">
+  <meta property="og:image" content="https://thesmartersiptv.com/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://iptv-the-smarters-pro.ai.studio/og-image.jpg">
+  <meta name="twitter:image" content="https://thesmartersiptv.com/og-image.jpg">
   <link rel="stylesheet" href="/assets/css/product-pages.css?v=1">
   <link rel="stylesheet" href="/assets/css/theme.css?v=20260907-9">
   <style>
@@ -164,27 +164,27 @@ const productsHtml = `<!doctype html>
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": "https://iptv-the-smarters-pro.ai.studio/products/#webpage",
-        "url": "https://iptv-the-smarters-pro.ai.studio/products/",
+        "@id": "https://thesmartersiptv.com/products/#webpage",
+        "url": "https://thesmartersiptv.com/products/",
         "name": "IPTV Solutions & Knowledge Base Directory | IPTV Smarters Pro",
         "description": "Explore our curated directory of IPTV topics: hardware video encoders, compatible player applications, playlist protocols, troubleshooting diagnostics, and subscription guides.",
         "inLanguage": "en"
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://iptv-the-smarters-pro.ai.studio/products/#breadcrumb",
+        "@id": "https://thesmartersiptv.com/products/#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://iptv-the-smarters-pro.ai.studio/"
+            "item": "https://thesmartersiptv.com/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Products & Topics",
-            "item": "https://iptv-the-smarters-pro.ai.studio/products/"
+            "item": "https://thesmartersiptv.com/products/"
           }
         ]
       }
