@@ -7,58 +7,10 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.join(__dirname, '..');
 const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
-const BASE_URL = 'https://iptv-the-smarters-pro.ai.studio';
-const TODAY = '2026-10-19';
+const BASE_URL = 'https://iptvthesmarters.vercel.app';
+const TODAY = new Date().toISOString().split('T')[0];
 
-// 1. Core pages
-const coreUrls = [
-  { path: '/', priority: '1.0', changefreq: 'daily', lastmod: TODAY },
-  { path: '/channels/', priority: '0.9', changefreq: 'daily', lastmod: TODAY },
-  { path: '/pricing/', priority: '0.9', changefreq: 'daily', lastmod: TODAY },
-  { path: '/features/', priority: '0.8', changefreq: 'weekly', lastmod: TODAY },
-  { path: '/contact/', priority: '0.8', changefreq: 'weekly', lastmod: TODAY },
-  { path: '/privacy/', priority: '0.5', changefreq: 'monthly', lastmod: '2026-09-17' },
-  { path: '/terms/', priority: '0.5', changefreq: 'monthly', lastmod: '2026-09-17' },
-  { path: '/refund/', priority: '0.5', changefreq: 'monthly', lastmod: '2026-09-17' }
-];
-
-// 2. Language homepages
-const langDirs = ['ar', 'de', 'es', 'fr', 'it', 'ko', 'nl', 'pl', 'pt', 'pt-br'];
-const langUrls = langDirs.map(l => ({
-  path: `/${l}/`,
-  priority: '0.8',
-  changefreq: 'weekly',
-  lastmod: TODAY
-}));
-
-// 3. IPTV Services
-const serviceDirs = ['', 'sports-iptv-providers', 'smart-tv-providers', 'xtream-codes-providers', '4k-streaming-providers', 'live-tv-vod-providers'];
-const serviceUrls = serviceDirs.map(s => ({
-  path: s ? `/iptv-services/${s}/` : `/iptv-services/`,
-  priority: s ? '0.8' : '0.9',
-  changefreq: s ? 'weekly' : 'daily',
-  lastmod: TODAY
-}));
-
-// 4. Guides
-const guideSubdirs = fs.readdirSync(path.join(sourceDir, 'guides')).filter(f => {
-  return fs.statSync(path.join(sourceDir, 'guides', f)).isDirectory();
-}).sort();
-
-const guideUrls = [
-  { path: '/guides/', priority: '0.9', changefreq: 'daily', lastmod: TODAY },
-  ...guideSubdirs.map(g => ({
-    path: `/guides/${g}/`,
-    priority: '0.8',
-    changefreq: 'weekly',
-    lastmod: TODAY
-  }))
-];
-
-// 5. Products: Directory + 117 Retained Enriched Product Pages
-const km = JSON.parse(fs.readFileSync(path.join(sourceDir, 'keyword-map.json'), 'utf8'));
-
-// Consolidation map
+// Import consolidated redirect mappings so 301s are NOT in sitemap
 const consolidations = {
   // Encoder hardware (26)
   "/products/iptv-encoders/": "/products/iptv-encoder/",
@@ -110,79 +62,120 @@ const consolidations = {
   "/products/ip-television/": "/products/internet-protocol-television/",
   "/products/xtreme-iptv/": "/products/xtremehd-iptv/",
   "/products/xtremhd-iptv/": "/products/xtremehd-iptv/",
-  "/products/iptv-github/": "/products/github-iptv/",
-  "/products/reddit-iptv/": "/products/iptv-reddit/",
-  "/products/ip-televizia/": "/products/ip-televizija/",
-  "/products/ptv-stream-player/": "/products/iptv-stream-player/",
-  "/products/iptv-abonnement/": "/products/abonnement-iptv/",
-  "/products/watch-nbc-live-iptv/": "/products/nbc-tv-show-live-stream-free-iptv/",
-  // Plans and Providers (15)
-  "/products/iptv-services/": "/iptv-services/",
+  "/products/ip-tv-provider/": "/iptv-services/",
+  "/products/ip-tv-box/": "/products/iptv-box/",
+  "/products/ip-televizia/": "/products/what-is-iptv/",
   "/products/iptv-service/": "/iptv-services/",
-  "/products/iptv-provider/": "/products/iptv-providers/",
-  "/products/iptv-service-providers/": "/products/iptv-providers/",
-  "/products/iptv-service-provider/": "/products/iptv-providers/",
-  "/products/ip-tv-provider/": "/products/iptv-providers/",
-  "/products/best-iptv-services/": "/products/best-iptv/",
-  "/products/best-iptv-providers/": "/products/best-iptv/",
-  "/products/best-iptv-provider/": "/products/best-iptv/",
-  "/products/best-iptv-service/": "/products/best-iptv/",
-  "/products/best-iptv-service-reddit/": "/products/best-iptv-reddit/",
-  "/products/reddit-best-iptv/": "/products/best-iptv-reddit/",
-  "/products/best-iptv-2025/": "/products/best-iptv-service-2026/",
-  "/products/iptv-streaming-services/": "/products/iptv-streaming-service/",
-  "/products/ip-tv-box/": "/products/iptv-box/"
+  "/products/iptv-services/": "/iptv-services/",
+  "/products/iptv-provider/": "/iptv-services/",
+  "/products/iptv-service-provider/": "/iptv-services/",
+  "/products/iptv-service-providers/": "/iptv-services/",
+  "/products/iptv-streaming-services/": "/iptv-services/",
+  "/products/best-iptv-service/": "/iptv-services/",
+  "/products/best-iptv-services/": "/iptv-services/",
+  "/products/best-iptv-provider/": "/iptv-services/",
+  "/products/best-iptv-providers/": "/iptv-services/",
+  "/products/best-iptv-2025/": "/products/best-iptv/",
+  "/products/best-iptv-service-reddit/": "/products/best-iptv/",
+  "/products/reddit-iptv/": "/products/best-iptv/",
+  "/products/reddit-best-iptv/": "/products/best-iptv/",
+  "/products/ptv-stream-player/": "/products/iptv-stream-player/",
+  "/products/iptv-github/": "/products/public-iptv-playlist/",
+  "/products/watch-nbc-live-iptv/": "/products/watch-nbc-live/",
+  "/products/iptv-abonnement/": "/products/abonnement-iptv/"
 };
 
-const retainedKm = km.filter(k => !consolidations[k.path]);
-
-const productUrls = [
-  { path: '/products/', priority: '0.9', changefreq: 'daily', lastmod: TODAY },
-  ...retainedKm.map(k => ({
-    path: k.path,
-    priority: '0.7',
-    changefreq: 'weekly',
-    lastmod: TODAY
-  }))
-];
-
-// Combine all valid indexable URLs
-const allEntries = [
-  ...coreUrls,
-  ...langUrls,
-  ...serviceUrls,
-  ...guideUrls,
-  ...productUrls
-];
-
-console.log(`Generating sitemap with ${allEntries.length} verified, indexable URLs...`);
-
-const xmlLines = [
-  '<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-];
-
-for (const entry of allEntries) {
-  xmlLines.push('  <url>');
-  xmlLines.push(`    <loc>${BASE_URL}${entry.path}</loc>`);
-  xmlLines.push(`    <lastmod>${entry.lastmod}</lastmod>`);
-  xmlLines.push(`    <changefreq>${entry.changefreq}</changefreq>`);
-  xmlLines.push(`    <priority>${entry.priority}</priority>`);
-  xmlLines.push('  </url>');
+function getAllHtmlFiles(dir, relativeTo = dir) {
+  let results = [];
+  const list = fs.readdirSync(dir);
+  for (const file of list) {
+    const full = path.join(dir, file);
+    const stat = fs.statSync(full);
+    if (stat.isDirectory()) {
+      results = results.concat(getAllHtmlFiles(full, relativeTo));
+    } else if (file.endsWith('.html')) {
+      const rel = path.relative(relativeTo, full).replace(/\\/g, '/');
+      results.push(rel);
+    }
+  }
+  return results;
 }
 
-xmlLines.push('</urlset>');
-xmlLines.push('');
+const allFiles = getAllHtmlFiles(sourceDir);
 
-const sitemapOutput = xmlLines.join('\n');
-fs.writeFileSync(path.join(sourceDir, 'sitemap.xml'), sitemapOutput, 'utf8');
+// Exclude non-page or verification files
+const excluded = ['404.html', 'google676628b207295d06.html'];
 
-console.log(`Successfully generated sitemap.xml with ${allEntries.length} URLs!`);
-console.log(`Breakdown:`);
-console.log(`- Core Pages: ${coreUrls.length}`);
-console.log(`- Translations: ${langUrls.length}`);
-console.log(`- IPTV Services: ${serviceUrls.length}`);
-console.log(`- Guides: ${guideUrls.length}`);
-console.log(`- Products: ${productUrls.length} (1 directory + ${retainedKm.length} retained pages)`);
-console.log(`- Consolidated URLs excluded: ${Object.keys(consolidations).length}`);
-process.exit(0);
+const urlEntries = [];
+
+for (const file of allFiles) {
+  if (excluded.includes(file)) continue;
+
+  let urlPath = '/' + file;
+  if (urlPath.endsWith('/index.html')) {
+    urlPath = urlPath.slice(0, -'index.html'.length);
+  } else if (urlPath.endsWith('.html')) {
+    urlPath = urlPath.slice(0, -'.html'.length) + '/';
+  }
+
+  // Skip if this path is a 301 redirect
+  if (consolidations[urlPath]) {
+    continue;
+  }
+
+  // Determine priority & changefreq based on route depth and importance
+  let priority = '0.7';
+  let changefreq = 'weekly';
+
+  if (urlPath === '/') {
+    priority = '1.0';
+    changefreq = 'daily';
+  } else if (['/channels/', '/pricing/', '/features/', '/contact/'].includes(urlPath)) {
+    priority = '0.9';
+    changefreq = 'daily';
+  } else if (/^\/(fr|de|es|ar|it|nl|pt|pt-br|pl|ko)\/$/.test(urlPath)) {
+    priority = '0.9';
+    changefreq = 'daily';
+  } else if (/^\/(fr|de|es|ar|it|nl|pt|pt-br|pl|ko)\/(pricing|channels|features|contact)\/$/.test(urlPath)) {
+    priority = '0.85';
+    changefreq = 'weekly';
+  } else if (/^\/(fr|de|es|ar|it|nl|pt|pt-br|pl|ko)\/[^\/]+\/$/.test(urlPath)) {
+    priority = '0.8';
+    changefreq = 'weekly';
+  } else if (urlPath.startsWith('/products/')) {
+    priority = '0.75';
+    changefreq = 'weekly';
+  } else if (urlPath.startsWith('/guides/')) {
+    priority = '0.8';
+    changefreq = 'weekly';
+  } else if (['/privacy/', '/terms/', '/refund/'].some(p => urlPath.includes(p))) {
+    priority = '0.3';
+    changefreq = 'monthly';
+  }
+
+  urlEntries.push({
+    loc: `${BASE_URL}${urlPath}`,
+    priority,
+    changefreq,
+    lastmod: TODAY
+  });
+}
+
+// Sort alphabetically by loc
+urlEntries.sort((a, b) => a.loc.localeCompare(b.loc));
+
+console.log(`Generating sitemap with ${urlEntries.length} clean, 200 OK canonical URLs...`);
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlEntries.map(e => `  <url>
+    <loc>${e.loc}</loc>
+    <lastmod>${e.lastmod}</lastmod>
+    <changefreq>${e.changefreq}</changefreq>
+    <priority>${e.priority}</priority>
+  </url>`).join('\n')}
+</urlset>
+`;
+
+fs.writeFileSync(path.join(sourceDir, 'sitemap.xml'), sitemapXml, 'utf8');
+console.log(`Successfully generated sitemap.xml with ${urlEntries.length} URLs!`);

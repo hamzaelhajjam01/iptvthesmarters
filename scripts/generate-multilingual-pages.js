@@ -9,7 +9,116 @@ const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
 const BASE_URL = 'https://iptvthesmarters.vercel.app';
 
-// Verified DataForSEO High-Volume / Low-KD Keywords
+// Localized UI Chrome Dictionaries
+const UI_STRINGS = {
+  fr: {
+    home: 'Accueil',
+    channels: 'Chaînes',
+    pricing: 'Tarifs',
+    support: 'Support',
+    getAccess: 'Accès Immédiat',
+    viewPlans: 'Voir les abonnements',
+    liveSupport: 'Support en direct',
+    plansEyebrow: 'Abonnements 4K',
+    plansH2: 'Choisissez votre formule',
+    plansP: 'Accès immédiat à toutes les chaînes, films et séries en Ultra HD.',
+    plansBtn: 'Consulter nos tarifs & commander',
+    faqEyebrow: 'Questions fréquentes',
+    faqSuffix: 'Réponses à vos questions',
+    footerDesc: "Fournisseur IPTV premium et guides d'installation officiels pour l'application IPTV Smarters Pro sur tous vos écrans connectés.",
+    navHeading: 'Navigation',
+    legalHeading: 'Légal & Support',
+    terms: "Conditions d'utilisation",
+    privacy: 'Confidentialité',
+    contact: 'Contactez-nous'
+  },
+  de: {
+    home: 'Startseite',
+    channels: 'Sender',
+    pricing: 'Preise',
+    support: 'Support',
+    getAccess: 'Sofort Freischalten',
+    viewPlans: 'Preise & Pakete ansehen',
+    liveSupport: 'Live-Support kontaktieren',
+    plansEyebrow: '4K IPTV Abonnements',
+    plansH2: 'Wählen Sie Ihr passendes Paket',
+    plansP: 'Sofortiger Zugriff auf alle Sender, Bundesliga und Serien in Ultra HD.',
+    plansBtn: 'Preise einsehen & bestellen',
+    faqEyebrow: 'Häufig gestellte Fragen',
+    faqSuffix: 'Antworten auf Ihre Fragen',
+    footerDesc: 'Führender IPTV-Anbieter und offizielle Einrichtungsanleitungen für IPTV Smarters Pro auf allen Geräten.',
+    navHeading: 'Navigation',
+    legalHeading: 'Rechtliches & Support',
+    terms: 'Nutzungsbedingungen',
+    privacy: 'Datenschutz',
+    contact: 'Kontakt aufnehmen'
+  },
+  es: {
+    home: 'Inicio',
+    channels: 'Canales',
+    pricing: 'Precios',
+    support: 'Soporte',
+    getAccess: 'Acceso Inmediato',
+    viewPlans: 'Ver planes y precios',
+    liveSupport: 'Soporte en directo',
+    plansEyebrow: 'Suscripciones 4K',
+    plansH2: 'Elige tu fórmula ideal',
+    plansP: 'Acceso inmediato a todos los canales de fútbol, películas y series en Ultra HD.',
+    plansBtn: 'Consultar tarifas y ordenar',
+    faqEyebrow: 'Preguntas frecuentes',
+    faqSuffix: 'Respuestas a tus dudas',
+    footerDesc: 'Proveedor IPTV de referencia y guías oficiales de instalación para IPTV Smarters Pro en todos tus dispositivos.',
+    navHeading: 'Navegación',
+    legalHeading: 'Legal y Soporte',
+    terms: 'Condiciones de uso',
+    privacy: 'Privacidad',
+    contact: 'Contáctanos'
+  },
+  it: {
+    home: 'Home',
+    channels: 'Canali',
+    pricing: 'Prezzi',
+    support: 'Supporto',
+    getAccess: 'Accesso Immediato',
+    viewPlans: 'Vedi i piani',
+    liveSupport: 'Supporto in tempo reale',
+    plansEyebrow: 'Abbonamenti 4K',
+    plansH2: 'Scegli il tuo piano ideale',
+    plansP: 'Accesso istantaneo a tutti i canali Serie A, cinema e serie in Ultra HD.',
+    plansBtn: 'Consulta i prezzi e ordina',
+    faqEyebrow: 'Domande frequenti',
+    faqSuffix: 'Risposte alle tue domande',
+    footerDesc: 'Fornitore IPTV premium e guide ufficiali di installazione per IPTV Smarters Pro su ogni dispositivo.',
+    navHeading: 'Navigazione',
+    legalHeading: 'Legale e Supporto',
+    terms: 'Termini di servizio',
+    privacy: 'Privacy Policy',
+    contact: 'Contattaci'
+  },
+  nl: {
+    home: 'Home',
+    channels: 'Zenders',
+    pricing: 'Prijzen',
+    support: 'Klantenservice',
+    getAccess: 'Direct Starten',
+    viewPlans: 'Bekijk abonnementen',
+    liveSupport: 'Live klantenondersteuning',
+    plansEyebrow: '4K IPTV Pakketten',
+    plansH2: 'Kies uw gewenste abonnement',
+    plansP: 'Directe toegang tot alle zenders, Eredivisie, Formule 1 en films in Ultra HD.',
+    plansBtn: 'Tarieven bekijken & bestellen',
+    faqEyebrow: 'Veelgestelde vragen',
+    faqSuffix: 'Antwoorden op uw vragen',
+    footerDesc: 'Hoogwaardige IPTV provider en officiële installatiehandleidingen voor IPTV Smarters Pro op al uw schermen.',
+    navHeading: 'Navigatie',
+    legalHeading: 'Juridisch & Hulp',
+    terms: 'Gebruiksvoorwaarden',
+    privacy: 'Privacybeleid',
+    contact: 'Neem contact op'
+  }
+};
+
+// High-Volume / Low-KD International Keyword Clusters
 const internationalClusters = [
   // 🇫🇷 FRENCH CLUSTER (/fr/...)
   {
@@ -109,7 +218,7 @@ const internationalClusters = [
       },
       {
         h2: "Étape 2 : Activer les sources inconnues",
-        p: "Allez dans Paramètres &gt; Ma Fire TV &gt; Options pour les développeurs &gt; Installer les applications inconnues, puis activez Downloader."
+        p: "Allez dans Paramètres > Ma Fire TV > Options pour les développeurs > Installer les applications inconnues, puis activez Downloader."
       },
       {
         h2: "Étape 3 : Télécharger et configurer l'APK",
@@ -270,11 +379,74 @@ const internationalClusters = [
         a: "Se recomienda una conexión estable de al menos 25-30 Mbps para streaming en calidad 4K Ultra HD y 15 Mbps para canales Full HD."
       }
     ]
+  },
+
+  // 🇮🇹 ITALIAN CLUSTER (/it/...)
+  {
+    lang: 'it',
+    langName: 'Italiano',
+    slug: 'abbonamento-iptv',
+    keyword: 'Abbonamento IPTV',
+    volume: 8100,
+    kd: 2,
+    intent: 'Commercial',
+    title: "Abbonamento IPTV 4K — Serie A e Champions Senza Blocchi 2026",
+    desc: "Abbonamento IPTV per IPTV Smarters Pro. Oltre 20.000 canali, Sky Sport, DAZN, cinema e serie TV in qualità 4K Ultra HD con server anti-blocco.",
+    heroTitle: "Abbonamento IPTV Premium 4K",
+    heroDesc: "La migliore IPTV in Italia per stabilità, supporto e qualità visiva. Goditi tutte le partite di calcio e i tuoi programmi preferiti senza rallentamenti.",
+    sections: [
+      {
+        h2: "Server Dedicati Anti-Blocco",
+        p: "Streaming stabile e fluido a 60FPS per Serie A, Champions League e Formula 1 anche nei momenti di picco."
+      },
+      {
+        h2: "Attivazione Istantanea Xtream Codes",
+        p: "Ricevi le tue credenziali di accesso immediatamente via email e WhatsApp per iniziare a guardare subito."
+      }
+    ],
+    faqs: [
+      {
+        q: "Come si attiva l'abbonamento su IPTV Smarters Pro?",
+        a: "Basta aprire l'app, scegliere 'Login con API Xtream Codes' e inserire i parametri ricevuti via email."
+      }
+    ]
+  },
+
+  // 🇳🇱 DUTCH CLUSTER (/nl/...)
+  {
+    lang: 'nl',
+    langName: 'Nederlands',
+    slug: 'iptv-kopen',
+    keyword: 'IPTV Kopen',
+    volume: 5400,
+    kd: 3,
+    intent: 'Commercial',
+    title: "IPTV Kopen 2026 — Beste IPTV Abonnement Nederland & België",
+    desc: "IPTV kopen voor IPTV Smarters Pro. Meer dan 20.000 zenders, Viaplay, Ziggo Sport, Eredivisie in 4K en VOD zonder haperingen.",
+    heroTitle: "IPTV Kopen: Betrouwbaar & Snel in 4K",
+    heroDesc: "Het toonaangevende IPTV abonnement voor Nederland en Vlaanderen. Geen haperingen, supersnelle zaptijden en directe activatie.",
+    sections: [
+      {
+        h2: "Anti-Freeze Servers voor Live Sport",
+        p: "Geniet van Formule 1, Eredivisie en Champions League in haarscherpe 4K 60FPS beeldkwaliteit."
+      },
+      {
+        h2: "Directe Levering via E-mail",
+        p: "Na betaling ontvangt u binnen 5 minuten uw Xtream Codes inloggegevens om direct te streamen."
+      }
+    ],
+    faqs: [
+      {
+        q: "Hoe installeer ik het abonnement op mijn TV?",
+        a: "Open IPTV Smarters Pro, klik op 'Login with Xtream Codes API' en voer de ontvangen inloggegevens in."
+      }
+    ]
   }
 ];
 
 function generatePageHtml(c) {
   const pageUrl = `${BASE_URL}/${c.lang}/${c.slug}/`;
+  const ui = UI_STRINGS[c.lang] || UI_STRINGS.fr;
 
   const sectionsHtml = c.sections.map(s => `
         <section>
@@ -306,7 +478,7 @@ function generatePageHtml(c) {
   return `<!doctype html>
 <html lang="${c.lang}">
 <head>
-  <!-- programmatic-multilingual-page:v1 -->
+  <!-- programmatic-multilingual-page:v2 -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>${c.title}</title>
@@ -361,7 +533,7 @@ function generatePageHtml(c) {
           "highPrice": "69.99",
           "offerCount": "4",
           "availability": "https://schema.org/InStock",
-          "url": "${BASE_URL}/${c.lang}/"
+          "url": "${BASE_URL}/${c.lang}/pricing/"
         }
       },
       {
@@ -379,17 +551,17 @@ function generatePageHtml(c) {
   <header class="kw-header">
     <a href="/${c.lang}/" class="kw-brand">IPTV Smarters Pro</a>
     <nav>
-      <a href="/${c.lang}/">Home</a>
-      <a href="/channels/">Channels</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/contact/">Support</a>
+      <a href="/${c.lang}/">${ui.home}</a>
+      <a href="/${c.lang}/channels/">${ui.channels}</a>
+      <a href="/${c.lang}/pricing/">${ui.pricing}</a>
+      <a href="/${c.lang}/contact/">${ui.support}</a>
     </nav>
-    <a href="/pricing/" class="kw-trial">Get Instant Access</a>
+    <a href="/${c.lang}/pricing/" class="kw-trial">${ui.getAccess}</a>
   </header>
 
   <main>
     <div class="breadcrumbs">
-      <a href="/${c.lang}/">Home</a>
+      <a href="/${c.lang}/">${ui.home}</a>
       <span>/</span>
       <a href="/${c.lang}/">${c.langName}</a>
       <span>/</span>
@@ -401,8 +573,8 @@ function generatePageHtml(c) {
       <h1>${c.heroTitle}</h1>
       <p>${c.heroDesc}</p>
       <div class="hero-actions">
-        <a href="/pricing/">Voir les abonnements</a>
-        <a href="/contact/">Support en direct</a>
+        <a href="/${c.lang}/pricing/">${ui.viewPlans}</a>
+        <a href="/${c.lang}/contact/">${ui.liveSupport}</a>
       </div>
     </section>
 
@@ -412,18 +584,18 @@ function generatePageHtml(c) {
 
     <!-- Pricing Section Shortcut -->
     <section class="plans" id="plans">
-      <span class="eyebrow">Abonnements 4K</span>
-      <h2>Choisissez votre formule</h2>
-      <p>Accès immédiat à toutes les chaînes, films et séries en Ultra HD.</p>
+      <span class="eyebrow">${ui.plansEyebrow}</span>
+      <h2>${ui.plansH2}</h2>
+      <p>${ui.plansP}</p>
       <div class="hero-actions" style="margin-top:20px;">
-        <a href="/pricing/">Consulter nos tarifs &amp; commander</a>
+        <a href="/${c.lang}/pricing/">${ui.plansBtn}</a>
       </div>
     </section>
 
     <!-- FAQ Accordion -->
     <section class="faq">
-      <span class="eyebrow">Questions fréquentes</span>
-      <h2>${c.keyword} : Réponses à vos questions</h2>
+      <span class="eyebrow">${ui.faqEyebrow}</span>
+      <h2>${c.keyword} : ${ui.faqSuffix}</h2>
       <div class="faq-list">
         ${faqsHtml}
       </div>
@@ -433,27 +605,27 @@ function generatePageHtml(c) {
   <footer>
     <div>
       <a href="/${c.lang}/" class="kw-brand" style="display:inline-block;margin-bottom:12px;">IPTV Smarters Pro</a>
-      <p style="font-size:13px;max-width:320px;line-height:1.6;">Fournisseur IPTV premium et guides d'installation officiels pour l'application IPTV Smarters Pro sur tous vos écrans connectés.</p>
+      <p style="font-size:13px;max-width:320px;line-height:1.6;">${ui.footerDesc}</p>
     </div>
     <nav>
-      <strong style="color:#fff;margin-bottom:8px;display:block;">Navigation</strong>
-      <a href="/${c.lang}/">Accueil</a>
-      <a href="/pricing/">Tarifs</a>
-      <a href="/channels/">Chaînes</a>
-      <a href="/guides/">Guides</a>
+      <strong style="color:#fff;margin-bottom:8px;display:block;">${ui.navHeading}</strong>
+      <a href="/${c.lang}/">${ui.home}</a>
+      <a href="/${c.lang}/pricing/">${ui.pricing}</a>
+      <a href="/${c.lang}/channels/">${ui.channels}</a>
+      <a href="/${c.lang}/features/">Features</a>
     </nav>
     <nav>
-      <strong style="color:#fff;margin-bottom:8px;display:block;">Légal &amp; Support</strong>
-      <a href="/terms/">Conditions d'utilisation</a>
-      <a href="/privacy/">Confidentialité</a>
-      <a href="/contact/">Contactez-nous</a>
+      <strong style="color:#fff;margin-bottom:8px;display:block;">${ui.legalHeading}</strong>
+      <a href="/${c.lang}/terms/">${ui.terms}</a>
+      <a href="/${c.lang}/privacy/">${ui.privacy}</a>
+      <a href="/${c.lang}/contact/">${ui.contact}</a>
     </nav>
   </footer>
 </body>
 </html>`;
 }
 
-function run() {
+export function run() {
   console.log(`Generating ${internationalClusters.length} multilingual programmatic SEO landing pages...`);
 
   let count = 0;
@@ -468,25 +640,8 @@ function run() {
     count++;
   }
 
-  // Update Sitemap
-  console.log('Injecting new international routes into sitemap.xml...');
-  const sitemapPath = path.join(sourceDir, 'sitemap.xml');
-  let sitemap = fs.readFileSync(sitemapPath, 'utf8');
-
-  const newSitemapUrls = internationalClusters.map(c => `  <url>
-    <loc>${BASE_URL}/${c.lang}/${c.slug}/</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>`).join('\n');
-
-  if (sitemap.includes('</urlset>')) {
-    sitemap = sitemap.replace('</urlset>', `${newSitemapUrls}\n</urlset>`);
-    fs.writeFileSync(sitemapPath, sitemap, 'utf8');
-    console.log('Sitemap.xml updated with all new multilingual landing routes!');
-  }
-
-  console.log(`Finished! Generated ${count} high-volume localized SEO landing pages.`);
+  console.log(`Successfully generated ${count} multilingual programmatic pages with native localized chrome!`);
 }
 
+// Run if called directly
 run();
