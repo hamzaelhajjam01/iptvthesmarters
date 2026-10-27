@@ -653,6 +653,526 @@
             </div>
           </div>
         </section>
+
+        <!-- HeroUI VOD Entertainment Hub (IMDb Top Rated Movies & Series Carousels) -->
+        <section id="vod-entertainment-hub" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <!-- Section Heading -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <span class="eyebrow mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-purple-400"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                IMDb Top-Rated VOD Catalog
+              </span>
+              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Stream Blockbuster Movies &amp; Binge-Worthy Series in 4K</h2>
+              <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">Access over 60,000+ on-demand movies, complete series, and documentaries updated weekly with multi-language audio and subtitles.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-full border border-zinc-800">Updated Daily</span>
+            </div>
+          </div>
+
+          <!-- Carousel 1: Top Rated Movies -->
+          <div class="mb-14">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_#7828C8]"></span>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Latest & Highest-Rated Blockbuster Movies</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" aria-label="Previous Movies" class="carousel-btn" onclick="document.getElementById('movie-track').scrollBy({left: -480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" aria-label="Next Movies" class="carousel-btn" onclick="document.getElementById('movie-track').scrollBy({left: 480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-container">
+              <div id="movie-track" class="carousel-track">
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.4
+                    </span>
+                    <span class="quality-chip">4K IMAX UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BNTc0YmQxMjEtODI5MC00NjFiLTlkMWUtOGQ5NjFmYWUyZGJhXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Dune: Part Two" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Sci-Fi / Adventure</span>
+                      <span class="media-year">2024</span>
+                    </div>
+                    <h4 class="media-title">Dune: Part Two</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.2
+                    </span>
+                    <span class="quality-chip">4K HDR</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Oppenheimer" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Drama / History</span>
+                      <span class="media-year">2023</span>
+                    </div>
+                    <h4 class="media-title">Oppenheimer</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.5
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BNThiZjA3MjItZGY5Ni00ZmJhLWEwN2EtOTBlYTA4Y2E0M2ZmXkEyXkFqcGc@._V1_QL75_UX380_CR0,1,380,562_.jpg" alt="Spider-Man: Across the Spider-Verse" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Animation / Action</span>
+                      <span class="media-year">2023</span>
+                    </div>
+                    <h4 class="media-title">Spider-Man: Across the Spider-Verse</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.2
+                    </span>
+                    <span class="quality-chip">4K HDR 60FPS</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BMDBkZDNjMWEtOTdmMi00NmExLTg5MmMtNTFlYTJlNWY5YTdmXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Top Gun: Maverick" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Thriller</span>
+                      <span class="media-year">2022</span>
+                    </div>
+                    <h4 class="media-title">Top Gun: Maverick</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      7.8
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BMmU5NGJlMzAtMGNmOC00YjJjLTgyMzUtNjAyYmE4Njg5YWMyXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="The Batman" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Crime / Mystery</span>
+                      <span class="media-year">2022</span>
+                    </div>
+                    <h4 class="media-title">The Batman</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      7.9
+                    </span>
+                    <span class="quality-chip">4K IMAX</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BOTJhOTMxMmItZmE0Ny00MDc3LWEzOGEtOGFkMzY4MWYyZDQ0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Guardians of the Galaxy Vol. 3" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Sci-Fi</span>
+                      <span class="media-year">2023</span>
+                    </div>
+                    <h4 class="media-title">Guardians of the Galaxy Vol. 3</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      7.5
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BZTk5ODY0MmQtMzA3Ni00NGY1LThiYzItZThiNjFiNDM4MTM3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Deadpool & Wolverine" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Comedy</span>
+                      <span class="media-year">2024</span>
+                    </div>
+                    <h4 class="media-title">Deadpool & Wolverine</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      7.6
+                    </span>
+                    <span class="quality-chip">4K HDR</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjc5MjllMGUtMDIwMS00ZDVkLWEzODQtM2NlMTMwMTZhNThmXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="Godzilla Minus One" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Sci-Fi</span>
+                      <span class="media-year">2023</span>
+                    </div>
+                    <h4 class="media-title">Godzilla Minus One</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel 2: Top Rated Series -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></span>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Latest & Trending TV Series (2024)</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" aria-label="Previous Series" class="carousel-btn" onclick="document.getElementById('series-track').scrollBy({left: -480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" aria-label="Next Series" class="carousel-btn" onclick="document.getElementById('series-track').scrollBy({left: 480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-container">
+              <div id="series-track" class="carousel-track">
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.6
+                    </span>
+                    <span class="quality-chip">4K HDR</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BZmJkMDRjYzEtMWI3Ny00OWE3LWJlNTItMGQ1MTQzMzc3NDY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg" alt="Shogun" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Historical / Drama</span>
+                      <span class="media-year">2024</span>
+                    </div>
+                    <h4 class="media-title">Shogun</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.6
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BYmU3MzYzOWEtOTdkZi00YzA1LTliMzQtNDdiZDBjY2FiNmFlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="The Penguin" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Crime / Drama</span>
+                      <span class="media-year">2024</span>
+                    </div>
+                    <h4 class="media-title">The Penguin</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.6
+                    </span>
+                    <span class="quality-chip">4K HDR</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BZDI5YzJhODQtMzQyNy00YWNmLWIxMjUtNDBjNjA5YWRjMzExXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg" alt="Severance" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Mystery / Sci-Fi</span>
+                      <span class="media-year">2022–</span>
+                    </div>
+                    <h4 class="media-title">Severance</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.5
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjk2NWI5OTctODcwYy00NGRmLWFmN2YtOTZiNzFiYjVlODBkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg" alt="The Bear" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Comedy / Drama</span>
+                      <span class="media-year">2022–</span>
+                    </div>
+                    <h4 class="media-title">The Bear</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.3
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BYzE1MTZmY2ItMTgxNi00OGU5LTk4NTItMmY2ODFhYzhjZjRkXkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg" alt="Fallout" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Sci-Fi / Action</span>
+                      <span class="media-year">2024–</span>
+                    </div>
+                    <h4 class="media-title">Fallout</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.4
+                    </span>
+                    <span class="quality-chip">4K HDR</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BYWI3ODJlMzktY2U5NC00ZjdlLWE1MGItNWQxZDk3NWNjN2RhXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" alt="The Last of Us" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Drama</span>
+                      <span class="media-year">2023–</span>
+                    </div>
+                    <h4 class="media-title">The Last of Us</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.2
+                    </span>
+                    <span class="quality-chip">4K Complete</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BOWU2ZDA0M2EtNWEyYy00MWUwLWI4NjAtYzkxMDFjYzZkNGFiXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg" alt="House of the Dragon" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Fantasy / Drama</span>
+                      <span class="media-year">2022–</span>
+                    </div>
+                    <h4 class="media-title">House of the Dragon</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip">
+                      <svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      8.5
+                    </span>
+                    <span class="quality-chip">4K UHD</span>
+                    <img src="https://m.media-amazon.com/images/M/MV5BZjU4OWNiYzQtMzc1NS00NjZlLTgyYTctZWY4ZmEzMTkxYjA4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg" alt="The Boys" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre">Action / Sci-Fi</span>
+                      <span class="media-year">2019–</span>
+                    </div>
+                    <h4 class="media-title">The Boys</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel 3: Live Sports & Major Leagues -->
+          <div class="mt-14">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Live Sports, Major Leagues &amp; PPV in 60FPS</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" aria-label="Previous Leagues" class="carousel-btn" onclick="document.getElementById('sports-track').scrollBy({left: -480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" aria-label="Next Leagues" class="carousel-btn" onclick="document.getElementById('sports-track').scrollBy({left: 480, behavior: 'smooth'})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-container">
+              <div id="sports-track" class="carousel-track">
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K 60FPS</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/yfor1r1718864480.jpg" alt="UEFA Champions League" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">European Football</span>
+                      <span class="media-year">TNT / Canal+ / Sky</span>
+                    </div>
+                    <h4 class="media-title">UEFA Champions League</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K HDR</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/67al0l1719007596.jpg" alt="Premier League" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">English Football</span>
+                      <span class="media-year">Sky Sports / TNT</span>
+                    </div>
+                    <h4 class="media-title">Premier League</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K UHD</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/3j1vo11636804719.jpg" alt="Spanish La Liga" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">Spanish Football</span>
+                      <span class="media-year">DAZN / Movistar</span>
+                    </div>
+                    <h4 class="media-title">Spanish La Liga</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">Live PPV 4K</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/l2k1ka1636383209.jpg" alt="UFC / MMA" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">Combat Sports & PPV</span>
+                      <span class="media-year">ESPN+ / TNT Box Office</span>
+                    </div>
+                    <h4 class="media-title">UFC / MMA</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K 60FPS</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/vtqtss1447330781.jpg" alt="NBA Basketball" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">US Basketball</span>
+                      <span class="media-year">NBA TV / ESPN</span>
+                    </div>
+                    <h4 class="media-title">NBA Basketball</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K Ultra HD</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/4e1svi1605133041.jpg" alt="Formula 1 Grand Prix" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">Motorsport</span>
+                      <span class="media-year">Sky Sports F1</span>
+                    </div>
+                    <h4 class="media-title">Formula 1 Grand Prix</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K UHD</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/6agbm61636804706.jpg" alt="Italian Serie A" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">Italian Football</span>
+                      <span class="media-year">DAZN / Paramount+</span>
+                    </div>
+                    <h4 class="media-title">Italian Serie A</h4>
+                  </div>
+                </div>
+
+                <div class="media-card">
+                  <div class="media-poster-wrap">
+                    <span class="imdb-chip" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      LIVE
+                    </span>
+                    <span class="quality-chip" style="background: rgba(37, 99, 235, 0.85); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);">4K HDR</span>
+                    <img src="https://r2.thesportsdb.com/images/media/league/poster/942uzh1636804690.jpg" alt="German Bundesliga" class="media-poster" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <div class="media-body">
+                    <div class="media-genre-row">
+                      <span class="media-genre" style="color: #60a5fa;">German Football</span>
+                      <span class="media-year">Sky Sport / beIN</span>
+                    </div>
+                    <h4 class="media-title">German Bundesliga</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="py-8 px-4 border-t border-zinc-900/50 max-w-7xl mx-auto relative overflow-hidden">
           <div class="text-center mb-6 relative z-10">
             <div class="flex flex-col items-center justify-center gap-4 mb-6">
