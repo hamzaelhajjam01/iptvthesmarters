@@ -560,59 +560,115 @@
       </style>
       
       
-      <header class="site-header sticky top-0 transition-colors"><div class="site-header-blur backdrop-blur-md border-b transition-colors border-white/5 site-header-scrolled bg-black/90"><div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><a href="/it/" class="flex items-center gap-3 group z-50"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-extrabold text-lg text-white tracking-tight">IPTV Smarters Pro</span></a><nav class="hidden lg:flex items-center gap-8"><a href="/it/" class="nav-link text-sm font-medium transition-colors text-white nav-link-active">Home</a><a href="/it/features/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Servizi IPTV</a><a href="/it/features/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Funzioni</a><a href="/it/channels/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Canali</a><a href="/it/pricing/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Prezzi</a><a href="/guides/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Guide</a><a href="/it/contact/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Contatti</a></nav><div class="flex items-center gap-4"><a href="/it/pricing/" class="btn-buy-now btn-nav-cta hidden md:flex px-6 py-2.5 font-bold text-sm rounded-full items-center gap-2 transition-all"><span>Inizia ora</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><details class="lang-switch">
-            <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Change language">
+      
+  
+  <header class="site-header sticky top-0 transition-colors z-50">
+    <div class="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled">
+      <div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="/it/" class="flex items-center gap-3 group z-50">
+          <svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg>
+          <span class="font-extrabold text-lg text-white tracking-tight">IPTV Smarters Pro</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="/it/" class="nav-link text-sm font-medium transition-colors text-white nav-link-active">Home</a>
+          <a href="/it/features/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Funzionalità</a>
+          <a href="/it/channels/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Canali</a>
+          <a href="/it/pricing/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Prezzi</a>
+          <a href="/it/contact/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">Contatti</a>
+        </nav>
+
+        <!-- Right Side: CTA & Lang Switcher -->
+        <div class="flex items-center gap-4">
+          <a href="/it/pricing/" class="btn-buy-now btn-nav-cta hidden md:flex px-6 py-2.5 font-bold text-sm rounded-full items-center gap-2 transition-all">
+            <span>Inizia Ora</span>
+            <span class="btn-buy-now-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </span>
+          </a>
+
+          <!-- Language Selector -->
+          <details class="lang-switch">
+            <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
               <span class="lang-flag" aria-hidden="true">🇮🇹</span>
               <span class="lang-name">Italiano</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-chevron"><path d="m6 9 6 6 6-6"/></svg>
             </summary>
             <div id="langMenu" class="lang-menu" role="menu">
-            <a href="/" class="lang-item" role="menuitem" data-lang="en">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇬🇧</span><span>English</span></div>
               
-            </a>
-            <a href="/fr/" class="lang-item" role="menuitem" data-lang="fr">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span>Français</span></div>
-              
-            </a>
-            <a href="/de/" class="lang-item" role="menuitem" data-lang="de">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></div>
-              
-            </a>
-            <a href="/es/" class="lang-item" role="menuitem" data-lang="es">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>Español</span></div>
-              
-            </a>
-            <a href="/ar/" class="lang-item" role="menuitem" data-lang="ar">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇸🇦</span><span>العربية</span></div>
-              
-            </a>
-            <a href="/it/" class="lang-item is-active" role="menuitem" data-lang="it" aria-current="true">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
-            </a>
-            <a href="/nl/" class="lang-item" role="menuitem" data-lang="nl">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇳🇱</span><span>Nederlands</span></div>
-              
-            </a>
-            <a href="/pt/" class="lang-item" role="menuitem" data-lang="pt">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇹</span><span>Português</span></div>
-              
-            </a>
-            <a href="/pt-br/" class="lang-item" role="menuitem" data-lang="pt-br">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇧🇷</span><span>Português (BR)</span></div>
-              
-            </a>
-            <a href="/pl/" class="lang-item" role="menuitem" data-lang="pl">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇱</span><span>Polski</span></div>
-              
-            </a>
-            <a href="/ko/" class="lang-item" role="menuitem" data-lang="ko">
-              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇰🇷</span><span>한국어</span></div>
-              
-            </a>
+      <a href="/" class="lang-item " role="menuitem" data-lang="en" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇬🇧</span><span>English</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/fr/" class="lang-item " role="menuitem" data-lang="fr" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span>Français</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/de/" class="lang-item " role="menuitem" data-lang="de" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/es/" class="lang-item " role="menuitem" data-lang="es" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>Español</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/ar/" class="lang-item " role="menuitem" data-lang="ar" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇸🇦</span><span>العربية</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/it/" class="lang-item is-active" role="menuitem" data-lang="it" aria-current="true">
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/nl/" class="lang-item " role="menuitem" data-lang="nl" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇳🇱</span><span>Nederlands</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/pt/" class="lang-item " role="menuitem" data-lang="pt" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇹</span><span>Português</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/pt-br/" class="lang-item " role="menuitem" data-lang="pt-br" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇧🇷</span><span>Português (BR)</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/pl/" class="lang-item " role="menuitem" data-lang="pl" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇱</span><span>Polski</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
+      <a href="/ko/" class="lang-item " role="menuitem" data-lang="ko" >
+        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇰🇷</span><span>한국어</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>
             </div>
-          </details><button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Apri il menu"><span class="menu-icon" aria-hidden="true"></span></button></div></div></div><nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Navigazione mobile"><div class="flex flex-col"><a href="/it/" class="mobile-nav-row text-lg font-semibold py-4 px-2 mobile-nav-row-active"><span>Home</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/it/features/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Servizi IPTV</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/it/features/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Funzioni</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/it/channels/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Canali</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/it/pricing/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Prezzi</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/guides/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Guide</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/it/contact/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>Contatti</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a></div><a href="/it/pricing/" class="btn-buy-now btn-nav-cta w-full mt-6 py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2 transition-all"><span>Inizia ora</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><a href="https://t.me/host4k" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 mt-4 py-3 text-sm font-semibold text-zinc-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-4 h-4"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Scrivici su Telegram</a></nav><div id="navOverlay" class="nav-overlay"></div></header>
+          </details>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button type="button" id="menuToggle" class="menu-toggle lg:hidden p-2 text-zinc-400 hover:text-white" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+            <span class="menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Mobile">
+      <div class="flex flex-col p-4 space-y-2">
+        <a href="/it/" class="mobile-nav-row text-lg font-semibold py-3 px-2 mobile-nav-row-active text-white">Home</a>
+        <a href="/it/features/" class="mobile-nav-row text-lg font-semibold py-3 px-2 text-zinc-400">Funzionalità</a>
+        <a href="/it/channels/" class="mobile-nav-row text-lg font-semibold py-3 px-2 text-zinc-400">Canali</a>
+        <a href="/it/pricing/" class="mobile-nav-row text-lg font-semibold py-3 px-2 text-zinc-400">Prezzi</a>
+        <a href="/it/contact/" class="mobile-nav-row text-lg font-semibold py-3 px-2 text-zinc-400">Contatti</a>
+        <div class="pt-4 border-t border-zinc-800">
+          <a href="/it/pricing/" class="btn-buy-now btn-nav-cta w-full py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2">
+            <span>Inizia Ora</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div id="navOverlay" class="nav-overlay"></div>
+  </header>
       <main class="flex-1">
         <section class="hero-stage">
           <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -745,13 +801,13 @@
             <div>
               <span class="eyebrow mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-purple-400"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                IMDb Top-Rated VOD Catalog
+                Cinema & Serie TV 4K
               </span>
-              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Stream Blockbuster Movies &amp; Binge-Worthy Series in 4K</h2>
-              <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">Access over 60,000+ on-demand movies, complete series, and documentaries updated weekly with multi-language audio and subtitles.</p>
+              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Streaming Film Blockbuster e Serie TV in 4K</h2>
+              <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">Oltre 60.000 film e serie on-demand in Ultra HD 4K con audio in italiano e zero buffering.</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-semibold text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-full border border-zinc-800">Updated Daily</span>
+              <span class="text-xs font-semibold text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-full border border-zinc-800">Aggiornato ogni giorno</span>
             </div>
           </div>
 
@@ -760,7 +816,7 @@
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_#7828C8]"></span>
-                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Latest & Highest-Rated Blockbuster Movies</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">I Migliori Film Blockbuster (2023 - 2024)</h3>
               </div>
               <div class="flex items-center gap-2">
                 <button type="button" aria-label="Previous Movies" class="carousel-btn" onclick="document.getElementById('movie-track').scrollBy({left: -480, behavior: 'smooth'})">
@@ -927,7 +983,7 @@
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></span>
-                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Latest & Trending TV Series (2024)</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Serie TV di Tendenza e Più Votate</h3>
               </div>
               <div class="flex items-center gap-2">
                 <button type="button" aria-label="Previous Series" class="carousel-btn" onclick="document.getElementById('series-track').scrollBy({left: -480, behavior: 'smooth'})">
@@ -1094,7 +1150,7 @@
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>
-                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Live Sports, Major Leagues &amp; PPV in 60FPS</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Sport in Diretta e Grandi Campionati in 60FPS</h3>
               </div>
               <div class="flex items-center gap-2">
                 <button type="button" aria-label="Previous Leagues" class="carousel-btn" onclick="document.getElementById('sports-track').scrollBy({left: -480, behavior: 'smooth'})">

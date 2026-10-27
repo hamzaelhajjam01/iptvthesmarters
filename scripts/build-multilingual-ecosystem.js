@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BASE_URL, LANGUAGES } from './multilingual-data.js';
+import { translateKoreanLandingPage } from './translate-korean-landing.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +28,37 @@ const ALL_HEADER_LANGUAGES = [
   { code: 'ko', name: '한국어', flag: '🇰🇷' }
 ];
 
+const UPDATED_DAILY = {
+  fr: 'Mis à jour quotidiennement',
+  de: 'Täglich aktualisiert',
+  es: 'Actualizado a diario',
+  ar: 'تحديث يومي',
+  it: 'Aggiornato ogni giorno',
+  nl: 'Dagelijks bijgewerkt',
+  pt: 'Atualizado diariamente',
+  'pt-br': 'Atualizado diariamente',
+  pl: 'Aktualizowane codziennie',
+  ko: '매일 업데이트'
+};
+
+const EN_LANG = {
+  code: 'en',
+  name: 'English',
+  flag: '🇬🇧',
+  dir: 'ltr',
+  locale: 'en_US',
+  whatsappText: encodeURIComponent('Hello, I would like to order IPTV Smarters Pro 4K subscription.'),
+  nav: {
+    home: 'Home',
+    features: 'Features',
+    channels: 'Channels',
+    pricing: 'Pricing',
+    contact: 'Contact',
+    cta: 'Get Started',
+    support: 'Support'
+  }
+};
+
 const COMMON_SUBPAGES_SET = new Set(['', 'pricing', 'channels', 'features', 'contact', 'privacy', 'terms', 'refund']);
 
 function getSubpageUrl(targetCode, activePage) {
@@ -46,7 +78,7 @@ function getSubpageUrl(targetCode, activePage) {
 
 function buildHeader(lang, activePage = '') {
   const isAr = lang.dir === 'rtl';
-  const prefix = `/${lang.code}/`;
+  const prefix = lang.code === 'en' ? '/' : `/${lang.code}/`;
   const isHome = activePage === 'home';
   const isPricing = activePage === 'pricing';
   const isChannels = activePage === 'channels';
@@ -243,39 +275,47 @@ function updateLanguageLandingPage(lang) {
 
   // A) Update carousel headings & badges in #vod-entertainment-hub
   const c = lang.carousel;
-  // Replace carousel section subtitle
+  const dailyText = UPDATED_DAILY[lang.code] || 'Updated Daily';
+
+  html = html.replace('IMDb Top-Rated VOD Catalog', c.badge);
   html = html.replace(
-    /(<p class="heroui-lead text-zinc-400[^"]*"[^>]*>)[\s\S]*?(<\/p>)/,
-    `$1${c.subtitle}$2`
+    /<h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">[\s\S]*?<\/h2>/,
+    `<h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">${c.title}</h2>`
   );
-  // Replace carousel section main H2
   html = html.replace(
-    /(<h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight heroui-title[^"]*"[^>]*>)[\s\S]*?(<\/h2>)/,
-    `$1${c.title}$2`
+    /<p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">[\s\S]*?<\/p>/,
+    `<p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">${c.subtitle}</p>`
   );
-  // Replace movies slider title
   html = html.replace(
-    /(<h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">)[\s\S]*?Top Blockbuster Movies[\s\S]*?(<\/h3>)/i,
+    /<span class="text-xs font-semibold text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-full border border-zinc-800">[\s\S]*?<\/span>/,
+    `<span class="text-xs font-semibold text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-full border border-zinc-800">${dailyText}</span>`
+  );
+
+  // Carousel 1: Movies (purple dot)
+  html = html.replace(
+    /(bg-purple-500 shadow-\[0_0_10px_#7828C8\]"><\/span>\s*<h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">)[^<]*(<\/h3>)/,
     `$1${c.moviesTitle}$2`
   );
-  // Replace series slider title
+  // Carousel 2: Series (cyan dot)
   html = html.replace(
-    /(<h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">)[\s\S]*?Trending TV Shows[\s\S]*?(<\/h3>)/i,
+    /(bg-cyan-400 shadow-\[0_0_10px_#22d3ee\]"><\/span>\s*<h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">)[^<]*(<\/h3>)/,
     `$1${c.seriesTitle}$2`
   );
-  // Replace sports slider title & sub
+  // Carousel 3: Sports (emerald dot)
   html = html.replace(
-    /(<h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">)[\s\S]*?Live Sports &amp; Major Leagues[\s\S]*?(<\/h3>)/i,
+    /(bg-emerald-400 shadow-\[0_0_10px_#34d399\]"><\/span>\s*<h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">)[^<]*(<\/h3>)/,
     `$1${c.sportsTitle}$2`
   );
-  html = html.replace(
-    /(<p class="text-sm text-zinc-400 mt-1">)[\s\S]*?Stream live football, basketball[\s\S]*?(<\/p>)/i,
-    `$1${c.sportsSub}$2`
-  );
+
+  // Fix typos
+  if (lang.code === 'es' || lang.code === 'pt') {
+    html = html.replace(/Contactoo/g, 'Contacto');
+  } else if (lang.code === 'pt-br') {
+    html = html.replace(/Contactoo/g, 'Contato');
+  }
 
   // B) Fix navigation links to stay in language silo
   const p = `/${lang.code}/`;
-  // Header / nav
   html = html.replace(/href="\/iptv-services\/"/g, `href="${p}features/"`);
   html = html.replace(/href="\/features\/"/g, `href="${p}features/"`);
   html = html.replace(/href="\/channels\/"/g, `href="${p}channels/"`);
@@ -293,6 +333,12 @@ function updateLanguageLandingPage(lang) {
   html = html.replace(/<script id="ais-lang-toggle-init">[\s\S]*?<\/script>/, '<script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>');
 
   fs.writeFileSync(filePath, html, 'utf8');
+
+  // C) Full Korean translation
+  if (lang.code === 'ko') {
+    translateKoreanLandingPage(filePath);
+  }
+
   console.log(`Updated /${lang.code}/index.html with localized header, carousels & silo links.`);
 }
 
@@ -920,8 +966,30 @@ function generateLegalPages(lang) {
 }
 
 // -------------------------------------------------------------
-// EXECUTE FOR ALL LANGUAGES
+// EXECUTE FOR ALL LANGUAGES & UNIFY ENGLISH
 // -------------------------------------------------------------
+function unifyEnglishPages() {
+  const pages = [
+    { file: 'index.html', active: 'home' },
+    { file: 'pricing/index.html', active: 'pricing' },
+    { file: 'channels/index.html', active: 'channels' },
+    { file: 'features/index.html', active: 'features' },
+    { file: 'contact/index.html', active: 'contact' }
+  ];
+  for (const p of pages) {
+    const filePath = path.join(sourceDir, p.file);
+    if (fs.existsSync(filePath)) {
+      let html = fs.readFileSync(filePath, 'utf8');
+      html = html.replace(/<header class="site-header[\s\S]*?<\/header>/, buildHeader(EN_LANG, p.active));
+      fs.writeFileSync(filePath, html, 'utf8');
+      console.log(`Updated English header in ${p.file}`);
+    }
+  }
+}
+
+console.log('\n=== Processing English Unified Headers ===');
+unifyEnglishPages();
+
 for (const lang of LANGUAGES) {
   console.log(`\n=== Processing Language: [${lang.code.toUpperCase()}] ${lang.name} ===`);
   updateLanguageLandingPage(lang);
@@ -932,4 +1000,4 @@ for (const lang of LANGUAGES) {
   generateLegalPages(lang);
 }
 
-console.log('\nMultilingual Ecosystem successfully built across all 10 languages!');
+console.log('\nMultilingual Ecosystem successfully built across all 10 languages + English!');
