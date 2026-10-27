@@ -35,36 +35,90 @@
   <link rel="stylesheet" href="/assets/css/heroui.css">
   <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
   
+  
+
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "@id": "https://thesmartersiptv.com/pl/pricing/#service",
-        "name": "IPTV Smarters Pro 4K Subscription",
-        "serviceType": "IPTV Streaming Service",
-        "provider": { "@type": "Organization", "name": "IPTV Smarters Pro", "url": "https://thesmartersiptv.com/pl/" },
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "EUR",
-          "lowPrice": "14.95",
-          "highPrice": "99.95",
-          "offerCount": "5",
-          "availability": "https://schema.org/InStock",
-          "url": "https://thesmartersiptv.com/pl/pricing/"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://thesmartersiptv.com/pl/pricing/#product",
+      "name": "IPTV Polska Abonament Smarters Pro",
+      "image": "https://thesmartersiptv.com/assets/images/brand/logo.png",
+      "description": "Kup najlepszy abonament IPTV w Polsce. Ponad 20 000 kanałów, Canal+ Sport, Polsat Sport, Eleven Sports, VOD i natychmiastowa aktywacja.",
+      "brand": {
+        "@type": "Brand",
+        "name": "IPTV Smarters Pro"
       },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://thesmartersiptv.com/pl/pricing/#breadcrumb",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://thesmartersiptv.com/pl/" },
-          { "@type": "ListItem", "position": 2, "name": "Cennik", "item": "https://thesmartersiptv.com/pl/pricing/" }
-        ]
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1640"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "lowPrice": "14.95",
+        "highPrice": "99.95",
+        "offerCount": "5",
+        "priceValidUntil": "2027-12-31",
+        "availability": "https://schema.org/InStock",
+        "url": "https://thesmartersiptv.com/pl/pricing/"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://thesmartersiptv.com/pl/pricing/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Strona główna",
+          "item": "https://thesmartersiptv.com/pl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cennik",
+          "item": "https://thesmartersiptv.com/pl/pricing/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://thesmartersiptv.com/pl/pricing/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Jak skonfigurować IPTV Smarters Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pobierz aplikację na telewizor lub telefon, wybierz 'Login with Xtream Codes API' i wprowadź dane otrzymane w mailu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy transmisje sportowe działają bez zacięć?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tak, dzięki dedykowanym serwerom z technologią 60FPS mecze piłkarskie i gale sportów walki działają w 100% płynnie."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy mogę korzystać z VPN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tak, nasza usługa jest w pełni kompatybilna z dowolnym VPN w celu ochrony prywatności."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">

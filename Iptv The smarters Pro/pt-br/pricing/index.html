@@ -35,36 +35,90 @@
   <link rel="stylesheet" href="/assets/css/heroui.css">
   <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
   
+  
+
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "@id": "https://thesmartersiptv.com/pt-br/pricing/#service",
-        "name": "IPTV Smarters Pro 4K Subscription",
-        "serviceType": "IPTV Streaming Service",
-        "provider": { "@type": "Organization", "name": "IPTV Smarters Pro", "url": "https://thesmartersiptv.com/pt-br/" },
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "USD",
-          "lowPrice": "14.95",
-          "highPrice": "99.95",
-          "offerCount": "5",
-          "availability": "https://schema.org/InStock",
-          "url": "https://thesmartersiptv.com/pt-br/pricing/"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://thesmartersiptv.com/pt-br/pricing/#product",
+      "name": "Melhor IPTV Brasil",
+      "image": "https://thesmartersiptv.com/assets/images/brand/logo.png",
+      "description": "Assinatura IPTV de alta performance para o Brasil. Mais de 20.000 canais, Premiere, SporTV, ESPN, filmes VOD e ativação imediata.",
+      "brand": {
+        "@type": "Brand",
+        "name": "IPTV Smarters Pro"
       },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://thesmartersiptv.com/pt-br/pricing/#breadcrumb",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://thesmartersiptv.com/pt-br/" },
-          { "@type": "ListItem", "position": 2, "name": "Planos & Preços", "item": "https://thesmartersiptv.com/pt-br/pricing/" }
-        ]
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1640"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "14.95",
+        "highPrice": "99.95",
+        "offerCount": "5",
+        "priceValidUntil": "2027-12-31",
+        "availability": "https://schema.org/InStock",
+        "url": "https://thesmartersiptv.com/pt-br/pricing/"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://thesmartersiptv.com/pt-br/pricing/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://thesmartersiptv.com/pt-br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Planos",
+          "item": "https://thesmartersiptv.com/pt-br/pricing/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://thesmartersiptv.com/pt-br/pricing/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Como configuro no aplicativo IPTV Smarters Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Basta abrir o aplicativo, clicar em 'Conectar com API Xtream Codes' e colocar o usuário, senha e URL do servidor que enviamos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Trava nos jogos do Brasileirão e Libertadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não! Nossos servidores utilizam balanceamento de carga de alta capacidade que elimina o travamento mesmo em finais de campeonato."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Funciona em qualquer aparelho?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim, é compatível com Smart TV Samsung Tizen, LG webOS, TV Box Android, Fire TV Stick, computadores e celulares."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">

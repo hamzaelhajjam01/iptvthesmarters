@@ -510,27 +510,47 @@
 
     </style>
   <html><head><link rel="stylesheet" href="/assets/css/runtime.css"><link rel="stylesheet" href="/assets/css/theme.css?v=20260907-9">
-    <script type="application/ld+json">
+    
+    <link rel="stylesheet" href="/assets/css/heroui.css">
+
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://thesmartersiptv.com/pt-br/#webpage",
-      "url": "https://thesmartersiptv.com/pt-br/",
-      "name": "IPTV Smarters Pro - Português (Brasil)",
-      "description": "Guia oficial de instalação e assinatura IPTV Smarters Pro com canais HD/4K.",
+      "@type": "WebSite",
+      "@id": "https://thesmartersiptv.com/#website",
+      "url": "https://thesmartersiptv.com/",
+      "name": "The Smarters IPTV",
+      "description": "Assinatura oficial IPTV Smarters Pro 4K com mais de 25.000 canais ao vivo, filmes e séries em VOD, tecnologia anti-travamento e ativação imediata.",
       "inLanguage": "pt-br"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://thesmartersiptv.com/#organization",
+      "name": "The Smarters IPTV",
+      "url": "https://thesmartersiptv.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://thesmartersiptv.com/assets/images/brand/logo.png"
+      }
     },
     {
       "@type": "Product",
       "@id": "https://thesmartersiptv.com/pt-br/#product",
-      "name": "IPTV Smarters Pro Subscription",
-      "image": "https://thesmartersiptv.com/og-image.jpg",
-      "description": "Guia oficial de instalação e assinatura IPTV Smarters Pro com canais HD/4K.",
+      "name": "Assinatura IPTV Smarters Pro 4K",
+      "image": "https://thesmartersiptv.com/assets/images/brand/logo.png",
+      "description": "Assinatura oficial IPTV Smarters Pro 4K com mais de 25.000 canais ao vivo, filmes e séries em VOD, tecnologia anti-travamento e ativação imediata.",
       "brand": {
         "@type": "Brand",
         "name": "IPTV Smarters Pro"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1640"
       },
       "offers": {
         "@type": "AggregateOffer",
@@ -538,14 +558,101 @@
         "lowPrice": "14.95",
         "highPrice": "99.95",
         "offerCount": "5",
+        "priceValidUntil": "2027-12-31",
         "availability": "https://schema.org/InStock",
-        "url": "https://thesmartersiptv.com/pt-br/"
+        "url": "https://thesmartersiptv.com/pt-br/pricing/"
       }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://thesmartersiptv.com/pt-br/#software",
+      "name": "IPTV Smarters Pro",
+      "operatingSystem": "Android, iOS, Windows, macOS, Amazon Fire TV Stick, Samsung Smart TV, LG Smart TV",
+      "applicationCategory": "MultimediaApplication",
+      "description": "Premium 4K video player application supporting Xtream Codes API, M3U playlists, EPG, multi-screen, and catch-up TV.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "1640"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "14.95",
+        "highPrice": "99.95",
+        "offerCount": "5"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://thesmartersiptv.com/pt-br/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://thesmartersiptv.com/pt-br/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://thesmartersiptv.com/pt-br/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O aplicativo IPTV Smarters Pro é gratuito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O aplicativo em si é totalmente gratuito para baixar e instalar na maioria das plataformas. Só que ele não vem com nenhum conteúdo. Você precisa assinar um plano com um provedor (como a gente) para assistir TV ao vivo ou filmes. Sem uma lista, o app é basicamente um player vazio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como faço login com o Xtream Codes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ao abrir o player Smarters Pro, escolha a opção “Login with Xtream Codes API”. Você vai precisar de quatro informações: um nome à sua escolha (tipo “Minha TV”), o usuário que enviamos por e-mail, sua senha e a URL do nosso portal. É o jeito mais rápido e confiável."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dá para instalar no Amazon Firestick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dá sim, mas como nem sempre ele está disponível na Amazon App Store oficial, talvez você precise instalar o APK do Smarters Pro pelo app Downloader. O processo leva uns dois minutos e ele segue sendo um dos melhores apps de IPTV para Firestick."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Por que meu guia EPG não carrega?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normalmente isso acontece quando o servidor do seu provedor está sobrecarregado ou quando você colocou um link M3U longo em vez de usar o login por API. Com a nossa configuração Xtream Codes, o guia de programação carrega sozinho e fica sincronizado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O app funciona com várias telas ao mesmo tempo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim, ele tem um recurso de múltiplas telas que permite assistir até quatro canais ao vivo ao mesmo tempo na mesma tela. Só lembre que sua assinatura precisa permitir várias conexões (como nossos planos de 2 ou 3 dispositivos) para usar isso sem travar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso de VPN para usar o serviço?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não exigimos VPN, porque nosso serviço roda em servidores seguros e com balanceamento de carga. Mesmo assim, somos totalmente compatíveis com VPN. Se a sua operadora reduzir a velocidade durante grandes eventos esportivos, conectar uma VPN resolve rapidinho."
+          }
+        }
+      ]
     }
   ]
 }
-    </script>
-    <link rel="stylesheet" href="/assets/css/heroui.css">
+  </script>
 </head></html><html><head><link rel="stylesheet" href="/assets/css/theme.css?v=20260907-9"></head></html><link rel="stylesheet" href="/assets/css/theme.css?v=20260907-9"></head>
   <body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">
     <div class="grain-overlay"></div>

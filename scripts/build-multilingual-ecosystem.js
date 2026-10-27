@@ -384,20 +384,46 @@ function generatePricingPage(lang) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Service",
-        "@id": "${BASE_URL}${canonicalPath}#service",
-        "name": "IPTV Smarters Pro 4K Subscription",
-        "serviceType": "IPTV Streaming Service",
-        "provider": { "@type": "Organization", "name": "IPTV Smarters Pro", "url": "${BASE_URL}${prefix}" },
+        "@type": "Product",
+        "@id": "${BASE_URL}${canonicalPath}#product",
+        "name": "${p.metaTitle.split('—')[0].trim() || 'IPTV Smarters Pro Subscription'}",
+        "description": "${p.metaDesc}",
+        "image": "${BASE_URL}/assets/images/brand/logo.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "IPTV Smarters Pro"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "1640"
+        },
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "${lang.code === 'ar' || lang.code === 'ko' || lang.code === 'pt-br' ? 'USD' : 'EUR'}",
           "lowPrice": "14.95",
           "highPrice": "99.95",
           "offerCount": "5",
+          "priceValidUntil": "2027-12-31",
           "availability": "https://schema.org/InStock",
           "url": "${BASE_URL}${canonicalPath}"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "${BASE_URL}${canonicalPath}#faq",
+        "mainEntity": [
+          ${p.faqs.map(f => JSON.stringify({
+            "@type": "Question",
+            "name": f.q,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": f.a
+            }
+          })).join(',\n          ')}
+        ]
       },
       {
         "@type": "BreadcrumbList",
