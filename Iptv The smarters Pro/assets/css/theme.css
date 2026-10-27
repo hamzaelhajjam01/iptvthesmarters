@@ -22,24 +22,9 @@
 footer{position:relative;overflow:hidden}
 footer>.footer-top-glow{position:absolute;z-index:1;top:0;right:0;left:0;margin:0;pointer-events:none}
 @media(max-width:639px){.pricing-grid{gap:1.25rem;margin-bottom:1.5rem}.plan-card:hover{transform:none}}
-/* Unified five-plan responsive pricing grid & 100% desktop width container */
+/* Boxed responsive pricing grid container aligned with max-w-7xl */
 #pricing,
-section[id="pricing"]{width:100%}
-@media(min-width:1024px){
-  #pricing,
-  section[id="pricing"],
-  section:has(.pricing-grid){width:100%!important;max-width:100%!important;padding-left:clamp(1rem,2.5vw,3rem)!important;padding-right:clamp(1rem,2.5vw,3rem)!important}
-  #pricing > div,
-  #pricing .max-w-7xl,
-  #pricing .max-w-6xl,
-  section[id="pricing"] > div,
-  section[id="pricing"] .max-w-7xl,
-  section[id="pricing"] .max-w-6xl,
-  section:has(.pricing-grid) > div,
-  section:has(.pricing-grid) .max-w-7xl,
-  section:has(.pricing-grid) .max-w-6xl,
-  .pricing-grid{width:100%!important;max-width:100%!important}
-}
+section[id="pricing"]{width:100%;max-width:80rem;margin-left:auto;margin-right:auto}
 .pricing-grid{grid-template-columns:minmax(0,1fr);gap:1.25rem;margin-bottom:0;width:100%}
 .pricing-diamond-slot{display:flex;width:100%;max-width:none!important;margin:0!important}
 .pricing-diamond-slot>.diamond-border{display:flex;width:100%;height:100%;margin:0;padding:2px;border-radius:24px}
@@ -53,9 +38,11 @@ section[id="pricing"]{width:100%}
 .pricing-diamond-slot .diamond-features{flex-grow:1;margin-bottom:1.75rem;gap:1rem}
 .pricing-diamond-slot .diamond-btn{margin-top:auto}
 @media(min-width:640px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(min-width:1024px){.pricing-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1024px){
+  .pricing-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:1.25rem!important;width:100%!important}
+}
 @media(min-width:1280px){
-  .pricing-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:clamp(0.75rem,1.2vw,1.25rem)!important;width:100%!important;max-width:100%!important}
+  .pricing-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:1.25rem!important;width:100%!important;max-width:100%!important}
   .plan-card{padding:1.75rem 1.25rem!important}
   .pricing-diamond-slot .diamond-panel{padding:1.75rem 1.25rem!important}
   .pricing-diamond-slot .diamond-badge{font-size:9.5px!important;padding:5px 10px!important;max-width:calc(100% - 14px)!important;letter-spacing:0.04em!important}
@@ -83,37 +70,18 @@ section[id="pricing"]{width:100%}
 .faq-chevron{color:#A78BFA!important;border-color:rgba(167,139,250,.32)!important}
 .faq-chevron svg{color:inherit!important;stroke:currentColor!important}
 .faq-summary:hover .faq-q{color:#A78BFA!important}
-/* Full-width Frequently Asked Questions */
+/* Boxed Frequently Asked Questions aligned with max-w-7xl / max-w-4xl */
 #faq,
-section[id="faq"],
-section:has(.faq-list){width:100%}
-@media(min-width:1024px){
-  #faq,
-  section[id="faq"],
-  section:has(.faq-list){width:100%!important;max-width:100%!important;padding-left:clamp(1rem,2.5vw,3rem)!important;padding-right:clamp(1rem,2.5vw,3rem)!important}
-  #faq > div,
-  #faq .max-w-3xl,
-  #faq .max-w-4xl,
-  #faq .max-w-5xl,
-  #faq .max-w-6xl,
-  #faq .max-w-7xl,
-  section[id="faq"] > div,
-  section[id="faq"] .max-w-3xl,
-  section[id="faq"] .max-w-4xl,
-  section[id="faq"] .max-w-5xl,
-  section[id="faq"] .max-w-6xl,
-  section[id="faq"] .max-w-7xl,
-  section:has(.faq-list) > div,
-  section:has(.faq-list) .max-w-3xl,
-  section:has(.faq-list) .max-w-4xl,
-  section:has(.faq-list) .max-w-5xl,
-  section:has(.faq-list) .max-w-6xl,
-  section:has(.faq-list) .max-w-7xl{width:100%!important;max-width:100%!important}
-  .faq-list{width:100%!important;max-width:100%!important}
-  .faq-item{width:100%!important}
-  .faq-summary{padding:1.35rem 2rem!important}
-  .faq-answer p{padding-left:5.25rem!important;padding-right:2.5rem!important;font-size:0.9375rem!important;line-height:1.7!important}
-  [dir="rtl"] .faq-answer p{padding-right:5.25rem!important;padding-left:2.5rem!important}
+section[id="faq"]{width:100%;max-width:80rem;margin-left:auto;margin-right:auto}
+.faq-list{width:100%;max-width:56rem;margin-left:auto;margin-right:auto}
+.faq-item{width:100%!important}
+.faq-summary{padding:1.35rem 1.75rem!important}
+.faq-answer p{padding-left:4.5rem!important;padding-right:2rem!important;font-size:0.9375rem!important;line-height:1.7!important}
+[dir="rtl"] .faq-answer p{padding-right:4.5rem!important;padding-left:2rem!important}
+@media(max-width:639px){
+  .faq-summary{padding:1.15rem 1.25rem!important}
+  .faq-answer p{padding-left:1.25rem!important;padding-right:1.25rem!important}
+  [dir="rtl"] .faq-answer p{padding-right:1.25rem!important;padding-left:1.25rem!important}
 }
 
 /* ===== Site-wide Language Switcher & Translation Styles ===== */

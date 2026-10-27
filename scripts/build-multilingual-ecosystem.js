@@ -417,7 +417,7 @@ function generatePricingPage(lang) {
     ${buildHeader(lang, 'pricing')}
 
     <main class="flex-1">
-      <section class="pt-24 pb-8 px-4 sm:px-6 lg:px-8 xl:px-12 w-full max-w-full mx-auto" id="pricing">
+      <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" id="pricing">
         <div class="text-center mb-16">
           <div class="flex flex-col items-center justify-center gap-4 mb-4">
             <div class="w-0.5 h-6 bg-blue-500"></div>
@@ -437,7 +437,7 @@ function generatePricingPage(lang) {
 
         <!-- Device Selector Tabs -->
         <div class="relative z-20 w-full">
-          <div class="w-full max-w-full mx-auto flex flex-col items-center">
+          <div class="w-full max-w-7xl mx-auto flex flex-col items-center">
             <div class="device-toggle" role="tablist" aria-label="Select devices" id="device-toggle">
               <button type="button" role="tab" aria-selected="true" data-devices="1" class="device-tab is-active"><span class="device-tab-bg" aria-hidden="true"></span>${p.deviceTabs[0]}</button>
               <button type="button" role="tab" aria-selected="false" data-devices="2" class="device-tab"><span class="device-tab-bg" aria-hidden="true"></span>${p.deviceTabs[1]}</button>
