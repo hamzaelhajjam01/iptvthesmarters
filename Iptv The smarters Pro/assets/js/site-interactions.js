@@ -28,7 +28,33 @@
       return { menuToggle, mobileNav, navOverlay };
     }
 
+    // Move mobileNav and navOverlay out of <header> and into document.body to escape any ancestor backdrop-filter, overflow, or containing-block restrictions
+    function ensureBodyPlacement() {
+      const { mobileNav, navOverlay } = getElements();
+      if (typeof document !== 'undefined' && document.body) {
+        if (mobileNav && mobileNav.parentElement !== document.body) {
+          document.body.appendChild(mobileNav);
+        }
+        if (navOverlay && navOverlay.parentElement !== document.body) {
+          document.body.appendChild(navOverlay);
+        }
+        // Ensure explicit close button inside mobileNav
+        if (mobileNav && !mobileNav.querySelector('.mobile-nav-close-row')) {
+          const closeRow = document.createElement('div');
+          closeRow.className = 'mobile-nav-close-row flex items-center justify-between pb-4 mb-4 border-b border-white/10';
+          closeRow.innerHTML = '<span class="font-extrabold text-base text-white tracking-tight">IPTV Smarters Pro</span>' +
+            '<button type="button" class="mobile-nav-close-btn p-2 -mr-2 text-zinc-400 hover:text-white transition-colors" aria-label="Fermer le menu">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
+            '</button>';
+          mobileNav.prepend(closeRow);
+        }
+      }
+    }
+
+    ensureBodyPlacement();
+
     function toggleMenu(forceOpen) {
+      ensureBodyPlacement();
       const { menuToggle, mobileNav, navOverlay } = getElements();
       if (!mobileNav) return;
 
@@ -58,6 +84,16 @@
     window.__toggleMobileMenu = toggleMenu;
 
     document.addEventListener('click', (e) => {
+      // 1. Explicit close button inside mobile nav
+      const closeBtn = e.target.closest('.mobile-nav-close-btn, .mobile-nav-close');
+      if (closeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu(false);
+        return;
+      }
+
+      // 2. Main hamburger toggle button or its children
       const toggle = e.target.closest('#menuToggle, .menu-toggle');
       if (toggle) {
         e.preventDefault();
@@ -66,6 +102,7 @@
         return;
       }
 
+      // 3. Click on darkened overlay
       if (e.target.closest('#navOverlay, .nav-overlay')) {
         e.preventDefault();
         e.stopPropagation();
@@ -73,6 +110,7 @@
         return;
       }
 
+      // 4. Click on link inside mobile navigation
       const link = e.target.closest('#mobileNav a, .mobile-nav a');
       if (link) {
         toggleMenu(false);

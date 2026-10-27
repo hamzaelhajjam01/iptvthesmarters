@@ -68,8 +68,7 @@ html, body {
 /* ==========================================================================
    HeroUI Navbar Component Styles
    ========================================================================== */
-.kw-header,
-header {
+.kw-header {
   backdrop-filter: blur(16px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
   background: rgba(0, 0, 0, 0.7) !important;
