@@ -13,6 +13,37 @@ console.log('Starting Multilingual Ecosystem Builder...');
 // Common SVG Brand Logo
 const BRAND_SVG = `<svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg>`;
 
+const ALL_HEADER_LANGUAGES = [
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'pt-br', name: 'Português (BR)', flag: '🇧🇷' },
+  { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+  { code: 'ko', name: '한국어', flag: '🇰🇷' }
+];
+
+const COMMON_SUBPAGES_SET = new Set(['', 'pricing', 'channels', 'features', 'contact', 'privacy', 'terms', 'refund']);
+
+function getSubpageUrl(targetCode, activePage) {
+  const isHome = !activePage || activePage === 'home';
+  if (isHome) {
+    return targetCode === 'en' ? '/' : `/${targetCode}/`;
+  }
+  const clean = activePage.replace(/^\/+|\/+$/g, '');
+  if (targetCode === 'en') {
+    return `/${clean}/`;
+  }
+  if (COMMON_SUBPAGES_SET.has(clean)) {
+    return `/${targetCode}/${clean}/`;
+  }
+  return `/${targetCode}/`;
+}
+
 function buildHeader(lang, activePage = '') {
   const isAr = lang.dir === 'rtl';
   const prefix = `/${lang.code}/`;
@@ -22,11 +53,15 @@ function buildHeader(lang, activePage = '') {
   const isFeatures = activePage === 'features';
   const isContact = activePage === 'contact';
 
-  const langListHtml = LANGUAGES.map(l => `
-      <a href="/${l.code}/" class="lang-item ${l.code === lang.code ? 'is-active' : ''}" role="menuitem">
+  const langListHtml = ALL_HEADER_LANGUAGES.map(l => {
+    const isActive = l.code === lang.code;
+    const targetUrl = getSubpageUrl(l.code, activePage);
+    return `
+      <a href="${targetUrl}" class="lang-item ${isActive ? 'is-active' : ''}" role="menuitem" data-lang="${l.code}" ${isActive ? 'aria-current="true"' : ''}>
         <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">${l.flag}</span><span>${l.name}</span></div>
-        ${l.code === lang.code ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>` : ''}
-      </a>`).join('');
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+      </a>`;
+  }).join('');
 
   return `
   <header class="site-header sticky top-0 transition-colors z-50">
@@ -190,7 +225,7 @@ function buildHeadTags(lang, title, desc, canonicalPath) {
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/theme.css?v=20260909-lang4">
   <link rel="stylesheet" href="/assets/css/heroui.css">
-  <script id="ais-lang-toggle-init">window.__toggleLangMenu = function(e) { var b = (e && e.target && e.target.closest && e.target.closest(".lang-trigger")) || document.getElementById("langToggle"); var d = b && b.closest && b.closest("details.lang-switch"); if (d) { if (e && e.target && (e.target.tagName === "SUMMARY" || e.target.closest("summary"))) { return; } d.open = !d.open; return; } if (e) { try { e.preventDefault(); e.stopPropagation(); } catch(_) {} } var s = (b && b.closest && b.closest(".lang-switch")) || document.querySelector(".lang-switch"); var m = (s && s.querySelector && s.querySelector(".lang-menu")) || document.getElementById("langMenu"); if (!m) return; var isHidden = m.hasAttribute("hidden") || m.style.display === "none"; document.querySelectorAll(".lang-menu").forEach(function(el) { el.setAttribute("hidden", ""); el.style.display = "none"; }); document.querySelectorAll(".lang-trigger").forEach(function(el) { el.setAttribute("aria-expanded", "false"); }); document.querySelectorAll("details.lang-switch[open]").forEach(function(el) { el.removeAttribute("open"); }); if (isHidden) { m.removeAttribute("hidden"); m.style.display = "block"; if (b) b.setAttribute("aria-expanded", "true"); } };</script>
+  <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
   `;
 }
 
@@ -250,8 +285,13 @@ function updateLanguageLandingPage(lang) {
   html = html.replace(/href="\/terms\/"/g, `href="${p}terms/"`);
   html = html.replace(/href="\/refund\/"/g, `href="${p}refund/"`);
 
+  // Update header with localized header & switcher
+  html = html.replace(/<header class="site-header[\s\S]*?<\/header>/, buildHeader(lang, 'home'));
+  // Update ais-lang-toggle-init in head
+  html = html.replace(/<script id="ais-lang-toggle-init">[\s\S]*?<\/script>/, '<script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>');
+
   fs.writeFileSync(filePath, html, 'utf8');
-  console.log(`Updated /${lang.code}/index.html with localized carousels & silo links.`);
+  console.log(`Updated /${lang.code}/index.html with localized header, carousels & silo links.`);
 }
 
 // -------------------------------------------------------------

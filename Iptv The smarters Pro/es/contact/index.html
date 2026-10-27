@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/theme.css?v=20260909-lang4">
   <link rel="stylesheet" href="/assets/css/heroui.css">
-  <script id="ais-lang-toggle-init">window.__toggleLangMenu = function(e) { var b = (e && e.target && e.target.closest && e.target.closest(".lang-trigger")) || document.getElementById("langToggle"); var d = b && b.closest && b.closest("details.lang-switch"); if (d) { if (e && e.target && (e.target.tagName === "SUMMARY" || e.target.closest("summary"))) { return; } d.open = !d.open; return; } if (e) { try { e.preventDefault(); e.stopPropagation(); } catch(_) {} } var s = (b && b.closest && b.closest(".lang-switch")) || document.querySelector(".lang-switch"); var m = (s && s.querySelector && s.querySelector(".lang-menu")) || document.getElementById("langMenu"); if (!m) return; var isHidden = m.hasAttribute("hidden") || m.style.display === "none"; document.querySelectorAll(".lang-menu").forEach(function(el) { el.setAttribute("hidden", ""); el.style.display = "none"; }); document.querySelectorAll(".lang-trigger").forEach(function(el) { el.setAttribute("aria-expanded", "false"); }); document.querySelectorAll("details.lang-switch[open]").forEach(function(el) { el.removeAttribute("open"); }); if (isHidden) { m.removeAttribute("hidden"); m.style.display = "block"; if (b) b.setAttribute("aria-expanded", "true"); } };</script>
+  <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
   
   <script type="application/ld+json">
   {
@@ -91,53 +91,56 @@
 
           <!-- Language Selector -->
           <details class="lang-switch">
-            <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+            <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Change language">
               <span class="lang-flag" aria-hidden="true">🇪🇸</span>
               <span class="lang-name">Español</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-chevron"><path d="m6 9 6 6 6-6"/></svg>
             </summary>
             <div id="langMenu" class="lang-menu" role="menu">
+            <a href="/contact/" class="lang-item" role="menuitem" data-lang="en">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇬🇧</span><span>English</span></div>
               
-      <a href="/fr/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span>Français</span></div>
-        
-      </a>
-      <a href="/de/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></div>
-        
-      </a>
-      <a href="/es/" class="lang-item is-active" role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>Español</span></div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
-      </a>
-      <a href="/ar/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇸🇦</span><span>العربية</span></div>
-        
-      </a>
-      <a href="/it/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></div>
-        
-      </a>
-      <a href="/nl/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇳🇱</span><span>Nederlands</span></div>
-        
-      </a>
-      <a href="/pt/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇹</span><span>Português</span></div>
-        
-      </a>
-      <a href="/pt-br/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇧🇷</span><span>Português (Brasil)</span></div>
-        
-      </a>
-      <a href="/pl/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇱</span><span>Polski</span></div>
-        
-      </a>
-      <a href="/ko/" class="lang-item " role="menuitem">
-        <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇰🇷</span><span>한국어</span></div>
-        
-      </a>
+            </a>
+            <a href="/fr/contact/" class="lang-item" role="menuitem" data-lang="fr">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span>Français</span></div>
+              
+            </a>
+            <a href="/de/contact/" class="lang-item" role="menuitem" data-lang="de">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></div>
+              
+            </a>
+            <a href="/es/contact/" class="lang-item is-active" role="menuitem" data-lang="es" aria-current="true">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>Español</span></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
+            </a>
+            <a href="/ar/contact/" class="lang-item" role="menuitem" data-lang="ar">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇸🇦</span><span>العربية</span></div>
+              
+            </a>
+            <a href="/it/contact/" class="lang-item" role="menuitem" data-lang="it">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></div>
+              
+            </a>
+            <a href="/nl/contact/" class="lang-item" role="menuitem" data-lang="nl">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇳🇱</span><span>Nederlands</span></div>
+              
+            </a>
+            <a href="/pt/contact/" class="lang-item" role="menuitem" data-lang="pt">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇹</span><span>Português</span></div>
+              
+            </a>
+            <a href="/pt-br/contact/" class="lang-item" role="menuitem" data-lang="pt-br">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇧🇷</span><span>Português (BR)</span></div>
+              
+            </a>
+            <a href="/pl/contact/" class="lang-item" role="menuitem" data-lang="pl">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇱</span><span>Polski</span></div>
+              
+            </a>
+            <a href="/ko/contact/" class="lang-item" role="menuitem" data-lang="ko">
+              <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇰🇷</span><span>한국어</span></div>
+              
+            </a>
             </div>
           </details>
 

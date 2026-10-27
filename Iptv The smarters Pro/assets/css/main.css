@@ -26,7 +26,9 @@ footer .text-\[\#64748b\],footer p{color:#8b96a8}
 .lang-trigger[aria-expanded="true"] .lang-chevron{transform:rotate(180deg);opacity:1}
 .lang-menu{position:absolute;top:calc(100% + 8px);inset-inline-end:0;min-width:210px;background:#0d0e15;border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.05);z-index:9999;max-height:80vh;overflow-y:auto;transform-origin:top right;animation:langMenuEnter .18s cubic-bezier(0.16, 1, 0.3, 1)}
 @keyframes langMenuEnter{from{opacity:0;transform:scale(.95) translateY(-4px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.lang-menu[hidden]{display:none !important}
+details.lang-switch:not([open]) > .lang-menu{display:none !important}
+details.lang-switch[open] > .lang-menu{display:block !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important}
+.lang-menu[hidden]:not(details.lang-switch[open] > .lang-menu){display:none !important}
 .lang-item{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;gap:10px;padding:10px 12px;min-height:44px;border-radius:10px;color:#a1a1aa;font-size:.875rem;font-weight:500;text-decoration:none;text-align:start;cursor:pointer;font-family:inherit;transition:background-color .15s,color .15s}
 .lang-item:hover{background:rgba(255,255,255,.08);color:#fff}
 .lang-item.is-active{color:#fff;background:linear-gradient(135deg,rgba(123,63,228,.25),rgba(6,182,212,.15));font-weight:700;border:1px solid rgba(123,63,228,.3)}

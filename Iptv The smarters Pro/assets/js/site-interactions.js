@@ -610,6 +610,7 @@
     nl: { code: 'nl', name: 'Nederlands', flag: '🇳🇱', path: '/nl/' },
     pl: { code: 'pl', name: 'Polski', flag: '🇵🇱', path: '/pl/' },
     pt: { code: 'pt', name: 'Português', flag: '🇵🇹', path: '/pt/' },
+    'pt-br': { code: 'pt-br', name: 'Português (Brasil)', flag: '🇧🇷', path: '/pt-br/' },
     ko: { code: 'ko', name: '한국어', flag: '🇰🇷', path: '/ko/' },
     ar: { code: 'ar', name: 'العربية', flag: '🇸🇦', path: '/ar/' }
   };
@@ -1604,28 +1605,54 @@
   }
 
   function detectCurrentLang() {
-    const p = window.location.pathname.replace(/\/$/, '') || '/';
+    const p = (typeof window !== 'undefined' && window.location && window.location.pathname) ? window.location.pathname : '/';
     if (p === '/fr' || p.startsWith('/fr/')) return 'fr';
     if (p === '/es' || p.startsWith('/es/')) return 'es';
     if (p === '/de' || p.startsWith('/de/')) return 'de';
     if (p === '/it' || p.startsWith('/it/')) return 'it';
     if (p === '/nl' || p.startsWith('/nl/')) return 'nl';
     if (p === '/pl' || p.startsWith('/pl/')) return 'pl';
+    if (p === '/pt-br' || p.startsWith('/pt-br/')) return 'pt-br';
     if (p === '/pt' || p.startsWith('/pt/')) return 'pt';
-    if (p === '/pt-br' || p.startsWith('/pt-br/')) return 'pt';
     if (p === '/ko' || p.startsWith('/ko/')) return 'ko';
     if (p === '/ar' || p.startsWith('/ar/')) return 'ar';
-
-    try {
-      const saved = localStorage.getItem('iptv_selected_lang');
-      if (saved && SUPPORTED_LANGS[saved]) return saved;
-    } catch(e) {}
-
     return 'en';
+  }
+
+  const COMMON_SUBPAGES = new Set(['', 'pricing', 'channels', 'features', 'contact', 'privacy', 'terms', 'refund']);
+
+  function getTargetUrlForLang(targetLang, currentPath) {
+    const p = currentPath || (typeof window !== 'undefined' ? window.location.pathname : '/');
+    const langCodes = ['fr', 'de', 'es', 'ar', 'it', 'nl', 'pt-br', 'pt', 'pl', 'ko'];
+    
+    let subPath = p;
+    for (const code of langCodes) {
+      if (p === '/' + code || p === '/' + code + '/') {
+        subPath = '';
+        break;
+      } else if (p.startsWith('/' + code + '/')) {
+        subPath = p.slice(code.length + 2);
+        break;
+      }
+    }
+
+    const cleanSub = subPath.replace(/^\/+|\/+$/g, '');
+
+    if (targetLang === 'en') {
+      return cleanSub ? '/' + cleanSub + '/' : '/';
+    }
+
+    if (COMMON_SUBPAGES.has(cleanSub)) {
+      return cleanSub ? '/' + targetLang + '/' + cleanSub + '/' : '/' + targetLang + '/';
+    }
+
+    return '/' + targetLang + '/';
   }
 
   function updateSwitcherUI(lang) {
     const cfg = SUPPORTED_LANGS[lang] || SUPPORTED_LANGS.en;
+    const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+
     document.querySelectorAll('.lang-switch').forEach(sw => {
       const flagEl = sw.querySelector('.lang-flag');
       const nameEl = sw.querySelector('.lang-name');
@@ -1638,14 +1665,22 @@
         item.classList.toggle('is-active', isActive);
         if (isActive) item.setAttribute('aria-current', 'true');
         else item.removeAttribute('aria-current');
+
+        if (itemLang) {
+          const targetUrl = getTargetUrlForLang(itemLang, currentPath);
+          item.setAttribute('href', targetUrl);
+        }
       });
     });
 
-    // Also update mobile nav language items if present
     document.querySelectorAll('.mobile-lang-item').forEach(item => {
       const itemLang = item.getAttribute('data-lang');
       const isActive = itemLang === lang;
       item.classList.toggle('is-active', isActive);
+      if (itemLang) {
+        const targetUrl = getTargetUrlForLang(itemLang, currentPath);
+        item.setAttribute('href', targetUrl);
+      }
     });
   }
 
@@ -1653,15 +1688,7 @@
     if (!SUPPORTED_LANGS[lang]) lang = 'en';
 
     document.documentElement.lang = lang;
-    if (lang === 'ar') {
-      document.documentElement.dir = 'rtl';
-    } else {
-      document.documentElement.dir = 'ltr';
-    }
-
-    if (document.body) {
-      translateNode(document.body, lang);
-    }
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
     updateSwitcherUI(lang);
 
@@ -1674,95 +1701,65 @@
     window.dispatchEvent(new CustomEvent('iptv:lang-changed', { detail: { lang } }));
 
     if (shouldNavigate) {
-      const targetPath = SUPPORTED_LANGS[lang]?.path || '/';
-      const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-      const cleanTarget = targetPath.replace(/\/$/, '') || '/';
-      if (cleanTarget !== currentPath) {
-        window.location.pathname = targetPath;
+      const targetUrl = getTargetUrlForLang(lang, window.location.pathname);
+      const cleanTarget = targetUrl.replace(/\/$/, '') || '/';
+      const cleanCurrent = window.location.pathname.replace(/\/$/, '') || '/';
+      if (cleanTarget !== cleanCurrent) {
+        window.location.href = targetUrl;
       }
     }
   }
   window.__setLanguage = applyLanguage;
 
   window.__toggleLangMenu = function(e) {
-    const trigger = (e && e.target && e.target.closest && e.target.closest('.lang-trigger')) || (e && e.currentTarget) || document.getElementById('langToggle') || document.querySelector('.lang-trigger');
-    const details = trigger && trigger.closest && trigger.closest('details.lang-switch');
+    const details = (e && e.target && e.target.closest && e.target.closest('details.lang-switch')) || document.querySelector('details.lang-switch');
     if (details) {
-      // If clicked directly on summary, native browser toggles open/close
       if (e && e.target && (e.target.tagName === 'SUMMARY' || e.target.closest('summary'))) {
-        return;
+        return; // native summary click handles toggle
       }
       details.open = !details.open;
-      return;
-    }
-
-    if (e) {
-      try {
-        e.preventDefault();
-        e.stopPropagation();
-      } catch(_) {}
-    }
-
-    const sw = (trigger && trigger.closest && trigger.closest('.lang-switch')) || document.querySelector('.lang-switch');
-    const menu = (sw && sw.querySelector && sw.querySelector('.lang-menu')) || document.getElementById('langMenu');
-    if (!menu) return;
-
-    const isExpanded = trigger && trigger.getAttribute('aria-expanded') === 'true';
-    const isVisible = !menu.hasAttribute('hidden') && menu.style.display !== 'none';
-    const shouldOpen = !(isExpanded && isVisible);
-
-    // Close all open language menus first
-    document.querySelectorAll('.lang-menu').forEach(m => {
-      m.setAttribute('hidden', '');
-      m.style.display = 'none';
-    });
-    document.querySelectorAll('.lang-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
-    document.querySelectorAll('details.lang-switch[open]').forEach(d => d.removeAttribute('open'));
-
-    if (shouldOpen) {
-      menu.removeAttribute('hidden');
-      menu.style.display = 'block';
-      if (trigger) trigger.setAttribute('aria-expanded', 'true');
     }
   };
 
-  function selectLanguageItem(item) {
+  function selectLanguageItem(item, e) {
     if (!item) return;
     const lang = item.getAttribute('data-lang');
-    if (lang) {
-      applyLanguage(lang, true);
-    }
+    if (!lang) return;
+
+    try {
+      localStorage.setItem('iptv_selected_lang', lang);
+    } catch(_) {}
+
     document.querySelectorAll('details.lang-switch[open]').forEach(d => d.removeAttribute('open'));
-    document.querySelectorAll('.lang-menu').forEach(m => {
-      m.setAttribute('hidden', '');
-      m.style.display = 'none';
-    });
-    document.querySelectorAll('.lang-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+
+    const targetUrl = item.getAttribute('href') || getTargetUrlForLang(lang, window.location.pathname);
+    const cleanTarget = targetUrl.replace(/\/$/, '') || '/';
+    const cleanCurrent = window.location.pathname.replace(/\/$/, '') || '/';
+    if (cleanTarget !== cleanCurrent) {
+      if (e) {
+        try { e.preventDefault(); } catch(_) {}
+      }
+      window.location.href = targetUrl;
+    }
   }
 
   function bindLangTriggers() {
     document.querySelectorAll('details.lang-switch').forEach(d => {
-      d.addEventListener('toggle', () => {
-        const trigger = d.querySelector('.lang-trigger');
-        if (trigger) {
-          trigger.setAttribute('aria-expanded', String(d.open));
-        }
-      });
-    });
-
-    document.querySelectorAll('.lang-trigger').forEach(btn => {
-      if (btn.tagName && btn.tagName.toLowerCase() === 'summary') {
-        // Native summary element handles open/close automatically
-        return;
+      // Ensure any lingering hidden or inline style is removed
+      const m = d.querySelector('.lang-menu');
+      if (m) {
+        m.removeAttribute('hidden');
+        m.style.display = '';
       }
-      btn.onclick = (e) => window.__toggleLangMenu(e);
-    });
-
-    document.querySelectorAll('.lang-item, .mobile-lang-item').forEach(item => {
-      item.onclick = (e) => {
-        try { e.preventDefault(); e.stopPropagation(); } catch(_) {}
-        selectLanguageItem(item);
-      };
+      d.addEventListener('toggle', () => {
+        const menu = d.querySelector('.lang-menu');
+        if (menu) {
+          menu.removeAttribute('hidden');
+          menu.style.display = '';
+        }
+        const trigger = d.querySelector('.lang-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', String(d.open));
+      });
     });
   }
 
@@ -1774,34 +1771,31 @@
     if (window.__langSwitcherInitialized) return;
     window.__langSwitcherInitialized = true;
 
-    // Delegated click listener on document for language items and closing on click outside
+    // Delegated click listener for selecting language and closing when clicking outside
     document.addEventListener('click', (e) => {
       const item = e.target.closest('.lang-item') || e.target.closest('.mobile-lang-item');
       if (item) {
-        try { e.preventDefault(); e.stopPropagation(); } catch(_) {}
-        selectLanguageItem(item);
+        selectLanguageItem(item, e);
         return;
       }
 
-      // Clicked outside language switches and language menus
-      if (!e.target.closest('.lang-switch') && !e.target.closest('.lang-menu')) {
-        document.querySelectorAll('details.lang-switch[open]').forEach(d => d.removeAttribute('open'));
-        document.querySelectorAll('.lang-menu').forEach(m => {
-          m.setAttribute('hidden', '');
-          m.style.display = 'none';
+      // Clicked outside language switcher
+      if (!e.target.closest('.lang-switch')) {
+        document.querySelectorAll('details.lang-switch[open]').forEach(d => {
+          d.removeAttribute('open');
+          const trigger = d.querySelector('.lang-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
         });
-        document.querySelectorAll('.lang-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        document.querySelectorAll('details.lang-switch[open]').forEach(d => d.removeAttribute('open'));
-        document.querySelectorAll('.lang-menu').forEach(m => {
-          m.setAttribute('hidden', '');
-          m.style.display = 'none';
+        document.querySelectorAll('details.lang-switch[open]').forEach(d => {
+          d.removeAttribute('open');
+          const trigger = d.querySelector('.lang-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
         });
-        document.querySelectorAll('.lang-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
       }
     });
   }
