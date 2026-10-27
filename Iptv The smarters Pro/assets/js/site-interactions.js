@@ -18,47 +18,79 @@
   }
 
   function mobileMenu() {
-    const menuToggle = document.getElementById('menuToggle') || document.querySelector('.menu-toggle');
-    const mobileNav = document.getElementById('mobileNav') || document.querySelector('.mobile-nav');
-    const navOverlay = document.getElementById('navOverlay') || document.querySelector('.nav-overlay');
+    if (window.__mobileMenuInitialized) return;
+    window.__mobileMenuInitialized = true;
 
-    if (menuToggle && mobileNav) {
-      function toggleMenu(open) {
-        const isOpen = typeof open === 'boolean' ? open : !mobileNav.classList.contains('is-open');
-        mobileNav.classList.toggle('is-open', isOpen);
-        mobileNav.setAttribute('aria-hidden', String(!isOpen));
-        menuToggle.setAttribute('aria-expanded', String(isOpen));
-        if (navOverlay) navOverlay.classList.toggle('is-active', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+    function getElements() {
+      const menuToggle = document.getElementById('menuToggle') || document.querySelector('.menu-toggle');
+      const mobileNav = document.getElementById('mobileNav') || document.querySelector('.mobile-nav');
+      const navOverlay = document.getElementById('navOverlay') || document.querySelector('.nav-overlay');
+      return { menuToggle, mobileNav, navOverlay };
+    }
+
+    function toggleMenu(forceOpen) {
+      const { menuToggle, mobileNav, navOverlay } = getElements();
+      if (!mobileNav) return;
+
+      const isCurrentlyOpen = document.body.classList.contains('menu-open') || mobileNav.classList.contains('is-open');
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !isCurrentlyOpen;
+
+      document.body.classList.toggle('menu-open', shouldOpen);
+      document.body.classList.toggle('is-menu-open', shouldOpen);
+
+      mobileNav.classList.toggle('is-open', shouldOpen);
+      mobileNav.classList.toggle('active', shouldOpen);
+      mobileNav.setAttribute('aria-hidden', String(!shouldOpen));
+
+      if (menuToggle) {
+        menuToggle.classList.toggle('is-open', shouldOpen);
+        menuToggle.setAttribute('aria-expanded', String(shouldOpen));
       }
 
-      menuToggle.addEventListener('click', (e) => {
+      if (navOverlay) {
+        navOverlay.classList.toggle('is-active', shouldOpen);
+        navOverlay.classList.toggle('is-open', shouldOpen);
+      }
+
+      document.body.style.overflow = shouldOpen ? 'hidden' : '';
+    }
+
+    window.__toggleMobileMenu = toggleMenu;
+
+    document.addEventListener('click', (e) => {
+      const toggle = e.target.closest('#menuToggle, .menu-toggle');
+      if (toggle) {
         e.preventDefault();
         e.stopPropagation();
         toggleMenu();
-      });
-
-      if (navOverlay) {
-        navOverlay.addEventListener('click', () => toggleMenu(false));
+        return;
       }
 
-      mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
-      });
-    }
+      if (e.target.closest('#navOverlay, .nav-overlay')) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu(false);
+        return;
+      }
 
-    const fallbackToggle = [...document.querySelectorAll('button')].find(b => /menu|navigation/i.test(b.getAttribute('aria-label') || ''));
-    if (fallbackToggle && !menuToggle) {
-      const header = fallbackToggle.closest('header') || fallbackToggle.parentElement;
-      const links = [...header.querySelectorAll('a[href]')].filter(a => /HOME|PRICING|CHANNELS|SETUP GUIDE|FAQ|CONTACT/i.test(clean(a.textContent)));
-      const unique = [...new Map(links.map(a => [clean(a.textContent), a])).values()];
-      const menu = document.createElement('nav'); menu.id = 'local-mobile-menu'; menu.hidden = true; menu.setAttribute('aria-label', 'Mobile navigation');
-      unique.forEach(a => { const copy = document.createElement('a'); copy.href = a.getAttribute('href'); copy.textContent = clean(a.textContent); menu.appendChild(copy); });
-      document.body.appendChild(menu);
-      fallbackToggle.setAttribute('aria-controls', menu.id);
-      fallbackToggle.addEventListener('click', event => { event.preventDefault(); menu.hidden = !menu.hidden; fallbackToggle.setAttribute('aria-expanded', String(!menu.hidden)); });
-      document.addEventListener('click', event => { if (!menu.hidden && !menu.contains(event.target) && !fallbackToggle.contains(event.target)) { menu.hidden = true; fallbackToggle.setAttribute('aria-expanded', 'false'); } });
-    }
+      const link = e.target.closest('#mobileNav a, .mobile-nav a');
+      if (link) {
+        toggleMenu(false);
+        return;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleMenu(false);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        toggleMenu(false);
+      }
+    });
   }
 
   const faqData = {
@@ -1811,8 +1843,9 @@
   }
 
   // Pre-initialize language switcher immediately if elements already exist in DOM
-  if (typeof document !== 'undefined' && (document.getElementById('langToggle') || document.querySelector('.lang-trigger'))) {
+  if (typeof document !== 'undefined') {
     try { initLanguageSwitcher(); } catch(e) {}
+    try { mobileMenu(); } catch(e) {}
   }
 
   if (document.readyState === 'loading') {
