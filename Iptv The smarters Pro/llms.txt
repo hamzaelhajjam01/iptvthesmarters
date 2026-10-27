@@ -2,8 +2,8 @@
 
 > IPTV subscription, setup, compatibility, pricing, and support information.
 
-- [Home](https://iptv-smarters-pro.ai.studio/)
-- [Pricing](https://iptv-smarters-pro.ai.studio/pricing/)
-- [Product topics](https://iptv-smarters-pro.ai.studio/products/)
-- [Guides](https://iptv-smarters-pro.ai.studio/guides/)
-- [Contact](https://iptv-smarters-pro.ai.studio/contact/)
+- [Home](https://iptvthesmarters.vercel.app/)
+- [Pricing](https://iptvthesmarters.vercel.app/pricing/)
+- [Product topics](https://iptvthesmarters.vercel.app/products/)
+- [Guides](https://iptvthesmarters.vercel.app/guides/)
+- [Contact](https://iptvthesmarters.vercel.app/contact/)
