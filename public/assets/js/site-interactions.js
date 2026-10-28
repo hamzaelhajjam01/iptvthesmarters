@@ -739,6 +739,81 @@
     }
   }
 
+  
+  function initToc() {
+    // Delegated click handler for TOC links (both desktop and mobile details)
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('#toc-list a, details.lg\\:hidden a, .toc-link');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      let targetId = '';
+      if (href.startsWith('#')) {
+        targetId = href.slice(1);
+      } else if (href.includes('#')) {
+        targetId = href.substring(href.indexOf('#') + 1);
+      }
+
+      if (!targetId) return;
+
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try {
+          history.pushState(null, '', '#' + targetId);
+        } catch (err) {}
+
+        // Auto-close mobile dropdown if inside <details>
+        const details = link.closest('details');
+        if (details) {
+          details.removeAttribute('open');
+        }
+
+        // Highlight clicked item
+        document.querySelectorAll('#toc-list a').forEach(a => {
+          const isCurrent = a === link || a.getAttribute('href') === '#' + targetId;
+          a.classList.toggle('text-blue-400', isCurrent);
+          a.classList.toggle('text-zinc-400', !isCurrent);
+        });
+      }
+    });
+
+    // Active heading scroll spy via IntersectionObserver
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      const tocLinks = document.querySelectorAll('#toc-list a[href^="#"]');
+      if (!tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach((link) => {
+              const href = link.getAttribute('href');
+              const isActive = href === '#' + id;
+              link.classList.toggle('text-blue-400', isActive);
+              link.classList.toggle('font-medium', isActive);
+              link.classList.toggle('text-zinc-400', !isActive);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0
+      });
+
+      tocLinks.forEach((link) => {
+        const id = link.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }
+  }
+
   function actions() {
     [...document.querySelectorAll('button')].forEach(button => {
       const label = clean(button.textContent);
@@ -1974,6 +2049,7 @@
     try { pricing(); } catch(e) { console.warn('Pricing warning:', e); }
     try { channels(); } catch(e) { console.warn('Channels warning:', e); }
     try { guides(); } catch(e) { console.warn('Guides warning:', e); }
+    try { initToc(); } catch(e) { console.warn('TOC warning:', e); }
     try { actions(); } catch(e) { console.warn('Actions warning:', e); }
   }
 
