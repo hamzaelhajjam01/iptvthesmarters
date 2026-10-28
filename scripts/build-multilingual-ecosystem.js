@@ -468,7 +468,7 @@ function generatePricingPage(lang) {
           </p>
           <!-- SEO Keyword Badges -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
-            ${lang.keywords.map(kw => `<span class="px-3.5 py-1.5 text-xs font-medium rounded-full bg-zinc-900/90 text-purple-200 border border-purple-900/40 shadow-sm">${kw}</span>`).join('')}
+            ${lang.keywords.map((kw, i) => `<span class=\"heroui-chip ${i === 0 ? 'heroui-chip-primary' : 'heroui-chip-default'}\">${kw}</span>`).join('')}
           </div>
         </div>
 
@@ -680,7 +680,7 @@ function generateChannelsPage(lang) {
           </p>
           <!-- SEO Keyword Badges -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
-            ${lang.keywords.map(kw => `<span class="px-3.5 py-1.5 text-xs font-medium rounded-full bg-zinc-900/90 text-purple-200 border border-purple-900/40 shadow-sm">${kw}</span>`).join('')}
+            ${lang.keywords.map((kw, i) => `<span class=\"heroui-chip ${i === 0 ? 'heroui-chip-primary' : 'heroui-chip-default'}\">${kw}</span>`).join('')}
           </div>
         </div>
 
@@ -890,7 +890,7 @@ function generateContactPage(lang) {
           </p>
           <!-- SEO Keyword Badges -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
-            ${lang.keywords.map(kw => `<span class="px-3.5 py-1.5 text-xs font-medium rounded-full bg-zinc-900/90 text-purple-200 border border-purple-900/40 shadow-sm">${kw}</span>`).join('')}
+            ${lang.keywords.map((kw, i) => `<span class=\"heroui-chip ${i === 0 ? 'heroui-chip-primary' : 'heroui-chip-default'}\">${kw}</span>`).join('')}
           </div>
         </div>
 

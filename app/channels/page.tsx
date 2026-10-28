@@ -115,6 +115,15 @@ export default function EnglishChannelsPage() {
               IPTV Smarters Pro streams local news and live sports to international entertainment and premium movie
               networks. Explore our comprehensive channel lineup below.
             </p>
+            {/* HeroUI High-Intent SEO Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-3xl mx-auto channels-seo-badges">
+              <span className="heroui-chip heroui-chip-primary">25,000+ Live Channels</span>
+              <span className="heroui-chip heroui-chip-default">4K UHD &amp; 60FPS</span>
+              <span className="heroui-chip heroui-chip-default">Top Live Sports &amp; PPV</span>
+              <span className="heroui-chip heroui-chip-default">EPG TV Guide Included</span>
+              <span className="heroui-chip heroui-chip-default">Anti-Freeze Server</span>
+              <span className="heroui-chip heroui-chip-default">Instant Xtream Codes</span>
+            </div>
           </div>
 
           <div className="reveal-on-scroll bg-zinc-950/50 border border-zinc-900 rounded-2xl p-6 is-visible">
