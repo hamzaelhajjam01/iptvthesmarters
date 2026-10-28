@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --biz-accent: #7B3FE4;
+  --biz-on-accent: #ffffff;
+  --biz-dark: #000000;
+  --biz-font: Inter, system-ui, sans-serif;
+  --biz-radius: 16px;
+}
+
+body {
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-family: var(--biz-font);
+  overflow-x: hidden;
+}
+
+/* Button & Header Styles */
+.btn-buy-now {
+  background: linear-gradient(135deg, #7B3FE4, #5F15CD);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(123, 63, 228, 0.35);
+}
+.btn-buy-now:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 24px rgba(123, 63, 228, 0.5);
+}
+
+.site-header-scrolled {
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(16px);
+}
+
+/* HeroUI & Prose styles */
+.prose {
+  color: #a1a1aa;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.prose strong {
+  color: #f4f4f5;
+}
+.prose a {
+  color: #c084fc;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.prose a:hover {
+  color: #e9d5ff;
+}
+.prose code {
+  color: #e9d5ff;
+  background: rgba(123, 63, 228, 0.15);
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.875em;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+[dir="rtl"] .group-hover\:translate-x-1:hover {
+  transform: translateX(-4px);
+}

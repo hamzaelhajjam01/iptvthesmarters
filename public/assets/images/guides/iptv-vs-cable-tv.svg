@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="IPTV vs Cable">
+  <defs>
+    <linearGradient id="bg-iptv-vs-cable-tv" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0d"/>
+      <stop offset="55%" stop-color="#111318"/>
+      <stop offset="100%" stop-color="#050506"/>
+    </linearGradient>
+    <radialGradient id="glow-iptv-vs-cable-tv" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logo-iptv-vs-cable-tv" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B3FE4"/>
+      <stop offset="100%" stop-color="#5F15CD"/>
+    </linearGradient>
+    <pattern id="grid-iptv-vs-cable-tv" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-iptv-vs-cable-tv)"/>
+  <rect width="1200" height="630" fill="url(#grid-iptv-vs-cable-tv)"/>
+  <circle cx="960" cy="120" r="360" fill="url(#glow-iptv-vs-cable-tv)"/>
+  <circle cx="180" cy="560" r="300" fill="url(#glow-iptv-vs-cable-tv)" opacity="0.6"/>
+  <g transform="translate(64,56)">
+    <rect width="230.8" height="34" rx="17" fill="#6366f1" fill-opacity="0.12" stroke="#6366f1" stroke-opacity="0.4"/>
+    <circle cx="18" cy="17" r="4" fill="#a5b4fc"/>
+    <text x="32" y="22" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="13"
+          letter-spacing="1.5" fill="#a5b4fc">IPTV SERVICES</text>
+  </g>
+  <g transform="translate(600,272)">
+    <circle r="118" fill="#6366f1" fill-opacity="0.07" stroke="#6366f1" stroke-opacity="0.35" stroke-width="1.5"/>
+    <circle r="86" fill="#000000" fill-opacity="0.35"/>
+    <g transform="scale(4.4)">
+    <g transform="translate(-12,-12)" fill="none" stroke="#a5b4fc" stroke-width="1.7"
+       stroke-linecap="round" stroke-linejoin="round">
+      <rect width="20" height="15" x="2" y="7" rx="2" ry="2"/>
+      <polyline points="17 2 12 7 7 2"/>
+    </g>
+    </g>
+  </g>
+  <text x="600" y="446" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800"
+        font-size="42" letter-spacing="-0.5" fill="#ffffff">IPTV vs Cable</text>
+  <text x="600" y="484" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="500"
+        font-size="18" fill="#71717a" letter-spacing="0.5">IPTV Smarters Pro Guide</text>
+  <g transform="translate(1080,548)">
+    <rect x="0" y="0" width="44" height="44" rx="12" fill="url(#logo-iptv-vs-cable-tv)"/>
+    <g transform="translate(9,9)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6.5 8.5C6.5 7.11929 7.61929 6 9 6H17C18.3807 6 19.5 7.11929 19.5 8.5V16.5C19.5 17.8807 18.3807 19 17 19H9C7.61929 19 6.5 17.8807 6.5 16.5V8.5Z"/>
+      <path d="M11.5 9.5L15.5 12L11.5 14.5V9.5Z" fill="#ffffff" stroke="none"/>
+    </g>
+  </g>
+</svg>
