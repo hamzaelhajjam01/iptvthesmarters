@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "what-is-iptv",
+    "category": "iptv services",
+    "title": "What Is IPTV? A Beginner's Guide",
+    "desc": "A plain-language explainer of how IPTV works, how it differs from traditional broadcast TV, and the terms you'll see everywhere."
+  },
+  {
+    "slug": "iptv-vs-cable-tv",
+    "category": "iptv services",
+    "title": "IPTV vs. Cable TV: What's the Difference?",
+    "desc": "A practical comparison of how IPTV and traditional cable TV differ on cost, flexibility, hardware, and channel delivery."
+  },
+  {
+    "slug": "how-to-choose-an-iptv-service",
+    "category": "iptv services",
+    "title": "How to Choose an IPTV Service: 7 Factors",
+    "desc": "Seven practical factors to evaluate before subscribing to any IPTV provider, from connection limits to legitimacy checks."
+  },
+  {
+    "slug": "iptv-glossary-m3u-epg-vod-xtream-codes",
+    "category": "iptv services",
+    "title": "IPTV Glossary: M3U, EPG, VOD &amp; More Explained",
+    "desc": "Plain-language definitions for the IPTV terms you'll run into constantly: M3U, EPG, VOD, Xtream Codes, catch-up, and more."
+  },
+  {
+    "slug": "iptv-pricing-monthly-annual-lifetime-plans",
+    "category": "iptv services",
+    "title": "IPTV Pricing: Monthly vs. Annual vs. Lifetime",
+    "desc": "How monthly, annual, and \"lifetime\" IPTV billing structures actually differ, and the real trade-offs behind each one."
+  },
+  {
+    "slug": "iptv-smarters-pro-on-android-box-nvidia-shield",
+    "category": "devices",
+    "title": "IPTV Smarters Pro on Android Box &amp; Nvidia Shield Setup",
+    "desc": "Install IPTV Smarters Pro on Nvidia Shield or any Android TV box via Google Play or sideloading, plus fixes for lag on generic boxes."
+  },
+  {
+    "slug": "iptv-smarters-pro-on-iphone-ios",
+    "category": "devices",
+    "title": "IPTV Smarters Pro on iPhone &amp; iOS: Complete Setup",
+    "desc": "Get IPTV Smarters Pro running on iPhone and iPad via the App Store, plus fixes for the most common iOS playback issues."
+  },
+  {
+    "slug": "how-many-devices-can-i-use-iptv-smarters-pro-on",
+    "category": "setup",
+    "title": "How Many Devices Can You Use IPTV Smarters Pro On?",
+    "desc": "Understand connection limits, simultaneous streams, and multi-device rules before you buy or share an IPTV Smarters Pro subscription."
+  },
+  {
+    "slug": "iptv-smarters-pro-black-screen-fix",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro Black Screen: How to Fix It",
+    "desc": "Stream loads but the screen stays black? Fix hardware decoder conflicts, HDMI-CEC issues, and resolution mismatches step by step."
+  },
+  {
+    "slug": "iptv-smarters-pro-no-sound-fix",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro No Sound: How to Fix Audio Issues",
+    "desc": "Picture works but there's no audio? Fix passthrough conflicts and codec mismatches causing silent playback in IPTV Smarters Pro."
+  },
+  {
+    "slug": "iptv-smarters-pro-wont-update-fix",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro Won't Update: How to Fix It",
+    "desc": "Stuck on an old version or getting an update failed error? Fix blocked installs, storage errors, and stale APK caches."
+  },
+  {
+    "slug": "how-to-clear-cache-iptv-smarters-pro",
+    "category": "setup",
+    "title": "How to Clear Cache on IPTV Smarters Pro",
+    "desc": "Free up storage and fix sluggish performance by safely clearing the cache in IPTV Smarters Pro without losing your playlist login."
+  },
+  {
+    "slug": "iptv-smarters-pro-complete-guide",
+    "category": "setup",
+    "title": "IPTV Smarters Pro: The Complete Setup &amp; Streaming Guide",
+    "desc": "The definitive master manual for IPTV Smarters Pro. Complete device installation, Xtream Codes setup, EPG configuration, buffering fixes, and subscription plans."
+  },
+  {
+    "slug": "is-iptv-smarters-pro-free",
+    "category": "comparisons",
+    "title": "Is IPTV Smarters Pro Free? App Cost vs Subscription",
+    "desc": "Understand the difference between the free IPTV Smarters Pro app client and the paid Xtream Codes IPTV subscription required for live channels."
+  },
+  {
+    "slug": "iptv-smarters-pro-failed-to-authorize-fix",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro \"Failed to Authorize\" — How to Fix It",
+    "desc": "Understand exactly why your server connection was rejected and how to fix trailing slashes, ISP blocks, or MAC locks instantly."
+  },
+  {
+    "slug": "iptv-smarters-pro-keeps-buffering-fixes",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro Keeps Buffering: 7 Fixes That Actually Work",
+    "desc": "Stop the endless spinning wheel. Learn how to increase playback buffer sizes, change video decoders, and bypass ISP throttling."
+  },
+  {
+    "slug": "iptv-smarters-pro-vs-tivimate",
+    "category": "comparisons",
+    "title": "IPTV Smarters Pro vs TiviMate: Which Should You Use?",
+    "desc": "A deep-dive comparison of the two biggest IPTV players. Find out which app offers better UI, EPG management, and premium features."
+  },
+  {
+    "slug": "iptv-smarters-pro-vs-ibo-player",
+    "category": "comparisons",
+    "title": "IPTV Smarters Pro vs IBO Player: Full Comparison",
+    "desc": "Comparing Smarters Pro against IBO Player. See which app wins on speed, MAC-based activation, and smart TV compatibility."
+  },
+  {
+    "slug": "iptv-smarters-vs-pro-vs-lite",
+    "category": "comparisons",
+    "title": "IPTV Smarters vs IPTV Smarters Pro vs Smarters Lite: What's the Difference?",
+    "desc": "Confused by the different versions? We break down the exact differences between the standard, Lite, and Pro versions of IPTV Smarters."
+  },
+  {
+    "slug": "how-to-set-up-xtream-codes-iptv-smarters-pro",
+    "category": "setup",
+    "title": "How to Set Up Xtream Codes in IPTV Smarters Pro",
+    "desc": "The fastest way to log in. Follow our step-by-step tutorial to enter your Xtream Codes API details without syntax errors."
+  },
+  {
+    "slug": "how-to-add-m3u-playlist-iptv-smarters-pro",
+    "category": "setup",
+    "title": "How to Add an M3U Playlist to IPTV Smarters Pro",
+    "desc": "Learn how to import massive M3U URLs into Smarters Pro and how to bypass memory limitations on older streaming devices."
+  },
+  {
+    "slug": "is-iptv-smarters-pro-safe-and-legal",
+    "category": "safety",
+    "title": "Is IPTV Smarters Pro Safe and Legal to Use?",
+    "desc": "Everything you need to know about the legality of IPTV Smarters Pro, copyright laws, and why a VPN is essential for streaming."
+  },
+  {
+    "slug": "how-to-activate-iptv-smarters-pro",
+    "category": "setup",
+    "title": "How to Activate IPTV Smarters Pro (Step-by-Step)",
+    "desc": "A complete walkthrough to download, install, and activate the premium features of IPTV Smarters Pro on any supported device."
+  },
+  {
+    "slug": "iptv-smarters-pro-login-not-working",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro Login Not Working: How to Fix It",
+    "desc": "Fix invalid details, network errors, and login loops. Step-by-step solutions to get you back into your IPTV subscription."
+  },
+  {
+    "slug": "install-iptv-smarters-pro-on-firestick",
+    "category": "devices",
+    "title": "How to Install IPTV Smarters Pro on Firestick (2026 Guide)",
+    "desc": "The definitive Downloader guide for 2026. Get IPTV Smarters Pro onto your Amazon Fire TV Stick safely in under 5 minutes."
+  },
+  {
+    "slug": "iptv-smarters-pro-on-samsung-lg-smart-tvs",
+    "category": "devices",
+    "title": "IPTV Smarters Pro on Samsung &amp; LG Smart TVs: Full Setup",
+    "desc": "Skip the Firestick. Learn how to install the official Smarters Pro app directly from your Samsung Tizen or LG WebOS store."
+  },
+  {
+    "slug": "iptv-smarters-pro-epg-not-loading-fix",
+    "category": "troubleshooting",
+    "title": "IPTV Smarters Pro EPG Not Loading: How to Fix It",
+    "desc": "Missing channel guides? Learn how to force-refresh your EPG, fix timezone offsets, and repair broken XMLTV links."
+  },
+  {
+    "slug": "how-to-use-multiple-playlists-iptv-smarters-pro",
+    "category": "setup",
+    "title": "How to Use Multiple Playlists in IPTV Smarters Pro",
+    "desc": "Manage backups and multiple providers easily. Learn how to switch between different IPTV subscriptions within a single app."
+  },
+  {
+    "slug": "best-iptv-subscriptions-for-smarters-pro",
+    "category": "comparisons",
+    "title": "Best IPTV Subscriptions That Work With IPTV Smarters Pro",
+    "desc": "What makes a great provider? Learn what features to look for (like catch-up and anti-freeze) when buying an IPTV sub."
+  },
+  {
+    "slug": "how-to-spot-fake-iptv-smarters-pro-apps",
+    "category": "safety",
+    "title": "How to Spot Fake IPTV Smarters Pro Apps (Clone Warning)",
+    "desc": "Protect your data. Learn how to identify malicious clone apps on Android and Firestick disguised as IPTV Smarters."
+  },
+  {
+    "slug": "iptv-smarters-pro-download-official-sources",
+    "category": "devices",
+    "title": "IPTV Smarters Pro Download: Official Sources by Device",
+    "desc": "Never download malware again. We list the only verified, official download links for Android, Windows, Mac, and iOS."
+  },
+  {
+    "slug": "iptv-smarters-pro-apk-safe-to-download",
+    "category": "safety",
+    "title": "IPTV Smarters Pro APK: Is It Safe to Download?",
+    "desc": "Analyzing the safety of third-party APKs. Learn how to scan files and verify signatures before sideloading onto your device."
+  },
+  {
+    "slug": "iptv-smarters-pro-update-latest-version",
+    "category": "setup",
+    "title": "IPTV Smarters Pro Update: What's New in the Latest Version",
+    "desc": "Explore the newest UI changes, bug fixes, and performance improvements in the latest release of IPTV Smarters Pro."
+  },
+  {
+    "slug": "iptv-smarters-pro-for-pc-mac-setup",
+    "category": "devices",
+    "title": "IPTV Smarters Pro for PC and Mac: Complete Setup Guide",
+    "desc": "Stream on your desktop. A complete setup guide for the native Windows and macOS versions of IPTV Smarters Pro."
+  },
+  {
+    "slug": "how-to-tell-if-iptv-provider-is-legitimate",
+    "category": "iptv services",
+    "title": "How to Tell If an IPTV Provider Is Legitimate",
+    "desc": "A practical checklist for evaluating whether an IPTV provider is properly licensed — red flags, what authorized reseller actually means, and how enforcement works."
+  }
+]

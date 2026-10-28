@@ -1689,7 +1689,7 @@
     return 'en';
   }
 
-  const COMMON_SUBPAGES = new Set(['', 'pricing', 'channels', 'features', 'contact', 'privacy', 'terms', 'refund']);
+  const COMMON_SUBPAGES = new Set(['', 'pricing', 'channels', 'features', 'contact', 'privacy', 'terms', 'refund', 'guides']);
 
   function getTargetUrlForLang(targetLang, currentPath) {
     const p = currentPath || (typeof window !== 'undefined' ? window.location.pathname : '/');
@@ -1708,15 +1708,23 @@
 
     const cleanSub = subPath.replace(/^\/+|\/+$/g, '');
 
+    // 1. If target is English ('en')
     if (targetLang === 'en') {
       return cleanSub ? '/' + cleanSub + '/' : '/';
     }
 
+    // 2. Guides hub or individual guide slug (e.g. 'guides' or 'guides/install-iptv-smarters-pro-on-firestick')
+    if (cleanSub === 'guides' || cleanSub.startsWith('guides/')) {
+      return '/' + targetLang + '/' + cleanSub + '/';
+    }
+
+    // 3. Known common subpages
     if (COMMON_SUBPAGES.has(cleanSub)) {
       return cleanSub ? '/' + targetLang + '/' + cleanSub + '/' : '/' + targetLang + '/';
     }
 
-    return '/' + targetLang + '/';
+    // 4. Default: keep cleanSub if present, otherwise home
+    return cleanSub ? '/' + targetLang + '/' + cleanSub + '/' : '/' + targetLang + '/';
   }
 
   function updateSwitcherUI(lang) {

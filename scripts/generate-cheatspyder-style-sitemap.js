@@ -10,12 +10,42 @@ const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 const BASE_URL = 'https://thesmartersiptv.com';
 const TODAY = new Date().toISOString().split('T')[0];
 
-// Read existing URLs from previous sitemap to maintain all paths
-const oldSitemap = fs.readFileSync(path.join(sourceDir, 'sitemap.xml'), 'utf8');
-const locMatches = (oldSitemap.match(/<loc>([\s\S]*?)<\/loc>/g) || []).map(l => l.replace(/<\/?loc>/g, '').trim());
+// Recursive scanner to find all index.html files in sourceDir
+function scanDirectoryForHtml(dir, fileList = []) {
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+  for (const item of items) {
+    // Exclude build/temp dirs
+    if (['node_modules', '.git', 'dist', 'temp', 'assets'].includes(item.name)) continue;
 
-// Unique clean list
-const allUrls = Array.from(new Set(locMatches)).sort();
+    const fullPath = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      scanDirectoryForHtml(fullPath, fileList);
+    } else if (item.isFile() && item.name === 'index.html') {
+      const rel = path.relative(sourceDir, fullPath).replace(/\\/g, '/');
+      let route = rel === 'index.html' ? '/' : `/${rel.replace(/\/index\.html$/, '')}/`;
+      fileList.push(`${BASE_URL}${route}`);
+    }
+  }
+  return fileList;
+}
+
+const scannedUrls = scanDirectoryForHtml(sourceDir);
+
+// Also read existing URLs from previous sitemaps if any
+let existingLocs = [];
+for (const smName of ['sitemap.xml', 'sitemap-pages.xml', 'sitemap-guides.xml', 'sitemap-products.xml', 'sitemap-legal.xml']) {
+  const smPath = path.join(sourceDir, smName);
+  if (fs.existsSync(smPath)) {
+    const xml = fs.readFileSync(smPath, 'utf8');
+    const matches = (xml.match(/<loc>([\s\S]*?)<\/loc>/g) || []).map(l => l.replace(/<\/?loc>/g, '').trim());
+    existingLocs.push(...matches);
+  }
+}
+
+// Clean and combine: only keep valid page URLs (exclude sitemap xml references in loc)
+const allUrls = Array.from(new Set([...scannedUrls, ...existingLocs]))
+  .filter(u => u.startsWith(BASE_URL) && !u.endsWith('.xml') && !u.endsWith('.xsl'))
+  .sort();
 
 const pages = [];
 const guides = [];
@@ -39,7 +69,8 @@ function getPriority(url) {
   if (url.endsWith('/pricing/')) return { prio: '0.9', freq: 'daily' };
   if (/^https:\/\/thesmartersiptv\.com\/[a-z-]+\/$/.test(url)) return { prio: '0.9', freq: 'daily' };
   if (url.includes('/channels/') || url.includes('/features/')) return { prio: '0.8', freq: 'weekly' };
-  if (url.includes('/guides/')) return { prio: '0.85', freq: 'weekly' };
+  if (url.endsWith('/guides/')) return { prio: '0.85', freq: 'daily' };
+  if (url.includes('/guides/')) return { prio: '0.8', freq: 'weekly' };
   if (url.includes('/products/')) return { prio: '0.7', freq: 'weekly' };
   if (url.includes('/privacy/') || url.includes('/terms/') || url.includes('/refund/')) return { prio: '0.4', freq: 'monthly' };
   return { prio: '0.7', freq: 'weekly' };
@@ -100,7 +131,7 @@ const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 </sitemapindex>`;
 
 fs.writeFileSync(path.join(sourceDir, 'sitemap.xml'), indexXml, 'utf8');
-console.log(`✅ Generated master sitemap.xml (Sitemap Index referencing 4 modular sub-sitemaps)`);
+console.log(`✅ Generated master sitemap.xml (Sitemap Index referencing 4 modular sub-sitemaps, total ${allUrls.length} pages)`);
 
 // 3. Update robots.txt
 const robotsTxt = `User-agent: *

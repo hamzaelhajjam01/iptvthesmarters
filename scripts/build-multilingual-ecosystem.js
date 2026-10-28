@@ -161,7 +161,17 @@ function buildHeader(lang, activePage = '') {
   </header>`;
 }
 
+
+const LOCALIZED_FOOTER_EXTRA = {
+  fr: '<li><a href="/fr/meilleur-iptv-france/" class="hover:text-white transition-colors">Meilleur IPTV France</a></li><li><a href="/fr/abonnement-iptv/" class="hover:text-white transition-colors">Abonnement IPTV 4K</a></li><li><a href="/fr/installer-iptv-smarters-sur-firestick/" class="hover:text-white transition-colors">Installer sur Firestick</a></li>',
+  de: '<li><a href="/de/bester-iptv-anbieter/" class="hover:text-white transition-colors">Bester IPTV Anbieter</a></li><li><a href="/de/iptv-kaufen/" class="hover:text-white transition-colors">IPTV Kaufen 4K</a></li>',
+  es: '<li><a href="/es/comprar-iptv-espana/" class="hover:text-white transition-colors">Comprar IPTV España</a></li><li><a href="/es/mejor-iptv-sin-cortes/" class="hover:text-white transition-colors">Mejor IPTV Sin Cortes</a></li>',
+  it: '<li><a href="/it/abbonamento-iptv/" class="hover:text-white transition-colors">Abbonamento IPTV 4K</a></li>',
+  nl: '<li><a href="/nl/iptv-kopen/" class="hover:text-white transition-colors">IPTV Kopen 4K</a></li>'
+};
+
 function buildFooter(lang) {
+  const extraLinks = LOCALIZED_FOOTER_EXTRA[lang.code] || '';
   const prefix = `/${lang.code}/`;
   return `
   <footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs">
@@ -189,6 +199,7 @@ function buildFooter(lang) {
             <li><a href="${prefix}channels/" class="hover:text-white transition-colors">${lang.nav.channels}</a></li>
             <li><a href="${prefix}features/" class="hover:text-white transition-colors">${lang.nav.features}</a></li>
             <li><a href="${prefix}pricing/" class="hover:text-white transition-colors">${lang.nav.pricing}</a></li>
+            ${extraLinks}
           </ul>
         </div>
 
