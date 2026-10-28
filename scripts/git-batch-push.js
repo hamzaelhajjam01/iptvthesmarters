@@ -13,57 +13,61 @@ function run(cmd) {
 
 const batches = [
   {
-    name: 'core-and-en-guides',
-    msg: 'feat(seo): core scripts, sitemaps, HeroUI callouts, and English technical guides',
+    name: 'core-scripts-and-en-pages',
+    msg: 'fix(ui): eliminate stray arrows and standardize navigation menu across English pages & guides',
     add: [
       'scripts',
-      '"Iptv The smarters Pro/assets"',
-      '"Iptv The smarters Pro/guides"',
-      '"Iptv The smarters Pro/sitemap-guides.xml"',
-      '"Iptv The smarters Pro/sitemap-products.xml"',
+      'build.js',
+      'package.json',
       '"Iptv The smarters Pro/index.html"',
-      '"Iptv The smarters Pro/pricing/index.html"',
-      '"Iptv The smarters Pro/products/index.html"'
+      '"Iptv The smarters Pro/pricing"',
+      '"Iptv The smarters Pro/features"',
+      '"Iptv The smarters Pro/channels"',
+      '"Iptv The smarters Pro/contact"',
+      '"Iptv The smarters Pro/privacy"',
+      '"Iptv The smarters Pro/terms"',
+      '"Iptv The smarters Pro/refund"',
+      '"Iptv The smarters Pro/guides"'
     ]
   },
   {
-    name: 'fr-guides-and-landing',
-    msg: 'feat(seo): 35 French technical guides suite and localized hub',
+    name: 'fr-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across French pages and guides',
     add: ['"Iptv The smarters Pro/fr"']
   },
   {
-    name: 'de-guides-and-landing',
-    msg: 'feat(seo): 35 German technical guides suite and localized hub',
+    name: 'de-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across German pages and guides',
     add: ['"Iptv The smarters Pro/de"']
   },
   {
-    name: 'es-guides-and-landing',
-    msg: 'feat(seo): 35 Spanish technical guides suite and localized hub',
+    name: 'es-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Spanish pages and guides',
     add: ['"Iptv The smarters Pro/es"']
   },
   {
-    name: 'ar-guides-and-landing',
-    msg: 'feat(seo): 35 Arabic technical guides suite, RTL layout, and localized hub',
+    name: 'ar-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Arabic pages and guides',
     add: ['"Iptv The smarters Pro/ar"']
   },
   {
-    name: 'it-guides-and-landing',
-    msg: 'feat(seo): 35 Italian technical guides suite and localized hub',
+    name: 'it-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Italian pages and guides',
     add: ['"Iptv The smarters Pro/it"']
   },
   {
-    name: 'nl-guides-and-landing',
-    msg: 'feat(seo): 35 Dutch technical guides suite and localized hub',
+    name: 'nl-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Dutch pages and guides',
     add: ['"Iptv The smarters Pro/nl"']
   },
   {
-    name: 'pt-guides-and-landing',
-    msg: 'feat(seo): 70 Portuguese (PT & BR) technical guides suite and localized hubs',
+    name: 'pt-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Portuguese pages and guides',
     add: ['"Iptv The smarters Pro/pt"', '"Iptv The smarters Pro/pt-br"']
   },
   {
-    name: 'pl-ko-guides-and-landing',
-    msg: 'feat(seo): 70 Polish & Korean technical guides suite and localized hubs',
+    name: 'pl-ko-pages-and-guides',
+    msg: 'fix(ui): standardize header navigation across Polish and Korean pages and guides',
     add: ['"Iptv The smarters Pro/pl"', '"Iptv The smarters Pro/ko"']
   }
 ];
@@ -100,7 +104,7 @@ for (let i = 0; i < batches.length; i++) {
     console.error(`Failed to push Batch ${i + 1}`);
     process.exit(1);
   }
-  console.log(`✅ Batch ${i + 1} pushed successfully!`);
+  console.log(`✓ Batch ${i + 1} pushed successfully!`);
 }
 
-console.log('\n🎉 ALL BATCHES COMMITTED AND PUSHED TO GITHUB ORIGIN MAIN SUCCESSFULLY!');
+console.log('\nAll batches successfully committed and pushed to origin main!');

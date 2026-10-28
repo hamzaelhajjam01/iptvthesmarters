@@ -16,6 +16,22 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.join(__dirname, '..');
 const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
+function safeWriteFileSync(filePath, data, encoding = 'utf8') {
+  let attempts = 0;
+  while (attempts < 6) {
+    try {
+      fs.writeFileSync(filePath, data, encoding);
+      return;
+    } catch (err) {
+      attempts++;
+      if (attempts >= 6) throw err;
+      const waitMs = attempts * 150;
+      const end = Date.now() + waitMs;
+      while (Date.now() < end) {}
+    }
+  }
+}
+
 const BRAND_SVG = `<svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg>`;
 
 const BRAND_SVG_FOOTER = `<svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient_footer)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient_footer" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg>`;
@@ -99,9 +115,8 @@ function buildGuideHeader(lang, currentGuideSlug = '') {
         </a>
         <nav class="hidden lg:flex items-center gap-8">
           <a href="${prefix}" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.home}</a>
-          <a href="${prefix}#pricing" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.services}</a>
-          <a href="${prefix}#features" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.features}</a>
-          <a href="${prefix}#channels" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.channels}</a>
+          <a href="${prefix}features/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.features}</a>
+          <a href="${prefix}channels/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.channels}</a>
           <a href="${prefix}pricing/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.pricing}</a>
           <a href="${prefix}guides/" class="nav-link text-sm font-medium transition-colors text-white nav-link-active">${nav.guides}</a>
           <a href="${prefix}contact/" class="nav-link text-sm font-medium transition-colors text-zinc-400 hover:text-white">${nav.contact}</a>
@@ -132,9 +147,8 @@ function buildGuideHeader(lang, currentGuideSlug = '') {
     <nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Mobile">
       <div class="flex flex-col">
         <a href="${prefix}" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.home}</span></a>
-        <a href="${prefix}#pricing" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.services}</span></a>
-        <a href="${prefix}#features" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.features}</span></a>
-        <a href="${prefix}#channels" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.channels}</span></a>
+        <a href="${prefix}features/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.features}</span></a>
+        <a href="${prefix}channels/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.channels}</span></a>
         <a href="${prefix}pricing/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.pricing}</span></a>
         <a href="${prefix}guides/" class="mobile-nav-row text-lg font-semibold py-4 px-2 mobile-nav-row-active"><span>${nav.guides}</span></a>
         <a href="${prefix}contact/" class="mobile-nav-row text-lg font-semibold py-4 px-2 text-zinc-400"><span>${nav.contact}</span></a>
@@ -414,8 +428,8 @@ function generateLocalizedGuide(slug, lang) {
   // 2. Title & Descriptions
   const pageTitle = `${i18n.title} | IPTV Smarters Pro`;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${pageTitle}</title>`);
-  html = html.replace(/<meta name="title" content="[^"]*">/, `<meta name="title" content="${i18n.title}">`);
-  html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${i18n.desc}">`);
+  html = html.replace(/<meta name="title" content="[^"]*">>*/, `<meta name="title" content="${i18n.title}">`);
+  html = html.replace(/<meta name="description" content="[^"]*">>*/, `<meta name="description" content="${i18n.desc}">`);
 
   // Open Graph & Twitter
   const targetCanonical = `${BASE_URL}/${langCode}/guides/${slug}/`;
@@ -518,7 +532,7 @@ function generateLocalizedGuide(slug, lang) {
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true });
   }
-  fs.writeFileSync(path.join(targetDir, 'index.html'), html, 'utf8');
+  safeWriteFileSync(path.join(targetDir, 'index.html'), html, 'utf8');
 }
 
 // -------------------------------------------------------------
@@ -543,8 +557,8 @@ function generateLocalizedGuidesHub(lang) {
   // 2. Title & Descriptions
   const pageTitle = `${hero.badge} | IPTV Smarters Pro`;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${pageTitle}</title>`);
-  html = html.replace(/<meta name="title" content="[^"]*">/, `<meta name="title" content="${pageTitle}">`);
-  html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${hero.subtitle}">`);
+  html = html.replace(/<meta name="title" content="[^"]*">>*/, `<meta name="title" content="${pageTitle}">`);
+  html = html.replace(/<meta name="description" content="[^"]*">>*/, `<meta name="description" content="${hero.subtitle}">`);
 
   const hubCanonical = `${BASE_URL}/${langCode}/guides/`;
   html = html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${hubCanonical}">`);
@@ -620,7 +634,7 @@ function generateLocalizedGuidesHub(lang) {
   if (!fs.existsSync(targetHubDir)) {
     fs.mkdirSync(targetHubDir, { recursive: true });
   }
-  fs.writeFileSync(path.join(targetHubDir, 'index.html'), html, 'utf8');
+  safeWriteFileSync(path.join(targetHubDir, 'index.html'), html, 'utf8');
 }
 
 // -------------------------------------------------------------
@@ -638,11 +652,14 @@ function syncEnglishGuides() {
     const hreflangBlock = buildHreflangBlock();
     hubHtml = hubHtml.replace('</head>', `    ${hreflangBlock}\n  </head>`);
     const newHeader = buildGuideHeader(EN_LOCALE);
-    const headerRegex = /<astro-island[^>]*component-export="Header"[\s\S]*?<\/header><\/astro-island>/;
-    if (headerRegex.test(hubHtml)) {
-      hubHtml = hubHtml.replace(headerRegex, newHeader);
+    const astroHeaderRegex = /<astro-island[^>]*component-export="Header"[\s\S]*?<\/header><\/astro-island>/;
+    const standardHeaderRegex = /<header class="site-header[\s\S]*?<\/header>/;
+    if (astroHeaderRegex.test(hubHtml)) {
+      hubHtml = hubHtml.replace(astroHeaderRegex, newHeader);
+    } else if (standardHeaderRegex.test(hubHtml)) {
+      hubHtml = hubHtml.replace(standardHeaderRegex, newHeader);
     }
-    fs.writeFileSync(enHubPath, hubHtml, 'utf8');
+    safeWriteFileSync(enHubPath, hubHtml, 'utf8');
   }
 
   // 2. Sync all 35 English guide detail pages
@@ -662,12 +679,15 @@ function syncEnglishGuides() {
 
     // Update Header with direct language switcher to the exact slug
     const newHeader = buildGuideHeader(EN_LOCALE, slug);
-    const headerRegex = /<astro-island[^>]*component-export="Header"[\s\S]*?<\/header><\/astro-island>/;
-    if (headerRegex.test(guideHtml)) {
-      guideHtml = guideHtml.replace(headerRegex, newHeader);
+    const astroHeaderRegex = /<astro-island[^>]*component-export="Header"[\s\S]*?<\/header><\/astro-island>/;
+    const standardHeaderRegex = /<header class="site-header[\s\S]*?<\/header>/;
+    if (astroHeaderRegex.test(guideHtml)) {
+      guideHtml = guideHtml.replace(astroHeaderRegex, newHeader);
+    } else if (standardHeaderRegex.test(guideHtml)) {
+      guideHtml = guideHtml.replace(standardHeaderRegex, newHeader);
     }
 
-    fs.writeFileSync(guidePath, guideHtml, 'utf8');
+    safeWriteFileSync(guidePath, guideHtml, 'utf8');
   }
 }
 
