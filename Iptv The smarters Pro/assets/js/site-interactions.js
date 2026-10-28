@@ -1901,10 +1901,10 @@
     const cleanTarget = targetUrl.replace(/\/$/, '') || '/';
     const cleanCurrent = window.location.pathname.replace(/\/$/, '') || '/';
     if (cleanTarget !== cleanCurrent) {
-      if (e) {
-        try { e.preventDefault(); } catch(_) {}
+      if (!item.getAttribute('href')) {
+        if (e) { try { e.preventDefault(); } catch(_) {} }
+        window.location.href = targetUrl;
       }
-      window.location.href = targetUrl;
     }
   }
 

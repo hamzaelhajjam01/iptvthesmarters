@@ -244,7 +244,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                 {ALL_LOCALES.map(loc => {
                   const isActive = loc.code === currentLang;
                   return (
-                    <a
+                    <Link
                       key={loc.code}
                       href={getLangUrl(loc.code)}
                       className={`lang-item ${isActive ? 'is-active' : ''}`}
@@ -272,7 +272,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                       >
                         <path d="M20 6 9 17l-5-5" />
                       </svg>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
