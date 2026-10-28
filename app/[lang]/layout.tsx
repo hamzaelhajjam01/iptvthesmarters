@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
 
 export async function generateStaticParams() {
@@ -19,10 +17,8 @@ export default function LocalizedLayout({ children, params }: LocalizedLayoutPro
   const isRtl = currentLocale.dir === 'rtl';
 
   return (
-    <div lang={params.lang} dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
-      <Header currentLang={params.lang} />
-      <main className="flex-1">{children}</main>
-      <Footer currentLang={params.lang} />
+    <div lang={params.lang} dir={isRtl ? 'rtl' : 'ltr'} style={{ display: 'contents' }}>
+      {children}
     </div>
   );
 }

@@ -52,21 +52,23 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
 
   const currentLocale = ALL_LOCALES.find(l => l.code === currentLang) || ALL_LOCALES[0];
 
-  const handleMenuToggle = () => {
-    if (typeof document === 'undefined') return;
-    const isOpen = document.body.classList.toggle('menu-open');
-    const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  const handleMenuToggle = (e: React.MouseEvent) => {
+    if (typeof window !== 'undefined' && (window as any).__toggleMobileMenu) {
+      // Let site-interactions.js document click listener handle it without double-toggling
+      return;
+    }
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('menu-open');
     }
   };
 
   const closeMobileMenu = () => {
-    if (typeof document === 'undefined') return;
-    document.body.classList.remove('menu-open');
-    const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-      menuToggle.setAttribute('aria-expanded', 'false');
+    if (typeof window !== 'undefined' && (window as any).__toggleMobileMenu) {
+      (window as any).__toggleMobileMenu(false);
+      return;
+    }
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove('menu-open');
     }
   };
 
