@@ -929,3 +929,54 @@ span[class*="rounded-full"][class*="border-purple-900"]:hover {
 .heroui-callout-meta svg {
   color: #34D399;
 }
+
+/* ==========================================================================
+   Pricing Carousel & Uniform Card Width Rules
+   ========================================================================== */
+#plan-panels.carousel-track,
+.pricing-carousel-track {
+  display: flex !important;
+  gap: 1.25rem !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  padding: 1rem 0.5rem 1.5rem !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#plan-panels.carousel-track::-webkit-scrollbar,
+.pricing-carousel-track::-webkit-scrollbar {
+  display: none !important;
+}
+
+#plan-panels.carousel-track .plan-card,
+#plan-panels.carousel-track .plan-carousel-item,
+#plan-panels.carousel-track .pricing-diamond-slot,
+.pricing-carousel-track .plan-card,
+.pricing-carousel-track .plan-carousel-item,
+.pricing-carousel-track .pricing-diamond-slot {
+  flex: 0 0 280px !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  scroll-snap-align: start !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 639px) {
+  #plan-panels.carousel-track .plan-card,
+  #plan-panels.carousel-track .plan-carousel-item,
+  #plan-panels.carousel-track .pricing-diamond-slot,
+  .pricing-carousel-track .plan-card,
+  .pricing-carousel-track .plan-carousel-item,
+  .pricing-carousel-track .pricing-diamond-slot {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    min-width: 85vw !important;
+    max-width: 320px !important;
+    scroll-snap-align: center !important;
+  }
+}

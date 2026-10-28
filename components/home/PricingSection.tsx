@@ -115,7 +115,7 @@ export default function PricingSection() {
     if (!trackRef.current) return;
     const container = trackRef.current;
     const card = container.querySelector<HTMLElement>('.plan-carousel-item');
-    const scrollAmount = card ? card.offsetWidth + 20 : 320;
+    const scrollAmount = card ? card.offsetWidth + 20 : 300;
     container.scrollBy({
       left: direction === 'next' ? scrollAmount : -scrollAmount,
       behavior: 'smooth',
@@ -130,7 +130,7 @@ export default function PricingSection() {
       cards[index].scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
-        inline: 'center',
+        inline: 'start',
       });
       setActiveSlide(index);
     }
@@ -141,7 +141,7 @@ export default function PricingSection() {
     const container = trackRef.current;
     const scrollLeft = container.scrollLeft;
     const card = container.querySelector<HTMLElement>('.plan-carousel-item');
-    const cardWidth = (card ? card.offsetWidth : 300) + 20;
+    const cardWidth = (card ? card.offsetWidth : 280) + 20;
     const index = Math.round(scrollLeft / cardWidth);
     setActiveSlide(Math.max(0, Math.min(index, PLANS.length - 1)));
   };
@@ -208,7 +208,7 @@ export default function PricingSection() {
               </button>
             </div>
 
-            {/* Carousel Navigation Header */}
+            {/* ONLY Top Carousel Navigation Controls Bar */}
             <div className="flex items-center justify-between w-full max-w-6xl mx-auto mb-4 px-2">
               <div className="flex items-center gap-2.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_#7828C8]"></span>
@@ -240,21 +240,8 @@ export default function PricingSection() {
               </div>
             </div>
 
-            {/* Carousel Slider Track with Floating Arrows */}
+            {/* Carousel Slider Track (Exact Same 280px Width on All Cards) */}
             <div className="relative w-full max-w-7xl mx-auto">
-              {/* Floating Left Arrow for Desktop */}
-              <button
-                type="button"
-                aria-label="Previous Plan"
-                className="carousel-btn absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 z-30 shadow-2xl hidden md:inline-flex"
-                onClick={() => scrollTrack('prev')}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-
-              {/* The Carousel Track */}
               <div
                 ref={trackRef}
                 onScroll={handleScroll}
@@ -272,7 +259,8 @@ export default function PricingSection() {
                     return (
                       <div
                         key={plan.id}
-                        className="plan-carousel-item pricing-diamond-slot shrink-0 w-[85vw] max-w-[310px] sm:w-[300px] md:w-[290px] lg:w-[285px] xl:w-[295px] snap-center flex flex-col h-full"
+                        className="plan-carousel-item pricing-diamond-slot shrink-0 flex-none snap-start w-[85vw] max-w-[320px] sm:w-[280px] sm:max-w-[280px] flex flex-col h-full"
+                        style={{ width: '280px', minWidth: '280px', maxWidth: '280px' }}
                         data-months={plan.months}
                         data-price-1={plan.prices[1]}
                         data-price-2={plan.prices[2]}
@@ -355,9 +343,10 @@ export default function PricingSection() {
                   return (
                     <div
                       key={plan.id}
-                      className={`plan-carousel-item plan-card shrink-0 w-[85vw] max-w-[310px] sm:w-[300px] md:w-[290px] lg:w-[285px] xl:w-[295px] snap-center flex flex-col justify-between ${
+                      className={`plan-carousel-item plan-card shrink-0 flex-none snap-start w-[85vw] max-w-[320px] sm:w-[280px] sm:max-w-[280px] flex flex-col justify-between ${
                         plan.isPopular ? 'is-popular ring-1 ring-purple-500/50 shadow-[0_0_30px_rgba(120,40,200,0.35)]' : ''
                       }`}
+                      style={{ width: '280px', minWidth: '280px', maxWidth: '280px' }}
                       data-months={plan.months}
                       data-price-1={plan.prices[1]}
                       data-price-2={plan.prices[2]}
@@ -408,18 +397,6 @@ export default function PricingSection() {
                   );
                 })}
               </div>
-
-              {/* Floating Right Arrow for Desktop */}
-              <button
-                type="button"
-                aria-label="Next Plan"
-                className="carousel-btn absolute -right-3 md:-right-5 top-1/2 -translate-y-1/2 z-30 shadow-2xl hidden md:inline-flex"
-                onClick={() => scrollTrack('next')}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
             </div>
 
             {/* Carousel Pagination Indicator Dots */}
