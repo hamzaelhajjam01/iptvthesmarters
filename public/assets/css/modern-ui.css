@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Modern Glassmorphism, Micro-Interactions, Glows & Typography Enhancements
+   ========================================================================== */
+
+:root {
+  --glass-bg: rgba(18, 18, 24, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(123, 63, 228, 0.45);
+  --glass-glow: 0 8px 32px 0 rgba(123, 63, 228, 0.18);
+  --glass-glow-subtle: 0 4px 20px 0 rgba(0, 0, 0, 0.4);
+  --font-smooth: -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #07070a !important;
+  color: #f3f4f6;
+  overflow-x: hidden;
+}
+
+/* Glassmorphic Cards & Elevated Panels */
+.plan-card,
+.pricing-diamond-slot .diamond-panel,
+.kw-plan,
+.kw-copy section,
+.faq-item {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.plan-card:hover,
+.pricing-diamond-slot .diamond-panel:hover,
+.kw-plan:hover,
+.kw-copy section:hover,
+.faq-item:hover {
+  border-color: var(--glass-border-hover) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 24px rgba(123, 63, 228, 0.22) !important;
+  transform: translateY(-3px);
+}
+
+/* Subtle glow badge on high-converting / popular plans */
+.is-popular,
+.plan-card.is-popular,
+.kw-plan.is-popular {
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  box-shadow: 0 0 35px rgba(123, 63, 228, 0.3) !important;
+  position: relative;
+}
+
+.is-popular::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c4b5fd, transparent);
+  pointer-events: none;
+}
+
+/* Modern Gradient CTA Buttons */
+.buy-now-btn,
+.kw-trial,
+.hero-actions a,
+.tm-submit,
+.om-go {
+  transition: all 0.25s ease-in-out !important;
+  box-shadow: 0 4px 18px rgba(123, 63, 228, 0.35) !important;
+  letter-spacing: 0.02em;
+}
+
+.buy-now-btn:hover,
+.kw-trial:hover,
+.hero-actions a:hover:not(:nth-child(2)),
+.tm-submit:hover,
+.om-go:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 8px 28px rgba(123, 63, 228, 0.55), 0 0 12px rgba(167, 139, 250, 0.4) !important;
+  filter: brightness(1.1);
+}
+
+.hero-actions a:nth-child(2):hover {
+  border-color: rgba(167, 139, 250, 0.5) !important;
+  background: rgba(30, 30, 38, 0.8) !important;
+  transform: translateY(-2px);
+}
+
+/* Modern FAQ item transitions */
+.faq-item {
+  border-radius: 16px !important;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item[open] {
+  background: rgba(22, 16, 36, 0.85) !important;
+  border-color: rgba(123, 63, 228, 0.5) !important;
+}
+
+.faq-summary {
+  user-select: none;
+  outline: none !important;
+}
+
+/* Mobile responsive padding & touch target polish */
+@media (max-width: 640px) {
+  .kw-hero h1 {
+    font-size: 2.2rem !important;
+    line-height: 1.15 !important;
+  }
+  .buy-now-btn,
+  .hero-actions a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #272732;
+  border-radius: 6px;
+  border: 2px solid #09090c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #474758;
+}

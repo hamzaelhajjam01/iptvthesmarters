@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import PricingView from '@/components/PricingView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata: Metadata = {
   title: 'Buy IPTV Smarters Pro 4K Subscription — Best Pricing Plans 2026',
@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishPricingPage() {
+  const mainHtml = getOriginalMain('pricing/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <PricingView lang="en" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import FeaturesView from '@/components/FeaturesView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata: Metadata = {
   title: 'IPTV Smarters Pro Features — Anti-Freeze, 4K Streaming & Multi-Screen',
@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishFeaturesPage() {
+  const mainHtml = getOriginalMain('features/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <FeaturesView lang="en" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

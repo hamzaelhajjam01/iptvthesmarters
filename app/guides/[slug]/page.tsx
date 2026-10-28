@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { getGuideBySlug, GUIDES } from '@/data/guides';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import GuideDetailView from '@/components/GuideDetailView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -50,12 +50,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function EnglishGuidePage({ params }: PageProps) {
+  const mainHtml = getOriginalMain(`guides/${params.slug}/index.html`);
   return (
     <>
       <Header currentLang="en" guideSlug={params.slug} />
-      <main className="flex-1">
-        <GuideDetailView lang="en" slug={params.slug} />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

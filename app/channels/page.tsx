@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ChannelsView from '@/components/ChannelsView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata: Metadata = {
   title: 'IPTV Smarters Pro Channels List (2026) — 25,000+ 4K Live Channels',
@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishChannelsPage() {
+  const mainHtml = getOriginalMain('channels/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <ChannelsView lang="en" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

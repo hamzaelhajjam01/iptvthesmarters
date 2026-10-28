@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import GuidesHubView from '@/components/GuidesHubView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata: Metadata = {
   title: 'IPTV Smarters Pro Setup Guides & Tutorials (2026 Edition)',
@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishGuidesHubPage() {
+  const mainHtml = getOriginalMain('guides/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <GuidesHubView lang="en" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

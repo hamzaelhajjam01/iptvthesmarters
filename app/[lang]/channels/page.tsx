@@ -1,7 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
-import ChannelsView from '@/components/ChannelsView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -18,8 +20,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentLocale = LOCALES[params.lang] || LOCALES.en;
   return {
-    title: `IPTV Smarters Pro Channels List (${currentLocale.name}) — 25,000+ Channels`,
-    description: 'Explore our complete IPTV Smarters Pro 4K channels lineup: Sports, Cinema, USA, UK, Canada, France, Spain, Germany, Arabic, Latino, and 100,000+ VOD movies.',
+    title: `IPTV Smarters Pro Channels (${currentLocale.name}) — 25,000+ Live Channels`,
+    description: 'Full IPTV Smarters Pro channel lineup: 25,000+ live TV channels and 100,000+ movies & TV shows from US, UK, Canada, Europe, and worldwide in 4K and FHD.',
     alternates: {
       canonical: `https://thesmartersiptv.com/${params.lang}/channels/`,
     },
@@ -27,5 +29,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function LocalizedChannelsPage({ params }: PageProps) {
-  return <ChannelsView lang={params.lang} />;
+  const mainHtml = getOriginalMain(`${params.lang}/channels/index.html`);
+  return (
+    <>
+      <Header currentLang={params.lang} />
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <Footer currentLang={params.lang} />
+    </>
+  );
 }

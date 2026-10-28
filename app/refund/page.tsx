@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import LegalView from '@/components/LegalView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata = {
   title: 'Refund Policy | IPTV Smarters Pro',
@@ -9,12 +9,11 @@ export const metadata = {
 };
 
 export default function EnglishRefundPage() {
+  const mainHtml = getOriginalMain('refund/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <LegalView lang="en" type="refund" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -32,8 +33,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col antialiased">
-        {children}
+      <head>
+        <link rel="stylesheet" href="/assets/css/brand-fonts.css" />
+        <link rel="stylesheet" href="/assets/css/inter.css" />
+        <link rel="stylesheet" href="/assets/css/arabic-font.css" />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <link rel="stylesheet" href="/assets/css/modern-ui.css" />
+        <link rel="stylesheet" href="/assets/css/heroui.css" />
+        <link rel="stylesheet" href="/assets/css/runtime.css" />
+        <link rel="stylesheet" href="/assets/css/theme.css" />
+        <link rel="stylesheet" href="/assets/css/setup-modal.css" />
+        <link rel="stylesheet" href="/assets/css/product-pages.css" />
+        <link rel="stylesheet" href="/assets/css/page-custom.css" />
+      </head>
+      <body className="bg-black text-white selection:bg-cyan-500/30 selection:text-white">
+        <div className="grain-overlay" />
+        <div className="min-h-screen flex flex-col font-sans antialiased bg-black text-white transition-colors">
+          {children}
+        </div>
+        <Script src="/assets/js/site-interactions.js" strategy="afterInteractive" />
+        <Script src="/assets/js/support-chat.js" strategy="lazyOnload" />
+        <Script src="/assets/js/free-trial-modal.js" strategy="lazyOnload" />
+        <Script src="/assets/js/order-modal.js" strategy="lazyOnload" />
+        <Script src="/assets/js/setup-modal.js" strategy="lazyOnload" />
       </body>
     </html>
   );

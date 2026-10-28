@@ -1,7 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
-import FeaturesView from '@/components/FeaturesView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -27,5 +29,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function LocalizedFeaturesPage({ params }: PageProps) {
-  return <FeaturesView lang={params.lang} />;
+  const mainHtml = getOriginalMain(`${params.lang}/features/index.html`);
+  return (
+    <>
+      <Header currentLang={params.lang} />
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <Footer currentLang={params.lang} />
+    </>
+  );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ContactView from '@/components/ContactView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 export const metadata: Metadata = {
   title: 'Contact Us — 24/7 IPTV Smarters Pro Technical Support',
@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishContactPage() {
+  const mainHtml = getOriginalMain('contact/index.html');
   return (
     <>
       <Header currentLang="en" />
-      <main className="flex-1">
-        <ContactView lang="en" />
-      </main>
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />
     </>
   );

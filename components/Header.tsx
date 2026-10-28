@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ALL_LOCALES, Locale } from '@/data/locales';
+import { ALL_LOCALES } from '@/data/locales';
 import { TRANSLATIONS } from '@/data/translations';
 
 interface HeaderProps {
@@ -12,15 +12,13 @@ interface HeaderProps {
 }
 
 export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const pathname = usePathname() || '/';
 
   const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
   const nav = t.nav;
   const prefix = currentLang === 'en' ? '/' : `/${currentLang}/`;
 
-  // Get current active section
+  // Determine active nav tab
   const isHome = pathname === prefix || pathname === '/' || pathname === `/${currentLang}`;
   const isFeatures = pathname.includes('/features');
   const isChannels = pathname.includes('/channels');
@@ -28,9 +26,9 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
   const isGuides = pathname.includes('/guides');
   const isContact = pathname.includes('/contact');
 
-  // Compute target URL for each language switch
-  function getLangUrl(targetLocale: Locale) {
-    const targetPrefix = targetLocale.code === 'en' ? '' : `/${targetLocale.code}`;
+  // Compute exact URL for switching to another language
+  function getLangUrl(targetCode: string) {
+    const targetPrefix = targetCode === 'en' ? '' : `/${targetCode}`;
     if (guideSlug) {
       return `${targetPrefix}/guides/${guideSlug}/`;
     }
@@ -49,10 +47,28 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
     if (isContact) {
       return `${targetPrefix}/contact/`;
     }
-    return targetPrefix || '/';
+    return targetPrefix ? `${targetPrefix}/` : '/';
   }
 
   const currentLocale = ALL_LOCALES.find(l => l.code === currentLang) || ALL_LOCALES[0];
+
+  const handleMenuToggle = () => {
+    if (typeof document === 'undefined') return;
+    const isOpen = document.body.classList.toggle('menu-open');
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+  };
+
+  const closeMobileMenu = () => {
+    if (typeof document === 'undefined') return;
+    document.body.classList.remove('menu-open');
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  };
 
   return (
     <header className="site-header sticky top-0 transition-colors z-50">
@@ -61,7 +77,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
           {/* Logo */}
           <Link href={prefix} className="flex items-center gap-3 group z-50">
             <svg
-              className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10"
+              className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10"
               viewBox="0 0 40 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +191,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-4 h-4"
+                  className="lucide lucide-arrow-right w-4 h-4"
                 >
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
@@ -184,18 +200,18 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             </Link>
 
             {/* Language Selector */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="lang-trigger flex items-center gap-2 px-3 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-sm text-zinc-300 transition-colors"
-                aria-expanded={langMenuOpen}
+            <details className="lang-switch">
+              <summary
+                id="langToggle"
+                className="lang-trigger"
+                aria-haspopup="true"
+                aria-expanded="false"
                 aria-label="Change language"
               >
                 <span className="lang-flag" aria-hidden="true">
                   {currentLocale.flag}
                 </span>
-                <span className="lang-name font-medium">{currentLocale.name}</span>
+                <span className="lang-name">{currentLocale.name}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -206,162 +222,134 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className={`transition-transform duration-200 ${langMenuOpen ? 'rotate-180' : ''}`}
+                  className="lang-chevron"
                 >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
-              </button>
-
-              {langMenuOpen && (
-                <div
-                  className="lang-menu absolute right-0 mt-2 w-48 bg-zinc-900/95 backdrop-blur-xl border border-zinc-800 rounded-2xl shadow-2xl p-2 z-50 flex flex-col gap-1"
-                  role="menu"
-                >
-                  {ALL_LOCALES.map(loc => {
-                    const isActive = loc.code === currentLang;
-                    return (
-                      <Link
-                        key={loc.code}
-                        href={getLangUrl(loc)}
-                        onClick={() => setLangMenuOpen(false)}
-                        className={`lang-item flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-colors ${
-                          isActive ? 'bg-purple-600/20 text-purple-400 font-bold' : 'text-zinc-300 hover:bg-zinc-800/80 hover:text-white'
-                        }`}
-                        role="menuitem"
+              </summary>
+              <div id="langMenu" className="lang-menu" role="menu">
+                {ALL_LOCALES.map(loc => {
+                  const isActive = loc.code === currentLang;
+                  return (
+                    <a
+                      key={loc.code}
+                      href={getLangUrl(loc.code)}
+                      className={`lang-item ${isActive ? 'is-active' : ''}`}
+                      role="menuitem"
+                      data-lang={loc.code}
+                      {...(isActive ? { 'aria-current': 'true' } : {})}
+                    >
+                      <div className="lang-item-content">
+                        <span className="lang-flag" aria-hidden="true">
+                          {loc.flag}
+                        </span>
+                        <span>{loc.name}</span>
+                      </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lang-item-check"
                       >
-                        <div className="flex items-center gap-2">
-                          <span aria-hidden="true">{loc.flag}</span>
-                          <span>{loc.name}</span>
-                        </div>
-                        {isActive && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M20 6 9 17l-5-5" />
-                          </svg>
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                    </a>
+                  );
+                })}
+              </div>
+            </details>
 
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-zinc-400 hover:text-white focus:outline-none"
-              aria-expanded={mobileMenuOpen}
-              aria-label="Toggle menu"
+              id="menuToggle"
+              className="menu-toggle lg:hidden p-2 text-zinc-400 hover:text-white"
+              aria-expanded="false"
+              aria-controls="mobileNav"
+              aria-label="Open menu"
+              onClick={handleMenuToggle}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {mobileMenuOpen ? (
-                  <>
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </>
-                ) : (
-                  <>
-                    <line x1="4" y1="12" x2="20" y2="12" />
-                    <line x1="4" y1="6" x2="20" y2="6" />
-                    <line x1="4" y1="18" x2="20" y2="18" />
-                  </>
-                )}
-              </svg>
+              <span className="menu-icon" aria-hidden="true"></span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <nav className="mobile-nav lg:hidden bg-zinc-950 border-b border-zinc-800 px-6 py-6 transition-all">
-          <div className="flex flex-col space-y-3">
-            <Link
-              href={prefix}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isHome ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              {nav.home}
-            </Link>
-            <Link
-              href={`${prefix}features/`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isFeatures ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              {nav.features}
-            </Link>
-            <Link
-              href={`${prefix}channels/`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isChannels ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              {nav.channels}
-            </Link>
+      <nav id="mobileNav" className="mobile-nav" aria-hidden="true" aria-label="Mobile">
+        <div className="flex flex-col p-4 space-y-2">
+          <Link
+            href={prefix}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isHome ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.home}
+          </Link>
+          <Link
+            href={`${prefix}features/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isFeatures ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.features}
+          </Link>
+          <Link
+            href={`${prefix}channels/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isChannels ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.channels}
+          </Link>
+          <Link
+            href={`${prefix}pricing/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isPricing ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.pricing}
+          </Link>
+          <Link
+            href={`${prefix}guides/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isGuides ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.guides}
+          </Link>
+          <Link
+            href={`${prefix}contact/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isContact ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.contact}
+          </Link>
+          <div className="pt-4 border-t border-zinc-800">
             <Link
               href={`${prefix}pricing/`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isPricing ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
+              onClick={closeMobileMenu}
+              className="btn-buy-now btn-nav-cta w-full py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2"
             >
-              {nav.pricing}
+              <span>{nav.cta}</span>
             </Link>
-            <Link
-              href={`${prefix}guides/`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isGuides ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              {nav.guides}
-            </Link>
-            <Link
-              href={`${prefix}contact/`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-lg font-semibold py-2 px-2 rounded-xl transition-colors ${
-                isContact ? 'text-white bg-zinc-900 font-bold' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              {nav.contact}
-            </Link>
-            <div className="pt-4 border-t border-zinc-800">
-              <Link
-                href={`${prefix}pricing/`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn-buy-now btn-nav-cta w-full py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2"
-              >
-                <span>{nav.cta}</span>
-              </Link>
-            </div>
           </div>
-        </nav>
-      )}
+        </div>
+      </nav>
+      <div id="navOverlay" className="nav-overlay" onClick={closeMobileMenu}></div>
     </header>
   );
 }

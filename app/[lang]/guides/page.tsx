@@ -1,7 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
-import GuidesHubView from '@/components/GuidesHubView';
+import { getOriginalMain } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -17,18 +19,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentLocale = LOCALES[params.lang] || LOCALES.en;
-  const title = `IPTV Smarters Pro Guides (${currentLocale.name}) | Setup & Tutorials`;
-  const canonicalUrl = `https://thesmartersiptv.com/${params.lang}/guides/`;
-
   return {
-    title,
-    description: 'Comprehensive walkthroughs, device installation guides, troubleshooting, and Xtream Codes playlist tutorials for IPTV Smarters Pro.',
+    title: `IPTV Smarters Pro Setup Guides (${currentLocale.name}) — Firestick, Smart TV, Android & iOS`,
+    description: 'Step-by-step installation guides for IPTV Smarters Pro on Amazon Firestick, Samsung & LG Smart TV, Android, Windows, Mac, iOS, and Apple TV.',
     alternates: {
-      canonical: canonicalUrl,
+      canonical: `https://thesmartersiptv.com/${params.lang}/guides/`,
     },
   };
 }
 
-export default function LocalizedGuidesHubPage({ params }: PageProps) {
-  return <GuidesHubView lang={params.lang} />;
+export default function LocalizedGuidesPage({ params }: PageProps) {
+  const mainHtml = getOriginalMain(`${params.lang}/guides/index.html`);
+  return (
+    <>
+      <Header currentLang={params.lang} />
+      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <Footer currentLang={params.lang} />
+    </>
+  );
 }
