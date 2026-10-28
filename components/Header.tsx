@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ALL_LOCALES } from '@/data/locales';
@@ -13,6 +13,17 @@ interface HeaderProps {
 
 export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
   const pathname = usePathname() || '/';
+
+  useEffect(() => {
+    const run = () => {
+      if (typeof window !== 'undefined' && (window as any).__initSite) {
+        (window as any).__initSite();
+      }
+    };
+    run();
+    const timer = setTimeout(run, 60);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
   const nav = t.nav;

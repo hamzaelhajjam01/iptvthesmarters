@@ -547,7 +547,7 @@
   }
 
   function channels() {
-    const tablist = document.querySelector('[role="tablist"][aria-label*="Channel"], #channel-categories-tablist');
+    const tablist = document.querySelector('[role="tablist"][aria-label*="Channel" i], #channel-categories-tablist, .channel-tabs');
     if (!tablist) return;
 
     const tabs = [...tablist.querySelectorAll('button')];
@@ -562,18 +562,48 @@
 
     if (!grid) return;
 
-    function renderList() {
-      const activeBtn = tablist.querySelector('button[aria-selected="true"]') || tabs[0];
-      const catKey = resolveChannelKey(activeBtn);
-      const catData = CHANNEL_CATEGORIES[catKey] || CHANNEL_CATEGORIES.sports;
+    const existingCards = [...grid.querySelectorAll('.channel-card')];
+    const isStaticPreRendered = existingCards.length > 0;
 
+    function renderList() {
+      const activeBtn = tablist.querySelector('button[aria-selected="true"]') || tabs.find(t => t.classList.contains('is-active')) || tabs[0];
+      const catKey = resolveChannelKey(activeBtn);
       const q = (searchInput?.value || '').trim().toLowerCase();
-      let list = catData.channels;
+
+      if (clearBtn) {
+        if (q) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+
+      if (isStaticPreRendered) {
+        let visibleCount = 0;
+        existingCards.forEach(card => {
+          const cardCat = (card.getAttribute('data-category') || '').trim().toLowerCase();
+          const cardText = (card.textContent || '').trim().toLowerCase();
+
+          const matchesCat = (catKey === 'all') || (cardCat === catKey) || cardCat.includes(catKey);
+          const matchesQuery = !q || cardText.includes(q);
+
+          if (matchesCat && matchesQuery) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (countEl) {
+          countEl.textContent = `${visibleCount} channel${visibleCount === 1 ? '' : 's'}`;
+        }
+        return;
+      }
+
+      // Dynamic rendering using CHANNEL_CATEGORIES (English channels)
+      const catData = CHANNEL_CATEGORIES[catKey] || CHANNEL_CATEGORIES.sports;
+      let list = catData ? catData.channels : [];
 
       if (q) {
-        if (clearBtn) clearBtn.classList.remove('hidden');
-        // Search in active category or across all if searching
-        const pool = catKey === 'all' ? catData.channels : CHANNEL_CATEGORIES.all.channels.concat(catData.channels);
+        const pool = catKey === 'all' && catData ? catData.channels : (CHANNEL_CATEGORIES.all ? CHANNEL_CATEGORIES.all.channels.concat(catData ? catData.channels : []) : []);
         const seen = new Set();
         list = pool.filter(ch => {
           if (seen.has(ch.name)) return false;
@@ -582,8 +612,6 @@
             (ch.quality && ch.quality.toLowerCase().includes(q)) ||
             (ch.cat && ch.cat.toLowerCase().includes(q));
         });
-      } else {
-        if (clearBtn) clearBtn.classList.add('hidden');
       }
 
       if (countEl) {
@@ -620,36 +648,90 @@
 
       const catKey = resolveChannelKey(btn);
       const catData = CHANNEL_CATEGORIES[catKey] || CHANNEL_CATEGORIES.sports;
-      if (titleEl) titleEl.textContent = catData.title;
-      if (descEl) descEl.textContent = catData.desc;
+      if (titleEl && catData) titleEl.textContent = catData.title;
+      if (descEl && catData) descEl.textContent = catData.desc;
 
       renderList();
     }
 
     tabs.forEach(button => {
-      button.addEventListener('click', (e) => {
+      button.onclick = (e) => {
         e.preventDefault();
         selectTab(button);
-      });
+      };
     });
 
     if (searchInput) {
-      searchInput.addEventListener('input', () => {
+      searchInput.oninput = () => {
         renderList();
-      });
+      };
     }
 
     if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
+      clearBtn.onclick = () => {
         if (searchInput) searchInput.value = '';
         renderList();
         searchInput?.focus();
-      });
+      };
     }
 
     // Initial render
-    const initialActive = tablist.querySelector('button[aria-selected="true"]') || tabs[1] || tabs[0];
+    const initialActive = tablist.querySelector('button[aria-selected="true"]') || tabs.find(t => t.classList.contains('is-active')) || tabs[1] || tabs[0];
     if (initialActive) selectTab(initialActive);
+  }
+
+  function guides() {
+    const categoryTabsContainer = document.getElementById('categoryTabs') || document.querySelector('[role="tablist"][aria-label*="Guide" i]');
+    const searchInput = document.getElementById('searchInput') || document.querySelector('input[placeholder*="guide" i], input[placeholder*="guía" i]');
+    const cards = [...document.querySelectorAll('.blog-card-wrapper')];
+
+    if (!categoryTabsContainer && !searchInput && !cards.length) return;
+
+    const tabs = categoryTabsContainer ? [...categoryTabsContainer.querySelectorAll('button')] : [];
+    let activeCategory = 'all';
+
+    function filterGuides() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+
+      cards.forEach(card => {
+        const cat = (card.getAttribute('data-category') || '').trim().toLowerCase();
+        const title = (card.getAttribute('data-title') || card.textContent || '').trim().toLowerCase();
+
+        const matchesCat = (activeCategory === 'all') || (cat === activeCategory) || cat.includes(activeCategory);
+        const matchesQuery = !q || title.includes(q);
+
+        if (matchesCat && matchesQuery) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.onclick = (e) => {
+        e.preventDefault();
+        const cat = (tab.getAttribute('data-category') || tab.textContent || 'all').trim().toLowerCase();
+        activeCategory = cat;
+
+        tabs.forEach(t => {
+          const isCurrent = (t === tab);
+          if (isCurrent) {
+            t.className = 'px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 border bg-blue-500 text-white border-blue-500 shadow-[0_0_15px_rgba(123,63,228,0.3)] is-active';
+          } else {
+            t.className = 'px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 border bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:bg-zinc-800 hover:text-white';
+          }
+        });
+
+        filterGuides();
+      };
+    });
+
+    if (searchInput) {
+      searchInput.oninput = () => {
+        filterGuides();
+      };
+    }
   }
 
   function actions() {
@@ -1879,12 +1961,14 @@
   }
 
   function initSite() {
+    window.__initSite = initSite;
     try { initLanguageSwitcher(); } catch(e) { console.warn('Language switcher init warning:', e); }
     try { normalizePricingLayout(); } catch(e) { console.warn('Pricing layout warning:', e); }
     try { mobileMenu(); } catch(e) { console.warn('Mobile menu warning:', e); }
     try { faq(); } catch(e) { console.warn('FAQ warning:', e); }
     try { pricing(); } catch(e) { console.warn('Pricing warning:', e); }
     try { channels(); } catch(e) { console.warn('Channels warning:', e); }
+    try { guides(); } catch(e) { console.warn('Guides warning:', e); }
     try { actions(); } catch(e) { console.warn('Actions warning:', e); }
   }
 
