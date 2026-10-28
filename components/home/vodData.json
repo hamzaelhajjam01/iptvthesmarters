@@ -1,0 +1,198 @@
+{
+  "movies": [
+    {
+      "title": "Dune: Part Two",
+      "year": "2024",
+      "genre": "Sci-Fi / Adventure",
+      "rating": "8.4",
+      "quality": "4K IMAX UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTc0YmQxMjEtODI5MC00NjFiLTlkMWUtOGQ5NjFmYWUyZGJhXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Oppenheimer",
+      "year": "2023",
+      "genre": "Drama / History",
+      "rating": "8.2",
+      "quality": "4K HDR",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Spider-Man: Across the Spider-Verse",
+      "year": "2023",
+      "genre": "Animation / Action",
+      "rating": "8.5",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNThiZjA3MjItZGY5Ni00ZmJhLWEwN2EtOTBlYTA4Y2E0M2ZmXkEyXkFqcGc@._V1_QL75_UX380_CR0,1,380,562_.jpg"
+    },
+    {
+      "title": "Top Gun: Maverick",
+      "year": "2022",
+      "genre": "Action / Thriller",
+      "rating": "8.2",
+      "quality": "4K HDR 60FPS",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMDBkZDNjMWEtOTdmMi00NmExLTg5MmMtNTFlYTJlNWY5YTdmXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "The Batman",
+      "year": "2022",
+      "genre": "Crime / Mystery",
+      "rating": "7.8",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMmU5NGJlMzAtMGNmOC00YjJjLTgyMzUtNjAyYmE4Njg5YWMyXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Guardians of the Galaxy Vol. 3",
+      "year": "2023",
+      "genre": "Action / Sci-Fi",
+      "rating": "7.9",
+      "quality": "4K IMAX",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTJhOTMxMmItZmE0Ny00MDc3LWEzOGEtOGFkMzY4MWYyZDQ0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "year": "2024",
+      "genre": "Action / Comedy",
+      "rating": "7.5",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTk5ODY0MmQtMzA3Ni00NGY1LThiYzItZThiNjFiNDM4MTM3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Godzilla Minus One",
+      "year": "2023",
+      "genre": "Action / Sci-Fi",
+      "rating": "7.6",
+      "quality": "4K HDR",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjc5MjllMGUtMDIwMS00ZDVkLWEzODQtM2NlMTMwMTZhNThmXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    }
+  ],
+  "series": [
+    {
+      "title": "Shogun",
+      "year": "2024",
+      "genre": "Historical / Drama",
+      "rating": "8.6",
+      "quality": "4K HDR",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZmJkMDRjYzEtMWI3Ny00OWE3LWJlNTItMGQ1MTQzMzc3NDY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg"
+    },
+    {
+      "title": "The Penguin",
+      "year": "2024",
+      "genre": "Crime / Drama",
+      "rating": "8.6",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYmU3MzYzOWEtOTdkZi00YzA1LTliMzQtNDdiZDBjY2FiNmFlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "Severance",
+      "year": "2022–",
+      "genre": "Mystery / Sci-Fi",
+      "rating": "8.6",
+      "quality": "4K HDR",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDI5YzJhODQtMzQyNy00YWNmLWIxMjUtNDBjNjA5YWRjMzExXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+      "title": "The Bear",
+      "year": "2022–",
+      "genre": "Comedy / Drama",
+      "rating": "8.5",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjk2NWI5OTctODcwYy00NGRmLWFmN2YtOTZiNzFiYjVlODBkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+      "title": "Fallout",
+      "year": "2024–",
+      "genre": "Sci-Fi / Action",
+      "rating": "8.3",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzE1MTZmY2ItMTgxNi00OGU5LTk4NTItMmY2ODFhYzhjZjRkXkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg"
+    },
+    {
+      "title": "The Last of Us",
+      "year": "2023–",
+      "genre": "Action / Drama",
+      "rating": "8.4",
+      "quality": "4K HDR",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYWI3ODJlMzktY2U5NC00ZjdlLWE1MGItNWQxZDk3NWNjN2RhXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+      "title": "House of the Dragon",
+      "year": "2022–",
+      "genre": "Fantasy / Drama",
+      "rating": "8.2",
+      "quality": "4K Complete",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOWU2ZDA0M2EtNWEyYy00MWUwLWI4NjAtYzkxMDFjYzZkNGFiXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg"
+    },
+    {
+      "title": "The Boys",
+      "year": "2019–",
+      "genre": "Action / Sci-Fi",
+      "rating": "8.5",
+      "quality": "4K UHD",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZjU4OWNiYzQtMzc1NS00NjZlLTgyYTctZWY4ZmEzMTkxYjA4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+      "title": "UEFA Champions League",
+      "year": "TNT / Canal+ / Sky",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/yfor1r1718864480.jpg"
+    },
+    {
+      "title": "Premier League",
+      "year": "Sky Sports / TNT",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/67al0l1719007596.jpg"
+    },
+    {
+      "title": "Spanish La Liga",
+      "year": "DAZN / Movistar",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/3j1vo11636804719.jpg"
+    },
+    {
+      "title": "UFC / MMA",
+      "year": "ESPN+ / TNT Box Office",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/l2k1ka1636383209.jpg"
+    },
+    {
+      "title": "NBA Basketball",
+      "year": "NBA TV / ESPN",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/vtqtss1447330781.jpg"
+    },
+    {
+      "title": "Formula 1 Grand Prix",
+      "year": "Sky Sports F1",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/4e1svi1605133041.jpg"
+    },
+    {
+      "title": "Italian Serie A",
+      "year": "DAZN / Paramount+",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/6agbm61636804706.jpg"
+    },
+    {
+      "title": "German Bundesliga",
+      "year": "Sky Sport / beIN",
+      "genre": "",
+      "rating": "",
+      "quality": "",
+      "poster": "https://r2.thesportsdb.com/images/media/league/poster/942uzh1636804690.jpg"
+    }
+  ]
+}
