@@ -562,8 +562,13 @@
 
     if (!grid) return;
 
-    const existingCards = [...grid.querySelectorAll('.channel-card')];
-    const isStaticPreRendered = existingCards.length > 0;
+    if (!grid.dataset.mode) {
+      const initialCards = grid.querySelectorAll('.channel-card[data-category]');
+      grid.dataset.mode = initialCards.length > 0 ? 'static' : 'dynamic';
+    }
+
+    const isStaticPreRendered = grid.dataset.mode === 'static';
+    const staticCards = isStaticPreRendered ? [...grid.querySelectorAll('.channel-card[data-category]')] : [];
 
     function renderList() {
       const activeBtn = tablist.querySelector('button[aria-selected="true"]') || tabs.find(t => t.classList.contains('is-active')) || tabs[0];
@@ -577,7 +582,7 @@
 
       if (isStaticPreRendered) {
         let visibleCount = 0;
-        existingCards.forEach(card => {
+        staticCards.forEach(card => {
           const cardCat = (card.getAttribute('data-category') || '').trim().toLowerCase();
           const cardText = (card.textContent || '').trim().toLowerCase();
 
