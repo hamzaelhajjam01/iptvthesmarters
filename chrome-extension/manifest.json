@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Smarters IPTV Web Player — HLS, M3U & Xtream",
-  "short_name": "Smarters IPTV",
+  "short_name": "SmartersIPTV",
   "version": "1.0.0",
   "description": "Fast web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API with stream health diagnostics.",
+  "homepage_url": "https://thesmartersiptv.com",
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
