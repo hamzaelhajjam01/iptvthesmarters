@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Smarters IPTV Web Player — HLS, M3U & Xtream",
+  "short_name": "Smarters IPTV",
+  "version": "1.0.0",
+  "description": "Fast web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API with stream health diagnostics.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open Smarters IPTV Web Player",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_cors",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}

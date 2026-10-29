@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smarters IPTV Web Player</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="url(#brand_grad)"/>
+          <path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="brand_grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#7B3FE4"/>
+              <stop offset="1" stop-color="#5F15CD"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">Smarters Player</span>
+          <span class="brand-tag">Web Edition</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btnOpenFullTab" class="icon-btn" title="Open in Full Web Tab">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </button>
+        <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=popup_header_btn" target="_blank" class="header-cta-btn">
+          ⚡ 4K IPTV
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="tab-stream">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        HLS Stream
+      </button>
+      <button class="nav-tab" data-tab="tab-xtream">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        Xtream API
+      </button>
+      <button class="nav-tab" data-tab="tab-m3u">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        M3U Playlist
+      </button>
+    </nav>
+
+    <!-- Video Player Container (Shared) -->
+    <div class="player-wrapper">
+      <video id="videoPlayer" controls playsinline preload="auto"></video>
+      <div id="playerPlaceholder" class="player-placeholder">
+        <div class="placeholder-icon">▶</div>
+        <span>Select or enter a stream URL below to start playback</span>
+      </div>
+    </div>
+
+    <!-- Tab 1: Stream Player / Tester -->
+    <section id="tab-stream" class="tab-content active">
+      <div class="input-group">
+        <label for="streamUrl">Stream Link (.m3u8, .ts, or .mp4)</label>
+        <div class="input-with-action">
+          <input type="text" id="streamUrl" placeholder="https://example.com/live/playlist.m3u8" spellcheck="false" />
+          <button id="btnClearUrl" class="btn-clear" title="Clear">✕</button>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="btnPlayStream" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Play Stream
+        </button>
+        <button id="btnCheckHealth" class="btn-secondary" title="Test server response and stream latency">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          Test Health
+        </button>
+      </div>
+
+      <!-- Quick sample test links -->
+      <div class="sample-links">
+        <span class="sample-label">Quick Test Links:</span>
+        <button class="chip-sample" data-url="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">Mux BigBuckBunny</button>
+        <button class="chip-sample" data-url="https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8">Akamai 1080p</button>
+      </div>
+
+      <!-- Stream Health Diagnostics output -->
+      <div id="healthPanel" class="health-panel hidden">
+        <div class="health-header">
+          <span class="health-title">Stream Diagnostics</span>
+          <span id="healthBadge" class="health-badge">Testing...</span>
+        </div>
+        <div class="health-grid">
+          <div><span class="muted">Status:</span> <strong id="diagStatus">-</strong></div>
+          <div><span class="muted">Latency:</span> <strong id="diagLatency">-</strong></div>
+          <div><span class="muted">Resolution:</span> <strong id="diagResolution">-</strong></div>
+          <div><span class="muted">Protocol:</span> <strong id="diagProtocol">-</strong></div>
+        </div>
+      </div>
+
+      <!-- Lead Magnet Card -->
+      <div class="lead-magnet-card">
+        <div class="lead-badge">HIGH SPEED 4K SERVERS</div>
+        <h4 class="lead-title">Tired of Free Streams Buffering?</h4>
+        <p class="lead-desc">Get access to 25,000+ stable 4K channels, premium sports, and anti-freeze technology with instant Xtream Codes activation.</p>
+        <div class="lead-actions">
+          <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=stream_tab_banner" target="_blank" class="btn-gradient-sm">
+            ⚡ Get Premium Playlist
+          </a>
+          <a href="https://thesmartersiptv.com/?utm_source=chrome_ext&utm_medium=stream_tab_learn" target="_blank" class="btn-ghost-sm">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Xtream Codes API -->
+    <section id="tab-xtream" class="tab-content">
+      <div class="input-group">
+        <label for="xtreamHost">Portal / Server URL</label>
+        <input type="text" id="xtreamHost" placeholder="http://domain.com:8080" />
+      </div>
+      <div class="input-row">
+        <div class="input-group">
+          <label for="xtreamUser">Username</label>
+          <input type="text" id="xtreamUser" placeholder="username" />
+        </div>
+        <div class="input-group">
+          <label for="xtreamPass">Password</label>
+          <input type="password" id="xtreamPass" placeholder="••••••••" />
+        </div>
+      </div>
+
+      <button id="btnConnectXtream" class="btn-primary w-full">
+        Connect &amp; Load Channels
+      </button>
+
+      <div id="xtreamLoading" class="loading-spinner hidden">
+        Connecting to server...
+      </div>
+
+      <!-- Channel Browser -->
+      <div id="xtreamChannelsSection" class="channel-section hidden">
+        <div class="filter-row">
+          <select id="xtreamCategorySelect" class="category-select">
+            <option value="">All Categories</option>
+          </select>
+          <input type="text" id="xtreamChannelSearch" placeholder="Search channels..." class="channel-search-input" />
+        </div>
+        <div id="xtreamChannelList" class="channel-list"></div>
+      </div>
+
+      <!-- Xtream Promo -->
+      <div class="promo-box">
+        <div class="promo-text">
+          <strong>Need an Xtream Codes login?</strong>
+          <span>Activate your 4K subscription instantly at TheSmartersIPTV.com</span>
+        </div>
+        <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=xtream_tab_promo" target="_blank" class="btn-action-sm">
+          Get Details
+        </a>
+      </div>
+    </section>
+
+    <!-- Tab 3: M3U Playlist -->
+    <section id="tab-m3u" class="tab-content">
+      <div class="input-group">
+        <label for="m3uUrl">M3U Playlist URL</label>
+        <input type="text" id="m3uUrl" placeholder="https://example.com/playlist.m3u" />
+      </div>
+
+      <div class="or-divider"><span>OR UPLOAD FILE</span></div>
+
+      <div class="file-drop-area" id="m3uDropArea">
+        <input type="file" id="m3uFileInput" accept=".m3u,.m3u8,.txt" />
+        <span class="file-label">Drop .m3u file here or <u class="cursor-pointer">browse</u></span>
+      </div>
+
+      <button id="btnLoadM3u" class="btn-primary w-full mt-3">
+        Parse &amp; Load Playlist
+      </button>
+
+      <div id="m3uChannelsSection" class="channel-section hidden">
+        <div class="filter-row">
+          <select id="m3uCategorySelect" class="category-select">
+            <option value="">All Categories</option>
+          </select>
+          <input type="text" id="m3uChannelSearch" placeholder="Search channels..." class="channel-search-input" />
+        </div>
+        <div id="m3uChannelList" class="channel-list"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-links">
+        <a href="https://thesmartersiptv.com/?utm_source=chrome_ext&utm_medium=footer_home" target="_blank">Official Website</a>
+        <span>•</span>
+        <a href="https://thesmartersiptv.com/guides/?utm_source=chrome_ext&utm_medium=footer_guides" target="_blank">Setup Guides</a>
+        <span>•</span>
+        <a href="https://thesmartersiptv.com/contact/?utm_source=chrome_ext&utm_medium=footer_support" target="_blank">24/7 Support</a>
+      </div>
+      <p class="disclaimer">
+        Smarters IPTV is a media client and does not host or supply any content. Users must provide their own authorized streams.
+      </p>
+    </footer>
+  </div>
+
+  <script src="lib/hls.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

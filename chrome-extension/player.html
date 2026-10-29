@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smarters IPTV — Web Player &amp; Stream Client</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Bar -->
+    <header class="top-nav">
+      <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="url(#p_brand_grad)"/>
+          <path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="p_brand_grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#7B3FE4"/>
+              <stop offset="1" stop-color="#5F15CD"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-name">The Smarters IPTV <span class="tag">Web Player</span></span>
+      </div>
+
+      <div class="top-stream-input">
+        <input type="text" id="streamInput" placeholder="Paste .m3u8 or video stream link..." spellcheck="false" />
+        <button id="btnPlay" class="btn-play">▶ Play</button>
+      </div>
+
+      <div class="top-actions">
+        <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=player_tab_top" target="_blank" class="btn-premium">
+          ⚡ Get Premium 4K Server
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+      <!-- Left Sidebar: Channels & Playlists -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">Channel Browser</div>
+          <div class="playlist-tabs">
+            <button class="pl-tab active" data-type="quick">Samples</button>
+            <button class="pl-tab" data-type="xtream">Xtream</button>
+            <button class="pl-tab" data-type="m3u">M3U</button>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="channelSearch" placeholder="Filter channels..." />
+        </div>
+
+        <div id="channelList" class="channel-list-container">
+          <!-- Populated by player.js -->
+        </div>
+
+        <div class="sidebar-cta">
+          <div class="cta-inner">
+            <strong>Need a Stable 4K Playlist?</strong>
+            <p>25,000+ live channels &amp; movies without freezing.</p>
+            <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=player_sidebar_cta" target="_blank" class="btn-cta">
+              View Plans &amp; Pricing
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Area: Theater Video Player & Stream Monitor -->
+      <section class="stage">
+        <div class="video-container">
+          <video id="fullVideoPlayer" controls playsinline></video>
+          <div id="stageOverlay" class="stage-overlay">
+            <div class="big-play-btn">▶</div>
+            <h2>Smarters IPTV Web Player</h2>
+            <p>Select a sample stream or paste your playlist link above to start streaming in Ultra HD.</p>
+          </div>
+        </div>
+
+        <!-- Stream Info Bar -->
+        <div class="stream-info-bar">
+          <div class="info-left">
+            <h3 id="currentChannelName">No Stream Loaded</h3>
+            <span id="currentStreamUrl" class="stream-url-tag">-</span>
+          </div>
+          <div class="info-right">
+            <span class="stat-pill" id="statResolution">Res: -</span>
+            <span class="stat-pill" id="statStatus">Status: Idle</span>
+            <a href="https://thesmartersiptv.com/guides/?utm_source=chrome_ext&utm_medium=player_bar_guides" target="_blank" class="stat-link">Setup Guides</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="lib/hls.min.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>
