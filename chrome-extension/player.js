@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.Hls && Hls.isSupported() && (targetUrl.includes('.m3u8') || !targetUrl.endsWith('.mp4'))) {
       currentHls = new Hls({
-        enableWorker: true,
+        enableWorker: false,
         lowLatencyMode: true,
       });
 
@@ -594,6 +594,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Top Stream Input / Playlist Auto-Detect ---
   function handleStreamInput(url) {
     if (!url) return;
+
+    // Check /live/USERNAME/PASSWORD/STREAM_ID
+    const liveMatch = url.match(/^(https?:\/\/[^\/]+)\/live\/([^\/]+)\/([^\/]+)\/([^\/\.]+)(\.m3u8|\.ts)?/i);
+    if (liveMatch) {
+      const host = liveMatch[1];
+      const user = liveMatch[2];
+      const pass = liveMatch[3];
+      let plName = '';
+      try {
+        plName = `${new URL(host).hostname} (${user})`;
+      } catch (e) {
+        plName = 'Xtream IPTV';
+      }
+      let existing = savedPlaylists.find(p => p.host === host && p.user === user);
+      if (!existing) {
+        existing = { id: 'pl_' + Date.now(), name: plName, type: 'xtream', host, user, pass, addedAt: Date.now() };
+        savedPlaylists.push(existing);
+      }
+      activePlaylistId = existing.id;
+      chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+      renderPlaylistDropdown();
+      loadActivePlaylist(false);
+      playStream(url, 'Live Channel');
+      return;
+    }
 
     if (url.includes('get.php') && url.includes('username=') && url.includes('password=')) {
       try {

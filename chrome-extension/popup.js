@@ -1,12 +1,74 @@
-// Smarters IPTV Web Player - Popup Controller
+// Smarters IPTV Web Player - Popup Controller (Manifest V3)
 document.addEventListener('DOMContentLoaded', () => {
-  const video = document.getElementById('videoPlayer');
-  const placeholder = document.getElementById('playerPlaceholder');
+  // Elements - General
   const smartNotice = document.getElementById('smartNotice');
   const noticeText = document.getElementById('noticeText');
-  let currentHls = null;
+  const btnOpenFullTab = document.getElementById('btnOpenFullTab');
+  const navPlaylistCount = document.getElementById('navPlaylistCount');
 
-  // Tabs management
+  // Video Players
+  const videoPlayer = document.getElementById('videoPlayer');
+  const playerPlaceholder = document.getElementById('playerPlaceholder');
+  const placeholderText = document.getElementById('placeholderText');
+  const quickVideoPlayer = document.getElementById('quickVideoPlayer');
+  const quickPlaceholder = document.getElementById('quickPlaceholder');
+
+  let channelHls = null;
+  let quickHls = null;
+
+  // Channels Tab Elements
+  const activePlaylistBar = document.getElementById('activePlaylistBar');
+  const activePlName = document.getElementById('activePlName');
+  const activePlCount = document.getElementById('activePlCount');
+  const btnSwitchPlaylist = document.getElementById('btnSwitchPlaylist');
+  const channelControls = document.getElementById('channelControls');
+  const channelCategorySelect = document.getElementById('channelCategorySelect');
+  const channelSearch = document.getElementById('channelSearch');
+  const btnClearSearch = document.getElementById('btnClearSearch');
+  const channelList = document.getElementById('channelList');
+  const channelsEmptyState = document.getElementById('channelsEmptyState');
+  const btnGoToPlaylists = document.getElementById('btnGoToPlaylists');
+  const channelsLoading = document.getElementById('channelsLoading');
+
+  // Playlists Tab Elements
+  const playlistsCount = document.getElementById('playlistsCount');
+  const savedPlaylistsList = document.getElementById('savedPlaylistsList');
+  const typePills = document.querySelectorAll('.type-pill');
+  const formXtream = document.getElementById('formXtream');
+  const formM3u = document.getElementById('formM3u');
+  const plNameInput = document.getElementById('plName');
+  const plHostInput = document.getElementById('plHost');
+  const plUserInput = document.getElementById('plUser');
+  const plPassInput = document.getElementById('plPass');
+  const plM3uNameInput = document.getElementById('plM3uName');
+  const plM3uUrlInput = document.getElementById('plM3uUrl');
+  const m3uFileInput = document.getElementById('m3uFileInput');
+  const btnSavePlaylist = document.getElementById('btnSavePlaylist');
+  const plLoading = document.getElementById('plLoading');
+
+  // Quick Stream Elements
+  const streamUrlInput = document.getElementById('streamUrl');
+  const btnClearUrl = document.getElementById('btnClearUrl');
+  const btnPlayStream = document.getElementById('btnPlayStream');
+  const btnCheckHealth = document.getElementById('btnCheckHealth');
+  const healthPanel = document.getElementById('healthPanel');
+  const healthBadge = document.getElementById('healthBadge');
+  const diagStatus = document.getElementById('diagStatus');
+  const diagLatency = document.getElementById('diagLatency');
+  const diagResolution = document.getElementById('diagResolution');
+  const diagProtocol = document.getElementById('diagProtocol');
+  const chipSamples = document.querySelectorAll('.chip-sample');
+
+  // Application State (Synced with chrome.storage.local and player.html)
+  let savedPlaylists = [];
+  let activePlaylistId = null;
+  let activeChannels = [];
+  let categoryMap = {};
+  let currentlyPlayingChannelId = null;
+
+  // =========================================================
+  // TAB NAVIGATION
+  // =========================================================
   const navTabs = document.querySelectorAll('.nav-tab');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -19,15 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (c.id === tabId) c.classList.add('active');
       else c.classList.remove('active');
     });
+
+    // Pause player of inactive tab to save CPU / bandwidth
+    if (tabId !== 'tab-channels' && videoPlayer && !videoPlayer.paused) {
+      videoPlayer.pause();
+    }
+    if (tabId !== 'tab-stream' && quickVideoPlayer && !quickVideoPlayer.paused) {
+      quickVideoPlayer.pause();
+    }
   }
 
   navTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      switchToTab(tab.dataset.tab);
-    });
+    tab.addEventListener('click', () => switchToTab(tab.dataset.tab));
   });
 
-  function showNotification(msg, durationMs = 5000) {
+  if (btnSwitchPlaylist) {
+    btnSwitchPlaylist.addEventListener('click', () => switchToTab('tab-playlists'));
+  }
+  if (btnGoToPlaylists) {
+    btnGoToPlaylists.addEventListener('click', () => switchToTab('tab-playlists'));
+  }
+
+  function showNotification(msg, durationMs = 4500) {
     if (!smartNotice || !noticeText) return;
     noticeText.innerHTML = msg;
     smartNotice.classList.remove('hidden');
@@ -38,462 +113,774 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Open Full Screen Web Player Tab
-  const btnOpenFullTab = document.getElementById('btnOpenFullTab');
+  // Open Full Tab Web Player
   if (btnOpenFullTab) {
     btnOpenFullTab.addEventListener('click', () => {
-      const currentUrl = document.getElementById('streamUrl').value.trim();
-      const playerUrl = chrome.runtime.getURL('player.html') + (currentUrl ? '?stream=' + encodeURIComponent(currentUrl) : '');
+      let playerUrl = chrome.runtime.getURL('player.html');
+      if (currentlyPlayingChannelId && videoPlayer && videoPlayer.src) {
+        playerUrl += '?stream=' + encodeURIComponent(videoPlayer.src);
+      }
       chrome.tabs.create({ url: playerUrl });
     });
   }
 
-  // --- Core HLS / Video Player Engine ---
-  function playStreamUrl(url) {
-    if (!url) return;
-    placeholder.classList.add('hidden');
+  // =========================================================
+  // STORAGE INITIALIZATION & SYNC
+  // =========================================================
+  function initStorage() {
+    chrome.storage.local.get(
+      ['savedPlaylists', 'activePlaylistId', 'xtreamHost', 'xtreamUser', 'xtreamPass'],
+      (data) => {
+        savedPlaylists = Array.isArray(data.savedPlaylists) ? data.savedPlaylists : [];
+        activePlaylistId = data.activePlaylistId || null;
 
-    if (currentHls) {
-      currentHls.destroy();
-      currentHls = null;
+        // Auto-migrate legacy flat Xtream credentials if savedPlaylists is empty
+        if (savedPlaylists.length === 0 && data.xtreamHost && data.xtreamUser && data.xtreamPass) {
+          try {
+            const hostObj = new URL(data.xtreamHost);
+            const defaultPl = {
+              id: 'pl_' + Date.now(),
+              name: `${hostObj.hostname} (${data.xtreamUser})`,
+              type: 'xtream',
+              host: data.xtreamHost,
+              user: data.xtreamUser,
+              pass: data.xtreamPass,
+              addedAt: Date.now()
+            };
+            savedPlaylists.push(defaultPl);
+            activePlaylistId = defaultPl.id;
+            chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+          } catch (e) {
+            console.warn('Could not parse legacy host URL', e);
+          }
+        }
+
+        updatePlaylistCounts();
+        renderSavedPlaylists();
+
+        if (savedPlaylists.length > 0) {
+          if (!activePlaylistId || !savedPlaylists.some((p) => p.id === activePlaylistId)) {
+            activePlaylistId = savedPlaylists[0].id;
+            chrome.storage.local.set({ activePlaylistId });
+          }
+          loadActivePlaylist(false);
+        } else {
+          showEmptyStateChannels();
+        }
+      }
+    );
+  }
+
+  // Listen for storage changes made in other tabs (e.g. player.html)
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'local') {
+      let needsRefresh = false;
+      if (changes.savedPlaylists) {
+        savedPlaylists = Array.isArray(changes.savedPlaylists.newValue) ? changes.savedPlaylists.newValue : [];
+        needsRefresh = true;
+      }
+      if (changes.activePlaylistId) {
+        activePlaylistId = changes.activePlaylistId.newValue;
+        needsRefresh = true;
+      }
+      if (needsRefresh) {
+        updatePlaylistCounts();
+        renderSavedPlaylists();
+        if (activePlaylistId) {
+          loadActivePlaylist(false);
+        } else {
+          showEmptyStateChannels();
+        }
+      }
+    }
+  });
+
+  function updatePlaylistCounts() {
+    const count = savedPlaylists.length;
+    if (navPlaylistCount) navPlaylistCount.textContent = count;
+    if (playlistsCount) playlistsCount.textContent = `${count} saved`;
+  }
+
+  // =========================================================
+  // SMART URL DETECTOR & PARSER
+  // =========================================================
+  function inspectUrl(rawUrl) {
+    if (!rawUrl || typeof rawUrl !== 'string') return null;
+    const url = rawUrl.trim();
+
+    // 1. Check get.php?username=...&password=...
+    if (url.includes('get.php') && url.includes('username=') && url.includes('password=')) {
+      try {
+        const u = new URL(url);
+        const host = `${u.protocol}//${u.host}`;
+        const user = u.searchParams.get('username') || '';
+        const pass = u.searchParams.get('password') || '';
+        return { type: 'xtream', host, user, pass, originalUrl: url };
+      } catch (e) {}
     }
 
-    // Convert raw Xtream .ts or extensionless stream to .m3u8 for native browser HLS playback
-    let targetUrl = url;
+    // 2. Check live stream URL: /live/USERNAME/PASSWORD/STREAM_ID.m3u8
+    const liveMatch = url.match(/^(https?:\/\/[^\/]+)\/live\/([^\/]+)\/([^\/]+)\/([^\/\.]+)(\.m3u8|\.ts)?/i);
+    if (liveMatch) {
+      return {
+        type: 'xtream_stream',
+        host: liveMatch[1],
+        user: liveMatch[2],
+        pass: liveMatch[3],
+        streamId: liveMatch[4],
+        originalUrl: url
+      };
+    }
+
+    // 3. Check player_api.php
+    if (url.includes('player_api.php') && url.includes('username=') && url.includes('password=')) {
+      try {
+        const u = new URL(url);
+        const host = `${u.protocol}//${u.host}`;
+        const user = u.searchParams.get('username') || '';
+        const pass = u.searchParams.get('password') || '';
+        return { type: 'xtream', host, user, pass, originalUrl: url };
+      } catch (e) {}
+    }
+
+    // 4. Check regular M3U playlist (.m3u, .m3u8, get.php without standard params)
+    if (url.includes('.m3u') || url.includes('.m3u8') || url.includes('playlist')) {
+      return { type: 'm3u', url: url };
+    }
+
+    return null;
+  }
+
+  // Attach auto-detect listeners to Host and M3U URL inputs
+  function handleUrlAutoDetect(inputElem) {
+    inputElem.addEventListener('input', () => {
+      const val = inputElem.value.trim();
+      if (!val) return;
+      const detected = inspectUrl(val);
+      if (!detected) return;
+
+      if (detected.type === 'xtream' || detected.type === 'xtream_stream') {
+        // Switch to Xtream tab if currently on M3U
+        switchAddType('xtream');
+        plHostInput.value = detected.host;
+        plUserInput.value = detected.user;
+        plPassInput.value = detected.pass;
+        if (!plNameInput.value) {
+          try {
+            plNameInput.value = `${new URL(detected.host).hostname} (${detected.user})`;
+          } catch (e) {
+            plNameInput.value = 'My IPTV Playlist';
+          }
+        }
+        showNotification(
+          `⚡ <strong>Xtream credentials auto-extracted!</strong> Server: ${detected.host}, User: ${detected.user}`,
+          5000
+        );
+      } else if (detected.type === 'm3u' && inputElem !== plM3uUrlInput) {
+        switchAddType('m3u');
+        plM3uUrlInput.value = detected.url;
+        showNotification('⚡ <strong>Detected M3U Playlist URL!</strong>', 4000);
+      }
+    });
+  }
+
+  if (plHostInput) handleUrlAutoDetect(plHostInput);
+  if (plM3uUrlInput) handleUrlAutoDetect(plM3uUrlInput);
+
+  // =========================================================
+  // TAB 2: PLAYLIST MANAGER & RENDERING
+  // =========================================================
+
+  // Type Pills Switcher (Xtream vs M3U)
+  let currentAddType = 'xtream';
+  function switchAddType(type) {
+    currentAddType = type;
+    typePills.forEach((p) => {
+      if (p.dataset.type === type) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+    if (type === 'xtream') {
+      formXtream.classList.remove('hidden');
+      formM3u.classList.add('hidden');
+    } else {
+      formXtream.classList.add('hidden');
+      formM3u.classList.remove('hidden');
+    }
+  }
+
+  typePills.forEach((pill) => {
+    pill.addEventListener('click', () => switchAddType(pill.dataset.type));
+  });
+
+  // Render Saved Playlists Cards
+  function renderSavedPlaylists() {
+    if (!savedPlaylistsList) return;
+    savedPlaylistsList.innerHTML = '';
+
+    if (savedPlaylists.length === 0) {
+      savedPlaylistsList.innerHTML = `
+        <div class="empty-state-card" style="padding: 16px 12px;">
+          <span style="font-size: 11.5px; color: #a1a1aa;">No playlists saved yet. Fill out the form below to connect your IPTV server.</span>
+        </div>
+      `;
+      return;
+    }
+
+    savedPlaylists.forEach((pl) => {
+      const isActive = pl.id === activePlaylistId;
+      const card = document.createElement('div');
+      card.className = `playlist-card ${isActive ? 'active' : ''}`;
+
+      const hostText = pl.type === 'xtream' ? pl.host : (pl.url || 'Local File');
+      let hostnameClean = '';
+      try {
+        hostnameClean = new URL(hostText).hostname;
+      } catch (e) {
+        hostnameClean = hostText;
+      }
+
+      const countText = pl.channelCount ? `${pl.channelCount.toLocaleString()} ch` : 'Live';
+
+      card.innerHTML = `
+        <div class="pl-card-main">
+          <div class="pl-card-title-row">
+            <span class="pl-card-title" title="${pl.name}">${pl.name}</span>
+            ${isActive ? '<span class="badge-active">Active</span>' : ''}
+          </div>
+          <div class="pl-card-meta">
+            <span class="pl-type-pill">${pl.type === 'xtream' ? 'XTREAM' : 'M3U'}</span>
+            <span title="${hostText}">${hostnameClean}</span>
+            <span>•</span>
+            <span>${countText}</span>
+          </div>
+        </div>
+        <div class="pl-card-actions">
+          <button class="btn-card-watch" data-id="${pl.id}" title="Watch channels from this playlist">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            ${isActive ? 'Watching' : 'Watch'}
+          </button>
+          <button class="btn-card-delete" data-id="${pl.id}" title="Delete playlist">
+            🗑
+          </button>
+        </div>
+      `;
+
+      // Click to watch / switch
+      const btnWatch = card.querySelector('.btn-card-watch');
+      btnWatch.addEventListener('click', () => {
+        if (activePlaylistId !== pl.id) {
+          activePlaylistId = pl.id;
+          chrome.storage.local.set({ activePlaylistId });
+          renderSavedPlaylists();
+          loadActivePlaylist(true);
+        }
+        switchToTab('tab-channels');
+      });
+
+      // Click to delete
+      const btnDelete = card.querySelector('.btn-card-delete');
+      btnDelete.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (confirm(`Remove playlist "${pl.name}"?`)) {
+          savedPlaylists = savedPlaylists.filter((p) => p.id !== pl.id);
+          if (activePlaylistId === pl.id) {
+            activePlaylistId = savedPlaylists.length > 0 ? savedPlaylists[0].id : null;
+          }
+          chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+          updatePlaylistCounts();
+          renderSavedPlaylists();
+          if (activePlaylistId) {
+            loadActivePlaylist(false);
+          } else {
+            showEmptyStateChannels();
+          }
+        }
+      });
+
+      savedPlaylistsList.appendChild(card);
+    });
+  }
+
+  // Handle Save New Playlist
+  btnSavePlaylist.addEventListener('click', async () => {
+    plLoading.classList.remove('hidden');
+
+    try {
+      if (currentAddType === 'xtream') {
+        let host = plHostInput.value.trim().replace(/\/+$/, '');
+        const user = plUserInput.value.trim();
+        const pass = plPassInput.value.trim();
+        let name = plNameInput.value.trim();
+
+        if (!host || !user || !pass) {
+          alert('Please enter Portal URL, Username, and Password.');
+          plLoading.classList.add('hidden');
+          return;
+        }
+
+        if (!host.startsWith('http://') && !host.startsWith('https://')) {
+          host = 'http://' + host;
+        }
+
+        if (!name) {
+          try {
+            name = `${new URL(host).hostname} (${user})`;
+          } catch (e) {
+            name = 'Xtream IPTV';
+          }
+        }
+
+        // Verify authentication & get channel count
+        const authUrl = `${host}/player_api.php?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`;
+        const authRes = await fetch(authUrl);
+        const authData = await authRes.json();
+
+        if (!authData.user_info || authData.user_info.auth === 0) {
+          alert('Authentication failed: Invalid credentials or expired account.');
+          plLoading.classList.add('hidden');
+          return;
+        }
+
+        // Fetch streams to count channels
+        const streamsRes = await fetch(`${authUrl}&action=get_live_streams`);
+        const streams = await streamsRes.json();
+        const count = Array.isArray(streams) ? streams.length : 0;
+
+        const newPl = {
+          id: 'pl_' + Date.now(),
+          name,
+          type: 'xtream',
+          host,
+          user,
+          pass,
+          channelCount: count,
+          addedAt: Date.now()
+        };
+
+        savedPlaylists.push(newPl);
+        activePlaylistId = newPl.id;
+        chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+
+        // Reset form inputs
+        plHostInput.value = '';
+        plUserInput.value = '';
+        plPassInput.value = '';
+        plNameInput.value = '';
+
+        updatePlaylistCounts();
+        renderSavedPlaylists();
+        plLoading.classList.add('hidden');
+
+        showNotification(`✅ <strong>Connected!</strong> Loaded ${count.toLocaleString()} channels.`, 4000);
+        loadActivePlaylist(true);
+        switchToTab('tab-channels');
+      } else {
+        // M3U Playlist Mode
+        let name = plM3uNameInput.value.trim() || 'My M3U Playlist';
+        const url = plM3uUrlInput.value.trim();
+
+        if (!url && (!m3uFileInput.files || !m3uFileInput.files[0])) {
+          alert('Please enter an M3U Playlist URL or select a local .m3u file.');
+          plLoading.classList.add('hidden');
+          return;
+        }
+
+        let m3uText = '';
+        if (m3uFileInput.files && m3uFileInput.files[0]) {
+          m3uText = await m3uFileInput.files[0].text();
+        } else if (url) {
+          const res = await fetch(url);
+          m3uText = await res.text();
+        }
+
+        const parsed = parseM3U(m3uText);
+        if (!parsed.length) {
+          alert('No valid channels found in this M3U file.');
+          plLoading.classList.add('hidden');
+          return;
+        }
+
+        const newPl = {
+          id: 'pl_' + Date.now(),
+          name,
+          type: 'm3u',
+          url: url || 'local_file',
+          channelCount: parsed.length,
+          addedAt: Date.now()
+        };
+
+        savedPlaylists.push(newPl);
+        activePlaylistId = newPl.id;
+        chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+
+        plM3uNameInput.value = '';
+        plM3uUrlInput.value = '';
+        m3uFileInput.value = '';
+
+        updatePlaylistCounts();
+        renderSavedPlaylists();
+        plLoading.classList.add('hidden');
+
+        showNotification(`✅ <strong>M3U Loaded!</strong> Found ${parsed.length.toLocaleString()} channels.`, 4000);
+        loadActivePlaylist(true);
+        switchToTab('tab-channels');
+      }
+    } catch (err) {
+      console.error(err);
+      plLoading.classList.add('hidden');
+      alert(`Could not connect: ${err.message}. Please check URL and credentials.`);
+    }
+  });
+
+  // =========================================================
+  // TAB 1: CHANNELS BROWSER & PLAYBACK
+  // =========================================================
+  function showEmptyStateChannels() {
+    if (activePlaylistBar) activePlaylistBar.classList.add('hidden');
+    if (channelControls) channelControls.classList.add('hidden');
+    if (channelsLoading) channelsLoading.classList.add('hidden');
+    if (channelsEmptyState) channelsEmptyState.classList.remove('hidden');
+    if (playerPlaceholder) {
+      playerPlaceholder.classList.remove('hidden');
+      if (placeholderText) placeholderText.textContent = 'Add a playlist to start watching';
+    }
+  }
+
+  async function loadActivePlaylist(autoPlayFirst = false) {
+    const pl = savedPlaylists.find((p) => p.id === activePlaylistId);
+    if (!pl) {
+      showEmptyStateChannels();
+      return;
+    }
+
+    if (channelsEmptyState) channelsEmptyState.classList.add('hidden');
+    if (channelsLoading) channelsLoading.classList.remove('hidden');
+    if (activePlaylistBar) activePlaylistBar.classList.remove('hidden');
+    if (activePlName) activePlName.textContent = pl.name;
+
+    try {
+      if (pl.type === 'xtream') {
+        const authUrl = `${pl.host}/player_api.php?username=${encodeURIComponent(pl.user)}&password=${encodeURIComponent(pl.pass)}`;
+        const catUrl = `${authUrl}&action=get_live_categories`;
+        const streamUrl = `${authUrl}&action=get_live_streams`;
+
+        const [catRes, streamRes] = await Promise.all([fetch(catUrl), fetch(streamUrl)]);
+        const categories = await catRes.json();
+        const streams = await streamRes.json();
+
+        categoryMap = {};
+        channelCategorySelect.innerHTML = '<option value="">All Categories</option>';
+        if (Array.isArray(categories)) {
+          categories.forEach((cat) => {
+            categoryMap[cat.category_id] = cat.category_name;
+            const opt = document.createElement('option');
+            opt.value = cat.category_id;
+            opt.textContent = cat.category_name;
+            channelCategorySelect.appendChild(opt);
+          });
+        }
+
+        activeChannels = Array.isArray(streams) ? streams : [];
+        if (activePlCount) activePlCount.textContent = `${activeChannels.length.toLocaleString()} ch`;
+
+        renderChannelsList();
+        channelsLoading.classList.add('hidden');
+        channelControls.classList.remove('hidden');
+
+        if (autoPlayFirst && activeChannels.length > 0) {
+          const firstReal = activeChannels.find((s) => s.name && !s.name.includes('###') && !s.name.includes('NO EVENT')) || activeChannels[0];
+          if (firstReal) {
+            playXtreamChannel(firstReal, pl);
+          }
+        }
+      } else {
+        // M3U Playlist
+        if (pl.url && pl.url !== 'local_file') {
+          const res = await fetch(pl.url);
+          const text = await res.text();
+          activeChannels = parseM3U(text);
+        }
+
+        channelCategorySelect.innerHTML = '<option value="">All Categories</option>';
+        const groups = [...new Set(activeChannels.map((c) => c.group || 'General'))].filter(Boolean);
+        groups.forEach((g) => {
+          const opt = document.createElement('option');
+          opt.value = g;
+          opt.textContent = g;
+          channelCategorySelect.appendChild(opt);
+        });
+
+        if (activePlCount) activePlCount.textContent = `${activeChannels.length.toLocaleString()} ch`;
+
+        renderChannelsList();
+        channelsLoading.classList.add('hidden');
+        channelControls.classList.remove('hidden');
+
+        if (autoPlayFirst && activeChannels.length > 0) {
+          playM3uChannel(activeChannels[0]);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      channelsLoading.classList.add('hidden');
+      channelList.innerHTML = `<div style="padding:15px;text-align:center;color:#f31260;">Could not load channels: ${err.message}</div>`;
+    }
+  }
+
+  function renderChannelsList() {
+    if (!channelList) return;
+    channelList.innerHTML = '';
+
+    const selectedCat = channelCategorySelect.value;
+    const filter = channelSearch.value.toLowerCase().trim();
+    const pl = savedPlaylists.find((p) => p.id === activePlaylistId);
+
+    const filtered = activeChannels.filter((ch) => {
+      if (pl && pl.type === 'xtream') {
+        const matchCat = !selectedCat || String(ch.category_id) === String(selectedCat);
+        const catName = categoryMap[ch.category_id] || '';
+        const matchSearch = !filter || (ch.name && ch.name.toLowerCase().includes(filter)) || catName.toLowerCase().includes(filter);
+        return matchCat && matchSearch;
+      } else {
+        const matchCat = !selectedCat || ch.group === selectedCat;
+        const matchSearch = !filter || (ch.name && ch.name.toLowerCase().includes(filter));
+        return matchCat && matchSearch;
+      }
+    });
+
+    if (filtered.length === 0) {
+      channelList.innerHTML = '<div style="padding:14px;text-align:center;color:#71717a;font-size:12px;">No channels found</div>';
+      return;
+    }
+
+    // Limit to first 120 rendered channels for silky 60fps performance
+    filtered.slice(0, 120).forEach((ch) => {
+      const item = document.createElement('div');
+      const isPlaying = ch.stream_id ? ch.stream_id === currentlyPlayingChannelId : ch.name === currentlyPlayingChannelId;
+      item.className = `channel-item ${isPlaying ? 'active' : ''}`;
+
+      const numBadge = ch.num || ch.stream_id || '';
+      const catBadge = pl && pl.type === 'xtream' ? (categoryMap[ch.category_id] || '') : (ch.group || '');
+
+      item.innerHTML = `
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:6px;">${ch.name}</span>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          ${catBadge ? `<small style="color:#71717a;font-size:10px;">${catBadge.slice(0, 12)}</small>` : ''}
+          ${numBadge ? `<small style="color:#c084fc;font-weight:700;">#${numBadge}</small>` : ''}
+        </div>
+      `;
+
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.channel-item').forEach((i) => i.classList.remove('active'));
+        item.classList.add('active');
+
+        if (pl && pl.type === 'xtream') {
+          playXtreamChannel(ch, pl);
+        } else {
+          playM3uChannel(ch);
+        }
+      });
+
+      channelList.appendChild(item);
+    });
+  }
+
+  function playXtreamChannel(channel, pl) {
+    currentlyPlayingChannelId = channel.stream_id;
+    const playUrl = `${pl.host}/live/${pl.user}/${pl.pass}/${channel.stream_id}.m3u8`;
+    playInVideoElement(videoPlayer, playerPlaceholder, playUrl, channel.name);
+    showNotification(`<strong>Now Playing:</strong> ${channel.name}`, 3500);
+  }
+
+  function playM3uChannel(channel) {
+    currentlyPlayingChannelId = channel.name;
+    let playUrl = channel.url;
+    if (playUrl.includes('/live/') && playUrl.endsWith('.ts')) {
+      playUrl = playUrl.replace(/\.ts$/, '.m3u8');
+    }
+    playInVideoElement(videoPlayer, playerPlaceholder, playUrl, channel.name);
+    showNotification(`<strong>Now Playing:</strong> ${channel.name}`, 3500);
+  }
+
+  channelCategorySelect.addEventListener('change', renderChannelsList);
+  channelSearch.addEventListener('input', () => {
+    if (channelSearch.value) btnClearSearch.classList.remove('hidden');
+    else btnClearSearch.classList.add('hidden');
+    renderChannelsList();
+  });
+  btnClearSearch.addEventListener('click', () => {
+    channelSearch.value = '';
+    btnClearSearch.classList.add('hidden');
+    renderChannelsList();
+  });
+
+  // =========================================================
+  // CORE HLS VIDEO ENGINE (Manifest V3 Safe, No Workers)
+  // =========================================================
+  function playInVideoElement(vidElem, placeholderElem, rawUrl, title = '') {
+    if (!rawUrl || !vidElem) return;
+    if (placeholderElem) placeholderElem.classList.add('hidden');
+
+    let targetUrl = rawUrl;
+    // Format Xtream .ts to .m3u8 for HLS.js
     if (targetUrl.includes('/live/') && targetUrl.endsWith('.ts')) {
       targetUrl = targetUrl.replace(/\.ts$/, '.m3u8');
     } else if (targetUrl.includes('/live/') && !targetUrl.includes('.m3u8')) {
       targetUrl = targetUrl + '.m3u8';
     }
 
+    if (vidElem === videoPlayer) {
+      if (channelHls) {
+        channelHls.destroy();
+        channelHls = null;
+      }
+    } else {
+      if (quickHls) {
+        quickHls.destroy();
+        quickHls = null;
+      }
+    }
+
     if (window.Hls && Hls.isSupported() && (targetUrl.includes('.m3u8') || !targetUrl.endsWith('.mp4'))) {
-      currentHls = new Hls({
-        enableWorker: false,
+      const hlsInstance = new Hls({
+        enableWorker: false, // Required for Chrome extension CSP
         xhrSetup: function(xhr) { xhr.withCredentials = false; },
         lowLatencyMode: true,
         backBufferLength: 30,
       });
 
-      currentHls.loadSource(targetUrl);
-      currentHls.attachMedia(video);
+      if (vidElem === videoPlayer) channelHls = hlsInstance;
+      else quickHls = hlsInstance;
 
-      currentHls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play().catch(() => {});
-        updateDiagnosticsOnPlay();
+      hlsInstance.loadSource(targetUrl);
+      hlsInstance.attachMedia(vidElem);
+
+      hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+        vidElem.play().catch(() => {});
+        if (vidElem === quickVideoPlayer) updateDiagnosticsOnPlay();
       });
 
-      currentHls.on(Hls.Events.ERROR, (event, data) => {
-        console.warn('HLS Error:', data);
+      hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+        console.warn('HLS Event Error:', data);
         if (data.fatal) {
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              showDiagnosticsError('Network error / Stream offline');
-              currentHls.startLoad();
+              hlsInstance.startLoad();
               break;
             case Hls.ErrorTypes.MEDIA_ERROR:
-              showDiagnosticsError('Media decode error');
-              currentHls.recoverMediaError();
+              hlsInstance.recoverMediaError();
               break;
             default:
-              showDiagnosticsError('Fatal playback error');
-              currentHls.destroy();
+              hlsInstance.destroy();
               break;
           }
         }
       });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = targetUrl;
-      video.addEventListener('loadedmetadata', () => {
-        video.play().catch(() => {});
-        updateDiagnosticsOnPlay();
-      });
     } else {
-      video.src = targetUrl;
-      video.play().catch(() => {});
-    }
-
-    if (chrome.storage && chrome.storage.local) {
-      chrome.storage.local.set({ lastStreamUrl: url });
+      vidElem.src = targetUrl;
+      vidElem.play().catch(() => {});
     }
   }
 
-  // --- Smart URL Handler: Distinguishes between M3U Playlists and Single Streams ---
-  function handleStreamInput(url) {
-    if (!url) {
-      alert('Please enter a valid stream link or playlist URL');
-      return;
-    }
-
-    // 1. Check if user pasted an entire Xtream Codes get.php playlist URL:
-    // e.g.: http://imciq.zibak.ru/get.php?username=54U5LEX&password=KVXKPLA&type=m3u_plus&output=mpegts
-    if (url.includes('get.php') && url.includes('username=') && url.includes('password=')) {
-      try {
-        const u = new URL(url);
-        const host = `${u.protocol}//${u.host}`;
-        const user = u.searchParams.get('username');
-        const pass = u.searchParams.get('password');
-
-        if (host && user && pass) {
-          switchToTab('tab-xtream');
-          xtreamHost.value = host;
-          xtreamUser.value = user;
-          xtreamPass.value = pass;
-
-          showNotification(
-            `<strong>Full M3U Playlist Detected!</strong><br>Connecting to <code>${u.host}</code> (User: ${user}) and loading channels...`,
-            8000
-          );
-
-          connectXtream(true); // true = autoPlayFirst
-          return;
-        }
-      } catch (e) {
-        console.warn('Error parsing Xtream URL:', e);
-      }
-    }
-
-    // 2. Check if generic remote M3U playlist file:
-    if (url.includes('.m3u') || url.includes('type=m3u')) {
-      switchToTab('tab-m3u');
-      m3uUrl.value = url;
-      showNotification(`<strong>M3U Playlist File Detected!</strong><br>Loading channels...`, 6000);
-      loadRemoteM3u(url, true);
-      return;
-    }
-
-    // 3. Single video stream URL (e.g. .m3u8, .ts, or direct stream):
-    playStreamUrl(url);
-  }
-
-  // --- Tab 1: Single Stream Tester ---
-  const streamUrlInput = document.getElementById('streamUrl');
-  const btnPlayStream = document.getElementById('btnPlayStream');
-  const btnClearUrl = document.getElementById('btnClearUrl');
-  const btnCheckHealth = document.getElementById('btnCheckHealth');
-  const healthPanel = document.getElementById('healthPanel');
-
-  btnPlayStream.addEventListener('click', () => {
-    handleStreamInput(streamUrlInput.value.trim());
-  });
-
-  streamUrlInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      handleStreamInput(streamUrlInput.value.trim());
-    }
-  });
-
-  // Auto-detect when pasted
-  streamUrlInput.addEventListener('paste', () => {
-    setTimeout(() => {
-      const val = streamUrlInput.value.trim();
-      if (val.includes('get.php') || val.includes('.m3u') || val.includes('type=m3u')) {
-        handleStreamInput(val);
-      }
-    }, 50);
-  });
-
-  btnClearUrl.addEventListener('click', () => {
-    streamUrlInput.value = '';
-    streamUrlInput.focus();
-  });
-
-  // Quick sample links
-  document.querySelectorAll('.chip-sample').forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const url = chip.dataset.url;
-      streamUrlInput.value = url;
-      playStreamUrl(url);
-    });
-  });
-
-  // Stream Health Tester
-  btnCheckHealth.addEventListener('click', async () => {
-    const url = streamUrlInput.value.trim();
-    if (!url) {
-      alert('Enter a stream URL to test diagnostics');
-      return;
-    }
-
-    healthPanel.classList.remove('hidden');
-    const badge = document.getElementById('healthBadge');
-    badge.className = 'health-badge';
-    badge.textContent = 'Testing...';
-
-    const diagStatus = document.getElementById('diagStatus');
-    const diagLatency = document.getElementById('diagLatency');
-    const diagResolution = document.getElementById('diagResolution');
-    const diagProtocol = document.getElementById('diagProtocol');
-
-    diagStatus.textContent = 'Probing...';
-    diagLatency.textContent = 'Measuring...';
-    diagResolution.textContent = video.videoWidth ? `${video.videoWidth}x${video.videoHeight}` : 'Unknown';
-    diagProtocol.textContent = url.startsWith('https') ? 'HTTPS (Secure)' : 'HTTP (Insecure)';
-
-    const startTime = performance.now();
-    try {
-      const response = await fetch(url, { method: 'GET', headers: { Range: 'bytes=0-100' } });
-      const duration = Math.round(performance.now() - startTime);
-
-      diagLatency.textContent = `${duration} ms`;
-      diagStatus.textContent = `${response.status} ${response.statusText || 'OK'}`;
-
-      if (response.ok) {
-        badge.className = 'health-badge success';
-        badge.textContent = 'LIVE & STABLE';
-      } else {
-        badge.className = 'health-badge error';
-        badge.textContent = `HTTP ${response.status}`;
-      }
-    } catch (err) {
-      const duration = Math.round(performance.now() - startTime);
-      diagLatency.textContent = `${duration} ms`;
-      diagStatus.textContent = 'Connection Failed / Blocked';
-      badge.className = 'health-badge error';
-      badge.textContent = 'OFFLINE / BLOCKED';
-    }
-  });
-
-  function updateDiagnosticsOnPlay() {
-    video.addEventListener('loadedmetadata', () => {
-      const diagRes = document.getElementById('diagResolution');
-      if (diagRes && video.videoWidth) {
-        diagRes.textContent = `${video.videoWidth}x${video.videoHeight}`;
-      }
-    }, { once: true });
-  }
-
-  function showDiagnosticsError(message) {
-    healthPanel.classList.remove('hidden');
-    const badge = document.getElementById('healthBadge');
-    if (badge) {
-      badge.className = 'health-badge error';
-      badge.textContent = 'STREAM ERROR';
-    }
-    const diagStatus = document.getElementById('diagStatus');
-    if (diagStatus) diagStatus.textContent = message;
-  }
-
-  // --- Tab 2: Xtream Codes API ---
-  const xtreamHost = document.getElementById('xtreamHost');
-  const xtreamUser = document.getElementById('xtreamUser');
-  const xtreamPass = document.getElementById('xtreamPass');
-  const btnConnectXtream = document.getElementById('btnConnectXtream');
-  const xtreamLoading = document.getElementById('xtreamLoading');
-  const xtreamChannelsSection = document.getElementById('xtreamChannelsSection');
-  const xtreamCategorySelect = document.getElementById('xtreamCategorySelect');
-  const xtreamChannelSearch = document.getElementById('xtreamChannelSearch');
-  const xtreamChannelList = document.getElementById('xtreamChannelList');
-
-  let xtreamStreams = [];
-  let popupCategoryMap = {};
-
-  // Restore saved Xtream credentials
-  if (chrome.storage && chrome.storage.local) {
-    chrome.storage.local.get(['xtreamHost', 'xtreamUser', 'xtreamPass', 'lastStreamUrl'], (res) => {
-      if (res.xtreamHost) xtreamHost.value = res.xtreamHost;
-      if (res.xtreamUser) xtreamUser.value = res.xtreamUser;
-      if (res.xtreamPass) xtreamPass.value = res.xtreamPass;
-      if (res.lastStreamUrl && !streamUrlInput.value) {
-        streamUrlInput.value = res.lastStreamUrl;
-      }
+  // =========================================================
+  // TAB 3: QUICK STREAM TESTER
+  // =========================================================
+  if (btnClearUrl) {
+    btnClearUrl.addEventListener('click', () => {
+      streamUrlInput.value = '';
     });
   }
 
-  async function connectXtream(autoPlayFirst = false) {
-    let host = xtreamHost.value.trim().replace(/\/+$/, '');
-    const user = xtreamUser.value.trim();
-    const pass = xtreamPass.value.trim();
-
-    if (!host || !user || !pass) {
-      alert('Please enter Host, Username, and Password');
-      return;
-    }
-
-    if (!host.startsWith('http://') && !host.startsWith('https://')) {
-      host = 'http://' + host;
-      xtreamHost.value = host;
-    }
-
-    if (chrome.storage && chrome.storage.local) {
-      chrome.storage.local.set({ xtreamHost: host, xtreamUser: user, xtreamPass: pass });
-    }
-
-    xtreamLoading.classList.remove('hidden');
-    xtreamChannelsSection.classList.add('hidden');
-
-    try {
-      const authUrl = `${host}/player_api.php?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`;
-      const authRes = await fetch(authUrl);
-      const authData = await authRes.json();
-
-      if (!authData.user_info || authData.user_info.auth === 0) {
-        alert('Authentication failed: Invalid credentials or expired subscription.');
-        xtreamLoading.classList.add('hidden');
+  if (btnPlayStream) {
+    btnPlayStream.addEventListener('click', () => {
+      const raw = streamUrlInput.value.trim();
+      if (!raw) {
+        alert('Please enter a stream link.');
         return;
       }
 
-      const catUrl = `${authUrl}&action=get_live_categories`;
-      const streamUrl = `${authUrl}&action=get_live_streams`;
-
-      const [catRes, streamRes] = await Promise.all([fetch(catUrl), fetch(streamUrl)]);
-      const categories = await catRes.json();
-      xtreamStreams = await streamRes.json();
-
-      xtreamCategorySelect.innerHTML = '<option value="">All Categories</option>';
-      if (Array.isArray(categories)) {
-        categories.forEach((cat) => {
-          popupCategoryMap[cat.category_id] = cat.category_name;
-          const opt = document.createElement('option');
-          opt.value = cat.category_id;
-          opt.textContent = cat.category_name;
-          xtreamCategorySelect.appendChild(opt);
-        });
+      // Check if user accidentally pasted a get.php playlist in Quick Stream
+      const detected = inspectUrl(raw);
+      if (detected && detected.type === 'xtream') {
+        showNotification('⚡ <strong>Xtream server detected!</strong> Switching to Playlists to add your account...', 4000);
+        switchAddType('xtream');
+        plHostInput.value = detected.host;
+        plUserInput.value = detected.user;
+        plPassInput.value = detected.pass;
+        switchToTab('tab-playlists');
+        return;
       }
 
-      renderXtreamChannels(xtreamStreams, host, user, pass);
-      xtreamLoading.classList.add('hidden');
-      xtreamChannelsSection.classList.remove('hidden');
+      playInVideoElement(quickVideoPlayer, quickPlaceholder, raw);
+    });
+  }
 
-      if (autoPlayFirst && Array.isArray(xtreamStreams) && xtreamStreams.length > 0) {
-        // Find first real stream (skipping spacers that start with ###)
-        const realStream = xtreamStreams.find((s) => s.name && !s.name.includes('###') && !s.name.includes('NO EVENT')) || xtreamStreams[0];
-        if (realStream) {
-          const playUrl = `${host}/live/${user}/${pass}/${realStream.stream_id}.m3u8`;
-          streamUrlInput.value = playUrl;
-          playStreamUrl(playUrl);
-          showNotification(`<strong>Now Playing:</strong> ${realStream.name}`, 5000);
+  chipSamples.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const url = btn.dataset.url;
+      streamUrlInput.value = url;
+      playInVideoElement(quickVideoPlayer, quickPlaceholder, url);
+    });
+  });
+
+  // Diagnostics Health Check
+  if (btnCheckHealth) {
+    btnCheckHealth.addEventListener('click', async () => {
+      const url = streamUrlInput.value.trim();
+      if (!url) {
+        alert('Please enter a stream URL to test.');
+        return;
+      }
+
+      healthPanel.classList.remove('hidden');
+      healthBadge.textContent = 'Testing...';
+      healthBadge.className = 'health-badge';
+      diagStatus.textContent = 'Probing...';
+      diagLatency.textContent = 'Calculating...';
+      diagProtocol.textContent = url.startsWith('https://') ? 'HTTPS (Secure)' : 'HTTP (Insecure)';
+
+      const startTime = performance.now();
+      try {
+        const response = await fetch(url, { method: 'HEAD', cache: 'no-cache' });
+        const latency = Math.round(performance.now() - startTime);
+
+        diagStatus.textContent = `${response.status} ${response.statusText || 'OK'}`;
+        diagLatency.textContent = `${latency} ms`;
+
+        if (response.ok) {
+          healthBadge.textContent = 'LIVE & STABLE';
+          healthBadge.classList.add('live');
+        } else {
+          healthBadge.textContent = `CODE ${response.status}`;
+          healthBadge.classList.add('error');
         }
+      } catch (err) {
+        diagStatus.textContent = 'Connection Error';
+        diagLatency.textContent = 'Timeout / Failed';
+        healthBadge.textContent = 'OFFLINE / BLOCKED';
+        healthBadge.classList.add('error');
       }
-    } catch (err) {
-      console.error(err);
-      xtreamLoading.classList.add('hidden');
-      alert(`Could not connect to server: ${err.message}. Please verify the host URL.`);
-    }
-  }
-
-  btnConnectXtream.addEventListener('click', () => connectXtream(false));
-
-  function renderXtreamChannels(streams, host, user, pass) {
-    xtreamChannelList.innerHTML = '';
-    const selectedCat = xtreamCategorySelect.value;
-    const searchFilter = xtreamChannelSearch.value.toLowerCase().trim();
-
-    const filtered = streams.filter((ch) => {
-      const matchCat = !selectedCat || String(ch.category_id) === String(selectedCat);
-      const catName = popupCategoryMap[ch.category_id] || "";
-      const matchSearch = !searchFilter || (ch.name && ch.name.toLowerCase().includes(searchFilter)) || catName.toLowerCase().includes(searchFilter);
-      return matchCat && matchSearch;
-    });
-
-    if (filtered.length === 0) {
-      xtreamChannelList.innerHTML = '<div style="padding:10px;text-align:center;color:#71717A;">No channels found</div>';
-      return;
-    }
-
-    filtered.slice(0, 100).forEach((ch) => {
-      const item = document.createElement('div');
-      item.className = 'channel-item';
-      item.innerHTML = `<span>${ch.name}</span><small style="color:#A78BFA">#${ch.num || ch.stream_id}</small>`;
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.channel-item').forEach((i) => i.classList.remove('active'));
-        item.classList.add('active');
-        const playUrl = `${host}/live/${user}/${pass}/${ch.stream_id}.m3u8`;
-        streamUrlInput.value = playUrl;
-        playStreamUrl(playUrl);
-        showNotification(`<strong>Playing:</strong> ${ch.name}`, 4000);
-      });
-      xtreamChannelList.appendChild(item);
     });
   }
 
-  xtreamCategorySelect.addEventListener('change', () => {
-    const host = xtreamHost.value.trim().replace(/\/+$/, '');
-    const user = xtreamUser.value.trim();
-    const pass = xtreamPass.value.trim();
-    renderXtreamChannels(xtreamStreams, host, user, pass);
-  });
-
-  xtreamChannelSearch.addEventListener('input', () => {
-    const host = xtreamHost.value.trim().replace(/\/+$/, '');
-    const user = xtreamUser.value.trim();
-    const pass = xtreamPass.value.trim();
-    renderXtreamChannels(xtreamStreams, host, user, pass);
-  });
-
-  // --- Tab 3: M3U Playlist Parser ---
-  const m3uUrl = document.getElementById('m3uUrl');
-  const m3uFileInput = document.getElementById('m3uFileInput');
-  const btnLoadM3u = document.getElementById('btnLoadM3u');
-  const m3uChannelsSection = document.getElementById('m3uChannelsSection');
-  const m3uCategorySelect = document.getElementById('m3uCategorySelect');
-  const m3uChannelSearch = document.getElementById('m3uChannelSearch');
-  const m3uChannelList = document.getElementById('m3uChannelList');
-
-  let parsedM3uChannels = [];
-
-  async function loadRemoteM3u(url, autoPlayFirst = false) {
-    try {
-      const res = await fetch(url);
-      const m3uText = await res.text();
-      processM3uText(m3uText, autoPlayFirst);
-    } catch (err) {
-      alert('Could not fetch M3U playlist. Check URL or CORS settings.');
+  function updateDiagnosticsOnPlay() {
+    if (healthPanel.classList.contains('hidden')) return;
+    if (quickVideoPlayer && quickVideoPlayer.videoWidth) {
+      diagResolution.textContent = `${quickVideoPlayer.videoWidth} x ${quickVideoPlayer.videoHeight}`;
     }
   }
 
-  btnLoadM3u.addEventListener('click', async () => {
-    const url = m3uUrl.value.trim();
-    if (!url && (!m3uFileInput.files || !m3uFileInput.files[0])) {
-      alert('Please enter an M3U URL or select a local .m3u file');
-      return;
-    }
-
-    if (m3uFileInput.files && m3uFileInput.files[0]) {
-      const m3uText = await m3uFileInput.files[0].text();
-      processM3uText(m3uText, false);
-    } else if (url) {
-      loadRemoteM3u(url, false);
-    }
-  });
-
-  function processM3uText(content, autoPlayFirst = false) {
-    parsedM3uChannels = parseM3U(content);
-    if (!parsedM3uChannels.length) {
-      alert('No valid streams found in this M3U file.');
-      return;
-    }
-
-    const categories = [...new Set(parsedM3uChannels.map((c) => c.group || 'General'))].filter(Boolean);
-    m3uCategorySelect.innerHTML = '<option value="">All Categories</option>';
-    categories.forEach((cat) => {
-      const opt = document.createElement('option');
-      opt.value = cat;
-      opt.textContent = cat;
-      m3uCategorySelect.appendChild(opt);
-    });
-
-    renderM3uChannels();
-    m3uChannelsSection.classList.remove('hidden');
-
-    if (autoPlayFirst && parsedM3uChannels.length > 0) {
-      const first = parsedM3uChannels[0];
-      let pUrl = first.url;
-      if (pUrl.includes('/live/') && pUrl.endsWith('.ts')) {
-        pUrl = pUrl.replace(/\.ts$/, '.m3u8');
-      }
-      streamUrlInput.value = pUrl;
-      playStreamUrl(pUrl);
-      showNotification(`<strong>Now Playing:</strong> ${first.name}`, 4000);
-    }
-  }
-
+  // =========================================================
+  // M3U PARSER
+  // =========================================================
   function parseM3U(content) {
+    if (!content) return [];
     const lines = content.split('\n');
     const channels = [];
     let currentChannel = null;
 
-    // Limit parsing to first 50,000 lines to prevent browser memory freeze on 100MB files
-    const maxLines = Math.min(lines.length, 50000);
+    // Limit parsing to 40,000 lines to avoid high RAM consumption in popup
+    const maxLines = Math.min(lines.length, 40000);
     for (let i = 0; i < maxLines; i++) {
       const line = lines[i].trim();
       if (line.startsWith('#EXTINF:')) {
@@ -513,41 +900,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return channels;
   }
 
-  function renderM3uChannels() {
-    m3uChannelList.innerHTML = '';
-    const selectedGroup = m3uCategorySelect.value;
-    const filter = m3uChannelSearch.value.toLowerCase().trim();
-
-    const filtered = parsedM3uChannels.filter((c) => {
-      const matchGroup = !selectedGroup || c.group === selectedGroup;
-      const matchSearch = !filter || c.name.toLowerCase().includes(filter);
-      return matchGroup && matchSearch;
-    });
-
-    if (!filtered.length) {
-      m3uChannelList.innerHTML = '<div style="padding:10px;text-align:center;color:#71717A;">No channels found</div>';
-      return;
-    }
-
-    filtered.slice(0, 100).forEach((ch) => {
-      const item = document.createElement('div');
-      item.className = 'channel-item';
-      item.innerHTML = `<span>${ch.name}</span><small style="color:#A78BFA">${ch.group}</small>`;
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.channel-item').forEach((i) => i.classList.remove('active'));
-        item.classList.add('active');
-        let playUrl = ch.url;
-        if (playUrl.includes('/live/') && playUrl.endsWith('.ts')) {
-          playUrl = playUrl.replace(/\.ts$/, '.m3u8');
-        }
-        streamUrlInput.value = playUrl;
-        playStreamUrl(playUrl);
-        showNotification(`<strong>Playing:</strong> ${ch.name}`, 4000);
-      });
-      m3uChannelList.appendChild(item);
-    });
-  }
-
-  m3uCategorySelect.addEventListener('change', renderM3uChannels);
-  m3uChannelSearch.addEventListener('input', renderM3uChannels);
+  // Initialize
+  initStorage();
 });
