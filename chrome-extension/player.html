@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smarters IPTV — Web Player &amp; Stream Client</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="player.css">
 </head>
 <body>
@@ -19,17 +22,25 @@
           <path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <defs>
             <linearGradient id="p_brand_grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#7B3FE4"/>
+              <stop stop-color="#7828c8"/>
               <stop offset="1" stop-color="#5F15CD"/>
             </linearGradient>
           </defs>
         </svg>
-        <span class="brand-name">The Smarters IPTV <span class="tag">Web Player</span></span>
+        <div class="brand-text">
+          <span class="brand-name">The Smarters IPTV</span>
+          <span class="tag">Web Player</span>
+        </div>
       </div>
 
       <div class="top-stream-input">
-        <input type="text" id="streamInput" placeholder="Paste M3U link (get.php) or stream URL..." spellcheck="false" />
-        <button id="btnPlay" class="btn-play">▶ Play / Connect</button>
+        <div class="input-wrapper">
+          <input type="text" id="streamInput" placeholder="Paste M3U link (get.php) or stream URL..." spellcheck="false" />
+        </div>
+        <button id="btnPlay" class="btn-play">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Play / Connect
+        </button>
       </div>
 
       <div class="top-actions">
@@ -60,7 +71,6 @@
           <div class="playlist-tabs">
             <button class="pl-tab active" data-type="xtream">Live TV</button>
             <button class="pl-tab" data-type="favorites">⭐ Favorites</button>
-            <button class="pl-tab" data-type="quick">Demos</button>
           </div>
         </div>
 
@@ -95,6 +105,7 @@
         <!-- Bottom Promo Card -->
         <div class="sidebar-cta">
           <div class="cta-inner">
+            <span class="cta-badge">STABLE 4K CHANNELS</span>
             <strong>Need a Stable 4K Playlist?</strong>
             <p>25,000+ live channels &amp; movies without freezing.</p>
             <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=player_sidebar_cta" target="_blank" class="btn-cta">
@@ -112,6 +123,21 @@
             <div class="big-play-btn">▶</div>
             <h2>Smarters IPTV Web Player</h2>
             <p id="overlaySubtext">Select a channel from the sidebar or paste an M3U playlist URL in the top bar.</p>
+          </div>
+
+          <!-- In-Player Stream Error Card -->
+          <div id="streamErrorOverlay" class="stream-error-overlay hidden">
+            <div class="error-card">
+              <div class="error-icon">⚠️</div>
+              <h3>Channel Stream Offline</h3>
+              <p id="errorMsg">This live event or channel is currently not broadcasting or has ended.</p>
+              <div class="error-actions">
+                <button id="btnRetryStream" class="btn-retry">↻ Try Reconnecting</button>
+                <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=player_stream_error" target="_blank" class="btn-upgrade">
+                  ⚡ Upgrade to Stable 4K Servers
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -139,7 +165,10 @@
   <div id="playlistModal" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Save New Playlist</h3>
+        <div class="modal-title-wrap">
+          <span class="modal-badge">PLAYLIST MANAGER</span>
+          <h3>Save New Playlist</h3>
+        </div>
         <button id="btnCloseModal" class="btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
@@ -150,19 +179,19 @@
         <div class="form-group">
           <label for="plTypeSelect">Connection Type</label>
           <select id="plTypeSelect" class="sidebar-dropdown">
-            <option value="xtream">Xtream Codes API (Fastest)</option>
-            <option value="m3u">M3U Playlist URL (get.php)</option>
+            <option value="xtream">Xtream Codes API (Fastest &amp; Categorized)</option>
+            <option value="m3u">M3U Playlist URL (.m3u, .m3u8)</option>
           </select>
         </div>
         <div id="formXtreamFields">
           <div class="form-group">
             <label for="plHostInput">Server / Portal URL</label>
-            <input type="text" id="plHostInput" placeholder="http://domain.com:8080" />
+            <input type="text" id="plHostInput" placeholder="http://domain.com:8080 (or paste get.php / stream link)" spellcheck="false" />
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="plUserInput">Username</label>
-              <input type="text" id="plUserInput" placeholder="username" />
+              <input type="text" id="plUserInput" placeholder="username" spellcheck="false" />
             </div>
             <div class="form-group">
               <label for="plPassInput">Password</label>
@@ -173,7 +202,7 @@
         <div id="formM3uFields" class="hidden">
           <div class="form-group">
             <label for="plUrlInput">M3U Playlist URL</label>
-            <input type="text" id="plUrlInput" placeholder="http://domain.com/get.php?username=...&password=..." />
+            <input type="text" id="plUrlInput" placeholder="http://domain.com/get.php?username=...&password=..." spellcheck="false" />
           </div>
         </div>
       </div>

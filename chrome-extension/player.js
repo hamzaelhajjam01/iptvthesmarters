@@ -1,4 +1,4 @@
-// Smarters IPTV Web Player - Advanced Full Tab Controller
+// Smarters IPTV Web Player - HeroUI Full Tab Controller (Manifest V3)
 document.addEventListener('DOMContentLoaded', () => {
   const video = document.getElementById('fullVideoPlayer');
   const stageOverlay = document.getElementById('stageOverlay');
@@ -27,9 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const statResolution = document.getElementById('statResolution');
   const statStatus = document.getElementById('statStatus');
   const btnFavCurrent = document.getElementById('btnFavCurrent');
+  const streamErrorOverlay = document.getElementById('streamErrorOverlay');
+  const errorMsg = document.getElementById('errorMsg');
+  const btnRetryStream = document.getElementById('btnRetryStream');
 
   let currentHls = null;
-  let activeTab = 'xtream'; // 'xtream' | 'favorites' | 'quick'
+  let activeTab = 'xtream'; // 'xtream' | 'favorites'
   let currentPlayingChannel = null;
 
   // State
@@ -44,14 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let renderedCount = 0;
   const CHUNK_SIZE = 80;
 
-  const SAMPLE_CHANNELS = [
-    { stream_id: 'demo_1', name: 'Mux Big Buck Bunny (Multi-Bitrate)', url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8', category_name: 'Demo HLS' },
-    { stream_id: 'demo_2', name: 'Akamai 1080p Stream Test', url: 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8', category_name: 'Akamai CDN' },
-    { stream_id: 'demo_3', name: 'Tears of Steel (4K UHD HLS)', url: 'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8', category_name: 'Ultra HD' },
-    { stream_id: 'demo_4', name: 'Sintel Blender Animated Movie', url: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', category_name: 'Movies' },
-  ];
-
-  // Initialize Storage Data
+  // =========================================================
+  // STORAGE INITIALIZATION & SYNC
+  // =========================================================
   chrome.storage.local.get(['savedPlaylists', 'activePlaylistId', 'favorites', 'xtreamHost', 'xtreamUser', 'xtreamPass'], (data) => {
     savedPlaylists = Array.isArray(data.savedPlaylists) ? data.savedPlaylists : [];
     activePlaylistId = data.activePlaylistId || null;
@@ -61,34 +59,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-migrate single legacy login if savedPlaylists is empty
     if (savedPlaylists.length === 0 && data.xtreamHost && data.xtreamUser && data.xtreamPass) {
-      const defaultPl = {
-        id: 'pl_' + Date.now(),
-        name: `${new URL(data.xtreamHost).hostname} (${data.xtreamUser})`,
-        type: 'xtream',
-        host: data.xtreamHost,
-        user: data.xtreamUser,
-        pass: data.xtreamPass,
-        addedAt: Date.now()
-      };
-      savedPlaylists.push(defaultPl);
-      activePlaylistId = defaultPl.id;
-      chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+      try {
+        const defaultPl = {
+          id: 'pl_' + Date.now(),
+          name: `${new URL(data.xtreamHost).hostname} (${data.xtreamUser})`,
+          type: 'xtream',
+          host: data.xtreamHost,
+          user: data.xtreamUser,
+          pass: data.xtreamPass,
+          addedAt: Date.now()
+        };
+        savedPlaylists.push(defaultPl);
+        activePlaylistId = defaultPl.id;
+        chrome.storage.local.set({ savedPlaylists, activePlaylistId });
+      } catch (e) {}
     }
 
     renderPlaylistDropdown();
 
-    // Check ?stream= parameter
+    // Check ?stream= parameter from popup "Open in Full Tab"
     const urlParams = new URLSearchParams(window.location.search);
     const streamParam = urlParams.get('stream');
-    if (streamParam) {
+
+    if (savedPlaylists.length > 0) {
+      if (!activePlaylistId || !savedPlaylists.some(p => p.id === activePlaylistId)) {
+        activePlaylistId = savedPlaylists[0].id;
+        chrome.storage.local.set({ activePlaylistId });
+      }
+
+      // Always load the user's active playlist by default!
+      loadActivePlaylist(!streamParam).then(() => {
+        if (streamParam) {
+          streamInput.value = streamParam;
+          // Match streamParam with a channel in the playlist
+          const matched = allChannels.find(c => c.url === streamParam || (c.stream_id && streamParam.includes(c.stream_id)));
+          if (matched) {
+            selectAndPlayChannel(matched);
+          } else {
+            handleStreamInput(streamParam);
+          }
+        }
+      });
+    } else if (streamParam) {
       streamInput.value = streamParam;
       handleStreamInput(streamParam);
-    } else if (savedPlaylists.length > 0) {
-      loadActivePlaylist(true);
     } else {
-      renderChannels(SAMPLE_CHANNELS);
+      showEmptyStateChannels();
     }
   });
+
+  // Listen for storage changes from popup or other tabs
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'local') {
+      let needsRefresh = false;
+      if (changes.savedPlaylists) {
+        savedPlaylists = Array.isArray(changes.savedPlaylists.newValue) ? changes.savedPlaylists.newValue : [];
+        needsRefresh = true;
+      }
+      if (changes.activePlaylistId) {
+        activePlaylistId = changes.activePlaylistId.newValue;
+        needsRefresh = true;
+      }
+      if (needsRefresh) {
+        renderPlaylistDropdown();
+        if (activePlaylistId) {
+          loadActivePlaylist(false);
+        } else {
+          showEmptyStateChannels();
+        }
+      }
+    }
+  });
+
+  function showEmptyStateChannels() {
+    channelCountBadge.textContent = '0 channels';
+    channelList.innerHTML = `
+      <div style="padding: 40px 20px; text-align: center; color: var(--heroui-foreground-muted);">
+        <div style="font-size: 38px; margin-bottom: 12px;">📺</div>
+        <h4 style="color: #ffffff; margin-bottom: 8px; font-size: 14px; font-weight: 700;">No Playlists Added</h4>
+        <p style="font-size: 12px; margin-bottom: 18px; line-height: 1.45; color: var(--heroui-foreground-muted);">
+          Add your Xtream Codes API or M3U playlist to begin watching live channels.
+        </p>
+        <button id="btnEmptyAdd" class="btn-play" style="margin: 0 auto; display: inline-flex;">＋ Add Playlist</button>
+      </div>
+    `;
+    document.getElementById('btnEmptyAdd')?.addEventListener('click', () => {
+      btnNewPlaylist.click();
+    });
+  }
 
   // --- Playlist Dropdown & Management ---
   function renderPlaylistDropdown() {
@@ -101,7 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
     savedPlaylists.forEach((pl) => {
       const opt = document.createElement('option');
       opt.value = pl.id;
-      opt.textContent = pl.name;
+      const count = pl.channelCount ? ` (${pl.channelCount.toLocaleString()} ch)` : '';
+      opt.textContent = `${pl.name}${count}`;
       if (pl.id === activePlaylistId) opt.selected = true;
       playlistSelect.appendChild(opt);
     });
@@ -127,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadActivePlaylist(false);
       } else {
         allChannels = [];
-        renderFilteredChannels();
+        showEmptyStateChannels();
       }
     }
   });
@@ -160,7 +219,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  btnSavePlaylist.addEventListener('click', () => {
+  // Smart auto-fill when pasting into plHostInput
+  const plHostInput = document.getElementById('plHostInput');
+  plHostInput?.addEventListener('input', () => {
+    const val = plHostInput.value.trim();
+    if (!val) return;
+
+    // Check get.php
+    if (val.includes('get.php') && val.includes('username=') && val.includes('password=')) {
+      try {
+        const u = new URL(val);
+        plHostInput.value = `${u.protocol}//${u.host}`;
+        document.getElementById('plUserInput').value = u.searchParams.get('username') || '';
+        document.getElementById('plPassInput').value = u.searchParams.get('password') || '';
+        if (!document.getElementById('plNameInput').value) {
+          document.getElementById('plNameInput').value = `${u.hostname} (${u.searchParams.get('username')})`;
+        }
+      } catch (e) {}
+    }
+
+    // Check /live/USERNAME/PASSWORD/STREAM_ID
+    const liveMatch = val.match(/^(https?:\/\/[^\/]+)\/live\/([^\/]+)\/([^\/]+)\/([^\/\.]+)(\.m3u8|\.ts)?/i);
+    if (liveMatch) {
+      plHostInput.value = liveMatch[1];
+      document.getElementById('plUserInput').value = liveMatch[2];
+      document.getElementById('plPassInput').value = liveMatch[3];
+      if (!document.getElementById('plNameInput').value) {
+        try {
+          document.getElementById('plNameInput').value = `${new URL(liveMatch[1]).hostname} (${liveMatch[2]})`;
+        } catch (e) {}
+      }
+    }
+  });
+
+  btnSavePlaylist.addEventListener('click', async () => {
     const name = document.getElementById('plNameInput').value.trim() || 'My IPTV Playlist';
     const type = plTypeSelect.value;
 
@@ -200,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!pl) return;
 
     channelCountBadge.textContent = 'Connecting...';
-    channelList.innerHTML = '<div style="padding:24px;text-align:center;color:#A78BFA;">Connecting to server and loading channels...</div>';
+    channelList.innerHTML = '<div style="padding: 30px; text-align: center; color: #c084fc; font-weight: 600;">Connecting to server and loading channels...</div>';
 
     if (pl.type === 'xtream') {
       await fetchXtreamChannels(pl.host, pl.user, pl.pass, autoPlay);
@@ -237,6 +329,14 @@ document.addEventListener('DOMContentLoaded', () => {
         allChannels = [];
       }
 
+      // Update channelCount in savedPlaylists
+      const curPl = savedPlaylists.find(p => p.id === activePlaylistId);
+      if (curPl && curPl.channelCount !== allChannels.length) {
+        curPl.channelCount = allChannels.length;
+        chrome.storage.local.set({ savedPlaylists });
+        renderPlaylistDropdown();
+      }
+
       populateCategoryDropdown();
       applyFilters();
 
@@ -246,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {
       console.error(err);
-      channelList.innerHTML = `<div style="padding:20px;text-align:center;color:#f87171;">Failed to connect to ${host}: ${err.message}</div>`;
+      channelList.innerHTML = `<div style="padding: 24px; text-align: center; color: #f31260;">Failed to connect to ${host}: ${err.message}</div>`;
       channelCountBadge.textContent = 'Error';
     }
   }
@@ -258,27 +358,44 @@ document.addEventListener('DOMContentLoaded', () => {
       const m3uText = await res.text();
       const lines = m3uText.split('\n');
       allChannels = [];
+      categories = [];
       categoryMap = {};
 
-      let cur = null;
-      const maxLines = Math.min(lines.length, 60000);
+      const uniqueCats = new Set();
+      let currentCh = null;
+
+      const maxLines = Math.min(lines.length, 50000);
       for (let i = 0; i < maxLines; i++) {
         const line = lines[i].trim();
         if (line.startsWith('#EXTINF:')) {
           const nameMatch = line.match(/,(.+)$/);
           const groupMatch = line.match(/group-title="([^"]+)"/i);
-          const name = nameMatch ? nameMatch[1].trim() : 'Channel';
+          const name = nameMatch ? nameMatch[1].trim() : 'Channel ' + (allChannels.length + 1);
           const group = groupMatch ? groupMatch[1].trim() : 'General';
-          cur = { stream_id: 'm3u_' + i, name, category_name: group, category_id: group };
-          categoryMap[group] = group;
-        } else if (line && !line.startsWith('#') && cur) {
-          cur.url = line;
-          allChannels.push(cur);
-          cur = null;
+          uniqueCats.add(group);
+          currentCh = { name, group, id: 'm3u_' + allChannels.length };
+        } else if (line && !line.startsWith('#')) {
+          if (currentCh) {
+            let streamUrl = line;
+            if (streamUrl.includes('/live/') && streamUrl.endsWith('.ts')) {
+              streamUrl = streamUrl.replace(/\.ts$/, '.m3u8');
+            }
+            allChannels.push({
+              stream_id: currentCh.id,
+              num: allChannels.length + 1,
+              name: currentCh.name,
+              category_id: currentCh.group,
+              category_name: currentCh.group,
+              url: streamUrl
+            });
+            currentCh = null;
+          }
         }
       }
 
-      categories = Object.keys(categoryMap).map(k => ({ category_id: k, category_name: k }));
+      categories = Array.from(uniqueCats).map(name => ({ category_id: name, category_name: name }));
+      categories.forEach(c => { categoryMap[c.category_id] = c.category_name; });
+
       populateCategoryDropdown();
       applyFilters();
 
@@ -287,19 +404,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {
       console.error(err);
-      channelList.innerHTML = `<div style="padding:20px;text-align:center;color:#f87171;">Failed to fetch M3U file: ${err.message}</div>`;
+      channelList.innerHTML = `<div style="padding: 24px; text-align: center; color: #f31260;">Failed to load M3U: ${err.message}</div>`;
+      channelCountBadge.textContent = 'Error';
     }
   }
 
-  // --- Categories Dropdown Setup ---
+  // --- Populate Category Dropdown ---
   function populateCategoryDropdown() {
     categorySelect.innerHTML = '';
 
-    // Count channels per category
     const counts = {};
     allChannels.forEach(c => {
-      const cid = c.category_id || 'other';
-      counts[cid] = (counts[cid] || 0) + 1;
+      counts[c.category_id] = (counts[c.category_id] || 0) + 1;
     });
 
     const optAll = document.createElement('option');
@@ -338,9 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hideSpacers = chkHideSpacers.checked;
 
     let source = allChannels;
-    if (activeTab === 'quick') {
-      source = SAMPLE_CHANNELS;
-    } else if (activeTab === 'favorites') {
+    if (activeTab === 'favorites') {
       source = allChannels.filter(c => favorites.has(c.stream_id));
     }
 
@@ -369,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return true;
     });
 
-    channelCountBadge.textContent = `${filteredChannels.length} channels`;
+    channelCountBadge.textContent = `${filteredChannels.length.toLocaleString()} channels`;
     btnClearSearch.classList.toggle('hidden', !query);
 
     renderedCount = 0;
@@ -379,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderMoreChannels() {
     if (filteredChannels.length === 0) {
-      channelList.innerHTML = '<div style="padding:30px;text-align:center;color:#71717A;">No channels found matching your criteria.</div>';
+      channelList.innerHTML = '<div style="padding: 30px; text-align: center; color: var(--heroui-foreground-subtle);">No channels found matching your criteria.</div>';
       return;
     }
 
@@ -394,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isFav = favorites.has(ch.stream_id);
       card.innerHTML = `
         <div class="ch-info">
-          <span class="ch-name">${ch.name}</span>
+          <span class="ch-name" title="${ch.name}">${ch.name}</span>
           <div class="ch-meta">
             <span class="ch-category-pill">${ch.category_name || 'General'}</span>
             <small>#${ch.num || ch.stream_id}</small>
@@ -425,16 +539,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderedCount += nextBatch.length;
   }
 
-  // Infinite Scroll on Channel List
+  // Infinite Scroll in Channel List
   channelList.addEventListener('scroll', () => {
-    if (channelList.scrollHeight - channelList.scrollTop <= channelList.clientHeight + 250) {
+    if (channelList.scrollTop + channelList.clientHeight >= channelList.scrollHeight - 150) {
       if (renderedCount < filteredChannels.length) {
         renderMoreChannels();
       }
     }
   });
 
-  // Search input listeners
   channelSearch.addEventListener('input', applyFilters);
   btnClearSearch.addEventListener('click', () => {
     channelSearch.value = '';
@@ -443,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   chkHideSpacers.addEventListener('change', applyFilters);
 
-  // Mode Tabs
+  // Mode Tabs (Live TV vs Favorites)
   document.querySelectorAll('.pl-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.pl-tab').forEach(t => t.classList.remove('active'));
@@ -489,7 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!currentPlayingChannel) return;
     toggleFavorite(currentPlayingChannel.stream_id);
     document.querySelectorAll('.channel-card').forEach(c => {
-      // Re-sync rendered star buttons
       applyFilters();
     });
   });
@@ -514,11 +626,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     playStream(ch.url, ch.name);
   }
-
-  
-  const streamErrorOverlay = document.getElementById('streamErrorOverlay');
-  const errorMsg = document.getElementById('errorMsg');
-  const btnRetryStream = document.getElementById('btnRetryStream');
 
   function showStreamError(msg) {
     if (streamErrorOverlay && errorMsg) {
@@ -562,7 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.Hls && Hls.isSupported() && (targetUrl.includes('.m3u8') || !targetUrl.endsWith('.mp4'))) {
       currentHls = new Hls({
-        enableWorker: false,
+        enableWorker: false, // CSP safe for Chrome extensions
         lowLatencyMode: true,
       });
 
@@ -578,6 +685,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('HLS error:', data);
         if (data.fatal) {
           statStatus.textContent = 'Status: Offline / Error';
+          if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+            showStreamError('Stream network error. This event or channel might currently be offline.');
+          } else {
+            showStreamError('Unable to decode video stream.');
+          }
         }
       });
     } else {
@@ -620,6 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Check get.php
     if (url.includes('get.php') && url.includes('username=') && url.includes('password=')) {
       try {
         const u = new URL(url);
