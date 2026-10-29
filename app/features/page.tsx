@@ -191,21 +191,25 @@ const COMPAT_DEVICES = [
 
 const FAQS = [
   {
+    num: '01',
     q: 'How reliable is the streaming quality?',
     a: 'We run on a 20 Gbps backbone edge network with adaptive bitrate delivery. This means the stream automatically adjusts to your internet connection to prevent buffering.',
     isOpen: true,
   },
   {
+    num: '02',
     q: 'What internet speed do I need?',
     a: 'For smooth streaming, we recommend a minimum of 15 Mbps for Full HD (1080p) channels, and 25 Mbps for 4K Ultra HD streams.',
     isOpen: false,
   },
   {
+    num: '03',
     q: 'How detailed is the EPG?',
     a: 'Our EPG (Electronic Program Guide) updates daily, offering comprehensive current and upcoming listings, and automatically adjusts to your local timezone.',
     isOpen: false,
   },
   {
+    num: '04',
     q: 'What devices are compatible?',
     a: 'Almost everything with a screen. Smart TVs (Samsung, LG, Sony, Android TV), Amazon Fire TV Stick, Apple TV, iOS/Android smartphones and tablets, Windows/Mac PCs, and dedicated set-top boxes like MAG and Formuler.',
     isOpen: false,
@@ -396,27 +400,36 @@ export default function EnglishFeaturesPage() {
           </section>
 
           {/* Feature & Setup FAQs */}
-          <section className="py-8 bg-zinc-950/30 border-t border-zinc-900/50">
+          <section className="py-16 bg-zinc-950/30 border-t border-zinc-900/50" id="faq">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
+                <div className="flex flex-col items-center justify-center gap-4 mb-4">
+                  <div className="w-0.5 h-6 bg-cyan-500"></div>
+                  <span className="text-xs font-bold tracking-widest text-zinc-500 uppercase">Common Questions</span>
+                </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">Feature &amp; Setup FAQs</h2>
+                <p className="text-zinc-400 max-w-xl mx-auto text-lg">
+                  Everything you need to know about streaming quality, speed requirements, and hardware compatibility.
+                </p>
               </div>
-              <div className="space-y-4">
-                {FAQS.map((faq, idx) => (
+              <div className="faq-list w-full max-w-3xl mx-auto">
+                {FAQS.map((faq) => (
                   <details
-                    key={idx}
-                    className="faq-item group bg-zinc-900/30 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 border-zinc-800/60 hover:border-zinc-700 hover:bg-zinc-900/50"
+                    key={faq.num}
+                    className="faq-item"
+                    name="features-faq"
                     open={faq.isOpen ? true : undefined}
                   >
-                    <summary className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none cursor-pointer">
-                      <span className="font-semibold pr-4 transition-colors text-white group-open:text-cyan-400">
-                        {faq.q}
+                    <summary className="faq-summary">
+                      <span className="faq-num" aria-hidden="true">{faq.num}</span>
+                      <span className="faq-q">{faq.q}</span>
+                      <span className="faq-chevron" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
                       </span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-zinc-500 group-open:text-cyan-400">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
                     </summary>
-                    <div className="px-6 pb-5 text-zinc-400 text-sm leading-relaxed">
+                    <div className="faq-answer">
                       <p>{faq.a}</p>
                     </div>
                   </details>
