@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  other: {
+    'indexnow-key': '1b78916c08b6be747b3fa246ca892395',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

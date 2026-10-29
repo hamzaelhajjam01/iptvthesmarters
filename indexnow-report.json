@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-10-29T19:19:36.627Z",
+  "host": "thesmartersiptv.com",
+  "apiKey": "1b78916c08b6be747b3fa246ca892395",
+  "keyLocation": "https://thesmartersiptv.com/1b78916c08b6be747b3fa246ca892395.txt",
+  "totalUrls": 684,
+  "results": [
+    {
+      "endpoint": "https://www.bing.com/indexnow",
+      "statusCode": 403,
+      "statusMessage": "Forbidden",
+      "body": "{\"errorCode\":\"SiteVerificationNotCompleted\",\"message\":\"Site Verification is not completed. Please wait for some time for the verification to complete and try again.\",\"details\":null}"
+    },
+    {
+      "endpoint": "https://api.indexnow.org/indexnow",
+      "statusCode": 403,
+      "statusMessage": "Forbidden",
+      "body": "{\"errorCode\":\"SiteVerificationNotCompleted\",\"message\":\"Site Verification is not completed. Please wait for some time for the verification to complete and try again.\",\"details\":null}"
+    }
+  ],
+  "sampleUrls": [
+    "https://thesmartersiptv.com/",
+    "https://thesmartersiptv.com/ar/",
+    "https://thesmartersiptv.com/ar/channels/",
+    "https://thesmartersiptv.com/ar/contact/",
+    "https://thesmartersiptv.com/ar/features/",
+    "https://thesmartersiptv.com/ar/guides/",
+    "https://thesmartersiptv.com/ar/guides/best-iptv-subscriptions-for-smarters-pro/",
+    "https://thesmartersiptv.com/ar/guides/how-many-devices-can-i-use-iptv-smarters-pro-on/",
+    "https://thesmartersiptv.com/ar/guides/how-to-activate-iptv-smarters-pro/",
+    "https://thesmartersiptv.com/ar/guides/how-to-add-m3u-playlist-iptv-smarters-pro/",
+    "https://thesmartersiptv.com/ar/guides/how-to-choose-an-iptv-service/",
+    "https://thesmartersiptv.com/ar/guides/how-to-clear-cache-iptv-smarters-pro/",
+    "https://thesmartersiptv.com/ar/guides/how-to-set-up-xtream-codes-iptv-smarters-pro/",
+    "https://thesmartersiptv.com/ar/guides/how-to-spot-fake-iptv-smarters-pro-apps/",
+    "https://thesmartersiptv.com/ar/guides/how-to-tell-if-iptv-provider-is-legitimate/"
+  ]
+}
