@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showNotification(msg, durationMs = 4500) {
     if (!smartNotice || !noticeText) return;
-    noticeText.innerHTML = msg;
+    noticeText.textContent = msg;
     smartNotice.classList.remove('hidden');
     if (durationMs > 0) {
       setTimeout(() => {
@@ -341,32 +341,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const countText = pl.channelCount ? `${pl.channelCount.toLocaleString()} ch` : 'Live';
 
-      card.innerHTML = `
-        <div class="pl-card-main">
-          <div class="pl-card-title-row">
-            <span class="pl-card-title" title="${pl.name}">${pl.name}</span>
-            ${isActive ? '<span class="badge-active">Active</span>' : ''}
-          </div>
-          <div class="pl-card-meta">
-            <span class="pl-type-pill">${pl.type === 'xtream' ? 'XTREAM' : 'M3U'}</span>
-            <span title="${hostText}">${hostnameClean}</span>
-            <span>•</span>
-            <span>${countText}</span>
-          </div>
-        </div>
-        <div class="pl-card-actions">
-          <button class="btn-card-watch" data-id="${pl.id}" title="Watch channels from this playlist">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            ${isActive ? 'Watching' : 'Watch'}
-          </button>
-          <button class="btn-card-delete" data-id="${pl.id}" title="Delete playlist">
-            🗑
-          </button>
-        </div>
-      `;
+      const mainDiv = document.createElement('div');
+      mainDiv.className = 'pl-card-main';
+
+      const titleRow = document.createElement('div');
+      titleRow.className = 'pl-card-title-row';
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'pl-card-title';
+      titleSpan.title = pl.name;
+      titleSpan.textContent = pl.name;
+      titleRow.appendChild(titleSpan);
+
+      if (isActive) {
+        const activeBadge = document.createElement('span');
+        activeBadge.className = 'badge-active';
+        activeBadge.textContent = 'Active';
+        titleRow.appendChild(activeBadge);
+      }
+      mainDiv.appendChild(titleRow);
+
+      const metaDiv = document.createElement('div');
+      metaDiv.className = 'pl-card-meta';
+
+      const typePill = document.createElement('span');
+      typePill.className = 'pl-type-pill';
+      typePill.textContent = pl.type === 'xtream' ? 'XTREAM' : 'M3U';
+
+      const hostSpan = document.createElement('span');
+      hostSpan.title = hostText;
+      hostSpan.textContent = hostnameClean;
+
+      const dotSpan = document.createElement('span');
+      dotSpan.textContent = '•';
+
+      const cntSpan = document.createElement('span');
+      cntSpan.textContent = countText;
+
+      metaDiv.append(typePill, hostSpan, dotSpan, cntSpan);
+      mainDiv.appendChild(metaDiv);
+
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'pl-card-actions';
+
+      const btnWatch = document.createElement('button');
+      btnWatch.className = 'btn-card-watch';
+      btnWatch.setAttribute('data-id', pl.id);
+      btnWatch.title = 'Watch channels from this playlist';
+      btnWatch.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> ';
+      btnWatch.appendChild(document.createTextNode(isActive ? 'Watching' : 'Watch'));
+
+      const btnDel = document.createElement('button');
+      btnDel.className = 'btn-card-delete';
+      btnDel.setAttribute('data-id', pl.id);
+      btnDel.title = 'Delete playlist';
+      btnDel.textContent = '🗑';
+
+      actionsDiv.append(btnWatch, btnDel);
+      card.append(mainDiv, actionsDiv);
 
       // Click to watch / switch
-      const btnWatch = card.querySelector('.btn-card-watch');
+      // reuse btnWatch
       btnWatch.addEventListener('click', () => {
         if (activePlaylistId !== pl.id) {
           activePlaylistId = pl.id;
@@ -378,8 +413,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Click to delete
-      const btnDelete = card.querySelector('.btn-card-delete');
-      btnDelete.addEventListener('click', (e) => {
+      // reuse btnDel
+      btnDel.addEventListener('click', (e) => {
         e.stopPropagation();
         if (confirm(`Remove playlist "${pl.name}"?`)) {
           savedPlaylists = savedPlaylists.filter((p) => p.id !== pl.id);
@@ -623,7 +658,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error(err);
       channelsLoading.classList.add('hidden');
-      channelList.innerHTML = `<div style="padding:15px;text-align:center;color:#f31260;">Could not load channels: ${err.message}</div>`;
+      channelList.innerHTML = '';
+      const errEl = document.createElement('div');
+      errEl.style.cssText = 'padding:15px;text-align:center;color:#f31260;';
+      errEl.textContent = 'Could not load channels: ' + err.message;
+      channelList.appendChild(errEl);
     }
   }
 
@@ -662,13 +701,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const numBadge = ch.num || ch.stream_id || '';
       const catBadge = pl && pl.type === 'xtream' ? (categoryMap[ch.category_id] || '') : (ch.group || '');
 
-      item.innerHTML = `
-        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:6px;">${ch.name}</span>
-        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-          ${catBadge ? `<small style="color:#71717a;font-size:10px;">${catBadge.slice(0, 12)}</small>` : ''}
-          ${numBadge ? `<small style="color:#c084fc;font-weight:700;">#${numBadge}</small>` : ''}
-        </div>
-      `;
+      const nameSpan = document.createElement('span');
+      nameSpan.style.cssText = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:6px;';
+      nameSpan.textContent = ch.name;
+      item.appendChild(nameSpan);
+
+      const rightDiv = document.createElement('div');
+      rightDiv.style.cssText = 'display:flex;align-items:center;gap:6px;flex-shrink:0;';
+      if (catBadge) {
+        const catSmall = document.createElement('small');
+        catSmall.style.cssText = 'color:#71717a;font-size:10px;';
+        catSmall.textContent = catBadge.slice(0, 12);
+        rightDiv.appendChild(catSmall);
+      }
+      if (numBadge) {
+        const numSmall = document.createElement('small');
+        numSmall.style.cssText = 'color:#c084fc;font-weight:700;';
+        numSmall.textContent = '#' + numBadge;
+        rightDiv.appendChild(numSmall);
+      }
+      item.appendChild(rightDiv);
 
       item.addEventListener('click', () => {
         document.querySelectorAll('.channel-item').forEach((i) => i.classList.remove('active'));

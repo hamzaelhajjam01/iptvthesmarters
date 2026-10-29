@@ -346,7 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {
       console.error(err);
-      channelList.innerHTML = `<div style="padding: 24px; text-align: center; color: #f31260;">Failed to connect to ${host}: ${err.message}</div>`;
+      channelList.innerHTML = '';
+      const errDiv = document.createElement('div');
+      errDiv.style.cssText = 'padding: 24px; text-align: center; color: #f31260;';
+      errDiv.textContent = `Failed to connect to ${host}: ${err.message}`;
+      channelList.appendChild(errDiv);
       channelCountBadge.textContent = 'Error';
     }
   }
@@ -404,7 +408,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {
       console.error(err);
-      channelList.innerHTML = `<div style="padding: 24px; text-align: center; color: #f31260;">Failed to load M3U: ${err.message}</div>`;
+      channelList.innerHTML = '';
+      const errDiv = document.createElement('div');
+      errDiv.style.cssText = 'padding: 24px; text-align: center; color: #f31260;';
+      errDiv.textContent = `Failed to load M3U: ${err.message}`;
+      channelList.appendChild(errDiv);
       channelCountBadge.textContent = 'Error';
     }
   }
@@ -506,18 +514,40 @@ document.addEventListener('DOMContentLoaded', () => {
       card.className = 'channel-card' + (currentPlayingChannel && currentPlayingChannel.stream_id === ch.stream_id ? ' active' : '');
 
       const isFav = favorites.has(ch.stream_id);
-      card.innerHTML = `
-        <div class="ch-info">
-          <span class="ch-name" title="${ch.name}">${ch.name}</span>
-          <div class="ch-meta">
-            <span class="ch-category-pill">${ch.category_name || 'General'}</span>
-            <small>#${ch.num || ch.stream_id}</small>
-          </div>
-        </div>
-        <div class="ch-actions">
-          <button class="btn-star ${isFav ? 'favorited' : ''}" title="${isFav ? 'Remove Favorite' : 'Add to Favorites'}">${isFav ? '★' : '☆'}</button>
-        </div>
-      `;
+      const chInfo = document.createElement('div');
+      chInfo.className = 'ch-info';
+
+      const chName = document.createElement('span');
+      chName.className = 'ch-name';
+      chName.title = ch.name;
+      chName.textContent = ch.name;
+
+      const chMeta = document.createElement('div');
+      chMeta.className = 'ch-meta';
+
+      const chCat = document.createElement('span');
+      chCat.className = 'ch-category-pill';
+      chCat.textContent = ch.category_name || 'General';
+
+      const chNum = document.createElement('small');
+      chNum.textContent = '#' + (ch.num || ch.stream_id);
+
+      chMeta.appendChild(chCat);
+      chMeta.appendChild(chNum);
+      chInfo.appendChild(chName);
+      chInfo.appendChild(chMeta);
+
+      const chActions = document.createElement('div');
+      chActions.className = 'ch-actions';
+
+      const btnStar = document.createElement('button');
+      btnStar.className = 'btn-star' + (isFav ? ' favorited' : '');
+      btnStar.title = isFav ? 'Remove Favorite' : 'Add to Favorites';
+      btnStar.textContent = isFav ? '★' : '☆';
+      chActions.appendChild(btnStar);
+
+      card.appendChild(chInfo);
+      card.appendChild(chActions);
 
       // Play on click
       card.addEventListener('click', (e) => {

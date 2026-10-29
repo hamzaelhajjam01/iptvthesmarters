@@ -50,9 +50,8 @@ function copyDir(src, dest) {
 copyDir(path.join(extDir, 'icons'), path.join(stageDir, 'icons'));
 copyDir(path.join(extDir, 'lib'), path.join(stageDir, 'lib'));
 
-// Use PowerShell Compress-Archive on the staging directory
-const cmd = `powershell -Command "Compress-Archive -Path '${stageDir}\\*' -DestinationPath '${zipFile}' -Force"`;
-execSync(cmd, { stdio: 'inherit' });
+// Use bsdtar (tar.exe) to create POSIX forward-slash ZIP archive
+execSync(`tar.exe -a -c -f "${zipFile}" -C "${stageDir}" *`, { stdio: 'inherit' });
 
 // Cleanup staging
 fs.rmSync(stageDir, { recursive: true, force: true });
