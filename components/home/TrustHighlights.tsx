@@ -12,8 +12,8 @@ export default function TrustHighlights() {
           </div>
           <h3 className="text-xl font-bold text-white mb-3">Secure Payments</h3>
           <p className="text-zinc-400 text-sm leading-relaxed">
-            Your payments are processed securely with enterprise-grade encryption. We accept all major credit
-            cards and Crypto.
+            Your payments are processed securely with enterprise-grade encryption. We accept PayPal, all major credit
+            cards, and Crypto.
           </p>
         </div>
         <div className="reveal-on-scroll bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 text-left hover:bg-zinc-900/60 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start group" style={{ transitionDelay: '0.1s' }}>

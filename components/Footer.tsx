@@ -7,8 +7,23 @@ interface FooterProps {
   currentLang?: string;
 }
 
+const PAYPAL_TEXT: Record<string, string> = {
+  en: 'PayPal Accepted',
+  fr: 'PayPal Accepté',
+  de: 'PayPal Akzeptiert',
+  es: 'PayPal Aceptado',
+  it: 'PayPal Accettato',
+  nl: 'PayPal Geaccepteerd',
+  pt: 'PayPal Aceito',
+  'pt-br': 'PayPal Aceito',
+  pl: 'PayPal Akceptowany',
+  ar: 'نقبل باي بال',
+  ko: 'PayPal 결제 가능',
+};
+
 export default function Footer({ currentLang = 'en' }: FooterProps) {
   const prefix = currentLang === 'en' ? '/' : `/${currentLang}/`;
+  const paypalLabel = PAYPAL_TEXT[currentLang] || PAYPAL_TEXT.en;
 
   return (
     <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs">
@@ -193,7 +208,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between text-xs text-[#64748b] gap-4">
           <p>© 2026 IPTV Smarters Pro. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center flex-wrap gap-4 sm:gap-6">
             <span className="footer-trust-pill">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -211,6 +226,19 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
               Secure Checkout
+            </span>
+            <span className="footer-trust-pill">
+              <svg
+                className="w-4 h-4 text-[#0079C1]"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.792.792 0 0 1 .782-.67h6.634c3.084 0 5.487 1.056 5.86 4.382.203 1.808-.415 3.32-1.745 4.26-1.127.798-2.678 1.188-4.608 1.188H9.373a.855.855 0 0 0-.845.727l-.95 6.01a.642.642 0 0 1-.633.541l.13-.82z" />
+                <path d="M9.13 14.88h2.07c2.44 0 4.35-.97 4.9-3.79.23-1.18.06-2.13-.53-2.79-.62-.69-1.66-1.06-3.09-1.06H8.28a.86.86 0 0 0-.85.73l-1.37 8.68a.64.64 0 0 0 .63.74h2.44z" fill="#00457C" />
+              </svg>
+              {paypalLabel}
             </span>
             <button
               type="button"

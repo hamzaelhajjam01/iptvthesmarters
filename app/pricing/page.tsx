@@ -69,7 +69,7 @@ export default function EnglishPricingPage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Secure Payments</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  Your payments are processed securely with enterprise-grade encryption. We accept all major credit cards and Crypto.
+                  Your payments are processed securely with enterprise-grade encryption. We accept PayPal, all major credit cards, and Crypto.
                 </p>
               </div>
 
