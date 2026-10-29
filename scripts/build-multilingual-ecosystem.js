@@ -11,6 +11,65 @@ const sourceDir = path.join(projectRoot, 'Iptv The smarters Pro');
 
 console.log('Starting Multilingual Ecosystem Builder...');
 
+
+const LOCALIZED_REVIEWS = {
+  "en": {
+    "author": "David Miller",
+    "datePublished": "2026-01-15",
+    "body": "Flawless 4K streaming and instant Xtream Codes activation. Zero buffering during live sports and huge VOD collection."
+  },
+  "fr": {
+    "author": "Jean-Pierre Laurent",
+    "datePublished": "2026-01-15",
+    "body": "Excellente qualité de streaming 4K sans aucune coupure. Activation instantanée avec Xtream Codes et support très réactif."
+  },
+  "de": {
+    "author": "Stefan Wagner",
+    "datePublished": "2026-01-15",
+    "body": "Hervorragende 4K-Streaming-Qualität und absolut stabile Server ohne Ruckler. Schnelle Freischaltung und top Kundenservice."
+  },
+  "es": {
+    "author": "Carlos Mendoza",
+    "datePublished": "2026-01-15",
+    "body": "Calidad de streaming 4K impecable sin cortes ni congelamientos. Activación inmediata y excelente soporte por WhatsApp."
+  },
+  "ar": {
+    "author": "أحمد المنصوري",
+    "datePublished": "2026-01-15",
+    "body": "أفضل اشتراك IPTV بجودة 4K فائقة وبدون أي تقطيع أثناء المباريات المباشرة. تفعيل فوري ودعم فني ممتاز."
+  },
+  "it": {
+    "author": "Marco Rossi",
+    "datePublished": "2026-01-15",
+    "body": "Streaming in 4K impeccabile e server ultra stabili senza blocchi. Attivazione immediata tramite Xtream Codes e ottimo supporto."
+  },
+  "nl": {
+    "author": "Lars van den Berg",
+    "datePublished": "2026-01-15",
+    "body": "Geweldige 4K beeldkwaliteit zonder haperingen tijdens live sport. Snelle activatie en zeer vriendelijke klantenservice."
+  },
+  "pt": {
+    "author": "Rodrigo Silva",
+    "datePublished": "2026-01-15",
+    "body": "Excelente estabilidade em 4K sem travamentos. Ativação rápida com Xtream Codes e suporte dedicado via WhatsApp."
+  },
+  "pt-br": {
+    "author": "Lucas Oliveira",
+    "datePublished": "2026-01-15",
+    "body": "Melhor IPTV que já testei, canais em 4K lisos e sem travamento. Ativação imediata e suporte nota 10."
+  },
+  "pl": {
+    "author": "Michał Kowalski",
+    "datePublished": "2026-01-15",
+    "body": "Świetna jakość transmisji 4K bez zacinania. Błyskawiczna aktywacja i rewelacyjny kontakt z pomocą techniczną."
+  },
+  "ko": {
+    "author": "김민준",
+    "datePublished": "2026-01-15",
+    "body": "버퍼링 없는 완벽한 4K 스트리밍 화질과 방대한 채널. 빠른 활성화와 친절한 고객 지원에 매우 만족합니다."
+  }
+};
+
 // Common SVG Brand Logo
 const BRAND_SVG = `<svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg>`;
 

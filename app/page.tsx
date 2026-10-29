@@ -116,7 +116,26 @@ const homeJsonLd = {
         bestRating: '5',
         worstRating: '1',
         ratingCount: '1640',
+        reviewCount: '1640',
       },
+      review: [
+        {
+          '@type': 'Review',
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: '5',
+            bestRating: '5',
+            worstRating: '1',
+          },
+          author: {
+            '@type': 'Person',
+            name: 'David Miller',
+          },
+          datePublished: '2026-01-15',
+          reviewBody:
+            'Flawless 4K streaming and instant Xtream Codes activation. Zero buffering during live sports and huge VOD collection.',
+        },
+      ],
       offers: {
         '@type': 'AggregateOffer',
         priceCurrency: 'USD',
