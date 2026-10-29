@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "next lint",
-    "indexnow": "node scripts/push-indexnow.cjs"
+    "indexnow": "node scripts/push-indexnow.cjs",
+    "package:ext": "node scripts/package-extension.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
