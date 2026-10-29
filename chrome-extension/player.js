@@ -22,12 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Sintel Blender Animated Movie', url: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', group: 'Movies' },
   ];
 
+  function handleFullStreamInput(url) {
+    if (!url) return;
+    if (url.includes('get.php') && url.includes('username=') && url.includes('password=')) {
+      try {
+        const u = new URL(url);
+        const host = `${u.protocol}//${u.host}`;
+        const user = u.searchParams.get('username');
+        const pass = u.searchParams.get('password');
+        if (host && user && pass) {
+          chrome.storage.local.set({ xtreamHost: host, xtreamUser: user, xtreamPass: pass }, () => {
+            document.querySelectorAll('.pl-tab').forEach((t) => t.classList.remove('active'));
+            const xtTab = document.querySelector('.pl-tab[data-type="xtream"]');
+            if (xtTab) xtTab.classList.add('active');
+            activeTab = 'xtream';
+            loadXtreamChannels(true);
+          });
+          return;
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    playStream(url, 'Custom Stream');
+  }
+
   // Check URL query param ?stream=
   const urlParams = new URLSearchParams(window.location.search);
   const streamParam = urlParams.get('stream');
   if (streamParam) {
     streamInput.value = streamParam;
-    playStream(streamParam, 'Custom Stream');
+    handleFullStreamInput(streamParam);
   }
 
   function playStream(url, name = 'Live Stream') {
@@ -42,13 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
       currentHls = null;
     }
 
-    if (window.Hls && Hls.isSupported() && (url.includes('.m3u8') || !url.endsWith('.mp4'))) {
+    let targetUrl = url;
+    if (targetUrl.includes('/live/') && targetUrl.endsWith('.ts')) {
+      targetUrl = targetUrl.replace(/\.ts$/, '.m3u8');
+    } else if (targetUrl.includes('/live/') && !targetUrl.includes('.m3u8')) {
+      targetUrl = targetUrl + '.m3u8';
+    }
+
+    if (window.Hls && Hls.isSupported() && (targetUrl.includes('.m3u8') || !targetUrl.endsWith('.mp4'))) {
       currentHls = new Hls({
         enableWorker: true,
         lowLatencyMode: true,
       });
 
-      currentHls.loadSource(url);
+      currentHls.loadSource(targetUrl);
       currentHls.attachMedia(video);
 
       currentHls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -63,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     } else {
-      video.src = url;
+      video.src = targetUrl;
       video.play().catch(() => {});
       statStatus.textContent = 'Status: Direct Play';
     }
@@ -75,13 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnPlay.addEventListener('click', () => {
     const url = streamInput.value.trim();
-    if (url) playStream(url, 'Custom Stream');
+    if (url) handleFullStreamInput(url);
   });
 
   streamInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const url = streamInput.value.trim();
-      if (url) playStream(url, 'Custom Stream');
+      if (url) handleFullStreamInput(url);
     }
   });
 
@@ -121,19 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (activeTab === 'quick') {
         renderChannels(SAMPLE_CHANNELS);
       } else if (activeTab === 'xtream') {
-        loadXtreamChannels();
+        loadXtreamChannels(false);
       } else if (activeTab === 'm3u') {
         loadM3uNotice();
       }
     });
   });
 
-  function loadXtreamChannels() {
-    channelList.innerHTML = '<div style="padding:16px;text-align:center;color:#A78BFA;">Checking saved Xtream credentials...</div>';
+  function loadXtreamChannels(autoPlay = false) {
+    channelList.innerHTML = '<div style="padding:16px;text-align:center;color:#A78BFA;">Connecting to Xtream server...</div>';
     if (chrome.storage && chrome.storage.local) {
       chrome.storage.local.get(['xtreamHost', 'xtreamUser', 'xtreamPass'], async (res) => {
         if (!res.xtreamHost || !res.xtreamUser || !res.xtreamPass) {
-          channelList.innerHTML = '<div style="padding:16px;text-align:center;color:#71717A;">No Xtream login saved. Open the extension popup to enter your server credentials.</div>';
+          channelList.innerHTML = '<div style="padding:16px;text-align:center;color:#71717A;">No Xtream login saved. Paste your playlist URL in the top bar to connect.</div>';
           return;
         }
 
@@ -142,13 +174,21 @@ document.addEventListener('DOMContentLoaded', () => {
           const fetchRes = await fetch(streamUrl);
           const streams = await fetchRes.json();
 
-          if (Array.isArray(streams)) {
+          if (Array.isArray(streams) && streams.length > 0) {
             const mapped = streams.map((s) => ({
               name: s.name,
               url: `${res.xtreamHost}/live/${res.xtreamUser}/${res.xtreamPass}/${s.stream_id}.m3u8`,
               group: `#${s.num || s.stream_id}`,
             }));
             renderChannels(mapped);
+
+            if (autoPlay) {
+              const realStream = mapped.find((s) => !s.name.includes('###') && !s.name.includes('NO EVENT')) || mapped[0];
+              if (realStream) {
+                streamInput.value = realStream.url;
+                playStream(realStream.url, realStream.name);
+              }
+            }
           } else {
             channelList.innerHTML = '<div style="padding:16px;text-align:center;color:#f87171;">Could not parse Xtream channel list.</div>';
           }

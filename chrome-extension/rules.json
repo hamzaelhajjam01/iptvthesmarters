@@ -26,5 +26,23 @@
       "urlFilter": "|http*",
       "resourceTypes": ["xmlhttprequest", "media", "other"]
     }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "User-Agent",
+          "operation": "set",
+          "value": "IPTVSmartersPro"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "|http*",
+      "resourceTypes": ["xmlhttprequest", "media", "other"]
+    }
   }
 ]

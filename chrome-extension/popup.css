@@ -729,3 +729,29 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* Smart Auto-Detect Notice */
+.smart-notice {
+  background: linear-gradient(135deg, rgba(123, 63, 228, 0.25) 0%, rgba(34, 211, 238, 0.15) 100%);
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(123, 63, 228, 0.25);
+  animation: fadeIn 0.25s ease-in;
+}
+
+.notice-icon {
+  font-size: 14px;
+  color: var(--accent-cyan);
+}
+
+.notice-text {
+  flex: 1;
+  line-height: 1.35;
+  font-weight: 500;
+}
