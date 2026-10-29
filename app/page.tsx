@@ -88,6 +88,11 @@ const homeJsonLd = {
       description:
         'Official IPTV Smarters Pro 4K subscription with 25,000+ live TV channels, 100,000+ VOD movies & series, anti-freeze technology, and instant Xtream Codes activation.',
       inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://thesmartersiptv.com/guides/?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
       '@type': 'Organization',
@@ -151,10 +156,16 @@ const homeJsonLd = {
       '@type': 'SoftwareApplication',
       '@id': 'https://thesmartersiptv.com/#software',
       name: 'IPTV Smarters Pro',
-      operatingSystem: 'Android, iOS, Windows, macOS, Amazon Fire TV Stick, Samsung Smart TV, LG Smart TV',
+      operatingSystem:
+        'Android, iOS, Windows, macOS, Amazon Fire TV Stick, Samsung Smart TV, LG Smart TV',
       applicationCategory: 'MultimediaApplication',
       description:
         'Premium 4K video player application supporting Xtream Codes API, M3U playlists, EPG, multi-screen, and catch-up TV.',
+      sameAs: [
+        'https://en.wikipedia.org/wiki/Streaming_media',
+        'https://play.google.com/store/apps/details?id=com.nst.iptvsmarterstvbox',
+        'https://apps.apple.com/app/smarters-player-lite/id1628995509',
+      ],
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',

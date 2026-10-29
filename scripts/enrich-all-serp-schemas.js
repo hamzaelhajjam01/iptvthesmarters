@@ -217,7 +217,12 @@ for (const lang of allLangs) {
           "url": `${BASE_URL}/`,
           "name": "The Smarters IPTV",
           "description": conf.productDesc,
-          "inLanguage": lang
+          "inLanguage": lang,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": `${BASE_URL}/guides/?q={search_term_string}`,
+            "query-input": "required name=search_term_string"
+          }
         },
         {
           "@type": "Organization",
@@ -227,6 +232,17 @@ for (const lang of allLangs) {
           "logo": {
             "@type": "ImageObject",
             "url": `${BASE_URL}/assets/images/brand/logo.png`
+          },
+          "sameAs": [
+            "https://en.wikipedia.org/wiki/Internet_Protocol_television",
+            "https://www.wikidata.org/wiki/Q4830453",
+            "https://wa.me/18042804332"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "url": "https://wa.me/18042804332",
+            "availableLanguage": ["English", "French", "German", "Spanish", "Italian", "Dutch", "Portuguese", "Arabic"]
           }
         },
         {
@@ -282,6 +298,11 @@ for (const lang of allLangs) {
           "operatingSystem": "Android, iOS, Windows, macOS, Amazon Fire TV Stick, Samsung Smart TV, LG Smart TV",
           "applicationCategory": "MultimediaApplication",
           "description": "Premium 4K video player application supporting Xtream Codes API, M3U playlists, EPG, multi-screen, and catch-up TV.",
+          "sameAs": [
+            "https://en.wikipedia.org/wiki/Streaming_media",
+            "https://play.google.com/store/apps/details?id=com.nst.iptvsmarterstvbox",
+            "https://apps.apple.com/app/smarters-player-lite/id1628995509"
+          ],
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",

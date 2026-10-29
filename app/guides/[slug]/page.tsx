@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { getGuideBySlug, GUIDES } from '@/data/guides';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getOriginalMain } from '@/lib/getPageContent';
+import { getOriginalMain, getOriginalJsonLd } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -52,8 +52,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default function EnglishGuidePage({ params }: PageProps) {
   const guide = getGuideBySlug(params.slug);
   const mainHtml = getOriginalMain(`guides/${params.slug}/index.html`);
+  const originalJsonLd = getOriginalJsonLd(`guides/${params.slug}/index.html`);
 
-  const jsonLd = {
+  const fallbackJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -100,6 +101,8 @@ export default function EnglishGuidePage({ params }: PageProps) {
       },
     ],
   };
+
+  const jsonLd = originalJsonLd || fallbackJsonLd;
 
   return (
     <>

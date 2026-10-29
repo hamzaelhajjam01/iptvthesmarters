@@ -25,3 +25,20 @@ export function getOriginalFooter(lang: string = 'en'): string {
   const footerMatch = rawHtml.match(/<footer[^>]*>([\s\S]*?)<\/footer>/i);
   return footerMatch ? footerMatch[0] : '';
 }
+
+export function getOriginalJsonLd(relPath: string): object | null {
+  const filePath = path.join(process.cwd(), 'Iptv The smarters Pro', relPath);
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+  const rawHtml = fs.readFileSync(filePath, 'utf8');
+  const match = rawHtml.match(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/i);
+  if (match) {
+    try {
+      return JSON.parse(match[1]);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}

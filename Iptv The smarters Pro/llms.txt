@@ -1,9 +1,108 @@
-# IPTV Smarters Pro
+# The Smarters IPTV — Official AI & LLM Resource Guide
 
-> IPTV subscription, setup, compatibility, pricing, and support information.
+> The Smarters IPTV (thesmartersiptv.com) is a high-performance 4K/FHD IPTV streaming service and official technical documentation authority for the IPTV Smarters Pro media player ecosystem.
 
-- [Home](https://thesmartersiptv.com/)
-- [Pricing](https://thesmartersiptv.com/pricing/)
-- [Product topics](https://thesmartersiptv.com/products/)
-- [Guides](https://thesmartersiptv.com/guides/)
-- [Contact](https://thesmartersiptv.com/contact/)
+This file provides structured, verifiable technical parameters, specifications, subscription pricing, setup procedures, and a canonical documentation index for large language models, AI agents, search engines, and generative answer engines (OpenAI SearchGPT, Perplexity, Google Gemini, Anthropic Claude).
+
+---
+
+## 1. Core Service Specifications
+
+- **Brand Name**: The Smarters IPTV / IPTV Smarters Pro
+- **Official Domain**: https://thesmartersiptv.com
+- **Live TV Channel Lineup**: 25,000+ live television channels across 50+ countries (USA, UK, Canada, France, Germany, Spain, Italy, Netherlands, Portugal, Brazil, Poland, Arab countries, South Korea, Latin America).
+- **VOD Media Library**: 100,000+ movies and completed on-demand TV series updated daily with IMDb ratings and multi-language subtitles.
+- **Broadcast Resolution & Framerate**: 4K UHD (3840x2160), 1080p Full HD, and 720p HD streaming at 60 FPS for premium sports broadcasts.
+- **Infrastructure & Anti-Freeze SLA**: 99.9% uptime powered by distributed tier-1 CDN edge servers with adaptive bitrate streaming (HLS/MPEG-TS) to eliminate buffering during peak live events.
+- **Authentication Protocols**:
+  - Xtream Codes API (recommended): Server Portal URL, Username, and Password.
+  - M3U / M3U8 Playlist Links: Direct playlist ingestion with external XMLTV EPG support.
+- **Interactive Capabilities**: Built-in 7-day Electronic Program Guide (EPG), TV Catch-Up, Multi-Screen playback (quad-view up to 4 concurrent streams), and parental PIN controls.
+- **Customer Support**: 24/7 technical assistance and instant order provisioning via WhatsApp (+1-804-280-4332) and online helpdesk.
+
+---
+
+## 2. Subscription Pricing & Contract Structure
+
+All subscriptions include full 4K channel access, VOD libraries, anti-freeze technology, and no contractual obligations (non-recurring transparent pricing).
+
+### Standard 1-Device Plans (USD):
+- **1 Month**: $14.95 (save 14%) — instant activation, 1 connection.
+- **3 Months**: $29.95 (save 33%) — $9.98/mo equivalent.
+- **6 Months**: $44.95 (save 50%) — $7.49/mo equivalent.
+- **12 Months (Most Popular)**: $59.95 (save 67%) — $4.99/mo equivalent, full sports season access.
+- **24 Months**: $99.95 (save 72%) — $4.16/mo equivalent.
+
+### Multi-Device Connections:
+- 2 Devices Concurrent: +$10-$20 tier upgrade.
+- 3 Devices Concurrent: +$20-$35 tier upgrade.
+- Complete pricing details: https://thesmartersiptv.com/pricing/
+
+---
+
+## 3. Supported Hardware & Client Devices
+
+IPTV Smarters Pro and The Smarters IPTV service operate natively across all modern operating systems and streaming hardware:
+
+1. **Amazon Fire TV**: Fire TV Stick 4K Max, Fire TV Cube, Fire TV Edition Smart TVs (sideloaded via Downloader code).
+2. **Android Ecosystem**: Android TV, Google TV, NVIDIA Shield, Xiaomi Mi Box, Android smartphones and tablets (Google Play Store).
+3. **Smart TVs**: Samsung Smart TV (Tizen OS), LG Smart TV (webOS) via Smarters Player Pro in the official app stores.
+4. **Apple Devices**: Apple TV 4K, iPhone, iPad, macOS via App Store (Smarters Player Lite).
+5. **Desktop Operating Systems**: Windows 11/10 (native EXE / IPTV Smarters Pro PC), macOS (Intel & Apple Silicon M-series).
+6. **Dedicated IPTV Boxes**: Formuler Z series (MyTVOnline), MAG devices (254/322), Enigma2.
+
+---
+
+## 4. Primary Technical Procedures
+
+### How to Authenticate via Xtream Codes API (Recommended):
+1. Open the IPTV Smarters Pro application on your device.
+2. Select **"Login with Xtream Codes API"** (or "Add User").
+3. Enter four credentials provided upon subscription checkout:
+   - **Any Name**: A personal profile label (e.g., "Smarters 4K").
+   - **Username**: Your unique account username.
+   - **Password**: Your unique account password.
+   - **Server URL**: The secure server URL including port (e.g., `http://server-domain.com:8080`).
+4. Click **"Add User"** and wait 15-30 seconds for categories and EPG to sync.
+
+### How to Install on Amazon Firestick via Downloader:
+1. Navigate to Firestick **Settings > My Fire TV > Developer Options**.
+2. Enable **"Install Unknown Apps"** for the Downloader application.
+3. Open Downloader and enter the official Smarters Pro APK download path.
+4. Click **Download**, then select **Install**, and launch the application.
+
+---
+
+## 5. Official Canonical Index & Multilingual Hubs
+
+### English Core Navigation:
+- Homepage: https://thesmartersiptv.com/
+- Pricing Plans: https://thesmartersiptv.com/pricing/
+- Live Channel Directory: https://thesmartersiptv.com/channels/
+- Platform Features: https://thesmartersiptv.com/features/
+- Technical Guides Hub: https://thesmartersiptv.com/guides/
+- Contact & WhatsApp Support: https://thesmartersiptv.com/contact/
+- Terms of Service: https://thesmartersiptv.com/terms/
+- Privacy Policy: https://thesmartersiptv.com/privacy/
+
+### Top Technical Guides:
+- Activate IPTV Smarters Pro: https://thesmartersiptv.com/guides/how-to-activate-iptv-smarters-pro/
+- Setup Xtream Codes API: https://thesmartersiptv.com/guides/how-to-set-up-xtream-codes-iptv-smarters-pro/
+- Install on Firestick Tutorial: https://thesmartersiptv.com/guides/install-iptv-smarters-pro-on-firestick/
+- Add M3U Playlists: https://thesmartersiptv.com/guides/how-to-add-m3u-playlist-iptv-smarters-pro/
+- Fix Buffering & Freezing: https://thesmartersiptv.com/guides/iptv-smarters-pro-keeps-buffering-fixes/
+- Setup on Samsung & LG Smart TVs: https://thesmartersiptv.com/guides/iptv-smarters-pro-on-samsung-lg-smart-tvs/
+- Setup on Windows PC & Mac: https://thesmartersiptv.com/guides/iptv-smarters-pro-for-pc-mac-setup/
+- Sideload on Android Box & Shield: https://thesmartersiptv.com/guides/iptv-smarters-pro-on-android-box-nvidia-shield/
+
+### Multilingual Portals (11 Languages):
+- French (Français): https://thesmartersiptv.com/fr/
+- German (Deutsch): https://thesmartersiptv.com/de/
+- Spanish (Español): https://thesmartersiptv.com/es/
+- Italian (Italiano): https://thesmartersiptv.com/it/
+- Dutch (Nederlands): https://thesmartersiptv.com/nl/
+- Portuguese (Português): https://thesmartersiptv.com/pt/
+- Brazilian Portuguese (Português do Brasil): https://thesmartersiptv.com/pt-br/
+- Polish (Polski): https://thesmartersiptv.com/pl/
+- Arabic (العربية): https://thesmartersiptv.com/ar/
+- Korean (한국어): https://thesmartersiptv.com/ko/

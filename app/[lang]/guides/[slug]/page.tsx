@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
 import { getGuideBySlug, GUIDES } from '@/data/guides';
-import { getOriginalMain } from '@/lib/getPageContent';
+import { getOriginalMain, getOriginalJsonLd } from '@/lib/getPageContent';
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0c',
@@ -69,8 +69,9 @@ export default function LocalizedGuidePage({ params }: PageProps) {
   const localizedDesc =
     guide?.translations?.[params.lang]?.desc || guide?.desc || '';
   const mainHtml = getOriginalMain(`${params.lang}/guides/${params.slug}/index.html`);
+  const originalJsonLd = getOriginalJsonLd(`${params.lang}/guides/${params.slug}/index.html`);
 
-  const jsonLd = {
+  const fallbackJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -117,6 +118,8 @@ export default function LocalizedGuidePage({ params }: PageProps) {
       },
     ],
   };
+
+  const jsonLd = originalJsonLd || fallbackJsonLd;
 
   return (
     <>
