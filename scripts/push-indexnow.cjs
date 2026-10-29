@@ -8,7 +8,7 @@ const path = require('path');
 const https = require('https');
 
 const HOST = 'thesmartersiptv.com';
-const API_KEY = '1b78916c08b6be747b3fa246ca892395';
+const API_KEY = 'b1af89195e4349aea74d90da1500b68e';
 const KEY_LOCATION = `https://${HOST}/${API_KEY}.txt`;
 
 // Sitemaps to extract URLs from
