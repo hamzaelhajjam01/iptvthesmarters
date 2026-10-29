@@ -68,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.Hls && Hls.isSupported() && (targetUrl.includes('.m3u8') || !targetUrl.endsWith('.mp4'))) {
       currentHls = new Hls({
-        enableWorker: true,
+        enableWorker: false,
+        xhrSetup: function(xhr) { xhr.withCredentials = false; },
         lowLatencyMode: true,
         backBufferLength: 30,
       });

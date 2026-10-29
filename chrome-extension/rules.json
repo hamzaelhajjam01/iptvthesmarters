@@ -23,8 +23,8 @@
       ]
     },
     "condition": {
-      "urlFilter": "|http*",
-      "resourceTypes": ["xmlhttprequest", "media", "other"]
+      "urlFilter": "*",
+      "resourceTypes": ["main_frame", "sub_frame", "xmlhttprequest", "media", "other"]
     }
   },
   {
@@ -37,12 +37,24 @@
           "header": "User-Agent",
           "operation": "set",
           "value": "IPTVSmartersPro"
+        },
+        {
+          "header": "sec-ch-ua",
+          "operation": "remove"
+        },
+        {
+          "header": "sec-ch-ua-mobile",
+          "operation": "remove"
+        },
+        {
+          "header": "sec-ch-ua-platform",
+          "operation": "remove"
         }
       ]
     },
     "condition": {
-      "urlFilter": "|http*",
-      "resourceTypes": ["xmlhttprequest", "media", "other"]
+      "urlFilter": "*",
+      "resourceTypes": ["main_frame", "sub_frame", "xmlhttprequest", "media", "other"]
     }
   }
 ]

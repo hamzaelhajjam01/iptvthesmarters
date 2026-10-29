@@ -515,9 +515,37 @@ document.addEventListener('DOMContentLoaded', () => {
     playStream(ch.url, ch.name);
   }
 
+  
+  const streamErrorOverlay = document.getElementById('streamErrorOverlay');
+  const errorMsg = document.getElementById('errorMsg');
+  const btnRetryStream = document.getElementById('btnRetryStream');
+
+  function showStreamError(msg) {
+    if (streamErrorOverlay && errorMsg) {
+      errorMsg.textContent = msg;
+      streamErrorOverlay.classList.remove('hidden');
+    }
+  }
+
+  function hideStreamError() {
+    if (streamErrorOverlay) {
+      streamErrorOverlay.classList.add('hidden');
+    }
+  }
+
+  if (btnRetryStream) {
+    btnRetryStream.addEventListener('click', () => {
+      hideStreamError();
+      if (currentPlayingChannel) {
+        playStream(currentPlayingChannel.url, currentPlayingChannel.name);
+      }
+    });
+  }
+
   function playStream(url, name = 'Live Stream') {
     if (!url) return;
     stageOverlay.classList.add('hidden');
+    hideStreamError();
     statStatus.textContent = 'Status: Connecting...';
 
     if (currentHls) {
