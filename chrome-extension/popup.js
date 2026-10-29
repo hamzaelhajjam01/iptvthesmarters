@@ -284,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const xtreamChannelList = document.getElementById('xtreamChannelList');
 
   let xtreamStreams = [];
+  let popupCategoryMap = {};
 
   // Restore saved Xtream credentials
   if (chrome.storage && chrome.storage.local) {
@@ -340,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
       xtreamCategorySelect.innerHTML = '<option value="">All Categories</option>';
       if (Array.isArray(categories)) {
         categories.forEach((cat) => {
+          popupCategoryMap[cat.category_id] = cat.category_name;
           const opt = document.createElement('option');
           opt.value = cat.category_id;
           opt.textContent = cat.category_name;
@@ -377,7 +379,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const filtered = streams.filter((ch) => {
       const matchCat = !selectedCat || String(ch.category_id) === String(selectedCat);
-      const matchSearch = !searchFilter || (ch.name && ch.name.toLowerCase().includes(searchFilter));
+      const catName = popupCategoryMap[ch.category_id] || "";
+      const matchSearch = !searchFilter || (ch.name && ch.name.toLowerCase().includes(searchFilter)) || catName.toLowerCase().includes(searchFilter);
       return matchCat && matchSearch;
     });
 

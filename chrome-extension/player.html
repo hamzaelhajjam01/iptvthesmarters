@@ -28,8 +28,8 @@
       </div>
 
       <div class="top-stream-input">
-        <input type="text" id="streamInput" placeholder="Paste .m3u8 or video stream link..." spellcheck="false" />
-        <button id="btnPlay" class="btn-play">▶ Play</button>
+        <input type="text" id="streamInput" placeholder="Paste M3U link (get.php) or stream URL..." spellcheck="false" />
+        <button id="btnPlay" class="btn-play">▶ Play / Connect</button>
       </div>
 
       <div class="top-actions">
@@ -43,29 +43,62 @@
     <main class="main-workspace">
       <!-- Left Sidebar: Channels & Playlists -->
       <aside class="sidebar">
-        <div class="sidebar-header">
-          <div class="sidebar-title">Channel Browser</div>
-          <div class="playlist-tabs">
-            <button class="pl-tab active" data-type="quick">Samples</button>
-            <button class="pl-tab" data-type="xtream">Xtream</button>
-            <button class="pl-tab" data-type="m3u">M3U</button>
+        <!-- Playlist Selector Bar -->
+        <div class="sidebar-section playlist-section">
+          <div class="section-label">Active Playlist</div>
+          <div class="playlist-row">
+            <select id="playlistSelect" class="sidebar-dropdown">
+              <!-- Dynamically populated -->
+            </select>
+            <button id="btnNewPlaylist" class="btn-icon-action" title="Add New Playlist">＋</button>
+            <button id="btnDeletePlaylist" class="btn-icon-action danger" title="Delete Active Playlist">🗑</button>
           </div>
         </div>
 
-        <div class="search-box">
-          <input type="text" id="channelSearch" placeholder="Filter channels..." />
+        <!-- Mode Tabs -->
+        <div class="sidebar-section tab-selector-section">
+          <div class="playlist-tabs">
+            <button class="pl-tab active" data-type="xtream">Live TV</button>
+            <button class="pl-tab" data-type="favorites">⭐ Favorites</button>
+            <button class="pl-tab" data-type="quick">Demos</button>
+          </div>
         </div>
 
+        <!-- Category Dropdown Filter -->
+        <div class="sidebar-section category-section" id="categorySection">
+          <div class="section-label">Category Filter</div>
+          <select id="categorySelect" class="sidebar-dropdown">
+            <option value="all">📂 All Categories</option>
+          </select>
+        </div>
+
+        <!-- Search Box & Filter Toggle -->
+        <div class="sidebar-section search-section">
+          <div class="search-input-wrapper">
+            <input type="text" id="channelSearch" placeholder="Filter channels (e.g. champions, bein)..." spellcheck="false" />
+            <button id="btnClearSearch" class="btn-clear-search hidden">✕</button>
+          </div>
+          <div class="search-meta-row">
+            <span id="channelCountBadge" class="channel-count-badge">0 channels</span>
+            <label class="spacer-toggle" title="Filter out empty spacers like ##### or NO EVENT">
+              <input type="checkbox" id="chkHideSpacers" checked />
+              <span>Hide Spacers</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Channel List Container -->
         <div id="channelList" class="channel-list-container">
           <!-- Populated by player.js -->
         </div>
 
+        <!-- Bottom Promo Card -->
         <div class="sidebar-cta">
           <div class="cta-inner">
             <strong>Need a Stable 4K Playlist?</strong>
             <p>25,000+ live channels &amp; movies without freezing.</p>
             <a href="https://thesmartersiptv.com/pricing/?utm_source=chrome_ext&utm_medium=player_sidebar_cta" target="_blank" class="btn-cta">
-              View Plans &amp; Pricing
+              View 4K Plans &amp; Pricing
             </a>
           </div>
         </div>
@@ -78,14 +111,18 @@
           <div id="stageOverlay" class="stage-overlay">
             <div class="big-play-btn">▶</div>
             <h2>Smarters IPTV Web Player</h2>
-            <p>Select a sample stream or paste your playlist link above to start streaming in Ultra HD.</p>
+            <p id="overlaySubtext">Select a channel from the sidebar or paste an M3U playlist URL in the top bar.</p>
           </div>
         </div>
 
         <!-- Stream Info Bar -->
         <div class="stream-info-bar">
           <div class="info-left">
-            <h3 id="currentChannelName">No Stream Loaded</h3>
+            <div class="channel-title-row">
+              <button id="btnFavCurrent" class="btn-fav-current" title="Add to Favorites">☆</button>
+              <h3 id="currentChannelName">No Stream Loaded</h3>
+              <span id="currentCategoryTag" class="category-tag-pill hidden">-</span>
+            </div>
             <span id="currentStreamUrl" class="stream-url-tag">-</span>
           </div>
           <div class="info-right">
@@ -96,6 +133,55 @@
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- Add Playlist Modal Dialog -->
+  <div id="playlistModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Save New Playlist</h3>
+        <button id="btnCloseModal" class="btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="plNameInput">Playlist Name</label>
+          <input type="text" id="plNameInput" placeholder="e.g. My Sports IPTV" />
+        </div>
+        <div class="form-group">
+          <label for="plTypeSelect">Connection Type</label>
+          <select id="plTypeSelect" class="sidebar-dropdown">
+            <option value="xtream">Xtream Codes API (Fastest)</option>
+            <option value="m3u">M3U Playlist URL (get.php)</option>
+          </select>
+        </div>
+        <div id="formXtreamFields">
+          <div class="form-group">
+            <label for="plHostInput">Server / Portal URL</label>
+            <input type="text" id="plHostInput" placeholder="http://domain.com:8080" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="plUserInput">Username</label>
+              <input type="text" id="plUserInput" placeholder="username" />
+            </div>
+            <div class="form-group">
+              <label for="plPassInput">Password</label>
+              <input type="password" id="plPassInput" placeholder="password" />
+            </div>
+          </div>
+        </div>
+        <div id="formM3uFields" class="hidden">
+          <div class="form-group">
+            <label for="plUrlInput">M3U Playlist URL</label>
+            <input type="text" id="plUrlInput" placeholder="http://domain.com/get.php?username=...&password=..." />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCancelModal" class="btn-modal-secondary">Cancel</button>
+        <button id="btnSavePlaylist" class="btn-modal-primary">Save &amp; Connect</button>
+      </div>
+    </div>
   </div>
 
   <script src="lib/hls.min.js"></script>
