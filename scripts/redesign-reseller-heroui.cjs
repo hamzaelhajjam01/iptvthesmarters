@@ -109,12 +109,13 @@ const pageHtml = `<!doctype html>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20a%20free%2024h%20reseller%20trial%20line" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-emerald-500 to-teal-500 text-black hover:from-emerald-400 hover:to-teal-400 inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-            Get Free 24h Trial Line
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20a%20free%2024h%20reseller%20trial%20line" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Get Free 24h Trial Line</span>
           </a>
-          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm border border-zinc-700 bg-zinc-900/60 hover:bg-zinc-800 text-white inline-flex items-center gap-2 transition-all">
-            View Credit Pricing ↓
+          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm border border-zinc-700 bg-zinc-900/90 hover:bg-zinc-800 text-white inline-flex items-center gap-2 transition-all shadow-md">
+            <span>View Credit Pricing</span>
+            <svg class="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </a>
         </div>
       </div>
@@ -261,8 +262,9 @@ const pageHtml = `<!doctype html>
               </li>
             </ul>
           </div>
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Starter%20Reseller%20Pack%20(20%20credits%20%2499)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-zinc-800 hover:bg-zinc-700 text-white text-center transition-all block">
-            Order via WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Starter%20Reseller%20Pack%20(20%20credits%20%2499)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Order via WhatsApp</span>
           </a>
         </div>
 
@@ -299,8 +301,9 @@ const pageHtml = `<!doctype html>
               </li>
             </ul>
           </div>
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Business%20Reseller%20Pack%20(50%20credits%20%24289)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-center transition-all block shadow-lg shadow-purple-600/30">
-            Order via WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Business%20Reseller%20Pack%20(50%20credits%20%24289)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-center transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-purple-600/40" style="color:#ffffff!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Order via WhatsApp</span>
           </a>
         </div>
 
@@ -334,8 +337,9 @@ const pageHtml = `<!doctype html>
               </li>
             </ul>
           </div>
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Pro%20Reseller%20Pack%20(150%20credits%20%24649)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-zinc-800 hover:bg-zinc-700 text-white text-center transition-all block">
-            Order via WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Pro%20Reseller%20Pack%20(150%20credits%20%24649)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Order via WhatsApp</span>
           </a>
         </div>
 
@@ -369,8 +373,9 @@ const pageHtml = `<!doctype html>
               </li>
             </ul>
           </div>
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Enterprise%20Reseller%20Pack%20(300%20credits%20%241199)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-zinc-800 hover:bg-zinc-700 text-white text-center transition-all block">
-            Order via WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Enterprise%20Reseller%20Pack%20(300%20credits%20%241199)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Order via WhatsApp</span>
           </a>
         </div>
 
@@ -444,9 +449,9 @@ const pageHtml = `<!doctype html>
         </div>
 
         <div class="text-center">
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20used%20the%20profit%20calculator%20and%20want%20to%20start%20my%20reseller%20account" target="_blank" rel="noopener noreferrer" class="px-8 py-3 rounded-full font-bold text-sm bg-gradient-to-r from-emerald-500 to-teal-500 text-black hover:from-emerald-400 hover:to-teal-400 inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-            Lock In Wholesale Rate on WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20used%20the%20profit%20calculator%20and%20want%20to%20start%20my%20reseller%20account" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Lock In Wholesale Rate on WhatsApp</span>
           </a>
         </div>
       </div>
@@ -467,7 +472,7 @@ const pageHtml = `<!doctype html>
           <summary class="flex items-center justify-between cursor-pointer font-bold text-lg text-white list-none">
             <span>What is an IPTV Reseller Panel?</span>
             <span class="transition group-open:rotate-180 text-zinc-400">
-              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline><img src="/assets/images/whatsapp.png" width="18" height="18" alt="WhatsApp" style="width:18px;height:18px;border-radius:50%;flex-shrink:0;">
             </span>
           </summary>
           <p class="text-zinc-400 text-sm leading-relaxed mt-4">
@@ -521,11 +526,11 @@ const pageHtml = `<!doctype html>
           Contact our team on WhatsApp today to get your white-label panel set up and activate your first lines.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20am%20ready%20to%20start%20my%20reseller%20business" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-emerald-500 to-teal-500 text-black hover:from-emerald-400 hover:to-teal-400 inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-            Message on WhatsApp
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20am%20ready%20to%20start%20my%20reseller%20business" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;border-radius:50%;flex-shrink:0;">
+            <span>Message on WhatsApp</span>
           </a>
-          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm bg-purple-600 hover:bg-purple-500 text-white inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/20">
+          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/30" style="color:#ffffff!important;">
             <span>View Packages</span>
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
