@@ -980,3 +980,111 @@ span[class*="rounded-full"][class*="border-purple-900"]:hover {
     scroll-snap-align: center !important;
   }
 }
+
+
+/* ==========================================================================
+   HeroUI Directory & Topic Grids Support
+   ========================================================================== */
+.directory {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 5rem;
+}
+.dir-header {
+  text-align: center;
+  padding-bottom: 3rem;
+}
+.featured-guides {
+  background: radial-gradient(circle at 50% 0%, rgba(123, 63, 228, 0.15) 0%, rgba(24, 24, 27, 0.4) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 1.25rem !important;
+  padding: 2rem !important;
+  margin-bottom: 3.5rem !important;
+}
+.featured-guides h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.featured-grid,
+.topic-grid {
+  display: grid !important;
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+@media (min-width: 640px) {
+  .featured-grid,
+  .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1024px) {
+  .featured-grid,
+  .topic-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+.featured-card,
+.topic-card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 1.25rem !important;
+  background-color: var(--heroui-content1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--heroui-radius-xl) !important;
+  text-decoration: none !important;
+  transition: transform var(--heroui-transition-default),
+              box-shadow var(--heroui-transition-default),
+              border-color var(--heroui-transition-default) !important;
+}
+.featured-card:hover,
+.topic-card:hover {
+  transform: translateY(-4px) !important;
+  background-color: var(--heroui-content2) !important;
+  border-color: rgba(147, 83, 211, 0.45) !important;
+  box-shadow: 0 0 0 1px rgba(120, 40, 200, 0.25), 0 12px 30px -4px rgba(0, 0, 0, 0.7), 0 0 25px rgba(120, 40, 200, 0.2) !important;
+}
+.featured-card strong,
+.topic-card strong {
+  color: #fff !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.4rem !important;
+}
+.featured-card span,
+.topic-card span {
+  color: #a1a1aa !important;
+  font-size: 0.825rem !important;
+  line-height: 1.45 !important;
+}
+.dir-section {
+  margin-bottom: 3.5rem;
+}
+.topic-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a78bfa;
+  margin-bottom: 0.5rem;
+}
+.dir-section h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+.sec-desc {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  max-width: 48rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}

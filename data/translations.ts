@@ -1,10 +1,13 @@
 // Auto-generated Translations Dictionary for all 11 languages
 export interface NavTranslations {
   home: string;
+  services: string;
   features: string;
   channels: string;
   pricing: string;
+  reseller: string;
   guides: string;
+  products: string;
   contact: string;
   cta: string;
 }
@@ -35,10 +38,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "en",
     "dir": "ltr",
     "nav": {
+      "services": "IPTV Services",
       "home": "Home",
       "features": "Features",
       "channels": "Channels",
+      "reseller": "Reseller",
       "pricing": "Pricing",
+      "products": "Products",
       "guides": "Guides",
       "contact": "Contact",
       "cta": "Get Started"
@@ -63,10 +69,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "fr",
     "dir": "ltr",
     "nav": {
+      "services": "Services IPTV",
       "home": "Accueil",
       "features": "Fonctionnalités",
       "channels": "Chaînes",
+      "reseller": "Revendeur",
       "pricing": "Tarifs",
+      "products": "Produits",
       "guides": "Guides",
       "contact": "Contact",
       "cta": "Commencer"
@@ -91,10 +100,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "de",
     "dir": "ltr",
     "nav": {
+      "services": "IPTV-Dienste",
       "home": "Startseite",
       "features": "Funktionen",
       "channels": "Sender",
+      "reseller": "Reseller",
       "pricing": "Preise",
+      "products": "Produkte",
       "guides": "Anleitungen",
       "contact": "Kontakt",
       "cta": "Jetzt Starten"
@@ -119,10 +131,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "es",
     "dir": "ltr",
     "nav": {
+      "services": "Servicios IPTV",
       "home": "Inicio",
       "features": "Funciones",
       "channels": "Canales",
+      "reseller": "Revendedor",
       "pricing": "Precios",
+      "products": "Productos",
       "guides": "Guías",
       "contact": "Contacto",
       "cta": "Empezar Ahora"
@@ -147,10 +162,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "ar",
     "dir": "rtl",
     "nav": {
+      "services": "خدمات IPTV",
       "home": "الرئيسية",
       "features": "المميزات",
       "channels": "القنوات",
+      "reseller": "موزع IPTV",
       "pricing": "الأسعار",
+      "products": "المنتجات",
       "guides": "دليل التثبيت",
       "contact": "اتصل بنا",
       "cta": "ابدأ الآن"
@@ -175,10 +193,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "it",
     "dir": "ltr",
     "nav": {
+      "services": "Servizi IPTV",
       "home": "Home",
       "features": "Funzionalità",
       "channels": "Canali",
+      "reseller": "Rivenditore",
       "pricing": "Prezzi",
+      "products": "Prodotti",
       "guides": "Guide",
       "contact": "Contatti",
       "cta": "Inizia Ora"
@@ -203,10 +224,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "nl",
     "dir": "ltr",
     "nav": {
+      "services": "IPTV-diensten",
       "home": "Home",
       "features": "Functies",
       "channels": "Zenders",
+      "reseller": "Reseller",
       "pricing": "Prijzen",
+      "products": "Producten",
       "guides": "Handleidingen",
       "contact": "Contact",
       "cta": "Nu Starten"
@@ -231,10 +255,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "pt",
     "dir": "ltr",
     "nav": {
+      "services": "Serviços IPTV",
       "home": "Início",
       "features": "Recursos",
       "channels": "Canais",
+      "reseller": "Revendedor",
       "pricing": "Planos & Preços",
+      "products": "Produtos",
       "guides": "Guias",
       "contact": "Contacto",
       "cta": "Começar Agora"
@@ -259,10 +286,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "pt-br",
     "dir": "ltr",
     "nav": {
+      "services": "Serviços IPTV",
       "home": "Início",
       "features": "Recursos",
       "channels": "Canais",
+      "reseller": "Revendedor",
       "pricing": "Planos & Preços",
+      "products": "Produtos",
       "guides": "Tutoriais",
       "contact": "Contato",
       "cta": "Começar Agora"
@@ -287,10 +317,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "pl",
     "dir": "ltr",
     "nav": {
+      "services": "Usługi IPTV",
       "home": "Strona główna",
       "features": "Funkcje",
       "channels": "Kanały",
+      "reseller": "Reseller",
       "pricing": "Cennik",
+      "products": "Produkty",
       "guides": "Poradniki",
       "contact": "Kontakt",
       "cta": "Rozpocznij"
@@ -315,10 +348,13 @@ export const TRANSLATIONS: Record<string, LanguageStrings> = {
     "code": "ko",
     "dir": "ltr",
     "nav": {
+      "services": "IPTV 서비스",
       "home": "홈",
       "features": "주요기능",
       "channels": "채널목록",
+      "reseller": "리셀러",
       "pricing": "요금제",
+      "products": "제품",
       "guides": "설정가이드",
       "contact": "고객지원",
       "cta": "지금 시작하기"

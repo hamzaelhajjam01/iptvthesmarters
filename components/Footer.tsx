@@ -21,12 +21,33 @@ const PAYPAL_TEXT: Record<string, string> = {
   ko: 'PayPal 결제 가능',
 };
 
+const RESELLER_LABEL: Record<string, string> = {
+  en: 'Reseller Program',
+  fr: 'Programme Revendeur',
+  de: 'Reseller-Programm',
+  es: 'Programa de Revendedores',
+  it: 'Programma Rivenditori',
+  nl: 'Reseller Programma',
+  pt: 'Programa de Revendedores',
+  'pt-br': 'Programa de Revendedores',
+  pl: 'Program Resellerski',
+  ar: 'برنامج الموزعين',
+  ko: '리셀러 프로그램',
+};
+
 export default function Footer({ currentLang = 'en' }: FooterProps) {
   const prefix = currentLang === 'en' ? '/' : `/${currentLang}/`;
   const paypalLabel = PAYPAL_TEXT[currentLang] || PAYPAL_TEXT.en;
+  const resellerLabel = RESELLER_LABEL[currentLang] || RESELLER_LABEL.en;
+
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs">
+    <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs relative">
       <div className="footer-top-glow" aria-hidden="true" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="footer-grid mb-10">
@@ -34,7 +55,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
           <div className="space-y-4">
             <Link href={prefix} className="flex items-center gap-2 group">
               <svg
-                className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10"
+                className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10"
                 viewBox="0 0 40 40"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,6 +154,17 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href={`${prefix}reseller/`} className="hover:text-white transition-colors tappable text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1.5">
+                  <span>{resellerLabel}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link href={`${prefix}products/`} className="hover:text-white transition-colors tappable">
+                  Product Directory
+                </Link>
+              </li>
+              <li>
                 <Link href={`${prefix}guides/how-to-activate-iptv-smarters-pro/`} className="hover:text-white transition-colors tappable">
                   Setup Guide
                 </Link>
@@ -175,96 +207,92 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
           {/* Contact Col */}
           <div>
             <h2 className="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Contact</h2>
-            <ul className="space-y-3 text-xs text-zinc-400">
-              <li>Expert Support via WhatsApp</li>
-              <li>
-                <a
-                  href="https://wa.me/18042804332"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="tappable inline-flex px-4 py-2 bg-gradient-primary hover:opacity-90 text-white font-bold rounded-lg transition-colors items-center gap-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-message-circle w-4 h-4"
-                  >
-                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                  </svg>
-                  Message Us
-                </a>
-              </li>
-            </ul>
+            <p className="text-zinc-400 mb-3 text-xs leading-relaxed">
+              Expert Support via WhatsApp
+            </p>
+            <a
+              href="https://wa.me/18042804332"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-lg text-xs font-semibold transition-all shadow-md shadow-purple-900/30"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-message-circle w-3.5 h-3.5"
+              >
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+              </svg>
+              <span>Message Us</span>
+            </a>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between text-xs text-[#64748b] gap-4">
+        <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
           <p>© 2026 IPTV Smarters Pro. All rights reserved.</p>
-          <div className="flex items-center flex-wrap gap-4 sm:gap-6">
-            <span className="footer-trust-pill">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-1.5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="w-4 h-4"
+                className="lucide lucide-shield-check text-green-500 w-3.5 h-3.5"
               >
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                <path d="m9 12 2 2 4-4" />
               </svg>
               Secure Checkout
             </span>
-            <span className="footer-trust-pill">
+            <span className="flex items-center gap-1.5">
               <svg
-                className="w-4 h-4 text-[#0079C1]"
-                viewBox="0 0 24 24"
-                fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-credit-card text-blue-400 w-3.5 h-3.5"
               >
-                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.792.792 0 0 1 .782-.67h6.634c3.084 0 5.487 1.056 5.86 4.382.203 1.808-.415 3.32-1.745 4.26-1.127.798-2.678 1.188-4.608 1.188H9.373a.855.855 0 0 0-.845.727l-.95 6.01a.642.642 0 0 1-.633.541l.13-.82z" />
-                <path d="M9.13 14.88h2.07c2.44 0 4.35-.97 4.9-3.79.23-1.18.06-2.13-.53-2.79-.62-.69-1.66-1.06-3.09-1.06H8.28a.86.86 0 0 0-.85.73l-1.37 8.68a.64.64 0 0 0 .63.74h2.44z" fill="#00457C" />
+                <rect width="20" height="14" x="2" y="5" rx="2" />
+                <line x1="2" x2="22" y1="10" y2="10" />
               </svg>
               {paypalLabel}
             </span>
             <button
+              onClick={scrollToTop}
               type="button"
-              aria-label="Back to top"
-              className="footer-back-to-top"
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
+              className="hover:text-white transition-colors cursor-pointer flex items-center gap-1"
             >
-              Back to top
+              Back to Top
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="14"
+                height="14"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="footer-back-to-top-icon w-4 h-4"
               >
-                <path d="M12 19V5" />
-                <path d="m5 12 7-7 7 7" />
+                <path d="m18 15-6-6-6 6" />
               </svg>
             </button>
           </div>

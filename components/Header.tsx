@@ -31,10 +31,13 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
 
   // Determine active nav tab
   const isHome = pathname === prefix || pathname === '/' || pathname === `/${currentLang}`;
+  const isServices = pathname.includes('/iptv-services');
   const isFeatures = pathname.includes('/features');
   const isChannels = pathname.includes('/channels');
   const isPricing = pathname.includes('/pricing');
+  const isReseller = pathname.includes('/reseller');
   const isGuides = pathname.includes('/guides');
+  const isProducts = pathname.includes('/products');
   const isContact = pathname.includes('/contact');
 
   // Compute exact URL for switching to another language
@@ -58,6 +61,15 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
     if (isContact) {
       return `${targetPrefix}/contact/`;
     }
+    if (isServices) {
+      return `${targetPrefix}/iptv-services/`;
+    }
+    if (isReseller) {
+      return `${targetPrefix}/reseller/`;
+    }
+    if (isProducts) {
+      return `${targetPrefix}/products/`;
+    }
     return targetPrefix ? `${targetPrefix}/` : '/';
   }
 
@@ -65,7 +77,6 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
 
   const handleMenuToggle = (e: React.MouseEvent) => {
     if (typeof window !== 'undefined' && (window as any).__toggleMobileMenu) {
-      // Let site-interactions.js document click listener handle it without double-toggling
       return;
     }
     if (typeof document !== 'undefined') {
@@ -88,9 +99,9 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
       <div className="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled">
         <div className="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href={prefix} className="flex items-center gap-3 group z-50">
+          <Link href={prefix} className="flex items-center gap-3 group z-50 flex-shrink-0">
             <svg
-              className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/20 rounded-xl ring-1 ring-white/10"
+              className="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10"
               viewBox="0 0 40 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -131,80 +142,106 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                 </linearGradient>
               </defs>
             </svg>
-            <span className="font-extrabold text-lg text-white tracking-tight">IPTV Smarters Pro</span>
+            <span className="font-extrabold text-base sm:text-lg text-white tracking-tight">IPTV Smarters Pro</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - Always visible on lg (1024px+) screens */}
+          <nav className="hidden lg:flex items-center gap-2.5 xl:gap-5 text-[13px] xl:text-sm font-medium">
             <Link
               href={prefix}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isHome ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isHome ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.home}
             </Link>
             <Link
+              href={`${prefix}iptv-services/`}
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isServices ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              {nav.services}
+            </Link>
+            <Link
               href={`${prefix}features/`}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isFeatures ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isFeatures ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.features}
             </Link>
             <Link
               href={`${prefix}channels/`}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isChannels ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isChannels ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.channels}
             </Link>
             <Link
               href={`${prefix}pricing/`}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isPricing ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isPricing ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.pricing}
             </Link>
             <Link
+              href={`${prefix}reseller/`}
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isReseller
+                  ? 'text-purple-400 nav-link-active font-bold'
+                  : 'text-purple-400/90 hover:text-purple-300 font-semibold'
+              }`}
+            >
+              {nav.reseller}
+            </Link>
+            <Link
               href={`${prefix}guides/`}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isGuides ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isGuides ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.guides}
             </Link>
             <Link
+              href={`${prefix}products/`}
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isProducts ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              {nav.products}
+            </Link>
+            <Link
               href={`${prefix}contact/`}
-              className={`nav-link text-sm font-medium transition-colors ${
-                isContact ? 'text-white nav-link-active' : 'text-zinc-400 hover:text-white'
+              className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
+                isContact ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
             >
               {nav.contact}
             </Link>
           </nav>
 
-          {/* Right Side: CTA & Lang Switcher */}
-          <div className="flex items-center gap-4">
+          {/* Right Side: CTA, Lang Switcher & Mobile Toggle */}
+          <div className="flex items-center gap-3">
             <Link
               href={`${prefix}pricing/`}
-              className="btn-buy-now btn-nav-cta hidden md:flex px-6 py-2.5 font-bold text-sm rounded-full items-center gap-2 transition-all"
+              className="btn-buy-now btn-nav-cta hidden sm:flex px-4 xl:px-6 py-2 xl:py-2.5 font-bold text-xs xl:text-sm rounded-full items-center gap-2 transition-all flex-shrink-0"
             >
               <span>{nav.cta}</span>
               <span className="btn-buy-now-arrow">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-arrow-right w-4 h-4"
+                  className="lucide lucide-arrow-right w-3.5 h-3.5 xl:w-4 xl:h-4"
                 >
                   <path d="M5 12h14" />
                   <path d="m12 5 7 7-7 7" />
@@ -249,8 +286,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                       href={getLangUrl(loc.code)}
                       className={`lang-item ${isActive ? 'is-active' : ''}`}
                       role="menuitem"
-                      data-lang={loc.code}
-                      {...(isActive ? { 'aria-current': 'true' } : {})}
+                      aria-current={isActive ? 'true' : undefined}
                     >
                       <div className="lang-item-content">
                         <span className="lang-flag" aria-hidden="true">
@@ -258,35 +294,37 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                         </span>
                         <span>{loc.name}</span>
                       </div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lang-item-check"
-                      >
-                        <path d="M20 6 9 17l-5-5" />
-                      </svg>
+                      {isActive && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lang-item-check"
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      )}
                     </Link>
                   );
                 })}
               </div>
             </details>
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Mobile Hamburger Button - Visible whenever width < 1024px (lg:hidden) */}
             <button
               type="button"
               id="menuToggle"
-              className="menu-toggle lg:hidden p-2 text-zinc-400 hover:text-white"
+              onClick={handleMenuToggle}
+              className="menu-toggle lg:hidden"
               aria-expanded="false"
               aria-controls="mobileNav"
               aria-label="Open menu"
-              onClick={handleMenuToggle}
             >
               <span className="menu-icon" aria-hidden="true"></span>
             </button>
@@ -294,9 +332,9 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer */}
       <nav id="mobileNav" className="mobile-nav" aria-hidden="true" aria-label="Mobile">
-        <div className="flex flex-col p-4 space-y-2">
+        <div className="flex flex-col">
           <Link
             href={prefix}
             onClick={closeMobileMenu}
@@ -305,6 +343,15 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             }`}
           >
             {nav.home}
+          </Link>
+          <Link
+            href={`${prefix}iptv-services/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isServices ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.services}
           </Link>
           <Link
             href={`${prefix}features/`}
@@ -334,6 +381,15 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             {nav.pricing}
           </Link>
           <Link
+            href={`${prefix}reseller/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isReseller ? 'mobile-nav-row-active text-purple-400 font-bold' : 'text-purple-400'
+            }`}
+          >
+            {nav.reseller}
+          </Link>
+          <Link
             href={`${prefix}guides/`}
             onClick={closeMobileMenu}
             className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
@@ -341,6 +397,15 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             }`}
           >
             {nav.guides}
+          </Link>
+          <Link
+            href={`${prefix}products/`}
+            onClick={closeMobileMenu}
+            className={`mobile-nav-row text-lg font-semibold py-3 px-2 ${
+              isProducts ? 'mobile-nav-row-active text-white' : 'text-zinc-400'
+            }`}
+          >
+            {nav.products}
           </Link>
           <Link
             href={`${prefix}contact/`}
@@ -351,7 +416,8 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
           >
             {nav.contact}
           </Link>
-          <div className="pt-4 border-t border-zinc-800">
+
+          <div className="pt-4 border-t border-zinc-800 space-y-3">
             <Link
               href={`${prefix}pricing/`}
               onClick={closeMobileMenu}
@@ -359,6 +425,28 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             >
               <span>{nav.cta}</span>
             </Link>
+            <a
+              href="https://wa.me/18042804332"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-zinc-400 hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-message-circle w-4 h-4"
+              >
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+              </svg>
+              Message us on WhatsApp
+            </a>
           </div>
         </div>
       </nav>

@@ -137,30 +137,27 @@ for (const filePath of allFiles) {
     html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/main.css">\n</head>');
     modified = true;
   }
+  if (urlPath.includes('/products/') && !html.includes('/assets/css/product-pages.css')) {
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/product-pages.css">\n</head>');
+    modified = true;
+  }
 
-  // 2. Upgrade Header (either kw-header or outdated site-header)
+  // 2. Upgrade Header with canonical HeroUI responsive header
   const universalHeader = generateUniversalHeader(urlPath, lang);
   
   if (html.includes('<header class="kw-header">')) {
     html = html.replace(/<header class="kw-header">[\s\S]*?<\/header>/, universalHeader);
     modified = true;
   } else if (html.includes('<header class="site-header')) {
-    // Replace site-header if it doesn't have Reseller or IPTV Services
-    if (!html.includes('/reseller/') || !html.includes('/iptv-services/')) {
-      // Replace outer astro-island or header
-      html = html.replace(/<header class="site-header[\s\S]*?<\/header>/, universalHeader);
-      modified = true;
-    }
+    html = html.replace(/<header class="site-header[\s\S]*?<\/header>/, universalHeader);
+    modified = true;
   }
 
-  // 3. Upgrade Footer
-  const universalFooter = generateUniversalFooter();
-  if (html.includes('<footer>') || html.includes('<footer class="')) {
-    // Check if footer needs reseller or iptv-services
-    if (!html.includes('Reseller Program') || !html.includes('/iptv-services/')) {
-      html = html.replace(/<footer[\s\S]*?<\/footer>/, universalFooter);
-      modified = true;
-    }
+  // 3. Upgrade Footer with canonical HeroUI responsive footer
+  const universalFooter = generateUniversalFooter(lang);
+  if (html.includes('<footer') && html.includes('</footer>')) {
+    html = html.replace(/<footer[\s\S]*?<\/footer>/, universalFooter);
+    modified = true;
   }
 
   // 4. Ensure site-interactions.js is present for header & mobile menu & details
