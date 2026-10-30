@@ -32,14 +32,79 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/theme.css?v=20261030-nav">
   <link rel="stylesheet" href="/assets/css/heroui.css?v=20261030-nav">
-  <link rel="stylesheet" href="/assets/css/product-pages.css?v=2">
-  <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
+  
+  <style id="products-heroui-styles">
+    /* HeroUI Directory Styles - Guaranteed Immediate Render */
+    .products-container {
+      width: min(1320px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 80px;
+    }
+    .heroui-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem;
+      background: rgba(18, 18, 24, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .heroui-card:hover {
+      background: rgba(28, 28, 38, 0.95);
+      border-color: rgba(167, 139, 250, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -8px rgba(123, 63, 228, 0.25);
+    }
+    .quick-tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(24, 24, 27, 0.6);
+      color: #a1a1aa;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quick-tab-btn:hover, .quick-tab-btn.is-active {
+      background: rgba(123, 63, 228, 0.2);
+      border-color: rgba(167, 139, 250, 0.6);
+      color: #fff;
+    }
+    .featured-hero-card {
+      background: linear-gradient(135deg, rgba(123, 63, 228, 0.15), rgba(95, 21, 205, 0.05));
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .featured-hero-card:hover {
+      background: linear-gradient(135deg, rgba(123, 63, 228, 0.25), rgba(95, 21, 205, 0.15));
+      border-color: rgba(167, 139, 250, 0.7);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 35px -8px rgba(123, 63, 228, 0.35);
+    }
+  </style>
 
+  <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
 </head>
 <body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">
   <div class="grain-overlay"></div>
   <div class="min-h-screen flex flex-col font-sans antialiased bg-black text-white transition-colors">
-  <header class="site-header sticky top-0 transition-colors z-50"><div class="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled"><div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><a href="/" class="flex items-center gap-3 group z-50 flex-shrink-0"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-extrabold text-base sm:text-lg text-white tracking-tight">IPTV Smarters Pro</span></a><nav class="site-nav-desktop hidden lg:flex items-center text-sm font-medium" style="display: flex; align-items: center; gap: 18px;"><a href="/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Home</a><a href="/iptv-services/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">IPTV Services</a><a href="/features/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Features</a><a href="/channels/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Channels</a><a href="/pricing/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Pricing</a><a href="/reseller/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white text-purple-400 hover:text-purple-300 font-semibold" style="display: inline-flex; align-items: center; padding: 4px 6px;">Reseller</a><a href="/guides/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Guides</a><a href="/products/" class="nav-link whitespace-nowrap transition-colors text-white nav-link-active font-semibold" style="display: inline-flex; align-items: center; padding: 4px 6px;">Products</a><a href="/contact/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 4px 6px;">Contact</a></nav><div class="flex items-center gap-3"><a href="/pricing/" class="btn-buy-now btn-nav-cta hidden sm:flex px-4 xl:px-6 py-2 xl:py-2.5 font-bold text-xs xl:text-sm rounded-full items-center gap-2 transition-all flex-shrink-0"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5 xl:w-4 xl:h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><details class="lang-switch">
+  <header class="site-header sticky top-0 transition-colors z-50"><div class="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled"><div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><a href="/" class="flex items-center gap-3 group z-50 flex-shrink-0"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-extrabold text-base sm:text-lg text-white tracking-tight">IPTV Smarters Pro</span></a><nav class="site-nav-desktop hidden lg:flex items-center text-sm font-medium" style="display: flex; align-items: center; gap: 28px;"><a href="/features/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 6px 10px;">Features</a><a href="/channels/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 6px 10px;">Channels</a><a href="/pricing/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 6px 10px;">Pricing</a><a href="/reseller/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white text-purple-400 hover:text-purple-300 font-semibold" style="display: inline-flex; align-items: center; padding: 6px 10px;">Reseller</a><a href="/guides/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white" style="display: inline-flex; align-items: center; padding: 6px 10px;">Guides</a></nav><div class="flex items-center gap-3"><a href="/pricing/" class="btn-buy-now btn-nav-cta hidden sm:flex px-4 xl:px-6 py-2 xl:py-2.5 font-bold text-xs xl:text-sm rounded-full items-center gap-2 transition-all flex-shrink-0"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5 xl:w-4 xl:h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><details class="lang-switch">
             <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Change language">
               <span class="lang-flag" aria-hidden="true">🇬🇧</span>
               <span class="lang-name">English</span>
@@ -93,494 +158,1366 @@
             </a>
             </div>
           </details><button type="button" id="menuToggle" class="menu-toggle lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"><span class="menu-icon" aria-hidden="true"></span></button></div></div></div><nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Mobile"><div class="flex flex-col"><a href="/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Home</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/iptv-services/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>IPTV Services</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/features/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Features</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/channels/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Channels</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/pricing/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Pricing</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/reseller/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-purple-400 font-bold"><span>Reseller Program</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/guides/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Guides</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/products/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 mobile-nav-row-active text-white"><span>Products</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/contact/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Contact</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a></div><a href="/pricing/" class="btn-buy-now btn-nav-cta w-full mt-6 py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2 transition-all"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 mt-4 py-3 text-sm font-semibold text-zinc-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-4 h-4"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Message us on WhatsApp</a></nav><div id="navOverlay" class="nav-overlay"></div></header>
-
-  <main class="directory">
-    
-    <div class="dir-header pt-12 pb-6">
-      <div class="flex flex-col items-center justify-center gap-3 mb-6">
-        <div class="w-1 h-8 bg-gradient-to-b from-purple-400 to-blue-600 rounded-full"></div>
-        <span class="text-xs font-bold tracking-widest text-purple-400 uppercase">Solutions Directory</span>
-      </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-        IPTV Solutions &amp; <span class="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Knowledge Base.</span>
-      </h1>
-      <p class="text-zinc-400 max-w-3xl mx-auto text-lg leading-relaxed">
-        Browse authoritative resources covering hardware video encoders, third-party player applications, streaming protocols, troubleshooting walkthroughs, and verified subscription packages.
-      </p>
-    </div>
-
-
-    <!-- Essential Setup Guides Hub -->
-    <div class="featured-guides">
-      <h2>Recommended Setup Guides</h2>
-      <div class="featured-grid">
-        <a href="/guides/how-to-activate-iptv-smarters-pro/" class="featured-card">
-          <strong>Activation Guide</strong>
-          <span>Complete walkthrough for activating IPTV Smarters Pro with Xtream Codes or M3U.</span>
-        </a>
-        <a href="/guides/install-iptv-smarters-pro-on-firestick/" class="featured-card">
-          <strong>Firestick Installation</strong>
-          <span>Sideload and configure IPTV Smarters Pro on Amazon Fire TV Stick 4K & Max.</span>
-        </a>
-        <a href="/guides/iptv-smarters-pro-failed-to-authorize-fix/" class="featured-card">
-          <strong>Failed to Authorize Fix</strong>
-          <span>Diagnostic steps for resolving server authorization and portal rejection errors.</span>
-        </a>
-        <a href="/guides/iptv-smarters-pro-keeps-buffering-fixes/" class="featured-card">
-          <strong>Buffer Elimination Guide</strong>
-          <span>Buffer tuning, hardware acceleration, and ISP throttling workarounds.</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- 1. Hardware Video Encoders -->
-    <section class="dir-section">
-      <div class="topic-badge">Hardware & Broadcasting</div>
-      <h2>Hardware Video Encoders & Ingestion Systems</h2>
-      <p class="sec-desc">Hardware streaming encoders convert physical HDMI or SDI video feeds into digital IP streams for local LANs, hotels, campuses, or CDN distribution. Note: Hardware encoders generate streams; they are not consumer viewing subscriptions.</p>
-      <div class="topic-grid">
-        <a href="/products/iptv-encoder/" class="topic-card">
-          <strong>IPTV Video Encoder Guide</strong>
-          <span>Core principles of hardware video capture, compression, and IP streaming.</span>
-        </a>
-        <a href="/products/hdmi-encoder-for-iptv/" class="topic-card">
-          <strong>HDMI to IPTV Encoders</strong>
-          <span>Connecting HDMI video sources to local IP networks and digital signage.</span>
-        </a>
-        <a href="/products/4k-iptv-encoder/" class="topic-card">
-          <strong>4K HEVC IPTV Encoders</strong>
-          <span>High-density 2160p encoding with H.265 compression and Gigabit Ethernet.</span>
-        </a>
-        <a href="/products/sdi-iptv-encoder/" class="topic-card">
-          <strong>SDI Broadcast Encoders</strong>
-          <span>Professional 3G/12G-SDI video capture for studios, OB vans, and event venues.</span>
-        </a>
-        <a href="/products/srt-iptv-encoder/" class="topic-card">
-          <strong>SRT Protocol Encoders</strong>
-          <span>Low-latency, packet-loss resilient streaming across public internet connections.</span>
-        </a>
-        <a href="/products/low-latency-iptv-encoder/" class="topic-card">
-          <strong>Low-Latency Encoders</strong>
-          <span>Sub-second glass-to-glass video latency for interactive live events and sports.</span>
-        </a>
-        <a href="/products/multicast-iptv-encoder/" class="topic-card">
-          <strong>Multicast LAN Encoders</strong>
-          <span>UDP/RTP IGMP multicast transmission for enterprise and corporate campuses.</span>
-        </a>
-        <a href="/products/best-4-channel-iptv-encoder/" class="topic-card">
-          <strong>4-Channel Multi-Input Encoders</strong>
-          <span>High-density 1U encoding units for multiple concurrent HDMI or SDI feeds.</span>
-        </a>
-        <a href="/products/rack-mount-iptv-encoder/" class="topic-card">
-          <strong>Rackmount Encoder Systems</strong>
-          <span>19-inch 1U/2U server rack hardware with redundant dual power supplies.</span>
-        </a>
-        <a href="/products/iptv-encoder-for-hotel/" class="topic-card">
-          <strong>Hospitality Hotel Encoders</strong>
-          <span>In-room TV distribution systems interfacing with hotel PMS middleware.</span>
-        </a>
-        <a href="/products/best-encoder-for-iptv/" class="topic-card">
-          <strong>Encoder Buyer's Guide</strong>
-          <span>Comparing standalone compact units with enterprise modular encoding systems.</span>
-        </a>
-        <a href="/products/compare-iptv-encoders-for-professional-use/" class="topic-card">
-          <strong>Professional Encoder Comparison</strong>
-          <span>Matrix evaluation of chipsets, latency, firmware stability, and protocols.</span>
-        </a>
-        <a href="/products/h-264-hdmi-iptv-encoder/" class="topic-card">
-          <strong>H.264 / AVC HDMI Encoders</strong>
-          <span>Universal client playback compatibility across legacy TVs and mobile apps.</span>
-        </a>
-        <a href="/products/hevc-hdmi-iptv-encoder/" class="topic-card">
-          <strong>HEVC / H.265 HDMI Encoders</strong>
-          <span>50% bandwidth reduction for efficient high-definition network transmission.</span>
-        </a>
-        <a href="/products/broadcast-iptv-encoder/" class="topic-card">
-          <strong>Broadcast-Grade Encoders</strong>
-          <span>SMPTE compliance, genlock reference timing, and multi-track audio embedding.</span>
-        </a>
-        <a href="/products/professional-hdmi-iptv-encoder/" class="topic-card">
-          <strong>Commercial-Grade HDMI Encoders</strong>
-          <span>24/7 continuous operation, fanless heat dissipation, and static IP management.</span>
-        </a>
-        <a href="/products/live-streaming-iptv-encoder/" class="topic-card">
-          <strong>Live Streaming Encoders</strong>
-          <span>Simultaneous multi-destination streaming to CDNs, YouTube, and local LANs.</span>
-        </a>
-        <a href="/products/pvi-encoder-iptv/" class="topic-card">
-          <strong>Pro Video Instruments Review</strong>
-          <span>Commercial AV distribution equipment and VeCOAX RF/IP hardware review.</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 2. Player Applications & Device Walkthroughs -->
-    <section class="dir-section">
-      <div class="topic-badge">Software & Players</div>
-      <h2>Player Applications & Multi-Device Compatibility</h2>
-      <p class="sec-desc">Player applications provide the user interface on your screen. Discover how to configure IPTV Smarters Pro subscription credentials on top player software across Smart TVs, Firestick, Apple devices, and PCs.</p>
-      <div class="topic-grid">
-        <a href="/products/iptv-smarters-pro/" class="topic-card">
-          <strong>IPTV Smarters Pro Player</strong>
-          <span>The flagship media player with multi-screen, EPG, and parental control features.</span>
-        </a>
-        <a href="/products/tivimate-iptv-player/" class="topic-card">
-          <strong>TiviMate IPTV Player</strong>
-          <span>Modern Android TV guide layout with Xtream Codes integration and multi-view.</span>
-        </a>
-        <a href="/products/smart-iptv/" class="topic-card">
-          <strong>Smart IPTV (SIPTV)</strong>
-          <span>LG webOS and Samsung Tizen TV setup via MAC address playlist upload.</span>
-        </a>
-        <a href="/products/iplay/" class="topic-card">
-          <strong>iPlay for Apple TV & iOS</strong>
-          <span>iCloud playlist syncing, custom channel groups, and subtitle support.</span>
-        </a>
-        <a href="/products/iptvx/" class="topic-card">
-          <strong>IPTVX for Apple Ecosystem</strong>
-          <span>Netflix-style UI for Apple TV, iPhone, iPad, and Mac with Xtream Codes API.</span>
-        </a>
-        <a href="/products/iptv-player-for-windows/" class="topic-card">
-          <strong>IPTV Player for Windows</strong>
-          <span>Desktop viewing solutions with GPU hardware decoding on Windows 10 & 11.</span>
-        </a>
-        <a href="/products/marinios-iptv/" class="topic-card">
-          <strong>Maritime & Offshore IPTV</strong>
-          <span>Buffer tuning and bandwidth optimization for Starlink and offshore yachts.</span>
-        </a>
-        <a href="/products/iptv-smart-player/" class="topic-card">
-          <strong>IPTV Smart Player</strong>
-          <span>Lightweight multi-platform streaming app with quick channel zapping.</span>
-        </a>
-        <a href="/products/ipexo-iptv-player-code/" class="topic-card">
-          <strong>IPEXO Player Setup</strong>
-          <span>Activation code pairing, playlist management, and connection setup.</span>
-        </a>
-        <a href="/products/iptv-app/" class="topic-card">
-          <strong>IPTV App Directory</strong>
-          <span>Comprehensive comparison of client playback applications by operating system.</span>
-        </a>
-        <a href="/products/iptv-editor/" class="topic-card">
-          <strong>IPTV Playlist Editor</strong>
-          <span>Reordering channel bouquets, hiding unwanted groups, and merging EPGs.</span>
-        </a>
-        <a href="/products/iptv-stream-player/" class="topic-card">
-          <strong>IPTV Stream Player</strong>
-          <span>Hardware decoding settings, aspect ratio adjustments, and stream cache tuning.</span>
-        </a>
-        <a href="/products/veplayer-iptv-decoder/" class="topic-card">
-          <strong>VEPlayer IPTV Decoder</strong>
-          <span>MPEG-TS stream parsing and video rendering optimization.</span>
-        </a>
-        <a href="/products/playtv/" class="topic-card">
-          <strong>PlayTV Streaming Guide</strong>
-          <span>Mobile and tablet touch controls with picture-in-picture mode.</span>
-        </a>
-        <a href="/products/smartiflix-iptv/" class="topic-card">
-          <strong>Smartiflix Application</strong>
-          <span>VOD catalog browsing, subtitle selection, and Xtream Codes login.</span>
-        </a>
-        <a href="/products/iptv-schedule/" class="topic-card">
-          <strong>EPG & Schedule Management</strong>
-          <span>XMLTV guide synchronization, timezone offsets, and missing guide fixes.</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 3. Protocols, Playlists & Diagnostics -->
-    <section class="dir-section">
-      <div class="topic-badge">Protocols & Formats</div>
-      <h2>Streaming Protocols, Playlists & Diagnostics</h2>
-      <p class="sec-desc">Understand playlist syntaxes, API connections, network delivery mechanisms, and immediate error diagnosis.</p>
-      <div class="topic-grid">
-        <a href="/products/iptv-smarters-failed-to-authorize/" class="topic-card">
-          <strong>Failed to Authorize Diagnosis</strong>
-          <span>Troubleshooting syntax errors, trailing slashes, expired tokens, and ISP port blocks.</span>
-        </a>
-        <a href="/products/xtream-iptv/" class="topic-card">
-          <strong>Xtream Codes API Architecture</strong>
-          <span>Structured Portal URL, Port, Username, and Password authentication benefits.</span>
-        </a>
-        <a href="/products/m3u-iptv/" class="topic-card">
-          <strong>M3U & M3U8 Playlist Formats</strong>
-          <span>Dissecting #EXTINF headers, stream directives, and tokenized URL parsing.</span>
-        </a>
-        <a href="/products/public-iptv-playlist/" class="topic-card">
-          <strong>Public vs. Private Playlists</strong>
-          <span>Why free public M3U links fail and how private credentials guarantee 60fps feeds.</span>
-        </a>
-        <a href="/products/home-telecom-m3u/" class="topic-card">
-          <strong>Telecom ISP IPTV Delivery</strong>
-          <span>Modem bridge configurations, VLAN tagging, and set-top box isolation.</span>
-        </a>
-        <a href="/products/m3u-player/" class="topic-card">
-          <strong>M3U Player Selection</strong>
-          <span>Fast playlist parsing and custom stream cache buffer configurations.</span>
-        </a>
-        <a href="/products/iptv-playlist/" class="topic-card">
-          <strong>Playlist Management Guide</strong>
-          <span>Organizing channel bouquets, categorizing VODs, and troubleshooting sync errors.</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 4. Technology, Legal & Architecture -->
-    <section class="dir-section">
-      <div class="topic-badge">Architecture & Legal</div>
-      <h2>Technology Standards, Architecture & Communities</h2>
-      <p class="sec-desc">Comprehensive insights into Internet Protocol Television history, infrastructure, legality, and open-source projects.</p>
-      <div class="topic-grid">
-        <a href="/products/what-is-iptv/" class="topic-card">
-          <strong>What is IPTV?</strong>
-          <span>Core technological principles: comparing IPTV with OTT and traditional broadcast.</span>
-        </a>
-        <a href="/products/internet-protocol-television/" class="topic-card">
-          <strong>IPTV Network Architecture</strong>
-          <span>Headends, middleware clusters, content delivery networks, and subscriber terminals.</span>
-        </a>
-        <a href="/products/is-iptv-legal/" class="topic-card">
-          <strong>IPTV Legality & Safety Guide</strong>
-          <span>Copyright compliance, licensed broadcasting frameworks, and consumer safety.</span>
-        </a>
-        <a href="/products/iptv-headend/" class="topic-card">
-          <strong>IPTV Headend Infrastructure</strong>
-          <span>Satellite reception, transcoding arrays, multiplexing, and IP stream gateways.</span>
-        </a>
-        <a href="/products/headend-iptv/" class="topic-card">
-          <strong>Local Headend Installation</strong>
-          <span>Signal aggregation and local IP distribution for private properties and campuses.</span>
-        </a>
-        <a href="/products/iptv-org/" class="topic-card">
-          <strong>IPTV-Org Open-Source Project</strong>
-          <span>Exploring the GitHub public domain channel directory and integration tips.</span>
-        </a>
-        <a href="/products/github-iptv/" class="topic-card">
-          <strong>GitHub IPTV Tools & Repositories</strong>
-          <span>Developer scripts, EPG grabbers, playlist parsers, and automation tools.</span>
-        </a>
-        <a href="/products/iptv-reddit/" class="topic-card">
-          <strong>Reddit Community Insights</strong>
-          <span>Navigating r/IPTV discussions, avoiding affiliate scams, and finding honest advice.</span>
-        </a>
-        <a href="/products/iptv-equipment/" class="topic-card">
-          <strong>Essential Hardware Checklist</strong>
-          <span>Gigabit streaming boxes, Wi-Fi 6 routers, shielded Cat6 cabling, and remotes.</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 5. Commercial Packages & Regional Solutions -->
-    <section class="dir-section">
-      <div class="topic-badge">Subscriptions & Regions</div>
-      <h2>Verified Subscriptions & Regional Channel Solutions</h2>
-      <p class="sec-desc">High-performance subscription packages with anti-freeze server clusters, 99.9% uptime, and regional channel coverage.</p>
-      <div class="topic-grid">
-        <a href="/products/best-iptv/" class="topic-card">
-          <strong>Best IPTV Service 2026</strong>
-          <span>Comprehensive comparison of server uptime, sports bitrates, and customer support.</span>
-        </a>
-        <a href="/products/best-iptv-service-2026/" class="topic-card">
-          <strong>2026 Quality Standards</strong>
-          <span>60fps live sports feeds, 4K UHD movies, and 24/7 WhatsApp assistance.</span>
-        </a>
-        <a href="/products/iptv-providers/" class="topic-card">
-          <strong>Provider Selection Framework</strong>
-          <span>Evaluating server redundancy, multi-device concurrency, and refund policies.</span>
-        </a>
-        <a href="/products/best-iptv-reddit/" class="topic-card">
-          <strong>Reddit Community Favorites</strong>
-          <span>Key community criteria: trial availability, anti-freeze tech, and payment safety.</span>
-        </a>
-        <a href="/products/iptv-usa/" class="topic-card">
-          <strong>IPTV USA Channels</strong>
-          <span>Regional network affiliates (ABC, CBS, NBC, FOX) and US major sports passes.</span>
-        </a>
-        <a href="/products/iptv-uk/" class="topic-card">
-          <strong>IPTV UK Solutions</strong>
-          <span>UK Premier League, BBC/ITV channels, and UK ISP throttling workarounds.</span>
-        </a>
-        <a href="/products/iptv-france/" class="topic-card">
-          <strong>IPTV France & Ligue 1</strong>
-          <span>French national networks, Canal+, beIN Sports, and French VOD cinema.</span>
-        </a>
-        <a href="/products/indian-iptv/" class="topic-card">
-          <strong>Indian Regional Channels</strong>
-          <span>Hindi, Tamil, Telugu, and Punjabi channels with live international cricket.</span>
-        </a>
-        <a href="/products/iptv-italiane-4k/" class="topic-card">
-          <strong>Italian 4K Television</strong>
-          <span>RAI 4K, Sky Italia, Serie A football coverage, and Italian EPG guide data.</span>
-        </a>
-        <a href="/products/lista-iptv-de-pago-con-canales-en-vivo/" class="topic-card">
-          <strong>Spanish & Latin Channels</strong>
-          <span>La Liga Santander, Copa Libertadores, and Latin American regional bouquets.</span>
-        </a>
-        <a href="/products/ip-tv-sat-n-al/" class="topic-card">
-          <strong>Turkish IPTV Solutions</strong>
-          <span>Turkish Süper Lig, Digiturk, beIN Sports Turkey, and Turkish support.</span>
-        </a>
-        <a href="/products/ip-televizija/" class="topic-card">
-          <strong>Balkan IP Televizija</strong>
-          <span>Croatian, Serbian, and Bosnian national channels with Arena Sport coverage.</span>
-        </a>
-        <a href="/products/4k-iptv/" class="topic-card">
-          <strong>4K Ultra HD Streaming</strong>
-          <span>High-bitrate 3840x2160 streams with HDR10 color and uncompressed audio.</span>
-        </a>
-        <a href="/products/4k-live-iptv/" class="topic-card">
-          <strong>4K Live Sports Streaming</strong>
-          <span>Smooth 60fps live football, basketball, and racing broadcasts.</span>
-        </a>
-        <a href="/products/iptv-subscription/" class="topic-card">
-          <strong>Subscription Tier Guide</strong>
-          <span>Choosing device concurrency (1, 2, or 3 screens) and billing durations.</span>
-        </a>
-        <a href="/products/iptv-free-trial/" class="topic-card">
-          <strong>Free Trial Testing</strong>
-          <span>Testing server latency, channel zapping speed, and device compatibility.</span>
-        </a>
-      </div>
-    </section>
   
-      <section class="py-12 px-4 max-w-7xl mx-auto">
-        <h2 class="text-2xl font-bold text-white mb-6">Featured Topics &amp; Hardware Guides</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          
-      <a href="/products/failed-to-authorize-iptv-smarters/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Fix Failed to Authorize in IPTV Smarters</h3>
+  <main class="flex-1">
+    <div class="products-container">
+      
+      <!-- Directory Hero Header -->
+      <div class="text-center max-w-3xl mx-auto pt-10 pb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-5">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          Solutions Directory & Knowledge Base
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-5 leading-tight">
+          IPTV Solutions &amp; <span class="bg-gradient-to-r from-purple-400 via-violet-300 to-cyan-400 bg-clip-text text-transparent">Knowledge Base.</span>
+        </h1>
+        <p class="text-zinc-400 text-base sm:text-lg leading-relaxed mb-8">
+          Browse 80+ authoritative resources covering hardware video encoders, third-party player applications, streaming protocols, troubleshooting diagnostics, and verified subscription packages.
+        </p>
+
+        <!-- Live Instant Search Bar -->
+        <div class="relative max-w-xl mx-auto mb-8">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-500">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="productSearchInput"
+            placeholder="Search guides, hardware encoders, players, protocols..."
+            class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-zinc-900/80 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all text-sm"
+          />
+        </div>
+
+        <!-- Quick Jump Filter Tabs -->
+        <div class="flex items-center justify-center flex-wrap gap-2">
+          <a href="#featured" class="quick-tab-btn is-active">⚡ Essential Guides</a>
+          <a href="#hardware" class="quick-tab-btn">Hardware Encoders</a>
+          <a href="#players" class="quick-tab-btn">Software & Players</a>
+          <a href="#protocols" class="quick-tab-btn">Protocols & Playlists</a>
+          <a href="#architecture" class="quick-tab-btn">Standards & Legal</a>
+          <a href="#subscriptions" class="quick-tab-btn">Subscriptions & 4K</a>
+        </div>
+      </div>
+
+      <!-- Essential Setup Guides Hub -->
+      <section id="featured" class="mb-16 scroll-mt-24">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Recommended Setup Guides</h2>
+          </div>
+          <a href="/guides/" class="text-xs font-semibold text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1">
+            Browse all 35+ tutorials <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a href="/guides/how-to-activate-iptv-smarters-pro/" class="featured-hero-card group">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-4 text-purple-400 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+              </div>
+              <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Quick Start</span>
+              <h3 class="font-bold text-lg text-white group-hover:text-purple-200 transition-colors mb-2">Activation Guide</h3>
+              <p class="text-zinc-400 text-xs leading-relaxed">Complete walkthrough for activating IPTV Smarters Pro with Xtream Codes or M3U.</p>
+            </div>
+            <span class="text-xs font-semibold text-purple-300 flex items-center gap-1 mt-4">Read walkthrough →</span>
+          </a>
+
+          <a href="/guides/install-iptv-smarters-pro-on-firestick/" class="featured-hero-card group">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-4 text-purple-400 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Device Setup</span>
+              <h3 class="font-bold text-lg text-white group-hover:text-purple-200 transition-colors mb-2">Firestick Installation</h3>
+              <p class="text-zinc-400 text-xs leading-relaxed">Sideload and configure IPTV Smarters Pro on Amazon Fire TV Stick 4K & Max.</p>
+            </div>
+            <span class="text-xs font-semibold text-purple-300 flex items-center gap-1 mt-4">Read walkthrough →</span>
+          </a>
+
+          <a href="/guides/iptv-smarters-pro-failed-to-authorize-fix/" class="featured-hero-card group">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-4 text-purple-400 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              </div>
+              <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Error Fix</span>
+              <h3 class="font-bold text-lg text-white group-hover:text-purple-200 transition-colors mb-2">Failed to Authorize Fix</h3>
+              <p class="text-zinc-400 text-xs leading-relaxed">Diagnostic steps for resolving server authorization and portal rejection errors.</p>
+            </div>
+            <span class="text-xs font-semibold text-purple-300 flex items-center gap-1 mt-4">Read walkthrough →</span>
+          </a>
+
+          <a href="/guides/iptv-smarters-pro-keeps-buffering-fixes/" class="featured-hero-card group">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-4 text-purple-400 group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider block mb-1">Performance</span>
+              <h3 class="font-bold text-lg text-white group-hover:text-purple-200 transition-colors mb-2">Buffer Elimination Guide</h3>
+              <p class="text-zinc-400 text-xs leading-relaxed">Buffer tuning, hardware acceleration, and ISP throttling workarounds.</p>
+            </div>
+            <span class="text-xs font-semibold text-purple-300 flex items-center gap-1 mt-4">Read walkthrough →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- The 5 Thematic HeroUI Sections -->
+      
+    <section id="hardware" class="category-block mb-16 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Hardware & Broadcasting</span>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Hardware Video Encoders & Ingestion Systems</h2>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-3xl mb-6 ml-12 leading-relaxed">Hardware streaming encoders convert physical HDMI or SDI video feeds into digital IP streams for local LANs, hotels, campuses, or CDN distribution.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+      <a href="/products/iptv-encoder/" class="heroui-card group" data-title="iptv video encoder guide" data-desc="core principles of hardware video capture, compression, and ip streaming.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Video Encoder Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Core principles of hardware video capture, compression, and IP streaming.
+        </p>
       </a>
 
-      <a href="/products/best-iptv-service/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Best IPTV Service 2026</h3>
+      <a href="/products/hdmi-encoder-for-iptv/" class="heroui-card group" data-title="hdmi to iptv encoders" data-desc="connecting hdmi video sources to local ip networks and digital signage.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          HDMI to IPTV Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Connecting HDMI video sources to local IP networks and digital signage.
+        </p>
       </a>
 
-      <a href="/products/best-iptv-providers/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Top Rated IPTV Providers</h3>
+      <a href="/products/4k-iptv-encoder/" class="heroui-card group" data-title="4k hevc iptv encoders" data-desc="high-density 2160p encoding with h.265 compression and gigabit ethernet.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          4K HEVC IPTV Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          High-density 2160p encoding with H.265 compression and Gigabit Ethernet.
+        </p>
       </a>
 
-      <a href="/products/free-popular-iptv-playlist/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Popular Free IPTV Playlist</h3>
+      <a href="/products/sdi-iptv-encoder/" class="heroui-card group" data-title="sdi broadcast encoders" data-desc="professional 3g/12g-sdi video capture for studios, ob vans, and event venues.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          SDI Broadcast Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Professional 3G/12G-SDI video capture for studios, OB vans, and event venues.
+        </p>
       </a>
 
-      <a href="/products/hdmi-iptv/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">HDMI IPTV Encoders & Setup</h3>
+      <a href="/products/srt-iptv-encoder/" class="heroui-card group" data-title="srt protocol encoders" data-desc="low-latency, packet-loss resilient streaming across public internet connections.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          SRT Protocol Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Low-latency, packet-loss resilient streaming across public internet connections.
+        </p>
       </a>
 
-      <a href="/products/hdmi-to-iptv/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">HDMI to IPTV Hardware Solutions</h3>
+      <a href="/products/low-latency-iptv-encoder/" class="heroui-card group" data-title="low-latency encoders" data-desc="sub-second glass-to-glass video latency for interactive live events and sports.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Low-Latency Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Sub-second glass-to-glass video latency for interactive live events and sports.
+        </p>
       </a>
 
-      <a href="/products/hdmi-to-iptv-converter/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">HDMI to IPTV Signal Converters</h3>
+      <a href="/products/multicast-iptv-encoder/" class="heroui-card group" data-title="multicast lan encoders" data-desc="udp/rtp igmp multicast transmission for enterprise and corporate campuses.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Multicast LAN Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          UDP/RTP IGMP multicast transmission for enterprise and corporate campuses.
+        </p>
       </a>
 
-      <a href="/products/hdmi-to-iptv-encoder/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Professional HDMI to IPTV Encoders</h3>
+      <a href="/products/best-4-channel-iptv-encoder/" class="heroui-card group" data-title="4-channel multi-input encoders" data-desc="high-density 1u encoding units for multiple concurrent hdmi or sdi feeds.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          4-Channel Multi-Input Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          High-density 1U encoding units for multiple concurrent HDMI or SDI feeds.
+        </p>
       </a>
 
-      <a href="/products/ip-tv/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">IP TV Streaming Protocol Guide</h3>
+      <a href="/products/rack-mount-iptv-encoder/" class="heroui-card group" data-title="rackmount encoder systems" data-desc="19-inch 1u/2u server rack hardware with redundant dual power supplies.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Rackmount Encoder Systems
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          19-inch 1U/2U server rack hardware with redundant dual power supplies.
+        </p>
       </a>
 
-      <a href="/products/ip-tv-provider/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Selecting an IP TV Provider</h3>
+      <a href="/products/iptv-encoder-for-hotel/" class="heroui-card group" data-title="hospitality hotel encoders" data-desc="in-room tv distribution systems interfacing with hotel pms middleware.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Hospitality Hotel Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          In-room TV distribution systems interfacing with hotel PMS middleware.
+        </p>
       </a>
 
-      <a href="/products/ip-televizia/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">IP Televizija Setup & Channels</h3>
+      <a href="/products/what-is-the-best-video-encoder-for-iptv/" class="heroui-card group" data-title="encoder buyer's guide" data-desc="comparing standalone compact units with enterprise modular encoding systems.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Encoder Buyer's Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Comparing standalone compact units with enterprise modular encoding systems.
+        </p>
       </a>
 
-      <a href="/products/iptv-encoder-box/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">IPTV Hardware Encoder Box</h3>
+      <a href="/products/compare-iptv-encoders-for-professional-use/" class="heroui-card group" data-title="professional encoder comparison" data-desc="matrix evaluation of chipsets, latency, firmware stability, and protocols.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Professional Encoder Comparison
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Matrix evaluation of chipsets, latency, firmware stability, and protocols.
+        </p>
       </a>
 
-      <a href="/products/iptv-encoder-encoders/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Commercial IPTV Encoder Systems</h3>
+      <a href="/products/h-264-hdmi-iptv-encoder/" class="heroui-card group" data-title="h.264 / avc hdmi encoders" data-desc="universal client playback compatibility across legacy tvs and mobile apps.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          H.264 / AVC HDMI Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Universal client playback compatibility across legacy TVs and mobile apps.
+        </p>
       </a>
 
-      <a href="/products/best-encoder-for-hotel-iptv/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Best IPTV Encoders for Hotels & Hospitality</h3>
+      <a href="/products/hevc-hdmi-iptv-encoder/" class="heroui-card group" data-title="hevc / h.265 hdmi encoders" data-desc="50% bandwidth reduction for efficient high-definition network transmission.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          HEVC / H.265 HDMI Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          50% bandwidth reduction for efficient high-definition network transmission.
+        </p>
       </a>
 
-      <a href="/products/best-hdmi-to-iptv-encoder/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Best HDMI to IPTV Encoder Hardware</h3>
+      <a href="/products/broadcast-iptv-encoder/" class="heroui-card group" data-title="broadcast-grade encoders" data-desc="smpte compliance, genlock reference timing, and multi-track audio embedding.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Broadcast-Grade Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          SMPTE compliance, genlock reference timing, and multi-track audio embedding.
+        </p>
       </a>
 
-      <a href="/products/https-iptv-org-github-io-iptv-index-m3u/" class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/50 hover:bg-zinc-900/80 transition-all flex flex-col justify-between group">
-        <div>
-          <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-2 block">Hardware &amp; Guide</span>
-          <h3 class="text-white font-bold text-base group-hover:text-purple-300 transition-colors">Public IPTV GitHub M3U Guide</h3>
+      <a href="/products/hardware-iptv-encoder/" class="heroui-card group" data-title="commercial-grade hdmi encoders" data-desc="24/7 continuous operation, fanless heat dissipation, and static ip management.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-        <span class="text-xs text-zinc-500 mt-4 flex items-center gap-1 group-hover:text-zinc-300">Read guide →</span>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Commercial-Grade HDMI Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          24/7 continuous operation, fanless heat dissipation, and static IP management.
+        </p>
       </a>
+
+      <a href="/products/live-streaming-iptv-encoder/" class="heroui-card group" data-title="live streaming encoders" data-desc="simultaneous multi-destination streaming to cdns, youtube, and local lans.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </div>
-      </section></main>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Live Streaming Encoders
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Simultaneous multi-destination streaming to CDNs, YouTube, and local LANs.
+        </p>
+      </a>
+
+      <a href="/products/pro-video-instruments-iptv/" class="heroui-card group" data-title="pro video instruments review" data-desc="commercial av distribution equipment and vecoax rf/ip hardware review.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Hardware & Broadcasting
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Pro Video Instruments Review
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Commercial AV distribution equipment and VeCOAX RF/IP hardware review.
+        </p>
+      </a>
+      </div>
+    </section>
+    <section id="players" class="category-block mb-16 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Software & Players</span>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Player Applications & Multi-Device Compatibility</h2>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-3xl mb-6 ml-12 leading-relaxed">Player applications provide the user interface on your screen. Discover how to configure IPTV Smarters Pro credentials on top player software across Smart TVs, Firestick, Apple devices, and PCs.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+      <a href="/products/iptv-smarters-pro/" class="heroui-card group" data-title="iptv smarters pro player" data-desc="the flagship media player with multi-screen, epg, and parental control features.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Smarters Pro Player
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          The flagship media player with multi-screen, EPG, and parental control features.
+        </p>
+      </a>
+
+      <a href="/products/tivimate-iptv-player/" class="heroui-card group" data-title="tivimate iptv player" data-desc="modern android tv guide layout with xtream codes integration and multi-view.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          TiviMate IPTV Player
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Modern Android TV guide layout with Xtream Codes integration and multi-view.
+        </p>
+      </a>
+
+      <a href="/products/smart-iptv/" class="heroui-card group" data-title="smart iptv (siptv)" data-desc="lg webos and samsung tizen tv setup via mac address playlist upload.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Smart IPTV (SIPTV)
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          LG webOS and Samsung Tizen TV setup via MAC address playlist upload.
+        </p>
+      </a>
+
+      <a href="/products/iplay/" class="heroui-card group" data-title="iplay for apple tv & ios" data-desc="icloud playlist syncing, custom channel groups, and subtitle support.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          iPlay for Apple TV & iOS
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          iCloud playlist syncing, custom channel groups, and subtitle support.
+        </p>
+      </a>
+
+      <a href="/products/iptvx/" class="heroui-card group" data-title="iptvx for apple ecosystem" data-desc="netflix-style ui for apple tv, iphone, ipad, and mac with xtream codes api.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTVX for Apple Ecosystem
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Netflix-style UI for Apple TV, iPhone, iPad, and Mac with Xtream Codes API.
+        </p>
+      </a>
+
+      <a href="/products/iptv-player-for-windows/" class="heroui-card group" data-title="iptv for windows desktop" data-desc="viewing solutions with gpu hardware decoding on windows 10 & 11.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV for Windows Desktop
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Viewing solutions with GPU hardware decoding on Windows 10 & 11.
+        </p>
+      </a>
+
+      <a href="/products/marinios-iptv/" class="heroui-card group" data-title="maritime & offshore iptv" data-desc="buffer tuning and bandwidth optimization for starlink and offshore yachts.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Maritime & Offshore IPTV
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Buffer tuning and bandwidth optimization for Starlink and offshore yachts.
+        </p>
+      </a>
+
+      <a href="/products/iptv-smart-player/" class="heroui-card group" data-title="iptv smart player" data-desc="lightweight multi-platform streaming app with quick channel zapping.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Smart Player
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Lightweight multi-platform streaming app with quick channel zapping.
+        </p>
+      </a>
+
+      <a href="/products/ipexo-iptv-player-code/" class="heroui-card group" data-title="ipexo player setup" data-desc="activation code pairing, playlist management, and connection setup.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPEXO Player Setup
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Activation code pairing, playlist management, and connection setup.
+        </p>
+      </a>
+
+      <a href="/products/best-iptv-player/" class="heroui-card group" data-title="iptv app directory" data-desc="comprehensive comparison of client playback applications by operating system.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV App Directory
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Comprehensive comparison of client playback applications by operating system.
+        </p>
+      </a>
+
+      <a href="/products/iptv-playlist-editor/" class="heroui-card group" data-title="iptv playlist editor" data-desc="reordering channel bouquets, hiding unwanted groups, and merging epgs.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Playlist Editor
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Reordering channel bouquets, hiding unwanted groups, and merging EPGs.
+        </p>
+      </a>
+
+      <a href="/products/ptv-stream-player/" class="heroui-card group" data-title="iptv stream player" data-desc="hardware decoding settings, aspect ratio adjustments, and stream cache tuning.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Stream Player
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Hardware decoding settings, aspect ratio adjustments, and stream cache tuning.
+        </p>
+      </a>
+
+      <a href="/products/veplayer-iptv-decoder/" class="heroui-card group" data-title="veplayer iptv decoder" data-desc="mpeg-ts stream parsing and video rendering optimization.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          VEPlayer IPTV Decoder
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          MPEG-TS stream parsing and video rendering optimization.
+        </p>
+      </a>
+
+      <a href="/products/playtv/" class="heroui-card group" data-title="playtv streaming guide" data-desc="mobile and tablet touch controls with picture-in-picture mode.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          PlayTV Streaming Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Mobile and tablet touch controls with picture-in-picture mode.
+        </p>
+      </a>
+
+      <a href="/products/smartiflix-iptv/" class="heroui-card group" data-title="smartflix application" data-desc="vod catalog browsing, subtitle selection, and xtream codes login.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          SmartFlix Application
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          VOD catalog browsing, subtitle selection, and Xtream Codes login.
+        </p>
+      </a>
+
+      <a href="/products/iptv-editor/" class="heroui-card group" data-title="epg & schedule management" data-desc="xmltv guide synchronization, timezone offsets, and missing guide fixes.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Software & Players
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          EPG & Schedule Management
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          XMLTV guide synchronization, timezone offsets, and missing guide fixes.
+        </p>
+      </a>
+      </div>
+    </section>
+    <section id="protocols" class="category-block mb-16 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Protocols & Formats</span>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Streaming Protocols, Playlists & Diagnostics</h2>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-3xl mb-6 ml-12 leading-relaxed">Understand playlist syntaxes, API connections, network delivery mechanisms, and immediate error diagnosis.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+      <a href="/products/failed-to-authorize-iptv-smarters/" class="heroui-card group" data-title="failed to authorize diagnosis" data-desc="troubleshooting syntax errors, trailing slashes, expired tokens, and isp port blocks.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Failed to Authorize Diagnosis
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Troubleshooting syntax errors, trailing slashes, expired tokens, and ISP port blocks.
+        </p>
+      </a>
+
+      <a href="/products/xcodes-iptv/" class="heroui-card group" data-title="xtream codes api architecture" data-desc="structured portal url, port, username, and password authentication benefits.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Xtream Codes API Architecture
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Structured Portal URL, Port, Username, and Password authentication benefits.
+        </p>
+      </a>
+
+      <a href="/products/m3u-iptv/" class="heroui-card group" data-title="m3u & m3u8 playlist formats" data-desc="dissecting #extinf headers, stream directives, and tokenized url parsing.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          M3U & M3U8 Playlist Formats
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Dissecting #EXTINF headers, stream directives, and tokenized URL parsing.
+        </p>
+      </a>
+
+      <a href="/products/public-iptv-playlist/" class="heroui-card group" data-title="public vs. private playlists" data-desc="why free public m3u links fail and how private credentials guarantee 60fps feeds.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Public vs. Private Playlists
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Why free public M3U links fail and how private credentials guarantee 60fps feeds.
+        </p>
+      </a>
+
+      <a href="/products/home-telecom-m3u/" class="heroui-card group" data-title="telecom isp iptv delivery" data-desc="modem bridge configurations, vlan tagging, and set-top box isolation.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Telecom ISP IPTV Delivery
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Modem bridge configurations, VLAN tagging, and set-top box isolation.
+        </p>
+      </a>
+
+      <a href="/products/m3u/" class="heroui-card group" data-title="m3u player selection" data-desc="fast playlist parsing and custom stream cache buffer configurations.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          M3U Player Selection
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Fast playlist parsing and custom stream cache buffer configurations.
+        </p>
+      </a>
+
+      <a href="/products/iptv-playlist/" class="heroui-card group" data-title="playlist management guide" data-desc="organizing channel bouquets, categorizing vods, and troubleshooting sync errors.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Protocols & Formats
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Playlist Management Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Organizing channel bouquets, categorizing VODs, and troubleshooting sync errors.
+        </p>
+      </a>
+      </div>
+    </section>
+    <section id="architecture" class="category-block mb-16 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Architecture & Legal</span>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Technology Standards, Architecture & Communities</h2>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-3xl mb-6 ml-12 leading-relaxed">Comprehensive insights into Internet Protocol Television history, infrastructure, legality, and open-source projects.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+      <a href="/products/what-is-iptv/" class="heroui-card group" data-title="what is iptv?" data-desc="core technological principles: comparing iptv with ott and traditional broadcast.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          What is IPTV?
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Core technological principles: comparing IPTV with OTT and traditional broadcast.
+        </p>
+      </a>
+
+      <a href="/products/iptv-headend/" class="heroui-card group" data-title="iptv network architecture" data-desc="headends, middleware clusters, content delivery networks, and subscriber terminals.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Network Architecture
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Headends, middleware clusters, content delivery networks, and subscriber terminals.
+        </p>
+      </a>
+
+      <a href="/products/is-iptv-legal/" class="heroui-card group" data-title="iptv legality & safety guide" data-desc="copyright compliance, licensed broadcasting frameworks, and consumer safety.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Legality & Safety Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Copyright compliance, licensed broadcasting frameworks, and consumer safety.
+        </p>
+      </a>
+
+      <a href="/products/headend-iptv/" class="heroui-card group" data-title="iptv headend infrastructure" data-desc="satellite reception, transcoding arrays, multiplexing, and ip stream gateways.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV Headend Infrastructure
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Satellite reception, transcoding arrays, multiplexing, and IP stream gateways.
+        </p>
+      </a>
+
+      <a href="/products/vecaster-hotel-iptv/" class="heroui-card group" data-title="local headend installation" data-desc="signal aggregation and local ip distribution for private properties and campuses.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Local Headend Installation
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Signal aggregation and local IP distribution for private properties and campuses.
+        </p>
+      </a>
+
+      <a href="/products/iptv-org/" class="heroui-card group" data-title="iptv-org open-source project" data-desc="exploring the github public domain channel directory and integration tips.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV-Org Open-Source Project
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Exploring the GitHub public domain channel directory and integration tips.
+        </p>
+      </a>
+
+      <a href="/products/github-iptv/" class="heroui-card group" data-title="github iptv tools & repositories" data-desc="developer scripts, epg grabbers, playlist parsers, and automation tools.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          GitHub IPTV Tools & Repositories
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Developer scripts, EPG grabbers, playlist parsers, and automation tools.
+        </p>
+      </a>
+
+      <a href="/products/reddit-iptv/" class="heroui-card group" data-title="reddit community insights" data-desc="navigating r/iptv discussions, avoiding affiliate scams, and finding honest advice.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Reddit Community Insights
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Navigating r/IPTV discussions, avoiding affiliate scams, and finding honest advice.
+        </p>
+      </a>
+
+      <a href="/products/iptv-equipment/" class="heroui-card group" data-title="essential hardware checklist" data-desc="gigabit streaming boxes, wi-fi 6 routers, shielded cat6 cabling, and remotes.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Architecture & Legal
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Essential Hardware Checklist
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Gigabit streaming boxes, Wi-Fi 6 routers, shielded Cat6 cabling, and remotes.
+        </p>
+      </a>
+      </div>
+    </section>
+    <section id="subscriptions" class="category-block mb-16 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Subscriptions & Regions</span>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Verified Subscriptions & Regional Channel Solutions</h2>
+        </div>
+      </div>
+      <p class="text-zinc-400 text-sm max-w-3xl mb-6 ml-12 leading-relaxed">High-performance subscription packages with anti-freeze server clusters, 99.9% uptime, and regional channel coverage.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+      <a href="/products/best-iptv-service/" class="heroui-card group" data-title="best iptv service 2026" data-desc="comprehensive comparison of server uptime, sports bitrates, and customer support.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Best IPTV Service 2026
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Comprehensive comparison of server uptime, sports bitrates, and customer support.
+        </p>
+      </a>
+
+      <a href="/products/best-iptv-providers/" class="heroui-card group" data-title="2026 quality standards" data-desc="60fps live sports feeds, 4k uhd movies, and 24/7 whatsapp assistance.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          2026 Quality Standards
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          60fps live sports feeds, 4K UHD movies, and 24/7 WhatsApp assistance.
+        </p>
+      </a>
+
+      <a href="/products/best-iptv-provider/" class="heroui-card group" data-title="provider selection framework" data-desc="evaluating server redundancy, multi-device concurrency, and refund policies.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Provider Selection Framework
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Evaluating server redundancy, multi-device concurrency, and refund policies.
+        </p>
+      </a>
+
+      <a href="/products/reddit-best-iptv/" class="heroui-card group" data-title="reddit community favorites" data-desc="key community criteria: trial availability, anti-freeze tech, and payment safety.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Reddit Community Favorites
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Key community criteria: trial availability, anti-freeze tech, and payment safety.
+        </p>
+      </a>
+
+      <a href="/products/iptv-usa/" class="heroui-card group" data-title="iptv usa channels" data-desc="regional network affiliates (abc, cbs, nbc, fox) and us major sports pass.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV USA Channels
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Regional network affiliates (ABC, CBS, NBC, FOX) and US major sports pass.
+        </p>
+      </a>
+
+      <a href="/products/iptv-uk/" class="heroui-card group" data-title="iptv uk solutions" data-desc="uk premier league, bbc/itv channels, and uk isp throttling workarounds.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV UK Solutions
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          UK Premier League, BBC/ITV channels, and UK ISP throttling workarounds.
+        </p>
+      </a>
+
+      <a href="/products/iptv-france/" class="heroui-card group" data-title="iptv france & ligue 1" data-desc="french national networks, canal+, bein sports, and french vod cinema.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          IPTV France & Ligue 1
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          French national networks, Canal+, beIN Sports, and French VOD cinema.
+        </p>
+      </a>
+
+      <a href="/products/indian-iptv/" class="heroui-card group" data-title="indian regional channels" data-desc="hindi, tamil, telugu, and punjabi channels with live international cricket.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Indian Regional Channels
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Hindi, Tamil, Telugu, and Punjabi channels with live international cricket.
+        </p>
+      </a>
+
+      <a href="/products/iptv-italiane-4k/" class="heroui-card group" data-title="italian 4k television" data-desc="rai 4k, sky italia, serie a football coverage, and italian epg guide data.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Italian 4K Television
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          RAI 4K, Sky Italia, Serie A football coverage, and Italian EPG guide data.
+        </p>
+      </a>
+
+      <a href="/products/lista-iptv-de-pago-con-canales-en-vivo/" class="heroui-card group" data-title="spanish & latin channels" data-desc="la liga santander, copa libertadores, and latin american regional bouquets.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Spanish & Latin Channels
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          La Liga Santander, Copa Libertadores, and Latin American regional bouquets.
+        </p>
+      </a>
+
+      <a href="/products/ip-tv-sat-n-al/" class="heroui-card group" data-title="turkish iptv solutions" data-desc="turkish süper lig, digiturk, bein sports turkey, and turkish support.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Turkish IPTV Solutions
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Turkish Süper Lig, Digiturk, beIN Sports Turkey, and Turkish support.
+        </p>
+      </a>
+
+      <a href="/products/ip-televizija/" class="heroui-card group" data-title="balkan ip televizija" data-desc="croatian, serbian, and bosnian national channels with arena sport coverage.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Balkan IP Televizija
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Croatian, Serbian, and Bosnian national channels with Arena Sport coverage.
+        </p>
+      </a>
+
+      <a href="/products/4k-iptv/" class="heroui-card group" data-title="4k ultra hd streaming" data-desc="high-bitrate 3840x2160 streams with hdr10 color and uncompressed audio.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          4K Ultra HD Streaming
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          High-bitrate 3840x2160 streams with HDR10 color and uncompressed audio.
+        </p>
+      </a>
+
+      <a href="/products/4k-live-iptv/" class="heroui-card group" data-title="4k live sports streaming" data-desc="smooth 60fps live football, basketball, and racing broadcasts.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          4K Live Sports Streaming
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Smooth 60fps live football, basketball, and racing broadcasts.
+        </p>
+      </a>
+
+      <a href="/products/iptv-subscription/" class="heroui-card group" data-title="subscription tier guide" data-desc="choosing device concurrency (1, 2, or 3 screens) and billing durations.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Subscription Tier Guide
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Choosing device concurrency (1, 2, or 3 screens) and billing durations.
+        </p>
+      </a>
+
+      <a href="/products/iptv-free-trial/" class="heroui-card group" data-title="free trial testing" data-desc="testing server latency, channel zapping speed, and device compatibility.">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:border-purple-400/40 transition-colors">
+            Subscriptions & Regions
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base text-zinc-100 group-hover:text-purple-300 transition-colors line-clamp-1 mb-2">
+          Free Trial Testing
+        </h3>
+        <p class="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+          Testing server latency, channel zapping speed, and device compatibility.
+        </p>
+      </a>
+      </div>
+    </section>
+
+      <!-- Bottom Support & Conversion Banner -->
+      <section class="mt-20 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-purple-950/40 via-zinc-900 to-indigo-950/40 border border-purple-500/30 text-center relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">Need Help Choosing or Setting Up?</h2>
+          <p class="text-zinc-400 text-sm sm:text-base mb-6 leading-relaxed">
+            Our engineers and support agents are available 24/7 on WhatsApp to provide free test accounts, instant credentials, and hardware compatibility checks.
+          </p>
+          <div class="flex items-center justify-center flex-wrap gap-4">
+            <a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              Message on WhatsApp
+            </a>
+            <a href="/pricing/" class="px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/20">
+              <span>View Subscriptions</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
 
   <footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs relative"><div class="footer-top-glow" aria-hidden="true"></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="footer-grid mb-10"><div class="space-y-4"><div class="flex items-center gap-2"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient_footer)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient_footer" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-display font-extrabold text-lg text-white tracking-tight">IPTV Smarters Pro</span></div><p class="text-zinc-400 leading-relaxed text-xs"><strong class="text-white">IPTV Smarters Pro</strong> Premium IPTV streaming with a premium live TV lineup and an extensive on-demand library, delivering 4K on every screen you own.</p><div class="flex items-center gap-3 pt-1"><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" aria-label="Message us on WhatsApp" class="footer-social-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-4 h-4"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://t.me/host4k" target="_blank" rel="noopener noreferrer" aria-label="Message us on Telegram" class="footer-social-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></div></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Product</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/features/" class="hover:text-white transition-colors tappable">Features</a></li><li><a href="/channels/" class="hover:text-white transition-colors tappable">Channel List</a></li><li><a href="/pricing/" class="hover:text-white transition-colors tappable">Pricing Plans</a></li><li><a href="/iptv-services/" class="hover:text-white transition-colors tappable">IPTV Services</a></li><li><a href="/reseller/" class="hover:text-white transition-colors tappable text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1.5"><span>Reseller Program</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">New</span></a></li><li><a href="/products/" class="hover:text-white transition-colors tappable">Product Directory</a></li><li><a href="/guides/how-to-activate-iptv-smarters-pro/" class="hover:text-white transition-colors tappable">Setup Guide</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Company</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/contact/" class="hover:text-white transition-colors tappable">Contact Us</a></li><li><a href="/guides/" class="hover:text-white transition-colors tappable">Guides</a></li><li><a href="/privacy/" class="hover:text-white transition-colors tappable">Privacy Policy</a></li><li><a href="/terms/" class="hover:text-white transition-colors tappable">Terms of Service</a></li><li><a href="/refund/" class="hover:text-white transition-colors tappable">Refund Policy</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Contact</h2><ul class="space-y-3 text-xs text-zinc-400"><li>Expert Support via WhatsApp</li><li><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="tappable inline-flex px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-white font-bold rounded-lg transition-colors items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle w-4 h-4"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg> Message Us</a></li></ul></div></div><div class="pt-6 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between text-xs text-[#64748b] gap-4"><p>© 2026 IPTV Smarters Pro. All rights reserved.</p><div class="flex items-center gap-6"><span class="footer-trust-pill flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-500"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Secure Checkout</span><span class="footer-trust-pill flex items-center gap-1.5"><svg class="w-4 h-4 text-[#0079C1]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.792.792 0 0 1 .782-.67h6.634c3.084 0 5.487 1.056 5.86 4.382.203 1.808-.415 3.32-1.745 4.26-1.127.798-2.678 1.188-4.608 1.188H9.373a.855.855 0 0 0-.845.727l-.95 6.01a.642.642 0 0 1-.633.541l.13-.82z"/><path d="M9.13 14.88h2.07c2.44 0 4.35-.97 4.9-3.79.23-1.18.06-2.13-.53-2.79-.62-.69-1.66-1.06-3.09-1.06H8.28a.86.86 0 0 0-.85.73l-1.37 8.68a.64.64 0 0 0 .63.74h2.44z" fill="#00457C"/></svg>PayPal Accepted</span><button type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="footer-back-to-top">Back to top<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-back-to-top-icon w-4 h-4"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg></button></div></div></div></footer>
-  <script src="/assets/js/site-interactions.js?v=20260907-7" defer></script>
-
   </div>
-  <script src="/assets/js/site-interactions.js?v=20260909-lang4" defer></script>
+
+  <!-- Search Filter Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('productSearchInput');
+      if (!input) return;
+      const cards = document.querySelectorAll('.heroui-card');
+      const sections = document.querySelectorAll('.category-block');
+
+      input.addEventListener('input', function(e) {
+        const val = e.target.value.toLowerCase().trim();
+        cards.forEach(card => {
+          const title = card.getAttribute('data-title') || '';
+          const desc = card.getAttribute('data-desc') || '';
+          if (!val || title.includes(val) || desc.includes(val)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Hide section headers if all cards inside are hidden
+        sections.forEach(sec => {
+          const visible = sec.querySelectorAll('.heroui-card[style*="display: flex"]').length;
+          const total = sec.querySelectorAll('.heroui-card').length;
+          if (val && visible === 0 && total > 0) {
+            sec.style.display = 'none';
+          } else {
+            sec.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+  <script src="/assets/js/site-interactions.js?v=20261030-nav" defer></script>
   <script src="/assets/js/support-chat.js" defer></script>
 </body>
 </html>
