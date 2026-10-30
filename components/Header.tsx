@@ -146,10 +146,9 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation - Always visible on lg (1024px+) screens */}
-          <nav className="site-nav-desktop hidden lg:flex items-center text-sm font-medium" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+          <nav className="site-nav-desktop hidden lg:flex items-center text-sm font-medium">
             <Link
               href={`${prefix}features/`}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '6px 10px' }}
               className={`nav-link whitespace-nowrap transition-colors ${
                 isFeatures ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
@@ -158,7 +157,6 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             </Link>
             <Link
               href={`${prefix}channels/`}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '6px 10px' }}
               className={`nav-link whitespace-nowrap transition-colors ${
                 isChannels ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
@@ -167,7 +165,6 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             </Link>
             <Link
               href={`${prefix}pricing/`}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '6px 10px' }}
               className={`nav-link whitespace-nowrap transition-colors ${
                 isPricing ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
@@ -176,7 +173,6 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             </Link>
             <Link
               href={`${prefix}reseller/`}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '6px 10px' }}
               className={`nav-link whitespace-nowrap transition-colors ${
                 isReseller
                   ? 'text-purple-400 nav-link-active font-bold'
@@ -187,7 +183,6 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
             </Link>
             <Link
               href={`${prefix}guides/`}
-              style={{ display: 'inline-flex', alignItems: 'center', padding: '6px 10px' }}
               className={`nav-link whitespace-nowrap transition-colors ${
                 isGuides ? 'text-white nav-link-active font-semibold' : 'text-zinc-400 hover:text-white'
               }`}
