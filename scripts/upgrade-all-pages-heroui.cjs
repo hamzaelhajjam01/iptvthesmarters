@@ -125,7 +125,7 @@ for (const filePath of allFiles) {
 
   // 1. Ensure modern HeroUI stylesheets and lang toggle script in <head>
   if (!html.includes('/assets/css/heroui.css')) {
-    html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/heroui.css">\n</head>');
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/heroui.css?v=20261030-nav">\n</head>');
     modified = true;
   }
   if (!html.includes('ais-lang-toggle-init')) {
@@ -138,7 +138,17 @@ for (const filePath of allFiles) {
     modified = true;
   }
   if (urlPath.includes('/products/') && !html.includes('/assets/css/product-pages.css')) {
-    html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/product-pages.css">\n</head>');
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/css/product-pages.css?v=20261030-nav">\n</head>');
+    modified = true;
+  }
+
+  // Bust cache on theme.css and heroui.css
+  if (html.includes('theme.css') && !html.includes('theme.css?v=20261030-nav')) {
+    html = html.replace(/theme\.css(\?v=[^"'\s>]*)?/g, 'theme.css?v=20261030-nav');
+    modified = true;
+  }
+  if (html.includes('heroui.css') && !html.includes('heroui.css?v=20261030-nav')) {
+    html = html.replace(/heroui\.css(\?v=[^"'\s>]*)?/g, 'heroui.css?v=20261030-nav');
     modified = true;
   }
 
