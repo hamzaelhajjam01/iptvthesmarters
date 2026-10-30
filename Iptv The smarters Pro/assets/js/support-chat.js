@@ -16,7 +16,7 @@ const css=document.createElement('style');css.textContent=`
 .sf3-float:hover{filter:brightness(.94);transform:scale(1.05)}
 .sf3-float:focus-visible,#sf3 button:focus-visible,#sf3 input:focus-visible{outline:3px solid #ffb3c5;outline-offset:2px}
 #sf3-top{bottom:96px;width:48px;height:48px;border-radius:50%!important}
-#sf3-open{bottom:24px;width:60px;height:60px;border-radius:50%!important}
+#sf3-open{bottom:24px;width:60px;height:60px;border-radius:50%!important;background:#25D366!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important}
 #sf3-open svg{width:30px;height:30px;stroke-width:2.2}
 #sf3{position:fixed;right:24px;bottom:101px;z-index:10001;width:430px;height:min(680px,calc(100vh - 125px));display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#111;border:1px solid #d9d9df;border-radius:25px;box-shadow:0 24px 85px #0008;font:16px/1.4 Arial,sans-serif}
 #sf3[hidden]{display:none}
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('#sf3,#sf3-open,#sf3-top,#sf-panel,#sf-chat,#sf-top,button[aria-label="Scroll to top"]').forEach(e=>e.remove());
  const top=document.createElement('button');top.id='sf3-top';top.className='sf3-float sf3-icon';top.setAttribute('aria-label','Scroll to top');top.innerHTML=icons.up;document.body.append(top);top.onclick=()=>scrollTo({top:0,behavior:'smooth'});const topState=()=>{const on=scrollY>500;top.style.opacity=on?'1':'0';top.style.pointerEvents=on?'auto':'none'};addEventListener('scroll',topState,{passive:true});topState();
  const panel=document.createElement('section');panel.id='sf3';panel.hidden=true;panel.setAttribute('aria-label','Lucy support chat');panel.innerHTML=`<header class="sf3-head"><span class="sf3-logo sf3-icon">${icons.bot}</span><span class="sf3-identity"><strong>Lucy - IPTV Smarters Pro Support</strong><span class="sf3-status"><i class="sf3-dot"></i>We typically reply right away</span></span><button class="sf3-reset sf3-icon" type="button" aria-label="Restart conversation">${icons.reset}</button><button class="sf3-close sf3-icon" type="button" aria-label="Close support chat">${icons.close}</button></header><main class="sf3-log" aria-live="polite"></main><div class="sf3-filebar"><span></span><button type="button" aria-label="Remove attachment">Remove</button></div><form class="sf3-compose"><button class="sf3-add sf3-icon" type="button" aria-label="Attach a file">${icons.plus}</button><input class="sf3-file" type="file" accept="image/*,.pdf,.txt" hidden><input class="sf3-input" type="text" maxlength="1000" autocomplete="off" aria-label="Type your message" placeholder="Type your message..."><button class="sf3-send sf3-icon" type="submit" aria-label="Send message" disabled>${icons.send}</button></form>`;document.body.append(panel);
- const open=document.createElement('button');open.id='sf3-open';open.className='sf3-float sf3-icon';open.setAttribute('aria-label','Open support chat');open.innerHTML=icons.chat;document.body.append(open);
+ const open=document.createElement('button');open.id='sf3-open';open.className='sf3-float sf3-icon';open.setAttribute('aria-label','Open support chat');open.innerHTML=icons.wa;document.body.append(open);
  const log=panel.querySelector('.sf3-log'),input=panel.querySelector('.sf3-input'),sendBtn=panel.querySelector('.sf3-send'),file=panel.querySelector('.sf3-file'),filebar=panel.querySelector('.sf3-filebar');let responding=false,attachment=null;
  const avatar=()=>`<span class="sf3-avatar sf3-icon">${icons.bot}</span>`;const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const add=(who,html)=>{log.insertAdjacentHTML('beforeend',`<div class="sf3-row ${who}">${who==='bot'?avatar():''}<div class="sf3-bubble ${who}">${html}</div></div>`);log.scrollTop=log.scrollHeight};
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
  const syncSend=()=>sendBtn.disabled=responding||(!input.value.trim()&&!attachment);
  const syncFile=()=>{filebar.classList.toggle('show',!!attachment);filebar.querySelector('span').textContent=attachment?`Attached: ${attachment.name}`:''};
- const setOpen=value=>{panel.hidden=!value;open.setAttribute('aria-expanded',String(value));open.setAttribute('aria-label',value?'Close support chat':'Open support chat');open.innerHTML=value?icons.close:icons.chat;if(value)setTimeout(()=>input.focus(),80)};
+ const setOpen=value=>{panel.hidden=!value;open.setAttribute('aria-expanded',String(value));open.setAttribute('aria-label',value?'Close support chat':'Open support chat');open.innerHTML=value?icons.close:icons.wa;if(value)setTimeout(()=>input.focus(),80)};
  open.onclick=()=>setOpen(panel.hidden);
  panel.querySelector('.sf3-close').onclick=()=>setOpen(false);
  panel.querySelector('.sf3-reset').onclick=reset;

@@ -1,0 +1,10 @@
+const fs = require('fs');
+const html = fs.readFileSync('Iptv The smarters Pro/index.html', 'utf8');
+const nav = html.match(/site-nav-desktop[^>]*/);
+console.log('NAV:', nav ? nav[0] : 'not found');
+const waGreen = (html.match(/#25D366/g) || []).length;
+console.log('WA green (#25D366) count:', waGreen);
+const waOfficialSvg = html.includes('M12.04 2c-5.46');
+console.log('Official WA SVG present:', waOfficialSvg);
+const footerCtaColor = html.match(/background-color:#25D366[^"']*/);
+console.log('Footer CTA green:', footerCtaColor ? footerCtaColor[0] : 'not found');
