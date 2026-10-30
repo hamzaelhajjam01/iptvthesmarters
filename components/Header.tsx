@@ -146,7 +146,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation - Always visible on lg (1024px+) screens */}
-          <nav className="hidden lg:flex items-center gap-2.5 xl:gap-5 text-[13px] xl:text-sm font-medium">
+          <nav className="site-nav-desktop hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium">
             <Link
               href={prefix}
               className={`nav-link px-1.5 py-1 whitespace-nowrap transition-colors ${
@@ -454,3 +454,4 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
     </header>
   );
 }
+

@@ -1088,3 +1088,48 @@ span[class*="rounded-full"][class*="border-purple-900"]:hover {
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
+
+
+/* ==========================================================================
+   Desktop Navigation Fix: Ensure clean spacing and gap between nav items
+   ========================================================================== */
+.site-nav-desktop,
+.site-header-bar nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.15rem !important;
+}
+
+@media (max-width: 1023.98px) {
+  .site-nav-desktop,
+  .site-header-bar nav {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-nav-desktop,
+  .site-header-bar nav {
+    display: flex !important;
+    gap: 1.15rem !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-nav-desktop,
+  .site-header-bar nav {
+    display: flex !important;
+    gap: 1.65rem !important;
+  }
+}
+
+.site-nav-desktop a,
+.site-header-bar nav a {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0.35rem 0.45rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
