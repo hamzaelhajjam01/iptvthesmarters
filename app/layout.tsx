@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -53,6 +54,7 @@ export default function RootLayout({
         <div className="grain-overlay" />
         <div className="min-h-screen flex flex-col font-sans antialiased bg-black text-white transition-colors">
           {children}
+        <GoogleAnalytics />
         </div>
         <Script src="/assets/js/site-interactions.js" strategy="afterInteractive" />
         <Script src="/assets/js/support-chat.js" strategy="lazyOnload" />
