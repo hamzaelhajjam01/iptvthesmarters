@@ -540,3 +540,18 @@ footer .btn-whatsapp-green {
   align-items: center !important;
   justify-content: center !important;
 }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   WHATSAPP ICON TAIL PRESERVATION GUARANTEE
+   Never clip the speech bubble pointer with border-radius
+   ══════════════════════════════════════════════════════════════════ */
+img[src*="whatsapp.png"],
+.sf3-wa-img,
+.sf3-wa-icon {
+  border-radius: 0 !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  overflow: visible !important;
+}

@@ -111,7 +111,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 aria-label="Message us on WhatsApp"
                 className="footer-social-btn"
               >
-                <img src="/assets/images/whatsapp.png" width={18} height={18} alt="WhatsApp" className="w-[18px] h-[18px] rounded-full shrink-0" />
+                <img src="/assets/images/whatsapp.png" width={18} height={18} alt="WhatsApp" className="w-[18px] h-[18px] object-contain shrink-0" />
               </a>
             </div>
           </div>

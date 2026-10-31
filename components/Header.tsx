@@ -400,7 +400,7 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
               className="flex items-center justify-center gap-2 mt-4 py-3.5 px-6 rounded-full text-sm font-bold text-white transition-all shadow-lg"
               style={{ backgroundColor: '#25D366', color: '#fff', boxShadow: '0 6px 20px rgba(37,211,102,0.35)' }}
             >
-              <img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] rounded-full shrink-0" />
+              <img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] object-contain shrink-0" />
               Message us on WhatsApp
             </a>
           </div>

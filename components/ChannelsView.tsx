@@ -80,7 +80,7 @@ export default function ChannelsView({ lang }: ChannelsViewProps) {
             href="https://wa.me/18042804332?text=Hello%2C%20does%20your%20IPTV%20playlist%20include..."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-whatsapp-green px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white inline-flex items-center gap-2 transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 6px 20px rgba(37,211,102,0.4)" }}><img src="/assets/images/whatsapp.png" width={20} height={20} alt="WhatsApp" className="w-5 h-5 rounded-full shrink-0" /><span>Ask Support on WhatsApp</span>
+            className="btn-whatsapp-green px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white inline-flex items-center gap-2 transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 6px 20px rgba(37,211,102,0.4)" }}><img src="/assets/images/whatsapp.png" width={20} height={20} alt="WhatsApp" className="w-5 h-5 object-contain shrink-0" /><span>Ask Support on WhatsApp</span>
           </a>
         </div>
       </div>

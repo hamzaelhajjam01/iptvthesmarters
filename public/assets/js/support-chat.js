@@ -8,14 +8,14 @@ const icons={
   plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   send:'<svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
   bot:'<svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M9 8V5h6v3M9 13h.01M15 13h.01M9 18v2M15 18v2M3 12h2M19 12h2"/></svg>',
-  wa:'<img src="/assets/images/whatsapp.png" width="24" height="24" alt="WhatsApp" class="sf3-wa-img" style="width:24px;height:24px;border-radius:50%;display:inline-block;vertical-align:middle;flex-shrink:0;">'
+  wa:'<img src="/assets/images/whatsapp.png" width="24" height="24" alt="WhatsApp" class="sf3-wa-img" style="width:24px;height:24px;display:inline-block;vertical-align:middle;flex-shrink:0;">'
 };
 const css=document.createElement('style');css.textContent=`
 .sf3-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.sf3-float{position:fixed;right:24px;z-index:10000;border:0;background:${P};color:#fff;border-radius:50%!important;aspect-ratio:1/1;display:grid;place-items:center;box-shadow:0 10px 30px #0005;cursor:pointer;transition:transform .18s,filter .18s,opacity .18s}
+.sf3-float{position:fixed;right:24px;z-index:10000;border:0;background:${P};color:#fff;aspect-ratio:1/1;display:grid;place-items:center;box-shadow:0 10px 30px #0005;cursor:pointer;transition:transform .18s,filter .18s,opacity .18s}
 .sf3-float:hover{filter:brightness(.94);transform:scale(1.05)}
 .sf3-float:focus-visible,#sf3 button:focus-visible,#sf3 input:focus-visible{outline:3px solid #ffb3c5;outline-offset:2px}
-#sf3-top{bottom:96px;width:48px;height:48px;border-radius:50%!important}
+#sf3-top{bottom:96px;width:48px;height:48px;border-radius:50%!important;border-radius:50%!important}
 #sf3-open{bottom:24px;width:60px;height:60px;border-radius:50%!important;background:#25D366!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important}
 #sf3-open svg{width:30px;height:30px;stroke-width:2.2}#sf3-open .sf3-wa-img{width:36px!important;height:36px!important;display:block;margin:auto}
 #sf3{position:fixed;right:24px;bottom:101px;z-index:10001;width:430px;height:min(680px,calc(100vh - 125px));display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#111;border:1px solid #d9d9df;border-radius:25px;box-shadow:0 24px 85px #0008;font:16px/1.4 Arial,sans-serif}
@@ -28,7 +28,7 @@ const css=document.createElement('style');css.textContent=`
 .sf3-identity{flex:1;min-width:0}
 .sf3-identity strong{display:block;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sf3-status{font-size:14px;font-weight:700}
-.sf3-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#50cf75;box-shadow:0 0 0 3px #ffffff20;margin-right:7px}
+.sf3-dot{display:inline-block;width:10px;height:10px;background:#50cf75;box-shadow:0 0 0 3px #ffffff20;margin-right:7px}
 .sf3-head button{width:36px;height:36px;padding:0;display:grid;place-items:center;border:0;background:transparent;color:#fff;cursor:pointer;border-radius:50%}
 .sf3-head button:hover{background:#ffffff1f}
 .sf3-head button svg{width:25px;height:25px}
@@ -51,7 +51,7 @@ const css=document.createElement('style');css.textContent=`
 .sf3-quick button{border:1px solid #dcdde2;border-radius:999px;background:#fff;color:${P};padding:9px 14px;font-size:15px;cursor:pointer}
 .sf3-quick button:hover{background:#fff1f0}
 .sf3-typing{display:flex;gap:5px;padding:5px 2px}
-.sf3-typing i{width:7px;height:7px;border-radius:50%;background:#888;animation:sf3dot 1s infinite}
+.sf3-typing i{width:7px;height:7px;background:#888;animation:sf3dot 1s infinite}
 .sf3-typing i:nth-child(2){animation-delay:.15s}
 .sf3-typing i:nth-child(3){animation-delay:.3s}
 @keyframes sf3dot{50%{transform:translateY(-4px);opacity:.45}}
@@ -59,7 +59,7 @@ const css=document.createElement('style');css.textContent=`
 .sf3-filebar.show{display:flex;align-items:center;justify-content:space-between}
 .sf3-filebar button{border:0;background:transparent;color:${P};cursor:pointer}
 .sf3-compose{flex:none;display:flex;align-items:center;gap:10px;padding:14px 16px;border-top:1px solid #e2e2e7;background:#fff}
-.sf3-add,.sf3-send{width:49px;height:49px;flex:none;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+.sf3-add,.sf3-send{width:49px;height:49px;flex:none;display:grid;place-items:center;cursor:pointer}
 .sf3-add{border:1px solid #dfe0e5;background:#fff;color:#727782}
 .sf3-send{border:0;background:#ff9b97;color:#fff}
 .sf3-send:not(:disabled){background:${P}}

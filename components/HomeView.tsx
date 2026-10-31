@@ -50,7 +50,7 @@ export default function HomeView({ lang }: HomeViewProps) {
               rel="noopener noreferrer"
               className="btn-whatsapp-green w-full sm:w-auto px-8 py-4 rounded-full font-bold text-sm text-white inline-flex items-center justify-center gap-2.5 transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 8px 24px rgba(37,211,102,0.45)" }}"
             >
-              <img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] rounded-full shrink-0" /><span>{t.hero.trial}</span>
+              <img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] object-contain shrink-0" /><span>{t.hero.trial}</span>
             </a>
           </div>
 

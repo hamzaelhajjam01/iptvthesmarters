@@ -118,7 +118,7 @@ export default function EnglishContactPage() {
               rel="noopener noreferrer"
               className="reveal-on-scroll bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl hover:border-emerald-500/40 p-10 flex flex-col items-center text-center hover:bg-zinc-900/60 transition-all group is-visible"
             >
-              <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all"><img src="/assets/images/whatsapp.png" width={56} height={56} alt="WhatsApp" className="w-14 h-14 rounded-full" /></div>
+              <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all"><img src="/assets/images/whatsapp.png" width={56} height={56} alt="WhatsApp" className="w-14 h-14 object-contain" /></div>
               <h2 className="text-3xl font-bold text-white mb-4">Live Chat Support</h2>
               <p className="text-zinc-400 mb-8 text-lg flex-grow">
                 Get the fastest response times by messaging our support agents directly on WhatsApp.
