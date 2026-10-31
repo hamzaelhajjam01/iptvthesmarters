@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { LOCALES } from '@/data/locales';
-import { getOriginalMain } from '@/lib/getPageContent';
+import { getOriginalMain, getOriginalJsonLd } from '@/lib/getPageContent';
 
 interface PageProps {
   params: {
@@ -106,8 +106,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default function LocalizedResellerPage({ params }: PageProps) {
   const currentLocale = LOCALES[params.lang] || LOCALES.en;
   const mainHtml = getOriginalMain(`${params.lang}/reseller/index.html`);
+  const jsonLd = getOriginalJsonLd(`${params.lang}/reseller/index.html`);
   return (
     <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <Header currentLang={params.lang} />
       <main
         className="flex-1"

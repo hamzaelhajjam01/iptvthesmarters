@@ -362,6 +362,75 @@ export const SIDEBAR_CTA_STRINGS = {
   }
 };
 
+export const RESELLER_CTA_STRINGS = {
+  en: {
+    badge: 'Wholesale Program',
+    title: 'Start an IPTV Business',
+    desc: 'Buy wholesale credits, manage client accounts under your brand, and keep 60–70% net profit.',
+    btn: 'Explore Reseller Panel →'
+  },
+  fr: {
+    badge: 'Programme Grossiste',
+    title: 'Lancez Votre Business IPTV',
+    desc: 'Achetez des crédits en gros, gérez vos comptes clients et conservez 60 à 70% de marge nette.',
+    btn: 'Découvrir le Panel Revendeur →'
+  },
+  de: {
+    badge: 'Großhandel-Programm',
+    title: 'Starten Sie Ihr IPTV-Business',
+    desc: 'Kaufen Sie Großhandel-Credits, verwalten Sie Kunden unter Ihrer Marke und behalten Sie 60–70% Marge.',
+    btn: 'Reseller Panel entdecken →'
+  },
+  es: {
+    badge: 'Programa Mayorista',
+    title: 'Inicia tu Negocio IPTV',
+    desc: 'Compra créditos al por mayor, gestiona tus clientes con marca blanca y obtén 60–70% de margen.',
+    btn: 'Ver Panel Reseller →'
+  },
+  ar: {
+    badge: 'برنامج الموزعين',
+    title: 'ابدأ مشروع IPTV الخاص بك',
+    desc: 'اشترِ رصيد الجملة وأدر حسابات عملائك بلوحة تحكم خاصة بعلامتك التجارية مع هامش ربح 60–70%.',
+    btn: 'لوحة موزع IPTV ←'
+  },
+  it: {
+    badge: 'Programma Rivenditori',
+    title: 'Avvia il Tuo Business IPTV',
+    desc: 'Acquista crediti all\'ingrosso, gestisci i tuoi clienti a marchio bianco e trattieni il 60–70% di profitto.',
+    btn: 'Scopri il Pannello Rivenditore →'
+  },
+  nl: {
+    badge: 'Groothandelsprogramma',
+    title: 'Start Uw Eigen IPTV Business',
+    desc: 'Koop groothandel-credits, beheer uw klanten onder eigen merk en behoud 60–70% nettowinst.',
+    btn: 'Bekijk Reseller Panel →'
+  },
+  pt: {
+    badge: 'Programa Revenda',
+    title: 'Comece Seu Negócio IPTV',
+    desc: 'Compre créditos por grosso, gira contas de clientes sob a sua marca e guarde 60–70% de margem.',
+    btn: 'Ver Painel de Revendedor →'
+  },
+  'pt-br': {
+    badge: 'Programa Revenda',
+    title: 'Comece Seu Negócio IPTV',
+    desc: 'Compre créditos no atacado, gerencie clientes com sua própria marca e lucre de 60 a 70%.',
+    btn: 'Conhecer Painel de Revenda →'
+  },
+  pl: {
+    badge: 'Program Reseller',
+    title: 'Rozpocznij Biznes IPTV',
+    desc: 'Kupuj hurtowe kredyty, zarządzaj klientami pod własną marką i zatrzymuj 60–70% zysku.',
+    btn: 'Sprawdź Panel Reseller →'
+  },
+  ko: {
+    badge: '도매 리셀러 프로그램',
+    title: '나만의 IPTV 비즈니스 시작',
+    desc: '도매 크레딧을 구매하고 자체 브랜드 패널로 고객을 관리하여 60~70% 순마진을 창출하세요.',
+    btn: '리셀러 패널 알아보기 →'
+  }
+};
+
 export const HUB_HERO_STRINGS = {
   fr: {
     badge: 'Base de Connaissances',

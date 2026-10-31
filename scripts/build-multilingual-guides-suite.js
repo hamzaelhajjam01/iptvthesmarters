@@ -7,6 +7,7 @@ import {
   GUIDE_CATEGORIES,
   HEROUI_CALLOUT_STRINGS,
   SIDEBAR_CTA_STRINGS,
+  RESELLER_CTA_STRINGS,
   HUB_HERO_STRINGS,
   FOOTER_I18N
 } from './multilingual-guides-data.js';
@@ -273,7 +274,9 @@ function buildHeroUICallout(langCode) {
 
 function buildSidebarCTA(langCode) {
   const s = SIDEBAR_CTA_STRINGS[langCode] || SIDEBAR_CTA_STRINGS['en'] || SIDEBAR_CTA_STRINGS['fr'];
+  const r = RESELLER_CTA_STRINGS[langCode] || RESELLER_CTA_STRINGS['en'];
   const pricingHref = langCode === 'en' ? '/pricing/' : `/${langCode}/pricing/`;
+  const resellerHref = langCode === 'en' ? '/reseller/' : `/${langCode}/reseller/`;
   const bullets = s.bullets
     .map(
       b =>
@@ -294,12 +297,18 @@ function buildSidebarCTA(langCode) {
       ${bullets}
     </ul>
     <a href="${pricingHref}" class="block w-full py-3 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold rounded-xl text-center transition-all shadow-lg shadow-purple-600/25">${s.btn}</a>
+    <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+      <span class="text-zinc-400 font-medium">${r.title}</span>
+      <a href="${resellerHref}" class="text-purple-400 hover:text-purple-300 font-bold transition-colors inline-flex items-center gap-1">${r.btn}</a>
+    </div>
   </div>`;
 }
 
 function buildMobileCTA(langCode) {
   const s = SIDEBAR_CTA_STRINGS[langCode] || SIDEBAR_CTA_STRINGS['en'] || SIDEBAR_CTA_STRINGS['fr'];
+  const r = RESELLER_CTA_STRINGS[langCode] || RESELLER_CTA_STRINGS['en'];
   const pricingHref = langCode === 'en' ? '/pricing/' : `/${langCode}/pricing/`;
+  const resellerHref = langCode === 'en' ? '/reseller/' : `/${langCode}/reseller/`;
 
   return `
   <div class="reveal-on-scroll lg:hidden mt-12 bg-gradient-to-r from-blue-500/10 to-zinc-900/40 border border-blue-500/20 rounded-2xl p-6 relative overflow-hidden">
@@ -310,10 +319,14 @@ function buildMobileCTA(langCode) {
       <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
       </div>
-      <div>
+      <div class="flex-1">
         <h4 class="text-white font-bold text-lg mb-2 mt-1">${s.title}</h4>
         <p class="text-zinc-400 text-sm mb-4 leading-relaxed">${s.desc}</p>
         <a href="${pricingHref}" class="inline-block px-6 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold rounded-lg transition-all shadow-md shadow-purple-600/25">${s.btn}</a>
+        <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+          <span class="text-zinc-400 font-medium">${r.title}</span>
+          <a href="${resellerHref}" class="text-purple-400 hover:text-purple-300 font-bold transition-colors inline-flex items-center gap-1">${r.btn}</a>
+        </div>
       </div>
     </div>
   </div>`;
@@ -685,6 +698,17 @@ function syncEnglishGuides() {
       guideHtml = guideHtml.replace(astroHeaderRegex, newHeader);
     } else if (standardHeaderRegex.test(guideHtml)) {
       guideHtml = guideHtml.replace(standardHeaderRegex, newHeader);
+    }
+
+    // Inject reseller internal link into sidebar and bottom callout if not present
+    if (!guideHtml.includes('/reseller/')) {
+      const sidebarPricingTarget = '<a href="/pricing/" class="block w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold text-center rounded-xl transition-all shadow-lg shadow-purple-600/25">Get Best IPTV 4K Plan →</a>';
+      const sidebarReplacement = `${sidebarPricingTarget}\n                <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">\n                  <span class="text-zinc-400 font-medium">Start an IPTV Business</span>\n                  <a href="/reseller/" class="text-purple-400 hover:text-purple-300 font-bold transition-colors inline-flex items-center gap-1">Reseller Panel →</a>\n                </div>`;
+      guideHtml = guideHtml.replace(sidebarPricingTarget, sidebarReplacement);
+
+      const bottomPricingTarget = '<a href="/pricing/" class="inline-block px-6 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold rounded-lg transition-all shadow-md shadow-purple-600/25">Explore 4K Pricing Plans →</a>';
+      const bottomReplacement = `${bottomPricingTarget}\n                    <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">\n                      <span class="text-zinc-400 font-medium">Start an IPTV Business</span>\n                      <a href="/reseller/" class="text-purple-400 hover:text-purple-300 font-bold transition-colors inline-flex items-center gap-1">Reseller Panel →</a>\n                    </div>`;
+      guideHtml = guideHtml.replace(bottomPricingTarget, bottomReplacement);
     }
 
     safeWriteFileSync(guidePath, guideHtml, 'utf8');

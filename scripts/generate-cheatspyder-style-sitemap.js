@@ -66,7 +66,8 @@ for (const url of allUrls) {
 
 function getPriority(url) {
   if (url === `${BASE_URL}/`) return { prio: '1.0', freq: 'daily' };
-  if (url.endsWith('/pricing/')) return { prio: '0.9', freq: 'daily' };
+  if (url.endsWith('/pricing/') || url.includes('/pricing/')) return { prio: '0.9', freq: 'daily' };
+  if (url.endsWith('/reseller/') || url.includes('/reseller/')) return { prio: '0.9', freq: 'daily' };
   if (/^https:\/\/thesmartersiptv\.com\/[a-z-]+\/$/.test(url)) return { prio: '0.9', freq: 'daily' };
   if (url.includes('/channels/') || url.includes('/features/')) return { prio: '0.8', freq: 'weekly' };
   if (url.endsWith('/guides/')) return { prio: '0.85', freq: 'daily' };
@@ -95,17 +96,26 @@ ${urlEntries}
 </urlset>`;
 }
 
+const publicDir = path.join(projectRoot, 'public');
+
 // 1. Write sub-sitemaps
-fs.writeFileSync(path.join(sourceDir, 'sitemap-pages.xml'), buildSubSitemapXml(pages), 'utf8');
+const pagesXml = buildSubSitemapXml(pages);
+const guidesXml = buildSubSitemapXml(guides);
+const productsXml = buildSubSitemapXml(products);
+const legalXml = buildSubSitemapXml(legal);
+
+[sourceDir, publicDir].forEach(targetDir => {
+  if (fs.existsSync(targetDir)) {
+    fs.writeFileSync(path.join(targetDir, 'sitemap-pages.xml'), pagesXml, 'utf8');
+    fs.writeFileSync(path.join(targetDir, 'sitemap-guides.xml'), guidesXml, 'utf8');
+    fs.writeFileSync(path.join(targetDir, 'sitemap-products.xml'), productsXml, 'utf8');
+    fs.writeFileSync(path.join(targetDir, 'sitemap-legal.xml'), legalXml, 'utf8');
+  }
+});
+
 console.log(`✅ Generated sitemap-pages.xml (${pages.length} URLs)`);
-
-fs.writeFileSync(path.join(sourceDir, 'sitemap-guides.xml'), buildSubSitemapXml(guides), 'utf8');
 console.log(`✅ Generated sitemap-guides.xml (${guides.length} URLs)`);
-
-fs.writeFileSync(path.join(sourceDir, 'sitemap-products.xml'), buildSubSitemapXml(products), 'utf8');
 console.log(`✅ Generated sitemap-products.xml (${products.length} URLs)`);
-
-fs.writeFileSync(path.join(sourceDir, 'sitemap-legal.xml'), buildSubSitemapXml(legal), 'utf8');
 console.log(`✅ Generated sitemap-legal.xml (${legal.length} URLs)`);
 
 // 2. Write Master Sitemap Index
@@ -130,7 +140,11 @@ const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
   </sitemap>
 </sitemapindex>`;
 
-fs.writeFileSync(path.join(sourceDir, 'sitemap.xml'), indexXml, 'utf8');
+[sourceDir, publicDir].forEach(targetDir => {
+  if (fs.existsSync(targetDir)) {
+    fs.writeFileSync(path.join(targetDir, 'sitemap.xml'), indexXml, 'utf8');
+  }
+});
 console.log(`✅ Generated master sitemap.xml (Sitemap Index referencing 4 modular sub-sitemaps, total ${allUrls.length} pages)`);
 
 // 3. Update robots.txt

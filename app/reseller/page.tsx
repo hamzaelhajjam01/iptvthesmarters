@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getOriginalMain } from '@/lib/getPageContent';
+import { getOriginalMain, getOriginalJsonLd } from '@/lib/getPageContent';
 
 export const viewport: Viewport = {
   themeColor: '#7B3FE4',
@@ -50,8 +50,15 @@ export const metadata: Metadata = {
 
 export default function ResellerPage() {
   const mainHtml = getOriginalMain('reseller/index.html');
+  const jsonLd = getOriginalJsonLd('reseller/index.html');
   return (
     <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <Header currentLang="en" />
       <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang="en" />

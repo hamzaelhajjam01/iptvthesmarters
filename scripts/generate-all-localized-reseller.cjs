@@ -3,6 +3,128 @@ const path = require('path');
 const { generateUniversalHeader, generateUniversalFooter } = require('./universal-components.cjs');
 
 const translations = {
+  en: {
+    title: 'IPTV Reseller Panel — Start Your IPTV Business | IPTV Smarters Pro',
+    desc: 'Start your profitable IPTV business with our IPTV reseller panel. Wholesale credits, instant line activation, 99.9% anti-freeze uptime, and 24/7 WhatsApp support.',
+    badge: 'AVAILABLE NOW • START YOUR IPTV BUSINESS',
+    h1: 'IPTV Reseller Panel — <span class="bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Start Your IPTV Business</span>',
+    heroP: 'Launch your own high-margin IPTV brand powered by Smarters infrastructure. Buy wholesale credits, create trials and active lines on your branded panel, and keep 60–70% net profit.',
+    chips: {
+      noBuffer: 'Zero Buffering',
+      noExpire: 'Credits Never Expire',
+      uptime: '99.99% Uptime SLA',
+      support: '24/7 WhatsApp Support'
+    },
+    btnPackages: 'View Credit Packs ↓',
+    btnTrial: 'Get 24h Free Trial',
+    trustText: 'Instant activation • Guided 15-min onboarding • 99.9% streaming uptime',
+    benefitsBadge: 'RESELLER BENEFITS',
+    benefitsTitle: 'Why Choose Our Reseller Program?',
+    benefitsSub: 'Everything you need to launch and scale a profitable streaming business from day one.',
+    card1Title: 'Zero Buffering',
+    card1Desc: 'Dedicated 20 Gbps load-balanced streaming nodes with 99.9% uptime guarantee. Your clients enjoy live sports and 4K cinema without freezes.',
+    card2Title: 'Credits Never Expire',
+    card2Desc: 'Purchased credits stay in your account balance indefinitely until assigned to active client subscriptions. Zero risk, zero lost capital.',
+    card3Title: 'White-Label Panel',
+    card3Desc: 'Full Xtream Codes-compatible web dashboard. Create, extend, pause, and manage client accounts under your own brand identity.',
+    card4Title: '24/7 Priority Support',
+    card4Desc: 'Direct WhatsApp engineer line for bulk line creation, stream bouquets, technical troubleshooting, and instant credit top-ups.',
+    processBadge: 'PROCESS',
+    processTitle: 'How the Credit System Works',
+    processSub: 'Simple 3-step setup to launch your IPTV business and start earning.',
+    step1Title: 'Choose Credit Pack',
+    step1Desc: '1 credit = 1 month of service subscription. 12 credits = 1 year. Credits never expire.',
+    step2Title: 'Instant Panel Setup',
+    step2Desc: 'Message us on WhatsApp. Receive your management dashboard credentials and loaded credit balance within 15 minutes.',
+    step3Title: 'Sell & Keep Profit',
+    step3Desc: 'Generate free 24-hour test lines, sell subscriptions at your chosen retail rates, and retain 60–70% net margin on renewals.',
+    pricingBadge: 'WHOLESALE PRICING',
+    pricingTitle: 'IPTV Reseller Credit Packages',
+    pricingSub: '1 CREDIT = 1 MONTH SERVICE • CREDITS NEVER EXPIRE • 24/7 RESELLER ONBOARDING',
+    tier1: {
+      badge: 'Starter Pack',
+      credits: '20 Credits',
+      sub: 'Ideal for testing market demand and setting up your panel',
+      price: '$99',
+      rate: '$4.95 / credit',
+      f1: '20 client-months of service',
+      f2: 'Instant reseller panel activation',
+      f3: 'Unlimited free 24h test lines',
+      f4: 'Credits never expire',
+      btn: 'Order on WhatsApp'
+    },
+    tier2: {
+      badge: 'Most Popular',
+      credits: '50 Credits',
+      sub: 'Best balance between profit margins and initial capital',
+      price: '$289',
+      rate: '$5.78 / credit equivalent',
+      f1: '50 client-months of service',
+      f2: 'White-label panel with sub-reseller creation',
+      f3: 'Unlimited 24h & 48h trial lines',
+      f4: '100+ EPG channels & auto m3u generator',
+      btn: 'Order on WhatsApp'
+    },
+    tier3: {
+      badge: 'High Volume',
+      credits: '150 Credits',
+      sub: 'For active resellers scaling past 50 subscribers',
+      price: '$649',
+      rate: '$4.33 / credit',
+      f1: '150 client-months of service',
+      f2: 'High-priority stream routing',
+      f3: 'Dedicated WhatsApp account manager',
+      f4: 'Credits never expire',
+      btn: 'Order on WhatsApp'
+    },
+    tier4: {
+      badge: 'Best Value',
+      credits: '300 Credits',
+      sub: 'Maximum profit margin for serious IPTV entrepreneurs',
+      price: '$1,199',
+      rate: '$3.99 / credit • Best wholesale rate',
+      f1: '300 client-months of service',
+      f2: 'Master sub-reseller management rights',
+      f3: 'Custom DNS & complete white-label branding',
+      f4: 'Lifetime priority technical support',
+      btn: 'Order on WhatsApp'
+    },
+    calcBadge: 'INTERACTIVE TOOL',
+    calcTitle: 'IPTV Reseller Profit Calculator',
+    calcSub: 'Simulate your monthly and annual revenue based on active clients and your retail pricing.',
+    lblClients: 'Active Clients',
+    lblPrice: 'Retail Price per Month ($)',
+    lblDuration: 'Billing Duration',
+    durMonthly: 'Monthly (1 credit / month)',
+    durQuarterly: 'Quarterly (3 credits / 3 months)',
+    durAnnual: 'Annual (12 credits / 12 months)',
+    lblTier: 'Wholesale Tier',
+    tierOptStarter: 'Starter ($4.95 / credit)',
+    tierOptBiz: 'Business ($5.78 / credit)',
+    tierOptPro: 'Professional ($4.33 / credit)',
+    tierOptEnt: 'Enterprise ($3.99 / credit)',
+    resRevenue: 'Estimated Revenue',
+    resCost: 'Wholesale Cost',
+    resProfit: 'Estimated Net Profit',
+    resMargin: 'Net Margin',
+    calcFootnote: 'Estimated return is calculated based on wholesale credit costs and your retail price point.',
+    faqBadge: 'COMMON QUESTIONS',
+    faqTitle: 'Frequently Asked Questions',
+    faqSub: 'Everything you need to know about our wholesale IPTV reseller program.',
+    q1: 'What is an IPTV Reseller Panel?',
+    a1: 'An IPTV reseller panel is a web dashboard that allows you to manage subscriptions for your own customers. You purchase credits in bulk at wholesale rates, and use those credits to create, activate, and manage accounts at your own retail pricing.',
+    q2: 'Do my credits expire?',
+    a2: 'No. Credits purchased through our reseller program never expire. They remain in your account balance until you activate an end-user line.',
+    q3: 'Can I generate free trial lines for prospective clients?',
+    a3: 'Yes! All reseller accounts have access to generate free 24-hour test lines directly from the panel with zero credit deduction.',
+    q4: 'How fast can I get set up?',
+    a4: 'Your panel is activated immediately upon payment. Our onboarding team configures your login credentials and credit balance within 15 minutes via WhatsApp.',
+    ctaTitle: 'Ready to Start Your IPTV Business?',
+    ctaDesc: 'Connect with us on WhatsApp today to get your white-label panel set up and receive your first credit bundle.',
+    ctaBtnWa: 'Message on WhatsApp',
+    ctaBtnPackages: 'View Packages ↑'
+  },
+
   fr: {
     title: 'Panel Revendeur IPTV — Lancez Votre Business IPTV | IPTV Smarters Pro',
     desc: 'Devenez revendeur IPTV avec Smarters Pro. Crédits sans expiration, panel marque blanche Xtream, marge nette 60-70%. Packs dès 99$. Test 24h gratuit inclus.',
@@ -1230,9 +1352,117 @@ function buildLocalizedResellerHtml(langCode) {
   const t = translations[langCode];
   if (!t) throw new Error(`Missing translation for ${langCode}`);
 
-  const isRtl = t.dir === 'rtl';
-  const prefix = `/${langCode}`;
-  const canonicalUrl = `https://thesmartersiptv.com/${langCode}/reseller/`;
+  const isRtl = t.dir === 'rtl' || langCode === 'ar';
+  const prefix = langCode === 'en' ? '' : `/${langCode}`;
+  const canonicalUrl = langCode === 'en' ? 'https://thesmartersiptv.com/reseller/' : `https://thesmartersiptv.com/${langCode}/reseller/`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": langCode === 'en' ? "https://thesmartersiptv.com/" : `https://thesmartersiptv.com/${langCode}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": t.title.split('—')[0].trim(),
+            "item": canonicalUrl
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": t.h1.replace(/<[^>]+>/g, '').trim(),
+        "description": t.desc,
+        "provider": {
+          "@type": "Organization",
+          "name": "IPTV Smarters Pro",
+          "url": "https://thesmartersiptv.com"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": t.pricingTitle,
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": `${t.tier1.credits} — ${t.tier1.badge}`,
+              "price": "99.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": `${canonicalUrl}#pricing-tiers`
+            },
+            {
+              "@type": "Offer",
+              "name": `${t.tier2.credits} — ${t.tier2.badge}`,
+              "price": "289.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": `${canonicalUrl}#pricing-tiers`
+            },
+            {
+              "@type": "Offer",
+              "name": `${t.tier3.credits} — ${t.tier3.badge}`,
+              "price": "649.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": `${canonicalUrl}#pricing-tiers`
+            },
+            {
+              "@type": "Offer",
+              "name": `${t.tier4.credits} — ${t.tier4.badge}`,
+              "price": "1199.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": `${canonicalUrl}#pricing-tiers`
+            }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": t.q1,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t.a1
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t.q2,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t.a2
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t.q3,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t.a3
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t.q4,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t.a4
+            }
+          }
+        ]
+      }
+    ]
+  };
 
   const headerHtml = generateUniversalHeader('/reseller/', langCode);
   const footerHtml = generateUniversalFooter(langCode);
@@ -1257,6 +1487,23 @@ function buildLocalizedResellerHtml(langCode) {
     <meta name="title" content="${t.title}">
     <meta name="description" content="${t.desc}">
     <link rel="canonical" href="${canonicalUrl}">
+    <link rel="alternate" hreflang="x-default" href="https://thesmartersiptv.com/reseller/">
+    <link rel="alternate" hreflang="en" href="https://thesmartersiptv.com/reseller/">
+    <link rel="alternate" hreflang="fr" href="https://thesmartersiptv.com/fr/reseller/">
+    <link rel="alternate" hreflang="de" href="https://thesmartersiptv.com/de/reseller/">
+    <link rel="alternate" hreflang="es" href="https://thesmartersiptv.com/es/reseller/">
+    <link rel="alternate" hreflang="it" href="https://thesmartersiptv.com/it/reseller/">
+    <link rel="alternate" hreflang="pt" href="https://thesmartersiptv.com/pt/reseller/">
+    <link rel="alternate" hreflang="pt-BR" href="https://thesmartersiptv.com/pt-br/reseller/">
+    <link rel="alternate" hreflang="nl" href="https://thesmartersiptv.com/nl/reseller/">
+    <link rel="alternate" hreflang="pl" href="https://thesmartersiptv.com/pl/reseller/">
+    <link rel="alternate" hreflang="ar" href="https://thesmartersiptv.com/ar/reseller/">
+    <link rel="alternate" hreflang="ko" href="https://thesmartersiptv.com/ko/reseller/">
+
+    <!-- Schema.org JSON-LD (Breadcrumbs, Service, FAQPage) -->
+    <script type="application/ld+json">
+${JSON.stringify(jsonLd, null, 2)}
+    </script>
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
 
@@ -1761,7 +2008,9 @@ const targetLangs = Object.keys(translations);
 let generatedCount = 0;
 
 targetLangs.forEach(lang => {
-  const dir = path.join(__dirname, '..', 'Iptv The smarters Pro', lang, 'reseller');
+  const dir = lang === 'en'
+    ? path.join(__dirname, '..', 'Iptv The smarters Pro', 'reseller')
+    : path.join(__dirname, '..', 'Iptv The smarters Pro', lang, 'reseller');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }

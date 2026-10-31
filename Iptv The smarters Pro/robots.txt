@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
 
-User-agent: bingbot
-User-agent: msnbot
-User-agent: BingPreview
 User-agent: GPTBot
 User-agent: ClaudeBot
 User-agent: PerplexityBot
