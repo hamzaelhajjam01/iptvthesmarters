@@ -1348,12 +1348,68 @@ const translations = {
 };
 
 // Generator function
-function buildLocalizedResellerHtml(langCode) {
+
+const calcBtnMap = {
+  en: 'Lock In Wholesale Rate on WhatsApp',
+  fr: 'Bloquer le tarif grossiste sur WhatsApp',
+  de: 'Großhandelspreis auf WhatsApp sichern',
+  es: 'Asegurar tarifa mayorista en WhatsApp',
+  ar: 'تثبيت سعر الجملة عبر واتساب',
+  it: "Blocca la tariffa all'ingrosso su WhatsApp",
+  nl: 'Groothandelstarief vastleggen via WhatsApp',
+  pt: 'Garantir tarifa de atacado no WhatsApp',
+  'pt-br': 'Garantir tarifa de atacado no WhatsApp',
+  pl: 'Zablokuj stawkę hurtową na WhatsApp',
+  ko: 'WhatsApp으로 도매 요금 확정하기'
+};
+
+const tier2PackNameMap = {
+  en: 'Business Pack',
+  fr: 'Pack Business',
+  de: 'Business-Paket',
+  es: 'Paquete Business',
+  ar: 'باقة الأعمال',
+  it: 'Pacchetto Business',
+  nl: 'Zakelijk Pakket',
+  pt: 'Pacote Business',
+  'pt-br': 'Pacote Business',
+  pl: 'Pakiet Biznesowy',
+  ko: '비즈니스 팩'
+};
+
+const durHalfYearMap = {
+  en: 'Half-Year (6 months)',
+  fr: 'Semestriel (6 mois)',
+  de: 'Halbjährlich (6 Monate)',
+  es: 'Semestral (6 meses)',
+  ar: 'نصف سنوي (6 أشهر)',
+  it: 'Semestrale (6 mesi)',
+  nl: 'Halfjaarlijks (6 maanden)',
+  pt: 'Semestral (6 meses)',
+  'pt-br': 'Semestral (6 meses)',
+  pl: 'Półroczny (6 miesięcy)',
+  ko: '반기 (6개월)'
+};
+
+const chipsActiveLinesMap = {
+  en: '10,000+ Active Lines',
+  fr: 'Plus de 10 000 lignes actives',
+  de: '10.000+ aktive Anschlüsse',
+  es: 'Más de 10.000 líneas activas',
+  ar: 'أكثر من 10,000 خط نشط',
+  it: 'Oltre 10.000 linee attive',
+  nl: '10.000+ actieve lijnen',
+  pt: 'Mais de 10.000 linhas ativas',
+  'pt-br': 'Mais de 10.000 linhas ativas',
+  pl: 'Ponad 10 000 aktywnych linii',
+  ko: '10,000개 이상의 활성 라인'
+};
+
+function buildModernHeroUIResellerHtml(langCode) {
   const t = translations[langCode];
   if (!t) throw new Error(`Missing translation for ${langCode}`);
 
   const isRtl = t.dir === 'rtl' || langCode === 'ar';
-  const prefix = langCode === 'en' ? '' : `/${langCode}`;
   const canonicalUrl = langCode === 'en' ? 'https://thesmartersiptv.com/reseller/' : `https://thesmartersiptv.com/${langCode}/reseller/`;
 
   const jsonLd = {
@@ -1467,8 +1523,8 @@ function buildLocalizedResellerHtml(langCode) {
   const headerHtml = generateUniversalHeader('/reseller/', langCode);
   const footerHtml = generateUniversalFooter(langCode);
 
-  return `<!DOCTYPE html>
-<html lang="${langCode}" dir="${isRtl ? 'rtl' : 'ltr'}" class="dark scroll-smooth">
+  return `<!doctype html>
+<html lang="${langCode}"${isRtl ? ' dir="rtl"' : ''} class="dark scroll-smooth">
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XFWZSDKJ29"></script>
@@ -1533,6 +1589,7 @@ ${JSON.stringify(jsonLd, null, 2)}
     <link rel="stylesheet" href="/assets/css/heroui.css?v=20261031-footer-v2">
 
     <style>
+      /* Page-specific modern HeroUI enhancements */
       .reseller-hero-glow {
         background: radial-gradient(circle at 50% 0%, rgba(123, 63, 228, 0.22) 0%, transparent 65%);
       }
@@ -1554,407 +1611,461 @@ ${JSON.stringify(jsonLd, null, 2)}
     </style>
     <script id="ais-lang-toggle-init">window.__toggleLangMenu=function(e){var d=(e&&e.target&&e.target.closest&&e.target.closest("details.lang-switch"))||document.querySelector("details.lang-switch");if(d){if(e&&e.target&&(e.target.tagName==="SUMMARY"||e.target.closest("summary")))return;d.open=!d.open;}};</script>
 </head>
-<body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white"${isRtl ? ' dir="rtl"' : ''}>
+<body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">
   <div class="grain-overlay"></div>
   <div class="min-h-screen flex flex-col font-sans antialiased bg-black text-white transition-colors">
-  
   ${headerHtml}
 
   <main class="flex-1">
 
-    <!-- 1. Hero Section -->
-    <section class="relative pt-12 pb-20 overflow-hidden reseller-hero-glow border-b border-zinc-900/60">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-6 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-          ${t.badge}
+    <!-- ═══════════════ HERO SECTION (Matches Features & Pricing) ═══════════════ -->
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto reseller-hero-glow">
+      <div class="text-center mb-12">
+        <div class="flex flex-col items-center justify-center gap-4 mb-4">
+          <div class="w-0.5 h-6 bg-purple-500"></div>
+          <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.badge}</span>
         </div>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
           ${t.h1}
         </h1>
-        <p class="text-zinc-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed font-normal">
+        <p class="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed mb-6">
           ${t.heroP}
         </p>
 
-        <!-- Feature Chips -->
-        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 text-xs font-semibold text-zinc-300">
-          <span class="px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800">${t.chips.noBuffer}</span>
-          <span class="px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800">${t.chips.noExpire}</span>
-          <span class="px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800">${t.chips.uptime}</span>
-          <span class="px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800">${t.chips.support}</span>
+        <!-- HeroUI High-Intent SEO Chips (Identical to Pricing/Features) -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-4 max-w-3xl mx-auto">
+          <span class="heroui-chip heroui-chip-primary">${t.chips.uptime}</span>
+          <span class="heroui-chip heroui-chip-default">${t.chips.noExpire}</span>
+          <span class="heroui-chip heroui-chip-default">${chipsActiveLinesMap[langCode] || '10,000+ Active Lines'}</span>
+          <span class="heroui-chip heroui-chip-secondary">${t.chips.support}</span>
         </div>
 
-        <!-- Hero CTAs -->
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="#pricing-tiers" class="btn-buy-now px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/30 hover:scale-105">
-            <span>${t.btnPackages}</span>
-          </a>
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
           <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20a%20free%2024h%20reseller%20trial%20line" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
-            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
             <span>${t.btnTrial}</span>
           </a>
-        </div>
-        <p class="text-xs text-zinc-400 mt-4">${t.trustText}</p>
-      </div>
-    </section>
-
-    <!-- 2. Benefits Grid -->
-    <section class="py-20 border-b border-zinc-900/60 bg-zinc-950/40">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">${t.benefitsBadge}</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4 tracking-tight">${t.benefitsTitle}</h2>
-          <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">${t.benefitsSub}</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/40 transition-all hover:translate-y-[-2px]">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">${t.card1Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.card1Desc}</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/40 transition-all hover:translate-y-[-2px]">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">${t.card2Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.card2Desc}</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/40 transition-all hover:translate-y-[-2px]">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">${t.card3Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.card3Desc}</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-purple-500/40 transition-all hover:translate-y-[-2px]">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">${t.card4Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.card4Desc}</p>
-          </div>
+          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm border border-zinc-700 bg-zinc-900/90 hover:bg-zinc-800 text-white inline-flex items-center gap-2 transition-all shadow-md">
+            <span>${t.btnPackages}</span>
+            <svg class="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- 3. Credit System Process -->
-    <section class="py-20 border-b border-zinc-900/60">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">${t.processBadge}</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4 tracking-tight">${t.processTitle}</h2>
-          <p class="text-zinc-400 text-sm sm:text-base">${t.processSub}</p>
+    <!-- ═══════════════ WHY CHOOSE US (4 Feature Cards matching Features page) ═══════════════ -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="flex flex-col items-center justify-center gap-2 mb-3">
+          <div class="w-0.5 h-6 bg-cyan-500"></div>
+          <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.benefitsBadge}</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">${t.benefitsTitle}</h2>
+        <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-2">
+          ${t.benefitsSub}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal-on-scroll group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-purple-500/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">${t.card1Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.card1Desc}</p>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 relative">
-            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-300 font-bold text-sm flex items-center justify-center mb-4 border border-purple-500/30">1</span>
-            <h3 class="text-base font-bold text-white mb-2">${t.step1Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.step1Desc}</p>
+        <div class="reveal-on-scroll group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-purple-500/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">${t.card2Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.card2Desc}</p>
           </div>
+        </div>
 
-          <div class="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 relative">
-            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-300 font-bold text-sm flex items-center justify-center mb-4 border border-purple-500/30">2</span>
-            <h3 class="text-base font-bold text-white mb-2">${t.step2Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.step2Desc}</p>
+        <div class="reveal-on-scroll group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-purple-500/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">${t.card3Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.card3Desc}</p>
           </div>
+        </div>
 
-          <div class="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 relative">
-            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-300 font-bold text-sm flex items-center justify-center mb-4 border border-purple-500/30">3</span>
-            <h3 class="text-base font-bold text-white mb-2">${t.step3Title}</h3>
-            <p class="text-xs text-zinc-400 leading-relaxed">${t.step3Desc}</p>
+        <div class="reveal-on-scroll group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-purple-500/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">${t.card4Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.card4Desc}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. Pricing Tiers Section -->
-    <section id="pricing-tiers" class="py-24 border-b border-zinc-900/60 bg-zinc-950/60">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">${t.pricingBadge}</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4 tracking-tight">${t.pricingTitle}</h2>
-          <p class="text-xs text-zinc-400 tracking-wider font-semibold">${t.pricingSub}</p>
+    <!-- ═══════════════ HOW IT WORKS (3 Step Cards) ═══════════════ -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="flex flex-col items-center justify-center gap-2 mb-3">
+          <div class="w-0.5 h-6 bg-purple-500"></div>
+          <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.processBadge}</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">${t.processTitle}</h2>
+        <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-2">
+          ${t.processSub}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center font-bold text-lg mb-6">1</div>
+            <h3 class="text-xl font-bold text-white mb-2">${t.step1Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.step1Desc}</p>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Tier 1: Starter -->
-          <div class="p-6 rounded-3xl bg-zinc-900/40 border border-zinc-800 flex flex-col justify-between hover:border-zinc-700 transition-all">
-            <div>
-              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-zinc-800 text-zinc-300 mb-4">${t.tier1.badge}</span>
-              <h3 class="text-xl font-extrabold text-white mb-1">${t.tier1.credits}</h3>
-              <p class="text-xs text-zinc-400 mb-6 leading-relaxed">${t.tier1.sub}</p>
-              <div class="mb-6">
-                <span class="text-3xl font-extrabold text-white">${t.tier1.price}</span>
-                <span class="text-xs text-zinc-400 block mt-1">${t.tier1.rate}</span>
-              </div>
-              <ul class="space-y-3 text-xs text-zinc-300 mb-8 border-t border-zinc-800 pt-6">
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier1.f1}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier1.f2}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier1.f3}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier1.f4}</span>
-                </li>
-              </ul>
-            </div>
-            <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Starter%20Reseller%20Pack%20(20%20credits%20%2499)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
-              <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
-              <span>${t.tier1.btn}</span>
-            </a>
+        <div class="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center font-bold text-lg mb-6">2</div>
+            <h3 class="text-xl font-bold text-white mb-2">${t.step2Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.step2Desc}</p>
           </div>
+        </div>
 
-          <!-- Tier 2: Business (Featured) -->
-          <div class="p-6 rounded-3xl bg-zinc-900/60 border-2 border-purple-500/80 flex flex-col justify-between relative shadow-xl shadow-purple-500/10">
-            <div class="absolute -top-3.5 ${isRtl ? 'right-6' : 'left-6'}">
-              <span class="px-3.5 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md">${t.tier2.badge}</span>
-            </div>
-            <div>
-              <div class="mt-2">
-                <h3 class="text-xl font-extrabold text-white mb-1">${t.tier2.credits}</h3>
-                <p class="text-xs text-zinc-400 mb-6 leading-relaxed">${t.tier2.sub}</p>
-              </div>
-              <div class="mb-6">
-                <span class="text-3xl font-extrabold text-white">${t.tier2.price}</span>
-                <span class="text-xs text-purple-300 block mt-1">${t.tier2.rate}</span>
-              </div>
-              <ul class="space-y-3 text-xs text-zinc-300 mb-8 border-t border-zinc-800 pt-6">
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier2.f1}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier2.f2}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier2.f3}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier2.f4}</span>
-                </li>
-              </ul>
-            </div>
-            <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Business%20Reseller%20Pack%20(50%20credits%20%24289)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
-              <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
-              <span>${t.tier2.btn}</span>
-            </a>
-          </div>
-
-          <!-- Tier 3: Professional -->
-          <div class="p-6 rounded-3xl bg-zinc-900/40 border border-zinc-800 flex flex-col justify-between hover:border-zinc-700 transition-all">
-            <div>
-              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-zinc-800 text-zinc-300 mb-4">${t.tier3.badge}</span>
-              <h3 class="text-xl font-extrabold text-white mb-1">${t.tier3.credits}</h3>
-              <p class="text-xs text-zinc-400 mb-6 leading-relaxed">${t.tier3.sub}</p>
-              <div class="mb-6">
-                <span class="text-3xl font-extrabold text-white">${t.tier3.price}</span>
-                <span class="text-xs text-zinc-400 block mt-1">${t.tier3.rate}</span>
-              </div>
-              <ul class="space-y-3 text-xs text-zinc-300 mb-8 border-t border-zinc-800 pt-6">
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier3.f1}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier3.f2}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier3.f3}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier3.f4}</span>
-                </li>
-              </ul>
-            </div>
-            <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Professional%20Reseller%20Pack%20(150%20credits%20%24649)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
-              <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
-              <span>${t.tier3.btn}</span>
-            </a>
-          </div>
-
-          <!-- Tier 4: Enterprise -->
-          <div class="p-6 rounded-3xl bg-zinc-900/40 border border-zinc-800 flex flex-col justify-between hover:border-zinc-700 transition-all">
-            <div>
-              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-zinc-800 text-zinc-300 mb-4">${t.tier4.badge}</span>
-              <h3 class="text-xl font-extrabold text-white mb-1">${t.tier4.credits}</h3>
-              <p class="text-xs text-zinc-400 mb-6 leading-relaxed">${t.tier4.sub}</p>
-              <div class="mb-6">
-                <span class="text-3xl font-extrabold text-white">${t.tier4.price}</span>
-                <span class="text-xs text-zinc-400 block mt-1">${t.tier4.rate}</span>
-              </div>
-              <ul class="space-y-3 text-xs text-zinc-300 mb-8 border-t border-zinc-800 pt-6">
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier4.f1}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier4.f2}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier4.f3}</span>
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>${t.tier4.f4}</span>
-                </li>
-              </ul>
-            </div>
-            <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Enterprise%20Reseller%20Pack%20(300%20credits%20%241199)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
-              <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
-              <span>${t.tier4.btn}</span>
-            </a>
+        <div class="bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center font-bold text-lg mb-6">3</div>
+            <h3 class="text-xl font-bold text-white mb-2">${t.step3Title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">${t.step3Desc}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. Interactive Profit Calculator -->
-    <section class="py-20 border-b border-zinc-900/60">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 sm:p-12 rounded-3xl bg-zinc-900/40 border border-zinc-800/80 shadow-2xl">
-          <div class="text-center max-w-xl mx-auto mb-10">
-            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">${t.calcBadge}</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1 mb-3">${t.calcTitle}</h2>
-            <p class="text-xs sm:text-sm text-zinc-400">${t.calcSub}</p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <label for="calc-clients" class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">${t.lblClients}</label>
-              <input type="number" id="calc-clients" value="50" min="1" max="10000" class="calc-input">
-            </div>
-            <div>
-              <label for="calc-price" class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">${t.lblPrice}</label>
-              <input type="number" id="calc-price" value="15" min="1" max="100" class="calc-input">
-            </div>
-            <div>
-              <label for="calc-duration" class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">${t.lblDuration}</label>
-              <select id="calc-duration" class="calc-input">
-                <option value="1" selected>${t.durMonthly}</option>
-                <option value="3">${t.durQuarterly}</option>
-                <option value="12">${t.durAnnual}</option>
-              </select>
-            </div>
-            <div>
-              <label for="calc-tier" class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">${t.lblTier}</label>
-              <select id="calc-tier" class="calc-input">
-                <option value="4.95">${t.tierOptStarter}</option>
-                <option value="5.78" selected>${t.tierOptBiz}</option>
-                <option value="4.33">${t.tierOptPro}</option>
-                <option value="3.99">${t.tierOptEnt}</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Calculator Results -->
-          <div class="p-6 rounded-2xl bg-black/60 border border-zinc-800 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div>
-              <span class="text-[11px] text-zinc-400 uppercase tracking-wider block mb-1">${t.resRevenue}</span>
-              <span id="res-revenue" class="text-xl sm:text-2xl font-black text-white">$750</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-zinc-400 uppercase tracking-wider block mb-1">${t.resCost}</span>
-              <span id="res-cost" class="text-xl sm:text-2xl font-black text-zinc-300">$289</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-zinc-400 uppercase tracking-wider block mb-1">${t.resProfit}</span>
-              <span id="res-profit" class="text-xl sm:text-2xl font-black text-emerald-400">$461</span>
-            </div>
-            <div>
-              <span class="text-[11px] text-zinc-400 uppercase tracking-wider block mb-1">${t.resMargin}</span>
-              <span id="res-margin" class="text-xl sm:text-2xl font-black text-purple-400">61.5%</span>
-            </div>
-          </div>
-          <p class="text-[11px] text-zinc-400 text-center mt-4">${t.calcFootnote}</p>
+    <!-- ═══════════════ RESELLER PRICING TIERS (Identical to Pricing page cards) ═══════════════ -->
+    <section id="pricing-tiers" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
+      <div class="text-center mb-16">
+        <div class="flex flex-col items-center justify-center gap-4 mb-4">
+          <div class="w-0.5 h-6 bg-purple-500"></div>
+          <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.pricingBadge}</span>
         </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">${t.pricingTitle}</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto text-base sm:text-lg">
+          ${t.pricingSub}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Tier 1: Starter -->
+        <div class="reveal-on-scroll bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between hover:border-zinc-700/80 transition-all duration-300">
+          <div>
+            <span class="inline-flex px-3 py-1 rounded-full text-xs font-bold bg-zinc-800 text-zinc-400 border border-zinc-700 mb-4">${t.tier1.badge}</span>
+            <h3 class="text-2xl font-bold text-white mb-1">${t.tier1.credits}</h3>
+            <p class="text-zinc-500 text-xs mb-6">${t.tier1.sub}</p>
+            <div class="text-4xl font-extrabold text-white mb-1">${t.tier1.price}</div>
+            <span class="text-xs text-zinc-400 font-medium">(${t.tier1.rate})</span>
+
+            <div class="border-t border-zinc-800/80 my-6"></div>
+
+            <ul class="space-y-3 text-sm text-zinc-300">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier1.f1}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier1.f2}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier1.f3}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier1.f4}</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Starter%20Reseller%20Pack%20(20%20credits%20%2499)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${t.tier1.btn}</span>
+          </a>
+        </div>
+
+        <!-- Tier 2: Business (Most Popular - Highlighted) -->
+        <div class="reveal-on-scroll relative bg-gradient-to-b from-purple-950/30 to-zinc-900/60 backdrop-blur-sm border border-purple-500/60 rounded-3xl p-8 flex flex-col justify-between shadow-2xl shadow-purple-500/15">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-md">
+            ${t.tier2.badge}
+          </div>
+          <div>
+            <span class="inline-flex px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 mb-4 mt-2">${tier2PackNameMap[langCode] || 'Business Pack'}</span>
+            <h3 class="text-2xl font-bold text-white mb-1">${t.tier2.credits}</h3>
+            <p class="text-zinc-400 text-xs mb-6">${t.tier2.sub}</p>
+            <div class="text-4xl font-extrabold text-white mb-1">${t.tier2.price}</div>
+            <span class="text-xs text-purple-400 font-medium">(${t.tier2.rate})</span>
+
+            <div class="border-t border-purple-500/30 my-6"></div>
+
+            <ul class="space-y-3 text-sm text-zinc-200">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier2.f1}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier2.f2}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier2.f3}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier2.f4}</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Business%20Reseller%20Pack%20(50%20credits%20%24289)" target="_blank" rel="noopener noreferrer" class="mt-8 w-full py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-center transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-purple-600/40" style="color:#ffffff!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${t.tier2.btn}</span>
+          </a>
+        </div>
+
+        <!-- Tier 3: Professional -->
+        <div class="reveal-on-scroll bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between hover:border-zinc-700/80 transition-all duration-300">
+          <div>
+            <span class="inline-flex px-3 py-1 rounded-full text-xs font-bold bg-zinc-800 text-zinc-400 border border-zinc-700 mb-4">${t.tier3.badge}</span>
+            <h3 class="text-2xl font-bold text-white mb-1">${t.tier3.credits}</h3>
+            <p class="text-zinc-500 text-xs mb-6">${t.tier3.sub}</p>
+            <div class="text-4xl font-extrabold text-white mb-1">${t.tier3.price}</div>
+            <span class="text-xs text-zinc-400 font-medium">(${t.tier3.rate})</span>
+
+            <div class="border-t border-zinc-800/80 my-6"></div>
+
+            <ul class="space-y-3 text-sm text-zinc-300">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier3.f1}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier3.f2}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier3.f3}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier3.f4}</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Pro%20Reseller%20Pack%20(150%20credits%20%24649)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${t.tier3.btn}</span>
+          </a>
+        </div>
+
+        <!-- Tier 4: Enterprise -->
+        <div class="reveal-on-scroll bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 flex flex-col justify-between hover:border-zinc-700/80 transition-all duration-300">
+          <div>
+            <span class="inline-flex px-3 py-1 rounded-full text-xs font-bold bg-zinc-800 text-zinc-400 border border-zinc-700 mb-4">${t.tier4.badge}</span>
+            <h3 class="text-2xl font-bold text-white mb-1">${t.tier4.credits}</h3>
+            <p class="text-zinc-500 text-xs mb-6">${t.tier4.sub}</p>
+            <div class="text-4xl font-extrabold text-white mb-1">${t.tier4.price}</div>
+            <span class="text-xs text-zinc-400 font-medium">(${t.tier4.rate})</span>
+
+            <div class="border-t border-zinc-800/80 my-6"></div>
+
+            <ul class="space-y-3 text-sm text-zinc-300">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier4.f1}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier4.f2}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier4.f3}</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#A78BFA"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>${t.tier4.f4}</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20want%20to%20buy%20the%20Enterprise%20Reseller%20Pack%20(300%20credits%20%241199)" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green mt-8 w-full py-3.5 rounded-full font-bold text-sm text-white text-center transition-all flex items-center justify-center gap-2.5" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.4)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${t.tier4.btn}</span>
+          </a>
+        </div>
+
       </div>
     </section>
 
-    <!-- 6. FAQs Section -->
-    <section class="py-20 border-b border-zinc-900/60">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-xl mx-auto mb-12">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">${t.faqBadge}</span>
-          <h2 class="text-3xl font-extrabold text-white mt-1 mb-3">${t.faqTitle}</h2>
-          <p class="text-xs sm:text-sm text-zinc-400">${t.faqSub}</p>
-        </div>
-
-        <div class="space-y-4">
-          <details class="group p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/80 transition-colors">
-            <summary class="font-bold text-sm sm:text-base text-white cursor-pointer list-none flex items-center justify-between">
-              <span>${t.q1}</span>
-              <span class="transition group-open:rotate-180 text-zinc-400 text-xs">▼</span>
-            </summary>
-            <p class="text-xs sm:text-sm text-zinc-400 mt-4 leading-relaxed">${t.a1}</p>
-          </details>
-
-          <details class="group p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/80 transition-colors">
-            <summary class="font-bold text-sm sm:text-base text-white cursor-pointer list-none flex items-center justify-between">
-              <span>${t.q2}</span>
-              <span class="transition group-open:rotate-180 text-zinc-400 text-xs">▼</span>
-            </summary>
-            <p class="text-xs sm:text-sm text-zinc-400 mt-4 leading-relaxed">${t.a2}</p>
-          </details>
-
-          <details class="group p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/80 transition-colors">
-            <summary class="font-bold text-sm sm:text-base text-white cursor-pointer list-none flex items-center justify-between">
-              <span>${t.q3}</span>
-              <span class="transition group-open:rotate-180 text-zinc-400 text-xs">▼</span>
-            </summary>
-            <p class="text-xs sm:text-sm text-zinc-400 mt-4 leading-relaxed">${t.a3}</p>
-          </details>
-
-          <details class="group p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/80 transition-colors">
-            <summary class="font-bold text-sm sm:text-base text-white cursor-pointer list-none flex items-center justify-between">
-              <span>${t.q4}</span>
-              <span class="transition group-open:rotate-180 text-zinc-400 text-xs">▼</span>
-            </summary>
-            <p class="text-xs sm:text-sm text-zinc-400 mt-4 leading-relaxed">${t.a4}</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Bottom Conversion Banner -->
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="p-10 sm:p-14 rounded-3xl bg-gradient-to-b from-zinc-900/90 to-zinc-950 border border-zinc-800 shadow-2xl relative overflow-hidden">
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">${t.ctaTitle}</h2>
-          <p class="text-zinc-400 text-sm max-w-xl mx-auto mb-8 leading-relaxed">
-            ${t.ctaDesc}
+    <!-- ═══════════════ PROFIT CALCULATOR (Modern HeroUI Card Container) ═══════════════ -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="max-w-4xl mx-auto bg-zinc-900/40 backdrop-blur-sm border border-zinc-800/80 rounded-3xl p-6 sm:p-10 shadow-2xl">
+        <div class="text-center mb-8">
+          <div class="flex flex-col items-center justify-center gap-2 mb-2">
+            <div class="w-0.5 h-6 bg-emerald-500"></div>
+            <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.calcBadge}</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">${t.calcTitle}</h2>
+          <p class="text-zinc-400 text-sm max-w-lg mx-auto mt-2">
+            ${t.calcSub}
           </p>
-          <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="https://wa.me/18042804332?text=Hello%2C%20I%20am%20ready%20to%20start%20my%20reseller%20business" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
-              <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;">
-              <span>${t.ctaBtnWa}</span>
-            </a>
-            <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/25">
-              <span>${t.ctaBtnPackages}</span>
-            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">${t.lblClients}</label>
+            <input type="number" id="calc-clients" value="50" min="5" max="5000" class="calc-input" />
           </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">${t.lblPrice}</label>
+            <input type="number" id="calc-price" value="14" min="8" max="50" class="calc-input" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">${t.lblTier}</label>
+            <select id="calc-tier" class="calc-input">
+              <option value="4.95">${t.tierOptStarter}</option>
+              <option value="5.78" selected>${t.tierOptBiz}</option>
+              <option value="4.33">${t.tierOptPro}</option>
+              <option value="3.99">${t.tierOptEnt}</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">${t.lblDuration}</label>
+            <select id="calc-duration" class="calc-input">
+              <option value="1" selected>${t.durMonthly}</option>
+              <option value="3">${t.durQuarterly}</option>
+              <option value="6">${durHalfYearMap[langCode] || 'Half-Year (6 months)'}</option>
+              <option value="12">${t.durAnnual}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 mb-6 text-center">
+          <div>
+            <span class="block text-xs font-medium text-zinc-500 mb-1">${t.resRevenue}</span>
+            <span id="res-revenue" class="text-xl sm:text-2xl font-bold text-white">$700</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-zinc-500 mb-1">${t.resCost}</span>
+            <span id="res-cost" class="text-xl sm:text-2xl font-bold text-zinc-400">$289</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-zinc-500 mb-1">${t.resProfit}</span>
+            <span id="res-profit" class="text-xl sm:text-2xl font-bold text-emerald-400">$411</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-zinc-500 mb-1">${t.resMargin}</span>
+            <span id="res-margin" class="text-xl sm:text-2xl font-bold text-purple-400">58.7%</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20used%20the%20profit%20calculator%20and%20want%20to%20start%20my%20reseller%20account" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${calcBtnMap[langCode] || 'Lock In Wholesale Rate on WhatsApp'}</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FAQ SECTION (Matches Pricing / Features) ═══════════════ -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="flex flex-col items-center justify-center gap-4 mb-4">
+          <div class="w-0.5 h-6 bg-purple-500"></div>
+          <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">${t.faqBadge}</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">${t.faqTitle}</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-2xl p-6 transition-colors open:border-purple-500/40">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-lg text-white list-none">
+            <span>${t.q1}</span>
+            <span class="transition group-open:rotate-180 text-zinc-400">
+              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <p class="text-zinc-400 text-sm leading-relaxed mt-4">
+            ${t.a1}
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-2xl p-6 transition-colors open:border-purple-500/40">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-lg text-white list-none">
+            <span>${t.q2}</span>
+            <span class="transition group-open:rotate-180 text-zinc-400">
+              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <p class="text-zinc-400 text-sm leading-relaxed mt-4">
+            ${t.a2}
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-2xl p-6 transition-colors open:border-purple-500/40">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-lg text-white list-none">
+            <span>${t.q3}</span>
+            <span class="transition group-open:rotate-180 text-zinc-400">
+              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <p class="text-zinc-400 text-sm leading-relaxed mt-4">
+            ${t.a3}
+          </p>
+        </details>
+
+        <details class="group bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-2xl p-6 transition-colors open:border-purple-500/40">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-lg text-white list-none">
+            <span>${t.q4}</span>
+            <span class="transition group-open:rotate-180 text-zinc-400">
+              <svg fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <p class="text-zinc-400 text-sm leading-relaxed mt-4">
+            ${t.a4}
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FINAL CALL TO ACTION (Matching Pricing & Features) ═══════════════ -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-950/40 via-zinc-900 to-indigo-950/40 border border-purple-500/30 p-8 sm:p-12 text-center">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">${t.ctaTitle}</h2>
+        <p class="text-zinc-400 text-base max-w-xl mx-auto mb-8 leading-relaxed">
+          ${t.ctaDesc}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="https://wa.me/18042804332?text=Hello%2C%20I%20am%20ready%20to%20start%20my%20reseller%20business" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center gap-2.5 transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important;">
+            <img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;object-fit:contain;">
+            <span>${t.ctaBtnWa}</span>
+          </a>
+          <a href="#pricing-tiers" class="px-8 py-3.5 rounded-full font-bold text-sm bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-600/30" style="color:#ffffff!important;">
+            <span>${t.ctaBtnPackages}</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -1997,27 +2108,30 @@ ${JSON.stringify(jsonLd, null, 2)}
       calcUpdate();
     })();
   </script>
-  <script src="/assets/js/site-interactions.js?v=20261030-nav2" defer></script>
+  <script src="/assets/js/site-interactions.js?v=20261031-footer-v2" defer></script>
   <script src="/assets/js/support-chat.js" defer></script>
 </body>
 </html>`;
 }
 
-// Generate for all languages
-const targetLangs = Object.keys(translations);
-let generatedCount = 0;
+// 2. Generate and write all 11 reseller pages
+const targetLangs = ['en', 'fr', 'de', 'es', 'ar', 'it', 'nl', 'pt', 'pt-br', 'pl', 'ko'];
+let count = 0;
 
 targetLangs.forEach(lang => {
-  const dir = lang === 'en'
+  const targetDir = lang === 'en'
     ? path.join(__dirname, '..', 'Iptv The smarters Pro', 'reseller')
     : path.join(__dirname, '..', 'Iptv The smarters Pro', lang, 'reseller');
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+
+  if (!fs.existsSync(targetDir)) {
+    fs.mkdirSync(targetDir, { recursive: true });
   }
-  const html = buildLocalizedResellerHtml(lang);
-  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
-  console.log(`✓ Generated fully translated reseller page for: ${lang}`);
-  generatedCount++;
+
+  const html = buildModernHeroUIResellerHtml(lang);
+  const outPath = path.join(targetDir, 'index.html');
+  fs.writeFileSync(outPath, html, 'utf8');
+  console.log(`✓ [${lang}] Generated modern HeroUI reseller page at: ${outPath} (${html.length} bytes)`);
+  count++;
 });
 
-console.log(`\nSuccessfully generated ${generatedCount} localized reseller pages!`);
+console.log(`\n🎉 Successfully generated all ${count} reseller pages with 100% HeroUI design parity!`);
