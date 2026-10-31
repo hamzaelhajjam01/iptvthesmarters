@@ -38,12 +38,10 @@ export default function ContactView({ lang }: ContactViewProps) {
                 Fastest way to get help with your Xtream Codes credentials, trial activation, or playlist sync. Typical response time is under 3 minutes.
               </p>
               <a
-                href="https://wa.me/212600000000?text=Hello%2C%20I%20need%20assistance%20with%20IPTV%20Smarters%20Pro."
+                href="https://wa.me/18042804332?text=Hello%2C%20I%20need%20assistance%20with%20IPTV%20Smarters%20Pro."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-600 hover:bg-green-500 text-white font-bold text-sm transition-colors"
-              >
-                <span>Open WhatsApp Support</span>
+                className="btn-whatsapp-green inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm text-white transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 6px 20px rgba(37,211,102,0.4)" }}><img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] rounded-full shrink-0" /><span>Open WhatsApp Support</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

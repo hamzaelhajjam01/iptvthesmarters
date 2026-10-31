@@ -118,12 +118,10 @@ export default function GuideDetailView({ lang, slug }: GuideDetailViewProps) {
                   View 4K Pricing Plans
                 </Link>
                 <a
-                  href="https://wa.me/212600000000"
+                  href="https://wa.me/18042804332"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-zinc-700 bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 font-semibold text-sm transition-all"
-                >
-                  Chat on WhatsApp
+                  className="btn-whatsapp-green w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center justify-center gap-2.5 transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 8px 24px rgba(37,211,102,0.45)" }}><img src="/assets/images/whatsapp.png" width={20} height={20} alt="WhatsApp" className="w-5 h-5 rounded-full shrink-0" /><span>Chat on WhatsApp</span>
                 </a>
               </div>
             </div>

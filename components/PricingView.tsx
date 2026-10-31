@@ -13,7 +13,7 @@ const PLANS = [
     price: '$14.95',
     period: '/ 1 month',
     popular: false,
-    checkoutUrl: 'https://wa.me/212600000000?text=' + encodeURIComponent('I want to order the 1 Month IPTV Smarters Pro 4K plan.')
+    checkoutUrl: 'https://wa.me/18042804332?text=' + encodeURIComponent('I want to order the 1 Month IPTV Smarters Pro 4K plan.')
   },
   {
     name: '3 Months',
@@ -21,7 +21,7 @@ const PLANS = [
     price: '$29.95',
     period: '/ 3 months',
     popular: false,
-    checkoutUrl: 'https://wa.me/212600000000?text=' + encodeURIComponent('I want to order the 3 Months IPTV Smarters Pro 4K plan.')
+    checkoutUrl: 'https://wa.me/18042804332?text=' + encodeURIComponent('I want to order the 3 Months IPTV Smarters Pro 4K plan.')
   },
   {
     name: '6 Months',
@@ -29,7 +29,7 @@ const PLANS = [
     price: '$44.95',
     period: '/ 6 months',
     popular: false,
-    checkoutUrl: 'https://wa.me/212600000000?text=' + encodeURIComponent('I want to order the 6 Months IPTV Smarters Pro 4K plan.')
+    checkoutUrl: 'https://wa.me/18042804332?text=' + encodeURIComponent('I want to order the 6 Months IPTV Smarters Pro 4K plan.')
   },
   {
     name: '12 Months',
@@ -37,7 +37,7 @@ const PLANS = [
     price: '$64.95',
     period: '/ 12 months',
     popular: true,
-    checkoutUrl: 'https://wa.me/212600000000?text=' + encodeURIComponent('I want to order the 12 Months Best Value IPTV Smarters Pro 4K plan.')
+    checkoutUrl: 'https://wa.me/18042804332?text=' + encodeURIComponent('I want to order the 12 Months Best Value IPTV Smarters Pro 4K plan.')
   }
 ];
 
@@ -167,7 +167,7 @@ export default function PricingView({ lang }: PricingViewProps) {
             </p>
           </div>
           <a
-            href="https://wa.me/212600000000?text=Hello%2C%20I%20would%20like%20to%20request%20a%20free%2024h%20trial%20for%20IPTV%20Smarters%20Pro."
+            href="https://wa.me/18042804332?text=Hello%2C%20I%20would%20like%20to%20request%20a%20free%2024h%20trial%20for%20IPTV%20Smarters%20Pro."
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 px-8 py-3.5 rounded-full bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 transition-colors"

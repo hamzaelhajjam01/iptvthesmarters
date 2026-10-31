@@ -45,12 +45,12 @@ export default function HomeView({ lang }: HomeViewProps) {
               </svg>
             </Link>
             <a
-              href="https://wa.me/212600000000?text=Hello%2C%20I%20would%20like%20to%20request%20a%20free%2024h%20trial%20for%20IPTV%20Smarters%20Pro."
+              href="https://wa.me/18042804332?text=Hello%2C%20I%20would%20like%20to%20request%20a%20free%2024h%20trial%20for%20IPTV%20Smarters%20Pro."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-200 font-semibold text-sm transition-all"
+              className="btn-whatsapp-green w-full sm:w-auto px-8 py-4 rounded-full font-bold text-sm text-white inline-flex items-center justify-center gap-2.5 transition-all shadow-lg" style={{ backgroundColor: "#25D366", color: "#ffffff", boxShadow: "0 8px 24px rgba(37,211,102,0.45)" }}"
             >
-              {t.hero.trial}
+              <img src="/assets/images/whatsapp.png" width={22} height={22} alt="WhatsApp" className="w-[22px] h-[22px] rounded-full shrink-0" /><span>{t.hero.trial}</span>
             </a>
           </div>
 

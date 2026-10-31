@@ -8,7 +8,7 @@ const icons={
   plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   send:'<svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
   bot:'<svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M9 8V5h6v3M9 13h.01M15 13h.01M9 18v2M15 18v2M3 12h2M19 12h2"/></svg>',
-  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.8 2.53 1.09 2.53.73 2.98.69.46-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.11-.23-.17-.48-.3"/></svg>'
+  wa:'<img src="/assets/images/whatsapp.png" width="24" height="24" alt="WhatsApp" class="sf3-wa-img" style="width:24px;height:24px;border-radius:50%;display:inline-block;vertical-align:middle;flex-shrink:0;">'
 };
 const css=document.createElement('style');css.textContent=`
 .sf3-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -17,7 +17,7 @@ const css=document.createElement('style');css.textContent=`
 .sf3-float:focus-visible,#sf3 button:focus-visible,#sf3 input:focus-visible{outline:3px solid #ffb3c5;outline-offset:2px}
 #sf3-top{bottom:96px;width:48px;height:48px;border-radius:50%!important}
 #sf3-open{bottom:24px;width:60px;height:60px;border-radius:50%!important;background:#25D366!important;box-shadow:0 8px 24px rgba(37,211,102,0.45)!important}
-#sf3-open svg{width:30px;height:30px;stroke-width:2.2}
+#sf3-open svg{width:30px;height:30px;stroke-width:2.2}#sf3-open .sf3-wa-img{width:36px!important;height:36px!important;display:block;margin:auto}
 #sf3{position:fixed;right:24px;bottom:101px;z-index:10001;width:430px;height:min(680px,calc(100vh - 125px));display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#111;border:1px solid #d9d9df;border-radius:25px;box-shadow:0 24px 85px #0008;font:16px/1.4 Arial,sans-serif}
 #sf3[hidden]{display:none}
 #sf3 *{box-sizing:border-box}
