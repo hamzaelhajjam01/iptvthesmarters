@@ -132,7 +132,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
               </li>
               <li>
                 <Link href={`${prefix}pricing/`} className="hover:text-white transition-colors tappable">
-                  Pricing Plans
+                  Buy IPTV Subscription
                 </Link>
               </li>
               <li>
@@ -149,6 +149,11 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
               <li>
                 <Link href={`${prefix}products/`} className="hover:text-white transition-colors tappable">
                   Product Directory
+                </Link>
+              </li>
+              <li>
+                <Link href={`${prefix}guides/how-to-setup-iptv-smarters-pro-on-firestick/`} className="hover:text-white transition-colors tappable">
+                  Best IPTV for Firestick
                 </Link>
               </li>
               <li>
