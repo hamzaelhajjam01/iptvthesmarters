@@ -16,8 +16,8 @@ export default function HeroSection() {
           </div>
 
           <h1 className="hero-title hero-fade-up" style={{ animationDelay: '0.15s' }}>
-            IPTV Smarters Pro
-            <span className="hero-title-accent">Television, without limits.</span>
+            IPTV Smarters Pro Subscription
+            <span className="hero-title-accent">Best 4K IPTV Service — Television, Without Limits</span>
           </h1>
 
           <p className="hero-sub hero-fade-up" style={{ animationDelay: '0.25s' }}>

@@ -5,8 +5,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thesmartersiptv.com'),
-  title: 'The Smarters IPTV — Best IPTV Smarters Pro 4K Subscription (2026)',
-  description: 'Official setup guides and top-rated IPTV Smarters Pro 4K subscription. Stream 25,000+ live channels, 100,000+ VOD movies with anti-freeze and instant Xtream Codes activation.',
+  title: 'IPTV Smarters Pro Subscription — Best 4K IPTV Service 2026',
+  description: 'Official IPTV Smarters Pro 4K subscription with instant Xtream Codes activation. Stream 25,000+ live TV channels, 100,000+ VODs with anti-freeze and 24/7 support.',
   icons: {
     icon: '/favicon.ico',
   },
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://thesmartersiptv.com/',
     siteName: 'IPTV Smarters Pro',
-    title: 'The Smarters IPTV — Best IPTV Smarters Pro 4K Subscription (2026)',
-    description: 'Official setup guides and top-rated IPTV Smarters Pro 4K subscription. Stream 25,000+ live channels, 100,000+ VOD movies with anti-freeze and instant Xtream Codes activation.',
+    title: 'IPTV Smarters Pro Subscription — Best 4K IPTV Service 2026',
+    description: 'Official IPTV Smarters Pro 4K subscription with instant Xtream Codes activation. Stream 25,000+ live TV channels, 100,000+ VODs with anti-freeze and 24/7 support.',
     images: [{ url: '/og-image.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Smarters IPTV — Best IPTV Smarters Pro 4K Subscription (2026)',
+    title: 'IPTV Smarters Pro Subscription — Best 4K IPTV Service 2026',
     description: 'Official setup guides and top-rated IPTV Smarters Pro 4K subscription.',
     images: ['/og-image.jpg'],
   },

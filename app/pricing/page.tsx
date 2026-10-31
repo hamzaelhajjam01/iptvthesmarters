@@ -5,8 +5,8 @@ import Footer from '@/components/Footer';
 import PricingSection from '@/components/home/PricingSection';
 
 export const metadata: Metadata = {
-  title: 'Buy IPTV Smarters Pro 4K Subscription — Best Pricing Plans 2026',
-  description: 'Choose from top-rated IPTV Smarters Pro 4K subscription plans starting from $14.95. Over 25,000 live channels, 100,000+ VOD movies, anti-freeze & instant Xtream Codes activation.',
+  title: 'Buy IPTV Subscription — Pricing Plans from $14/mo | The Smarters IPTV',
+  description: 'Buy top-rated IPTV Smarters Pro 4K subscription plans starting from $14.95. Stream 25,000+ live channels, 100,000+ VOD movies, 1-3 connections & instant activation.',
   alternates: {
     canonical: 'https://thesmartersiptv.com/pricing/',
   },

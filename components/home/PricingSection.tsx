@@ -156,15 +156,16 @@ export default function PricingSection() {
             <span className="text-xs font-bold tracking-widest text-zinc-500 uppercase">Pricing Plans</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Top-Rated IPTV Smarters Pro <br className="hidden md:block" />
-            <span className="text-gradient">Plans &amp; Pricing</span>
+            Buy IPTV Subscription — <br className="hidden md:block" />
+            <span className="text-gradient">Plans &amp; Instant Access</span>
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
-            Get unlimited access to all IPTV Smarters Pro channels, movies, and VODs. Secure payments, and instant account activation.
+            Choose the best IPTV Smarters Pro plan for your home. Enjoy 1, 2, or 3 simultaneous connections, 99.9% anti-freeze streaming, and instant Xtream Codes credentials.
           </p>
           {/* HeroUI High-Intent SEO Chips */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-3xl mx-auto pricing-seo-badges">
             <span className="heroui-chip heroui-chip-primary">Best IPTV 2026</span>
+            <span className="heroui-chip heroui-chip-secondary">1, 2, or 3 Connections</span>
             <span className="heroui-chip heroui-chip-default">Top Rated IPTV</span>
             <span className="heroui-chip heroui-chip-default">Instant Xtream Codes</span>
             <span className="heroui-chip heroui-chip-default">Anti-Freeze 4K Server</span>

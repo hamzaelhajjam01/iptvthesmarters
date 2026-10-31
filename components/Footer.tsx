@@ -22,7 +22,7 @@ const PAYPAL_TEXT: Record<string, string> = {
 };
 
 const RESELLER_LABEL: Record<string, string> = {
-  en: 'Reseller Program',
+  en: 'IPTV Reseller Panel',
   fr: 'Programme Revendeur',
   de: 'Reseller-Programm',
   es: 'Programa de Revendedores',
