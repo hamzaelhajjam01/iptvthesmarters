@@ -96,7 +96,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                   </linearGradient>
                 </defs>
               </svg>
-              <span className="font-display font-extrabold text-lg text-white tracking-tight">
+              <span className="font-display font-extrabold text-lg text-white tracking-tight whitespace-nowrap">
                 IPTV Smarters Pro
               </span>
             </Link>

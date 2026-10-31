@@ -542,3 +542,64 @@ html, body {
     gap: 2rem !important; /* 32px */
   }
 }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   UNIVERSAL FOOTER BULLETPROOF LAYOUT (HEROUI SPEC)
+   ══════════════════════════════════════════════════════════════════ */
+footer,
+footer.bg-zinc-950,
+.site-footer {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+footer .max-w-7xl {
+  width: 100% !important;
+  max-width: 80rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+footer .footer-grid {
+  display: grid !important;
+  width: 100% !important;
+  grid-template-columns: 1fr !important;
+  gap: 2.5rem !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 768px) {
+  footer .footer-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  footer .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr !important;
+  }
+}
+
+footer .footer-grid .space-y-4 {
+  min-width: 0 !important;
+}
+
+footer .footer-grid .space-y-4 span.font-display,
+footer .footer-grid .space-y-4 span.font-extrabold {
+  white-space: nowrap !important;
+}
+
+footer .btn-whatsapp-green {
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
