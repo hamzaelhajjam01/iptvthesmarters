@@ -309,6 +309,54 @@
     updatePricing(initialDevices);
   }
 
+  
+  function resellerCalculator() {
+    var clientsEl = document.getElementById('calc-clients');
+    if (!clientsEl) return;
+
+    function calcUpdate() {
+      var clientsInput = document.getElementById('calc-clients');
+      var priceInput = document.getElementById('calc-price');
+      var tierSelect = document.getElementById('calc-tier');
+      var durSelect = document.getElementById('calc-duration');
+
+      var clients = parseInt(clientsInput ? clientsInput.value : '0', 10) || 0;
+      var price = parseFloat(priceInput ? priceInput.value : '0') || 0;
+      var costPerCr = parseFloat(tierSelect ? tierSelect.value : '5.78') || 5.78;
+      var months = parseInt(durSelect ? durSelect.value : '1', 10) || 1;
+
+      var totalRevenue = clients * price * months;
+      var totalCost = clients * costPerCr * months;
+      var profit = totalRevenue - totalCost;
+      var margin = totalRevenue > 0 ? ((profit / totalRevenue) * 100).toFixed(1) : '0.0';
+
+      var fmt = function(n) {
+        return '$' + Math.round(n).toLocaleString('en-US');
+      };
+
+      var revEl = document.getElementById('res-revenue');
+      var costEl = document.getElementById('res-cost');
+      var profitEl = document.getElementById('res-profit');
+      var marginEl = document.getElementById('res-margin');
+
+      if (revEl) revEl.textContent = fmt(totalRevenue);
+      if (costEl) costEl.textContent = fmt(totalCost);
+      if (profitEl) profitEl.textContent = fmt(profit);
+      if (marginEl) marginEl.textContent = margin + '%';
+    }
+
+    ['calc-clients', 'calc-price', 'calc-tier', 'calc-duration'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && !el.__calcBound) {
+        el.__calcBound = true;
+        el.addEventListener('input', calcUpdate);
+        el.addEventListener('change', calcUpdate);
+      }
+    });
+
+    calcUpdate();
+  }
+
   function normalizePricingLayout() {
     document.querySelectorAll('.pricing-grid').forEach(grid => {
       const host = grid.nextElementSibling;
@@ -2047,6 +2095,7 @@
     try { mobileMenu(); } catch(e) { console.warn('Mobile menu warning:', e); }
     try { faq(); } catch(e) { console.warn('FAQ warning:', e); }
     try { pricing(); } catch(e) { console.warn('Pricing warning:', e); }
+    try { resellerCalculator(); } catch(e) { console.warn('Reseller calculator warning:', e); }
     try { channels(); } catch(e) { console.warn('Channels warning:', e); }
     try { guides(); } catch(e) { console.warn('Guides warning:', e); }
     try { initToc(); } catch(e) { console.warn('TOC warning:', e); }
@@ -2057,6 +2106,7 @@
   if (typeof document !== 'undefined') {
     try { initLanguageSwitcher(); } catch(e) {}
     try { mobileMenu(); } catch(e) {}
+    try { resellerCalculator(); } catch(e) {}
   }
 
   if (document.readyState === 'loading') {
