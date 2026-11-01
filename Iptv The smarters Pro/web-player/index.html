@@ -24,40 +24,154 @@
   <link rel="stylesheet" href="/assets/css/heroui.css">
   <link rel="stylesheet" href="/assets/css/runtime.css">
   <link rel="stylesheet" href="/assets/css/theme.css">
+  <style>
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+  </style>
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thesmartersiptv.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Web Player", "item": "https://thesmartersiptv.com/web-player/" }
-        ]
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "Smarters IPTV Web Player — HLS, M3U & Xtream",
-        "operatingSystem": "ChromeOS, Windows, macOS, Linux",
-        "applicationCategory": "MultimediaApplication",
-        "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" },
-        "downloadUrl": "https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "12",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://thesmartersiptv.com/web-player/#webpage",
+      "url": "https://thesmartersiptv.com/web-player/",
+      "name": "Smarters IPTV Web Player — Watch IPTV Online in Chrome, Windows & Mac",
+      "description": "Free Smarters IPTV web player & Chrome extension. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, or Chromebook with anti-freeze 4K playback and zero CORS errors.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://thesmartersiptv.com/#website",
+        "name": "The Smarters IPTV",
+        "url": "https://thesmartersiptv.com/"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://thesmartersiptv.com/web-player/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://thesmartersiptv.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Web Player",
+          "item": "https://thesmartersiptv.com/web-player/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Smarters IPTV Web Player — HLS, M3U & Xtream",
+      "operatingSystem": "ChromeOS, Windows, macOS, Linux",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "downloadUrl": "https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "12",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "IPTV Smarters Pro Team",
+        "url": "https://thesmartersiptv.com/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://thesmartersiptv.com/web-player/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I watch IPTV on my PC or Mac browser without installing software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Our Smarters IPTV Web Player Chrome extension allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly inside Google Chrome on Windows, macOS, Linux, and Chromebooks—with zero need for heavy Android emulators like Bluestacks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this web player support Xtream Codes API and M3U playlists?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. You can log in using your standard Xtream Codes credentials (Server URL, Username, and Password) or paste any direct M3U / M3U8 playlist URL to instantly load your channel bouquets, EPG, and VOD content."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Chrome ask for website data permissions when installing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires host access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the extension solve CORS errors when streaming IPTV?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard browsers block web video players from fetching stream segments from third-party IPTV servers due to CORS policies. Our extension uses secure declarative network rules to adjust request headers and user-agent tags in real time, enabling seamless playback."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Smarters IPTV Web Player extension free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the extension is 100% free to download and install from the official Google Chrome Web Store. It contains no hidden fees or paywalls for core player functionality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do I get high-speed 4K IPTV streams for the web player?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can pair the web player with our premium IPTV Smarters Pro subscription, giving you access to 25,000+ live channels, 100,000+ VOD movies, 99.9% anti-freeze uptime, and instant Xtream Codes activation."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
-<body class="bg-black text-white selection:bg-purple-500/30 selection:text-white">
+<body class="bg-black text-white selection:bg-cyan-500/30 selection:text-white">
   <div class="grain-overlay"></div>
-  <div class="min-h-screen flex flex-col font-sans antialiased bg-black text-white">
-    <header class="site-header sticky top-0 transition-colors z-50"><div class="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled"><div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><a href="//web-player/" class="flex items-center gap-3 group z-50 flex-shrink-0"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-extrabold text-base sm:text-lg text-white tracking-tight">IPTV Smarters Pro</span></a><nav class="site-nav-desktop hidden lg:flex items-center text-sm font-medium" style="gap:28px;"><a href="//web-player//features/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Features</a><a href="//web-player//channels/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Channels</a><a href="//web-player//pricing/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Pricing</a><a href="//web-player//reseller/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white text-purple-400 hover:text-purple-300 font-semibold">Reseller</a><a href="//web-player//guides/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Guides</a></nav><div class="flex items-center gap-3"><a href="/pricing/" class="btn-buy-now btn-nav-cta hidden sm:flex px-4 xl:px-6 py-2 xl:py-2.5 font-bold text-xs xl:text-sm rounded-full items-center gap-2 transition-all flex-shrink-0"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5 xl:w-4 xl:h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><details class="lang-switch">
+  <div class="min-h-screen flex flex-col font-sans antialiased bg-black text-white transition-colors">
+    <style>
+      astro-island, astro-slot, astro-static-slot { display: contents; }
+    </style>
+    <astro-island uid="2mN9Ck" prefix="r32" component-url="../assets/Header.BcipSPpJ.js" component-export="Header" renderer-url="../assets/client.DrRoA1Z2.js" props='{"currentPath":[0,"/features/"]}' client="load" opts='{"name":"Header","value":true}' await-children="">
+  
+  
+  <header class="site-header sticky top-0 transition-colors z-50"><div class="site-header-blur backdrop-blur-md border-b transition-colors bg-black/90 border-white/10 site-header-scrolled"><div class="site-header-bar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><a href="/" class="flex items-center gap-3 group z-50 flex-shrink-0"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-extrabold text-base sm:text-lg text-white tracking-tight">IPTV Smarters Pro</span></a><nav class="site-nav-desktop hidden lg:flex items-center text-sm font-medium" style="gap:28px;"><a href="/features/" class="nav-link whitespace-nowrap transition-colors text-white  font-semibold">Features</a><a href="/channels/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Channels</a><a href="/pricing/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Pricing</a><a href="/reseller/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white text-purple-400 hover:text-purple-300 font-semibold">Reseller</a><a href="/guides/" class="nav-link whitespace-nowrap transition-colors text-zinc-400 hover:text-white">Guides</a></nav><div class="flex items-center gap-3"><a href="/pricing/" class="btn-buy-now btn-nav-cta hidden sm:flex px-4 xl:px-6 py-2 xl:py-2.5 font-bold text-xs xl:text-sm rounded-full items-center gap-2 transition-all flex-shrink-0"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3.5 h-3.5 xl:w-4 xl:h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><details class="lang-switch">
             <summary id="langToggle" class="lang-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Change language">
               <span class="lang-flag" aria-hidden="true">🇬🇧</span>
               <span class="lang-name">English</span>
@@ -65,288 +179,446 @@
             </summary>
             <div id="langMenu" class="lang-menu" role="menu">
             
-            <a href="en" class="lang-item" role="menuitem" data-lang="en">
+            <a href="/features/" class="lang-item is-active" role="menuitem" data-lang="en" aria-current="true">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇬🇧</span><span>English</span></div>
-              
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lang-item-check"><path d="M20 6 9 17l-5-5"/></svg>
             </a>
-            <a href="/fren" class="lang-item" role="menuitem" data-lang="fr">
+            <a href="/fr/features/" class="lang-item" role="menuitem" data-lang="fr">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span>Français</span></div>
               
             </a>
-            <a href="/deen" class="lang-item" role="menuitem" data-lang="de">
+            <a href="/de/features/" class="lang-item" role="menuitem" data-lang="de">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇩🇪</span><span>Deutsch</span></div>
               
             </a>
-            <a href="/esen" class="lang-item" role="menuitem" data-lang="es">
+            <a href="/es/features/" class="lang-item" role="menuitem" data-lang="es">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>Español</span></div>
               
             </a>
-            <a href="/aren" class="lang-item" role="menuitem" data-lang="ar">
+            <a href="/ar/features/" class="lang-item" role="menuitem" data-lang="ar">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇸🇦</span><span>العربية</span></div>
               
             </a>
-            <a href="/iten" class="lang-item" role="menuitem" data-lang="it">
+            <a href="/it/features/" class="lang-item" role="menuitem" data-lang="it">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇮🇹</span><span>Italiano</span></div>
               
             </a>
-            <a href="/nlen" class="lang-item" role="menuitem" data-lang="nl">
+            <a href="/nl/features/" class="lang-item" role="menuitem" data-lang="nl">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇳🇱</span><span>Nederlands</span></div>
               
             </a>
-            <a href="/pten" class="lang-item" role="menuitem" data-lang="pt">
+            <a href="/pt/features/" class="lang-item" role="menuitem" data-lang="pt">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇹</span><span>Português</span></div>
               
             </a>
-            <a href="/pt-bren" class="lang-item" role="menuitem" data-lang="pt-br">
+            <a href="/pt-br/features/" class="lang-item" role="menuitem" data-lang="pt-br">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇧🇷</span><span>Português (BR)</span></div>
               
             </a>
-            <a href="/plen" class="lang-item" role="menuitem" data-lang="pl">
+            <a href="/pl/features/" class="lang-item" role="menuitem" data-lang="pl">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇵🇱</span><span>Polski</span></div>
               
             </a>
-            <a href="/koen" class="lang-item" role="menuitem" data-lang="ko">
+            <a href="/ko/features/" class="lang-item" role="menuitem" data-lang="ko">
               <div class="lang-item-content"><span class="lang-flag" aria-hidden="true">🇰🇷</span><span>한국어</span></div>
               
             </a>
             </div>
-          </details><button type="button" id="menuToggle" class="menu-toggle lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"><span class="menu-icon" aria-hidden="true"></span></button></div></div></div><nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Mobile"><div class="flex flex-col"><a href="//web-player/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Home</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/iptv-services/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>IPTV Services</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/features/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Features</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/channels/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Channels</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/pricing/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Pricing</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/reseller/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-purple-400 font-bold"><span>Reseller Program</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/guides/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Guides</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/products/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Products</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/contact/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Contact</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a></div><a href="/pricing/" class="btn-buy-now btn-nav-cta w-full mt-6 py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2 transition-all"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green flex items-center justify-center gap-2 mt-4 py-3.5 px-6 rounded-full text-sm font-bold text-white transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.45)!important;"><img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;"><span>Message us on WhatsApp</span></a></nav><div id="navOverlay" class="nav-overlay"></div></header>
+          </details><button type="button" id="menuToggle" class="menu-toggle lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"><span class="menu-icon" aria-hidden="true"></span></button></div></div></div><nav id="mobileNav" class="mobile-nav" aria-hidden="true" aria-label="Mobile"><div class="flex flex-col"><a href="/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Home</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/iptv-services/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>IPTV Services</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/features/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 mobile-nav-row-active text-white"><span>Features</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/channels/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Channels</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/pricing/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Pricing</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/reseller/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-purple-400 font-bold"><span>Reseller Program</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/guides/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Guides</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/products/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Products</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a><a href="/contact/" class="mobile-nav-row text-lg font-semibold py-3.5 px-2 text-zinc-400 hover:text-white"><span>Contact</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right mobile-nav-chevron w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></a></div><a href="/pricing/" class="btn-buy-now btn-nav-cta w-full mt-6 py-3.5 font-bold text-sm rounded-full flex items-center justify-center gap-2 transition-all"><span>Get Started</span><span class="btn-buy-now-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green flex items-center justify-center gap-2 mt-4 py-3.5 px-6 rounded-full text-sm font-bold text-white transition-all shadow-lg" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 6px 20px rgba(37,211,102,0.45)!important;"><img src="/assets/images/whatsapp.png" width="22" height="22" alt="WhatsApp" style="width:22px;height:22px;flex-shrink:0;"><span>Message us on WhatsApp</span></a></nav><div id="navOverlay" class="nav-overlay"></div></header></astro-island>
 
-    <main class="flex-1 pt-24 pb-20">
-      <!-- Breadcrumbs -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
-        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs text-zinc-400">
-          <a href="/" class="hover:text-white transition-colors">Home</a>
-          <span class="text-zinc-600">/</span>
-          <span class="text-purple-400 font-medium">Web Player</span>
-        </nav>
-      </div>
-
+    <main class="flex-1">
       <!-- Hero Section -->
-      <section class="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center pt-8 pb-20 border-b border-zinc-900/60 overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(123,63,228,0.18),transparent)] pointer-events-none"></div>
-
-        <div class="relative z-10 max-w-4xl mx-auto">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-8 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            <span>Official Chrome Extension • Manifest V3 Compliant</span>
+      <section class="pt-24 pb-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="flex flex-col items-center justify-center gap-4 mb-4">
+            <div class="w-0.5 h-6 bg-cyan-500"></div>
+            <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">
+              Official Chrome Extension &amp; Web Player
+            </span>
           </div>
-
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-            Smarters IPTV Web Player <br class="hidden sm:block">
-            <span class="text-gradient">Watch IPTV Online in Your Browser</span>
+          <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+            Smarters IPTV <span class="text-gradient">Web Player.</span>
           </h1>
-
-          <p class="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p class="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
             Stream live TV channels, HLS (.m3u8) video playlists, and Xtream Codes API directly in Google Chrome.
             Enjoy lag-free, anti-freeze streaming on <strong>Windows</strong>, <strong>macOS</strong>, and <strong>Chromebook</strong> with zero emulator setup.
           </p>
 
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base text-white inline-flex items-center justify-center gap-3 transition-all shadow-xl hover:scale-105" style="background:linear-gradient(135deg, #7B3FE4 0%, #5F15CD 100%);box-shadow:0 10px 30px rgba(123, 63, 228, 0.45);">
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+            <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-primary text-white font-bold flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-base sm:text-lg">
               <svg class="w-5 h-5 text-cyan-300 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
               </svg>
-              <span>Add to Chrome — It's Free</span>
+              <span>Add to Chrome — Free</span>
+              <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
 
-            <a href="/pricing/" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base text-zinc-300 hover:text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/80 inline-flex items-center justify-center gap-2 transition-all">
-              <span>Buy 4K IPTV Subscription</span>
-              <span class="text-purple-400">→</span>
+            <a href="/pricing/" class="group w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm text-white font-bold hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg">
+              <span>View 4K Plans</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </a>
           </div>
 
-          <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400 pt-4">
+          <!-- Trust highlights -->
+          <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400">
             <span class="flex items-center gap-1.5"><span class="text-yellow-400">★★★★★</span> 5.0 Chrome Web Store</span>
             <span class="text-zinc-700">•</span>
             <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Zero CORS Buffering</span>
             <span class="text-zinc-700">•</span>
-            <span class="flex items-center gap-1.5"><span class="text-purple-400">⚡</span> Xtream Codes &amp; M3U Supported</span>
+            <span class="flex items-center gap-1.5"><span class="text-purple-400">⚡</span> Xtream Codes &amp; M3U</span>
             <span class="text-zinc-700">•</span>
             <span class="flex items-center gap-1.5"><span class="text-cyan-400">✓</span> 100% Free Forever</span>
           </div>
         </div>
       </section>
 
-      <!-- High-Volume Feature Cards -->
-      <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-zinc-900/60">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
-            The Best IPTV Player for Windows, Mac &amp; Chrome
-          </h2>
-          <p class="text-zinc-400 text-base sm:text-lg">
-            Engineered specifically for web browsers. Say goodbye to heavy Android emulators, crashing desktop apps, and complex VLC configurations.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 font-bold text-xl">💻</div>
-            <h3 class="text-xl font-bold text-white mb-3">IPTV Player for Windows &amp; Mac</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Watch IPTV online without installing Bluestacks or heavy virtual machines. Runs natively inside Google Chrome, Brave, and Edge on any desktop or laptop operating system.
+      <!-- Feature Grid -->
+      <section class="py-12 reveal-on-scroll is-visible relative border-t border-zinc-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <div class="flex flex-col items-center justify-center gap-4 mb-4">
+              <div class="w-0.5 h-6 bg-cyan-500"></div>
+              <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Engineered For Browsers</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+              High-Performance Web Streaming
+            </h2>
+            <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
+              The fastest, most reliable way to stream IPTV on Windows, Mac, and Chromebook without heavy software.
             </p>
           </div>
 
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 font-bold text-xl">📡</div>
-            <h3 class="text-xl font-bold text-white mb-3">Universal HLS &amp; M3U8 Player Online</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Seamlessly renders HLS .m3u8 live feeds and on-demand video files. Supports multi-bitrate adaptive streaming, alternate audio tracks, and embedded subtitle tracks.
-            </p>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">IPTV Player for Windows &amp; Mac</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Watch IPTV online without installing Bluestacks or heavy virtual machines. Runs natively inside Google Chrome, Brave, and Edge on any desktop or laptop operating system.</p>
+              </div>
+            </div>
 
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 mb-6 font-bold text-xl">⚡</div>
-            <h3 class="text-xl font-bold text-white mb-3">Xtream Codes Web Player API</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Enter your Server URL, Username, and Password to pull your provider bouquets automatically. Categorized by Live TV, Movies, Series, and Catch-up.
-            </p>
-          </div>
+            <!-- Card 2 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">Universal HLS &amp; M3U8 Player</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Seamlessly renders HLS .m3u8 live feeds and on-demand video files. Supports multi-bitrate adaptive streaming, alternate audio tracks, and embedded subtitle tracks.</p>
+              </div>
+            </div>
 
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 mb-6 font-bold text-xl">🛡️</div>
-            <h3 class="text-xl font-bold text-white mb-3">CORS &amp; User-Agent Bypass</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Automatic declarative net request rules strip blocking CORS headers and set authentic Smarters user-agent strings so your streams never get blocked by browser security.
-            </p>
-          </div>
+            <!-- Card 3 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">Xtream Codes Web Player API</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Enter your Server URL, Username, and Password to pull your provider bouquets automatically. Categorized by Live TV, Movies, Series, and Catch-up.</p>
+              </div>
+            </div>
 
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 mb-6 font-bold text-xl">📊</div>
-            <h3 class="text-xl font-bold text-white mb-3">Real-Time Stream Diagnostics</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Built-in diagnostic overlay reveals stream resolution, framerate, buffer duration, and network throughput so you can pinpoint any freezing or provider bottlenecks.
-            </p>
-          </div>
+            <!-- Card 4 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">CORS &amp; User-Agent Bypass</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Automatic declarative net request rules strip blocking CORS headers and set authentic Smarters user-agent strings so your streams never get blocked by browser security.</p>
+              </div>
+            </div>
 
-          <div class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-8 hover:border-purple-500/40 transition-all flex flex-col">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 font-bold text-xl">🪶</div>
-            <h3 class="text-xl font-bold text-white mb-3">Lightweight &amp; Battery Friendly</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow">
-              Consumes less than 50MB of RAM compared to 2GB+ required by emulators. Hardware-accelerated GPU decoding ensures your laptop battery lasts while streaming live sports.
-            </p>
+            <!-- Card 5 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"></path></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">Real-Time Stream Diagnostics</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Built-in diagnostic overlay reveals stream resolution, framerate, buffer duration, and network throughput so you can pinpoint any freezing or provider bottlenecks.</p>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="reveal-on-scroll is-visible group relative bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/60 rounded-3xl p-8 hover:bg-zinc-900/50 hover:border-zinc-700/60 transition-all duration-300 flex flex-col items-start text-left overflow-hidden h-full">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full w-full">
+                <div class="flex justify-between items-start w-full mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all duration-300 shadow-lg shadow-black/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><rect width="16" height="16" x="4" y="4" rx="2"></rect><rect width="6" height="6" x="9" y="9" rx="1"></rect><path d="M15 2v2"></path><path d="M15 20v2"></path><path d="M2 15h2"></path><path d="M2 9h2"></path><path d="M20 15h2"></path><path d="M20 9h2"></path><path d="M9 2v2"></path><path d="M9 20v2"></path></svg>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">Lightweight &amp; Battery Friendly</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Consumes less than 50MB of RAM compared to 2GB+ required by emulators. Hardware-accelerated GPU decoding ensures your laptop battery lasts while streaming live sports.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 3-Step Setup Guide -->
-      <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-zinc-900/60">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Quick Start</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">How to Watch IPTV Online in 3 Steps</h2>
-          <p class="text-zinc-400 text-sm sm:text-base">Get up and streaming in under 60 seconds with your Chrome browser.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-zinc-900/30 border border-zinc-800/80 rounded-2xl p-8 text-center">
-            <div class="w-10 h-10 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center mx-auto mb-6 text-lg shadow-lg shadow-purple-600/30">1</div>
-            <h3 class="text-lg font-bold text-white mb-2">Install the Extension</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-              Click <strong>Add to Chrome</strong> on the official Chrome Web Store. The extension installs in seconds with zero configuration needed.
-            </p>
-            <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 text-xs font-semibold inline-flex items-center gap-1">
-              <span>Get Extension</span><span>↗</span>
-            </a>
+      <!-- Setup in Three Steps -->
+      <section class="py-16 bg-zinc-950/80 border-y border-zinc-900/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <div class="flex flex-col items-center justify-center gap-4 mb-6">
+              <div class="w-1 h-6 bg-gradient-to-b from-cyan-500 to-transparent rounded-full"></div>
+              <span class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Quick Start</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Setup in three steps</h2>
+            <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Get up and streaming in under 60 seconds with your Chrome browser.</p>
           </div>
 
-          <div class="bg-zinc-900/30 border border-zinc-800/80 rounded-2xl p-8 text-center">
-            <div class="w-10 h-10 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center mx-auto mb-6 text-lg shadow-lg shadow-purple-600/30">2</div>
-            <h3 class="text-lg font-bold text-white mb-2">Enter Stream Details</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-              Open the extension popup and choose <strong>Xtream Codes Login</strong> or <strong>M3U Playlist URL</strong>. Enter your subscription credentials.
-            </p>
-            <a href="/pricing/" class="text-purple-400 hover:text-purple-300 text-xs font-semibold inline-flex items-center gap-1">
-              <span>Need a Playlist? View Plans</span><span>→</span>
-            </a>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div class="hidden md:block absolute top-[52px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent -z-10"></div>
+            
+            <div class="bg-black/50 backdrop-blur-sm border border-zinc-800/60 p-10 rounded-3xl text-center relative group hover:border-zinc-700 transition-colors flex flex-col justify-between">
+              <div>
+                <div class="w-20 h-20 mx-auto bg-zinc-950 border-2 border-zinc-800 rounded-2xl flex items-center justify-center mb-8 group-hover:border-blue-500 transition-colors shadow-lg shadow-black/50">
+                  <span class="text-2xl font-black text-blue-400">01</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Install Extension</h3>
+                <p class="text-zinc-400 leading-relaxed mb-6">Click Add to Chrome on the official Chrome Web Store. The extension installs in seconds with zero configuration.</p>
+              </div>
+              <div>
+                <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-semibold text-sm transition-colors">
+                  <span>Get Extension Free</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
 
-          <div class="bg-zinc-900/30 border border-zinc-800/80 rounded-2xl p-8 text-center">
-            <div class="w-10 h-10 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center mx-auto mb-6 text-lg shadow-lg shadow-purple-600/30">3</div>
-            <h3 class="text-lg font-bold text-white mb-2">Start 4K Streaming</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-              Click Play on any channel. Enjoy seamless live sports, news, and movies with automatic anti-freeze buffer stabilization.
-            </p>
-            <span class="text-green-400 text-xs font-semibold">✓ Ready to Stream</span>
+            <div class="bg-black/50 backdrop-blur-sm border border-zinc-800/60 p-10 rounded-3xl text-center relative group hover:border-zinc-700 transition-colors flex flex-col justify-between">
+              <div>
+                <div class="w-20 h-20 mx-auto bg-zinc-950 border-2 border-zinc-800 rounded-2xl flex items-center justify-center mb-8 group-hover:border-cyan-400 transition-colors shadow-lg shadow-black/50">
+                  <span class="text-2xl font-black text-cyan-400">02</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Enter Credentials</h3>
+                <p class="text-zinc-400 leading-relaxed mb-6">Open the extension and choose Xtream Codes API login or paste any direct M3U / M3U8 playlist URL.</p>
+              </div>
+              <div>
+                <a href="/pricing/" class="inline-flex items-center gap-1.5 text-purple-400 hover:text-purple-300 font-semibold text-sm transition-colors">
+                  <span>Need a Playlist? View Plans</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="bg-black/50 backdrop-blur-sm border border-zinc-800/60 p-10 rounded-3xl text-center relative group hover:border-zinc-700 transition-colors flex flex-col justify-between">
+              <div>
+                <div class="w-20 h-20 mx-auto bg-zinc-950 border-2 border-zinc-800 rounded-2xl flex items-center justify-center mb-8 group-hover:border-purple-400 transition-colors shadow-lg shadow-black/50">
+                  <span class="text-2xl font-black text-purple-400">03</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Start Streaming</h3>
+                <p class="text-zinc-400 leading-relaxed mb-6">Select any live TV channel or VOD title. Enjoy smooth 4K playback with automated anti-buffer stream handling.</p>
+              </div>
+              <div>
+                <span class="inline-flex items-center gap-1.5 text-green-400 text-sm font-semibold">
+                  <span>✓</span> Instant 4K Playback
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Comparison Table -->
-      <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-zinc-900/60">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-extrabold text-white mb-4">Web Player Extension vs. Traditional Software</h2>
-          <p class="text-zinc-400 text-sm sm:text-base">Why thousands of IPTV users switched to browser streaming on PC and Mac.</p>
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <div class="flex flex-col items-center justify-center gap-4 mb-4">
+            <div class="w-0.5 h-6 bg-purple-500"></div>
+            <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Performance &amp; Efficiency</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Web Player vs Traditional Software</h2>
+          <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Why browser streaming on Windows &amp; Mac outperforms heavy emulators and desktop players.</p>
         </div>
 
-        <div class="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-900/30">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-zinc-900 text-zinc-300 border-b border-zinc-800 text-xs uppercase tracking-wider">
-              <tr>
-                <th class="p-4">Feature</th>
-                <th class="p-4 text-purple-400 font-bold">Smarters Web Player</th>
-                <th class="p-4 text-zinc-400">Android Emulators (Bluestacks)</th>
-                <th class="p-4 text-zinc-400">Desktop VLC Player</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-zinc-800/60 text-zinc-300">
-              <tr>
-                <td class="p-4 font-semibold text-white">Setup Time</td>
-                <td class="p-4 text-green-400 font-bold">&lt; 15 seconds</td>
-                <td class="p-4 text-red-400">15–20 minutes</td>
-                <td class="p-4 text-yellow-400">5 minutes</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-white">Memory (RAM) Usage</td>
-                <td class="p-4 text-green-400 font-bold">~45 MB</td>
-                <td class="p-4 text-red-400">2,000 MB+ (2 GB)</td>
-                <td class="p-4 text-yellow-400">250 MB</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-white">Browser CORS Handling</td>
-                <td class="p-4 text-green-400 font-bold">Automatic Bypass</td>
-                <td class="p-4 text-zinc-400">N/A (Virtual Machine)</td>
-                <td class="p-4 text-zinc-400">No Web Integration</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-white">Xtream Codes API Login</td>
-                <td class="p-4 text-green-400 font-bold">Native 1-Click</td>
-                <td class="p-4 text-yellow-400">Requires APK Install</td>
-                <td class="p-4 text-red-400">Manual M3U Only</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-white">Cost</td>
-                <td class="p-4 text-green-400 font-bold">100% Free</td>
-                <td class="p-4 text-zinc-400">Free (Ad-supported)</td>
-                <td class="p-4 text-zinc-400">Free</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/30 backdrop-blur-sm shadow-2xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-zinc-800 bg-zinc-950/60">
+                  <th class="py-5 px-6 text-sm font-bold text-white">Feature</th>
+                  <th class="py-5 px-6 text-sm font-bold text-cyan-400 bg-cyan-500/5">Smarters Web Player</th>
+                  <th class="py-5 px-6 text-sm font-bold text-zinc-400">Android Emulators (Bluestacks)</th>
+                  <th class="py-5 px-6 text-sm font-bold text-zinc-400">Desktop VLC Player</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-800/60 text-sm">
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">Setup Time</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">&lt; 15 seconds</td>
+                  <td class="py-4 px-6 text-rose-400">15–20 minutes</td>
+                  <td class="py-4 px-6 text-yellow-400">5 minutes</td>
+                </tr>
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">Memory (RAM) Usage</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">~45 MB</td>
+                  <td class="py-4 px-6 text-rose-400">2,000 MB+ (2 GB)</td>
+                  <td class="py-4 px-6 text-yellow-400">250 MB</td>
+                </tr>
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">Browser CORS Handling</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">Automatic Header Bypass</td>
+                  <td class="py-4 px-6 text-zinc-500">N/A (Virtual Machine)</td>
+                  <td class="py-4 px-6 text-zinc-500">No Web Integration</td>
+                </tr>
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">Xtream Codes API Login</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">Native 1-Click Login</td>
+                  <td class="py-4 px-6 text-yellow-400">Requires APK Install</td>
+                  <td class="py-4 px-6 text-rose-400">Manual M3U Only</td>
+                </tr>
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">License &amp; Cost</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">100% Free Forever</td>
+                  <td class="py-4 px-6 text-zinc-400">Free (Ad-Supported)</td>
+                  <td class="py-4 px-6 text-zinc-400">Free</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <!-- Bottom CTA Banner -->
-      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
-        <div class="bg-gradient-to-r from-purple-900/40 via-violet-900/30 to-zinc-900 border border-purple-500/30 rounded-3xl p-10 sm:p-14 shadow-2xl relative overflow-hidden">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Start Streaming IPTV in Your Browser Today</h2>
-          <p class="text-zinc-400 text-base max-w-xl mx-auto mb-8">
-            Install the free extension from the Chrome Web Store and experience the fastest web player for HLS &amp; Xtream Codes.
-          </p>
+      <!-- FAQ Section -->
+      <section class="py-16 bg-zinc-950/30 border-t border-zinc-900/50" id="faq">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <div class="flex flex-col items-center justify-center gap-4 mb-4">
+              <div class="w-0.5 h-6 bg-cyan-500"></div>
+              <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Common Questions</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">Frequently Asked Questions</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-lg">Everything you need to know about streaming IPTV in Google Chrome, speed requirements, and permissions.</p>
+          </div>
+
+          <div class="faq-list w-full max-w-3xl mx-auto">
+            <details class="faq-item" name="webplayer-faq" open>
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">01</span>
+                <span class="faq-q">Can I watch IPTV on my PC or Mac browser without installing software?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>Yes! Our Smarters IPTV Web Player Chrome extension allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly inside Google Chrome on Windows, macOS, Linux, and Chromebooks—with zero need for heavy Android emulators like Bluestacks.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">02</span>
+                <span class="faq-q">Does this web player support Xtream Codes API and M3U playlists?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>Absolutely. You can log in using your standard Xtream Codes credentials (Server URL, Username, and Password) or paste any direct M3U / M3U8 playlist URL to instantly load your channel bouquets, EPG, and VOD content.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">03</span>
+                <span class="faq-q">Why does Chrome ask for website data permissions when installing?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires host access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">04</span>
+                <span class="faq-q">How does the extension solve CORS errors when streaming IPTV?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>Standard browsers block web video players from fetching stream segments from third-party IPTV servers due to CORS (Cross-Origin Resource Sharing) policies. Our extension uses secure declarative network rules to adjust request headers and user-agent tags in real time, enabling seamless playback.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">05</span>
+                <span class="faq-q">Is the Smarters IPTV Web Player extension free?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>Yes, the extension is 100% free to download and install from the official Google Chrome Web Store. It contains no hidden fees or paywalls for core player functionality.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">06</span>
+                <span class="faq-q">Where do I get high-speed 4K IPTV streams for the web player?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>You can pair the web player with our premium IPTV Smarters Pro subscription, giving you access to 25,000+ live channels, 100,000+ VOD movies, 99.9% anti-freeze uptime, and instant Xtream Codes activation.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Conversion CTA -->
+      <section class="py-16 text-center border-t border-zinc-900/50 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Ready to stream in your browser?</h2>
+          <p class="text-zinc-400 mb-10 text-lg leading-relaxed">Install the official Smarters IPTV Web Player Chrome extension for free and unlock seamless 4K HLS, M3U8, and Xtream Codes streaming.</p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-sm text-white inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all shadow-lg shadow-purple-900/50">
-              <span>Add to Chrome Extension</span>
-              <span>↗</span>
+            <a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="group relative inline-flex px-8 py-4 rounded-full bg-gradient-primary text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-lg">
+              <span>Add to Chrome — Free</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
-            <a href="/pricing/" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-sm text-white bg-zinc-800 hover:bg-zinc-700 transition-all">
-              <span>Get IPTV Subscription</span>
+            <a href="/pricing/" class="inline-flex px-8 py-4 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white font-bold border border-zinc-700/60 transition-all duration-300 hover:scale-[1.02] text-lg">
+              <span>View IPTV Plans</span>
             </a>
           </div>
         </div>
       </section>
     </main>
-
-    <footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs relative"><div class="footer-top-glow" aria-hidden="true"></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="footer-grid mb-10"><div class="space-y-4"><div class="flex items-center gap-2"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient_footer)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient_footer" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-display font-extrabold text-lg text-white tracking-tight whitespace-nowrap">IPTV Smarters Pro</span></div><p class="text-zinc-400 leading-relaxed text-xs"><strong class="text-white">IPTV Smarters Pro</strong> Premium IPTV streaming with a premium live TV lineup and an extensive on-demand library, delivering 4K on every screen you own.</p><div class="flex items-center gap-3 pt-1"><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" aria-label="Message us on WhatsApp" class="footer-social-btn" style="color:#25D366!important;"><img src="/assets/images/whatsapp.png" width="18" height="18" alt="WhatsApp" style="width:18px;height:18px;flex-shrink:0;"></a><a href="https://t.me/host4k" target="_blank" rel="noopener noreferrer" aria-label="Message us on Telegram" class="footer-social-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></div></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Product</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/features/" class="hover:text-white transition-colors tappable">Features</a></li><li><a href="/channels/" class="hover:text-white transition-colors tappable">Channel List</a></li><li><a href="/pricing/" class="hover:text-white transition-colors tappable">Buy IPTV Subscription</a></li><li><a href="/iptv-services/" class="hover:text-white transition-colors tappable">IPTV Services</a></li><li><a href="/reseller/" class="hover:text-white transition-colors tappable text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1.5"><span>IPTV Reseller Panel</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">New</span></a></li><li><a href="/products/" class="hover:text-white transition-colors tappable">Product Directory</a></li><li><a href="/guides/how-to-setup-iptv-smarters-pro-on-firestick/" class="hover:text-white transition-colors tappable">Best IPTV for Firestick</a></li><li><a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors tappable flex items-center gap-1.5"><span>Web Player (Chrome)</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Free</span></a></li><li><a href="/web-player/" class="hover:text-white transition-colors tappable">Web Player Guide</a></li><li><a href="/guides/how-to-activate-iptv-smarters-pro/" class="hover:text-white transition-colors tappable">Setup Guide</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Company</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/contact/" class="hover:text-white transition-colors tappable">Contact Us</a></li><li><a href="/guides/" class="hover:text-white transition-colors tappable">Guides</a></li><li><a href="/privacy/" class="hover:text-white transition-colors tappable">Privacy Policy</a></li><li><a href="/terms/" class="hover:text-white transition-colors tappable">Terms of Service</a></li><li><a href="/refund/" class="hover:text-white transition-colors tappable">Refund Policy</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Contact</h2><ul class="space-y-3 text-xs text-zinc-400"><li>Expert Support via WhatsApp</li><li><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green tappable inline-flex px-5 py-2.5 rounded-full text-sm font-bold text-white items-center gap-2 transition-all shadow-md whitespace-nowrap" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 4px 15px rgba(37,211,102,0.4)!important;"><img src="/assets/images/whatsapp.png" width="18" height="18" alt="WhatsApp" style="width:18px;height:18px;flex-shrink:0;"><span>Message Us</span></a></li></ul></div></div><div class="pt-6 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between text-xs text-[#64748b] gap-4"><p>© 2026 IPTV Smarters Pro. All rights reserved.</p><div class="flex items-center gap-6"><span class="footer-trust-pill flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-500"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Secure Checkout</span><span class="footer-trust-pill flex items-center gap-1.5"><svg class="w-4 h-4 text-[#0079C1]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.792.792 0 0 1 .782-.67h6.634c3.084 0 5.487 1.056 5.86 4.382.203 1.808-.415 3.32-1.745 4.26-1.127.798-2.678 1.188-4.608 1.188H9.373a.855.855 0 0 0-.845.727l-.95 6.01a.642.642 0 0 1-.633.541l.13-.82z"/><path d="M9.13 14.88h2.07c2.44 0 4.35-.97 4.9-3.79.23-1.18.06-2.13-.53-2.79-.62-.69-1.66-1.06-3.09-1.06H8.28a.86.86 0 0 0-.85.73l-1.37 8.68a.64.64 0 0 0 .63.74h2.44z" fill="#00457C"/></svg>PayPal Accepted</span><button type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="footer-back-to-top">Back to top<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-back-to-top-icon w-4 h-4"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg></button></div></div></div></footer>
+    <astro-island uid="JYQrV" prefix="r33" component-url="../assets/Footer.BdoS3v74.js" component-export="Footer" renderer-url="../assets/client.DrRoA1Z2.js" props="{}" client="load" opts='{"name":"Footer","value":true}' await-children=""><footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-900 pt-16 pb-12 transition-colors text-xs relative"><div class="footer-top-glow" aria-hidden="true"></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="footer-grid mb-10"><div class="space-y-4"><div class="flex items-center gap-2"><svg class="w-10 h-10 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-purple-500/20 rounded-xl ring-1 ring-white/10" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="url(#brand_gradient_footer)"></rect><path d="M12 16C12 13.7909 13.7909 12 16 12H24C26.2091 12 28 13.7909 28 16V24C28 26.2091 26.2091 28 24 28H16C13.7909 28 12 26.2091 12 24V16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 16.5L23.5 20L18 23.5V16.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"></path><path d="M15 8L18 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M25 8L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><defs><lineargradient id="brand_gradient_footer" x1="0" y1="0" x2="40" y2="40" gradientunits="userSpaceOnUse"><stop stop-color="#7B3FE4"></stop><stop offset="1" stop-color="#5F15CD"></stop></lineargradient></defs></svg><span class="font-display font-extrabold text-lg text-white tracking-tight whitespace-nowrap">IPTV Smarters Pro</span></div><p class="text-zinc-400 leading-relaxed text-xs"><strong class="text-white">IPTV Smarters Pro</strong> Premium IPTV streaming with a premium live TV lineup and an extensive on-demand library, delivering 4K on every screen you own.</p><div class="flex items-center gap-3 pt-1"><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" aria-label="Message us on WhatsApp" class="footer-social-btn" style="color:#25D366!important;"><img src="/assets/images/whatsapp.png" width="18" height="18" alt="WhatsApp" style="width:18px;height:18px;flex-shrink:0;"></a><a href="https://t.me/host4k" target="_blank" rel="noopener noreferrer" aria-label="Message us on Telegram" class="footer-social-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></div></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Product</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/features/" class="hover:text-white transition-colors tappable">Features</a></li><li><a href="/channels/" class="hover:text-white transition-colors tappable">Channel List</a></li><li><a href="/pricing/" class="hover:text-white transition-colors tappable">Buy IPTV Subscription</a></li><li><a href="/iptv-services/" class="hover:text-white transition-colors tappable">IPTV Services</a></li><li><a href="/reseller/" class="hover:text-white transition-colors tappable text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1.5"><span>IPTV Reseller Panel</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">New</span></a></li><li><a href="/products/" class="hover:text-white transition-colors tappable">Product Directory</a></li><li><a href="/guides/how-to-setup-iptv-smarters-pro-on-firestick/" class="hover:text-white transition-colors tappable">Best IPTV for Firestick</a></li><li><a href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors tappable flex items-center gap-1.5"><span>Web Player (Chrome)</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Free</span></a></li><li><a href="/web-player/" class="hover:text-white transition-colors tappable">Web Player Guide</a></li><li><a href="/guides/how-to-activate-iptv-smarters-pro/" class="hover:text-white transition-colors tappable">Setup Guide</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Company</h2><ul class="space-y-2.5 text-xs text-zinc-400"><li><a href="/contact/" class="hover:text-white transition-colors tappable">Contact Us</a></li><li><a href="/guides/" class="hover:text-white transition-colors tappable">Guides</a></li><li><a href="/privacy/" class="hover:text-white transition-colors tappable">Privacy Policy</a></li><li><a href="/terms/" class="hover:text-white transition-colors tappable">Terms of Service</a></li><li><a href="/refund/" class="hover:text-white transition-colors tappable">Refund Policy</a></li></ul></div><div><h2 class="font-bold text-white uppercase tracking-wider text-[11px] mb-4">Contact</h2><ul class="space-y-3 text-xs text-zinc-400"><li>Expert Support via WhatsApp</li><li><a href="https://wa.me/18042804332" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-green tappable inline-flex px-5 py-2.5 rounded-full text-sm font-bold text-white items-center gap-2 transition-all shadow-md whitespace-nowrap" style="background-color:#25D366!important;color:#ffffff!important;box-shadow:0 4px 15px rgba(37,211,102,0.4)!important;"><img src="/assets/images/whatsapp.png" width="18" height="18" alt="WhatsApp" style="width:18px;height:18px;flex-shrink:0;"><span>Message Us</span></a></li></ul></div></div><div class="pt-6 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between text-xs text-[#64748b] gap-4"><p>© 2026 IPTV Smarters Pro. All rights reserved.</p><div class="flex items-center gap-6"><span class="footer-trust-pill flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-500"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Secure Checkout</span><span class="footer-trust-pill flex items-center gap-1.5"><svg class="w-4 h-4 text-[#0079C1]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.792.792 0 0 1 .782-.67h6.634c3.084 0 5.487 1.056 5.86 4.382.203 1.808-.415 3.32-1.745 4.26-1.127.798-2.678 1.188-4.608 1.188H9.373a.855.855 0 0 0-.845.727l-.95 6.01a.642.642 0 0 1-.633.541l.13-.82z"/><path d="M9.13 14.88h2.07c2.44 0 4.35-.97 4.9-3.79.23-1.18.06-2.13-.53-2.79-.62-.69-1.66-1.06-3.09-1.06H8.28a.86.86 0 0 0-.85.73l-1.37 8.68a.64.64 0 0 0 .63.74h2.44z" fill="#00457C"/></svg>PayPal Accepted</span><button type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="footer-back-to-top">Back to top<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-back-to-top-icon w-4 h-4"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg></button></div></div></div></footer></astro-island>
   </div>
-  <script src="/assets/js/site-interactions.js"></script>
-</body>
-</html>
+  <astro-island uid="ZEiosG" prefix="r34" component-url="../assets/AstroGlobalComponents.DFjrEEHf.js" component-export="AstroGlobalComponents" renderer-url="../assets/client.DrRoA1Z2.js" props="{}" client="load" opts='{"name":"AstroGlobalComponents","value":true}'></astro-island>
+    </div>
+    <script src="/assets/js/site-interactions.js?v=20260909-lang4" defer></script><script src="/assets/js/support-chat.js" defer></script><script src="/assets/js/free-trial-modal.js" defer></script><script src="/assets/js/order-modal.js" defer></script></body></html>
