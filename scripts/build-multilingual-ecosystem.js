@@ -416,6 +416,21 @@ function updateLanguageLandingPage(lang) {
 // -------------------------------------------------------------
 // 2. GENERATE PRICING PAGE (/[lang]/pricing/index.html)
 // -------------------------------------------------------------
+
+const PRICING_FAQ_HEADERS = {
+  fr: { title: 'FAQ — Questions &amp; Réponses', subtitle: 'Tout ce que vous devez savoir sur notre service et son activation.' },
+  it: { title: 'Domande Frequenti (FAQ)', subtitle: 'Tutto quello che devi sapere sul nostro servizio e sulla sua attivazione.' },
+  es: { title: 'Preguntas Frecuentes (FAQ)', subtitle: 'Todo lo que necesitas saber sobre nuestro servicio y su activación.' },
+  de: { title: 'Häufig Gestellte Fragen (FAQ)', subtitle: 'Alles, was Sie über unseren Service und die Aktivierung wissen müssen.' },
+  ar: { title: 'الأسئلة الشائعة — الأسئلة والأجوبة', subtitle: 'كل ما تحتاج لمعرفته حول خدمتنا وتفعيلها.' },
+  nl: { title: 'Veelgestelde Vragen (FAQ)', subtitle: 'Alles wat u moet weten over onze service en de activering ervan.' },
+  pt: { title: 'Perguntas Frequentes (FAQ)', subtitle: 'Tudo o que precisa de saber sobre o nosso serviço e a sua ativação.' },
+  'pt-br': { title: 'Perguntas Frequentes (FAQ)', subtitle: 'Tudo o que você precisa saber sobre o nosso serviço e sua ativação.' },
+  pl: { title: 'Najczęściej Zadawane Pytania (FAQ)', subtitle: 'Wszystko, co musisz wiedzieć o naszej usłudze i jej aktywacji.' },
+  ko: { title: '자주 묻는 질문 (FAQ)', subtitle: '서비스 및 활성화에 대해 알아야 할 모든 것.' },
+  en: { title: 'Frequently Asked Questions', subtitle: 'Everything you need to know about our service and activation.' }
+};
+
 function generatePricingPage(lang) {
   const p = lang.pricing;
   const prefix = `/${lang.code}/`;
@@ -644,8 +659,8 @@ function generatePricingPage(lang) {
       <!-- FAQ Accordion -->
       <section class="py-16 px-4 sm:px-6 lg:px-8 xl:px-12 w-full max-w-4xl mx-auto" id="faq">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">FAQ — Questions &amp; Réponses</h2>
-          <p class="text-zinc-400">Tout ce que vous devez savoir sur notre service et son activation.</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">${(PRICING_FAQ_HEADERS[lang.code] || PRICING_FAQ_HEADERS.en).title}</h2>
+          <p class="text-zinc-400">${(PRICING_FAQ_HEADERS[lang.code] || PRICING_FAQ_HEADERS.en).subtitle}</p>
         </div>
         <div class="faq-list w-full space-y-4">
           ${faqsHtml}
