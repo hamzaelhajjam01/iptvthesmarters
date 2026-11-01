@@ -156,7 +156,23 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                   Best IPTV for Firestick
                 </Link>
               </li>
+                            <li>
+                <a
+                  href="https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors tappable flex items-center gap-1.5"
+                >
+                  <span>Web Player (Chrome)</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Free</span>
+                </a>
+              </li>
               <li>
+                <Link href={`${prefix}web-player/`} className="hover:text-white transition-colors tappable">
+                  Web Player Guide
+                </Link>
+              </li>
+<li>
                 <Link href={`${prefix}guides/how-to-activate-iptv-smarters-pro/`} className="hover:text-white transition-colors tappable">
                   Setup Guide
                 </Link>
