@@ -5,6 +5,7 @@ const featuresHtmlPath = path.join(__dirname, '..', 'Iptv The smarters Pro', 'fe
 const targetHtmlPath = path.join(__dirname, '..', 'Iptv The smarters Pro', 'web-player', 'index.html');
 
 const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk';
+const FIREFOX_STORE_URL = 'https://addons.mozilla.org/addon/smarters-iptv-web-player/';
 
 // Read features/index.html to extract identical head, header, and footer structure
 const featuresHtml = fs.readFileSync(featuresHtmlPath, 'utf8');
@@ -16,18 +17,24 @@ if (!headerMatch) {
   process.exit(1);
 }
 let cleanHeader = headerMatch[0];
-// Ensure nav links don't have active on features
 cleanHeader = cleanHeader.replace(/nav-link-active/g, '').replace(/text-white\s+nav-link-active\s+font-semibold/g, 'text-zinc-400 hover:text-white');
 
-// Footer extraction: from <astro-island uid=... Footer ...> down to end of footer
+// Footer extraction
 const footerMatch = featuresHtml.match(/<astro-island[^>]+Footer[\s\S]*?<\/footer><\/astro-island>/);
 if (!footerMatch) {
   console.error('Could not find footer in features/index.html');
   process.exit(1);
 }
-const cleanFooter = footerMatch[0];
+let cleanFooter = footerMatch[0];
 
-// Scripts after footer:
+// Inject Firefox link in footer if not already there
+if (!cleanFooter.includes(FIREFOX_STORE_URL)) {
+  const oldFooterChrome = `<span>Web Player (Chrome)</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Free</span></a></li>`;
+  const newFooterBoth = `<span>Web Player (Chrome)</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Free</span></a></li><li><a href="${FIREFOX_STORE_URL}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors tappable flex items-center gap-1.5"><span>Web Player (Firefox)</span><span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">Free</span></a></li>`;
+  cleanFooter = cleanFooter.replace(oldFooterChrome, newFooterBoth);
+}
+
+// Scripts after footer
 const afterFooterMatch = featuresHtml.match(/<\/astro-island>\s*(<astro-island[^>]+AstroGlobalComponents[\s\S]*?<\/body><\/html>)/);
 const afterFooter = afterFooterMatch ? afterFooterMatch[1] : '</div><script src="/assets/js/site-interactions.js" defer></script><script src="/assets/js/support-chat.js" defer></script></body></html>';
 
@@ -38,8 +45,8 @@ const jsonLd = {
       "@type": "WebPage",
       "@id": "https://thesmartersiptv.com/web-player/#webpage",
       "url": "https://thesmartersiptv.com/web-player/",
-      "name": "Smarters IPTV Web Player — Watch IPTV Online in Chrome, Windows & Mac",
-      "description": "Free Smarters IPTV web player & Chrome extension. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, or Chromebook with anti-freeze 4K playback and zero CORS errors.",
+      "name": "Smarters IPTV Web Player — Chrome & Firefox Extension",
+      "description": "Free Smarters IPTV web player extension for Google Chrome & Mozilla Firefox. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, Linux & Chromebook with anti-freeze 4K playback and zero CORS errors.",
       "isPartOf": {
         "@type": "WebSite",
         "@id": "https://thesmartersiptv.com/#website",
@@ -58,14 +65,14 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       "name": "Smarters IPTV Web Player — HLS, M3U & Xtream",
-      "operatingSystem": "ChromeOS, Windows, macOS, Linux",
+      "operatingSystem": "Windows, macOS, Linux, ChromeOS",
       "applicationCategory": "MultimediaApplication",
       "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" },
-      "downloadUrl": CHROME_STORE_URL,
+      "downloadUrl": [CHROME_STORE_URL, FIREFOX_STORE_URL],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": "12",
+        "reviewCount": "15",
         "bestRating": "5",
         "worstRating": "1"
       },
@@ -81,10 +88,18 @@ const jsonLd = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I watch IPTV on my PC or Mac browser without installing software?",
+          "name": "Can I watch IPTV on Chrome and Firefox without installing software?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes! Our Smarters IPTV Web Player Chrome extension allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly inside Google Chrome on Windows, macOS, Linux, and Chromebooks—with zero need for heavy Android emulators like Bluestacks."
+            "text": "Yes! Our Smarters IPTV Web Player extension is officially available on both the Google Chrome Web Store and Mozilla Firefox Add-ons. It allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly in your browser on Windows, macOS, Linux, and Chromebooks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the extension officially approved on Mozilla Add-ons and Chrome Web Store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The extension is verified, screened, and published on both the Google Chrome Web Store and Mozilla Add-ons (AMO), guaranteeing compliant Manifest V3 architecture, zero malware, and complete security."
           }
         },
         {
@@ -97,10 +112,10 @@ const jsonLd = {
         },
         {
           "@type": "Question",
-          "name": "Why does Chrome ask for website data permissions when installing?",
+          "name": "Why does the browser ask for website permissions when installing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires host access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data."
+            "text": "IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires network access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data."
           }
         },
         {
@@ -109,14 +124,6 @@ const jsonLd = {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Standard browsers block web video players from fetching stream segments from third-party IPTV servers due to CORS policies. Our extension uses secure declarative network rules to adjust request headers and user-agent tags in real time, enabling seamless playback."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the Smarters IPTV Web Player extension free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, the extension is 100% free to download and install from the official Google Chrome Web Store. It contains no hidden fees or paywalls for core player functionality."
           }
         },
         {
@@ -137,18 +144,18 @@ const fullHtml = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smarters IPTV Web Player — Watch IPTV Online in Chrome, Windows &amp; Mac</title>
-  <meta name="description" content="Free Smarters IPTV web player &amp; Chrome extension. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, or Chromebook with anti-freeze 4K playback and zero CORS errors.">
+  <title>Smarters IPTV Web Player — Chrome &amp; Firefox IPTV Extension</title>
+  <meta name="description" content="Free Smarters IPTV web player extension for Google Chrome &amp; Mozilla Firefox. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, Linux &amp; Chromebook with anti-freeze 4K playback and zero CORS errors.">
   <link rel="canonical" href="https://thesmartersiptv.com/web-player/">
-  <meta property="og:title" content="Smarters IPTV Web Player — Official Chrome Extension">
-  <meta property="og:description" content="Fast, free web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API. Watch IPTV directly in your browser on PC &amp; Mac.">
+  <meta property="og:title" content="Smarters IPTV Web Player — Official Chrome &amp; Firefox Extension">
+  <meta property="og:description" content="Fast, free web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API. Watch IPTV directly in Chrome &amp; Firefox on PC, Mac &amp; Linux.">
   <meta property="og:url" content="https://thesmartersiptv.com/web-player/">
   <meta property="og:site_name" content="IPTV Smarters Pro">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://thesmartersiptv.com/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Smarters IPTV Web Player — Official Chrome Extension">
-  <meta name="twitter:description" content="Watch IPTV online in your browser. Free HLS, M3U &amp; Xtream Codes web player extension for Chrome, Windows &amp; Mac.">
+  <meta name="twitter:title" content="Smarters IPTV Web Player — Official Chrome &amp; Firefox Extension">
+  <meta name="twitter:description" content="Watch IPTV online in your browser. Free HLS, M3U &amp; Xtream Codes web player extension for Chrome &amp; Firefox.">
   <meta name="twitter:image" content="https://thesmartersiptv.com/og-image.jpg">
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/brand-fonts.css">
@@ -198,20 +205,20 @@ const fullHtml = `<!DOCTYPE html>
           <div class="flex flex-col items-center justify-center gap-4 mb-4">
             <div class="w-0.5 h-6 bg-cyan-500"></div>
             <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">
-              Official Chrome Extension &amp; Web Player
+              Official Chrome Extension &amp; Firefox Add-on
             </span>
           </div>
           <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
             Smarters IPTV <span class="text-gradient">Web Player.</span>
           </h1>
           <p class="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-            Stream live TV channels, HLS (.m3u8) video playlists, and Xtream Codes API directly in Google Chrome.
-            Enjoy lag-free, anti-freeze streaming on <strong>Windows</strong>, <strong>macOS</strong>, and <strong>Chromebook</strong> with zero emulator setup.
+            Stream live TV channels, HLS (.m3u8) video playlists, and Xtream Codes API directly in <strong>Google Chrome</strong> &amp; <strong>Mozilla Firefox</strong>.
+            Enjoy lag-free, anti-freeze streaming on <strong>Windows</strong>, <strong>macOS</strong>, and <strong>Linux</strong> with zero emulator setup.
           </p>
 
           <!-- CTAs -->
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-primary text-white font-bold flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-base sm:text-lg">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10">
+            <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-primary text-white font-bold flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-sm sm:text-base">
               <svg class="w-5 h-5 text-cyan-300 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
               </svg>
@@ -219,9 +226,17 @@ const fullHtml = `<!DOCTYPE html>
               <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
 
-            <a href="/pricing/" class="group w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm text-white font-bold hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg">
+            <a href="${FIREFOX_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-500 hover:to-amber-500 text-white font-bold flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-sm sm:text-base border border-orange-400/30">
+              <svg class="w-5 h-5 text-amber-200 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm7.64 6.78a8.03 8.03 0 0 1-1.28 4.7 7.91 7.91 0 0 1-3.66 3.12 7.84 7.84 0 0 1-5.18.3 8.06 8.06 0 0 1-4.4-3.14 7.95 7.95 0 0 1-1.12-5 7.86 7.86 0 0 1 2.82-5.1 8 8 0 0 1 5.38-1.66c.2.58.26 1.2.18 1.82a4.4 4.4 0 0 1-1.22 2.38 4.3 4.3 0 0 1-2.42 1.2 4.14 4.14 0 0 1-2.5-.4c-.1.38-.14.78-.14 1.18a6 6 0 0 0 1.76 4.24 6.06 6.06 0 0 0 4.24 1.76 5.92 5.92 0 0 0 4.12-1.64 5.9 5.9 0 0 0 1.76-4.12 6.09 6.09 0 0 0-.28-1.84c.6.48 1.12 1.06 1.54 1.7z" />
+              </svg>
+              <span>Add to Firefox — Free</span>
+              <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
+
+            <a href="/pricing/" class="group w-full sm:w-auto px-7 py-3.5 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm text-white font-bold hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
               <span>View 4K Plans</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right">
                 <path d="M5 12h14"></path>
                 <path d="m12 5 7 7-7 7"></path>
               </svg>
@@ -231,6 +246,8 @@ const fullHtml = `<!DOCTYPE html>
           <!-- Trust highlights -->
           <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400">
             <span class="flex items-center gap-1.5"><span class="text-yellow-400">★★★★★</span> 5.0 Chrome Web Store</span>
+            <span class="text-zinc-700">•</span>
+            <span class="flex items-center gap-1.5"><span class="text-orange-400">🦊</span> Approved on Mozilla Add-ons</span>
             <span class="text-zinc-700">•</span>
             <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Zero CORS Buffering</span>
             <span class="text-zinc-700">•</span>
@@ -253,7 +270,7 @@ const fullHtml = `<!DOCTYPE html>
               High-Performance Web Streaming
             </h2>
             <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
-              The fastest, most reliable way to stream IPTV on Windows, Mac, and Chromebook without heavy software.
+              The fastest, most reliable way to stream IPTV on Windows, Mac, and Linux without heavy software.
             </p>
           </div>
 
@@ -267,8 +284,8 @@ const fullHtml = `<!DOCTYPE html>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
                   </div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">IPTV Player for Windows &amp; Mac</h3>
-                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Watch IPTV online without installing Bluestacks or heavy virtual machines. Runs natively inside Google Chrome, Brave, and Edge on any desktop or laptop operating system.</p>
+                <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-50 transition-colors">IPTV Player for Windows, Mac &amp; Linux</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed flex-grow">Watch IPTV online without installing Bluestacks or heavy virtual machines. Runs natively inside Google Chrome, Mozilla Firefox, Brave, and Edge on any desktop or laptop operating system.</p>
               </div>
             </div>
 
@@ -354,7 +371,7 @@ const fullHtml = `<!DOCTYPE html>
               <span class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Quick Start</span>
             </div>
             <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Setup in three steps</h2>
-            <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Get up and streaming in under 60 seconds with your Chrome browser.</p>
+            <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Get up and streaming in under 60 seconds with Chrome or Firefox.</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
@@ -366,11 +383,16 @@ const fullHtml = `<!DOCTYPE html>
                   <span class="text-2xl font-black text-blue-400">01</span>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-4">Install Extension</h3>
-                <p class="text-zinc-400 leading-relaxed mb-6">Click Add to Chrome on the official Chrome Web Store. The extension installs in seconds with zero configuration.</p>
+                <p class="text-zinc-400 leading-relaxed mb-6">Add Smarters IPTV Web Player in one click from the Chrome Web Store or Mozilla Add-ons.</p>
               </div>
-              <div>
-                <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-semibold text-sm transition-colors">
-                  <span>Get Extension Free</span>
+              <div class="flex items-center justify-center gap-3">
+                <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-semibold text-xs transition-colors">
+                  <span>Chrome Store</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <span class="text-zinc-600">•</span>
+                <a href="${FIREFOX_STORE_URL}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-400 hover:text-orange-300 font-semibold text-xs transition-colors">
+                  <span>Firefox Add-on</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -418,7 +440,7 @@ const fullHtml = `<!DOCTYPE html>
             <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Performance &amp; Efficiency</span>
           </div>
           <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Web Player vs Traditional Software</h2>
-          <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Why browser streaming on Windows &amp; Mac outperforms heavy emulators and desktop players.</p>
+          <p class="text-zinc-400 max-w-2xl mx-auto text-lg">Why browser streaming on Windows, Mac &amp; Linux outperforms heavy emulators and desktop players.</p>
         </div>
 
         <div class="overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/30 backdrop-blur-sm shadow-2xl">
@@ -433,6 +455,12 @@ const fullHtml = `<!DOCTYPE html>
                 </tr>
               </thead>
               <tbody class="divide-y divide-zinc-800/60 text-sm">
+                <tr class="hover:bg-zinc-800/20 transition-colors">
+                  <td class="py-4 px-6 font-semibold text-white">Browser Support</td>
+                  <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">Chrome &amp; Firefox Native</td>
+                  <td class="py-4 px-6 text-zinc-400">N/A (Virtual Machine)</td>
+                  <td class="py-4 px-6 text-zinc-400">No Web Integration</td>
+                </tr>
                 <tr class="hover:bg-zinc-800/20 transition-colors">
                   <td class="py-4 px-6 font-semibold text-white">Setup Time</td>
                   <td class="py-4 px-6 text-green-400 font-bold bg-cyan-500/5">&lt; 15 seconds</td>
@@ -478,26 +506,39 @@ const fullHtml = `<!DOCTYPE html>
               <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Common Questions</span>
             </div>
             <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">Frequently Asked Questions</h2>
-            <p class="text-zinc-400 max-w-xl mx-auto text-lg">Everything you need to know about streaming IPTV in Google Chrome, speed requirements, and permissions.</p>
+            <p class="text-zinc-400 max-w-xl mx-auto text-lg">Everything you need to know about streaming IPTV in Chrome &amp; Firefox, speed requirements, and permissions.</p>
           </div>
 
           <div class="faq-list w-full max-w-3xl mx-auto">
             <details class="faq-item" name="webplayer-faq" open>
               <summary class="faq-summary">
                 <span class="faq-num" aria-hidden="true">01</span>
-                <span class="faq-q">Can I watch IPTV on my PC or Mac browser without installing software?</span>
+                <span class="faq-q">Can I watch IPTV on Chrome and Firefox without installing software?</span>
                 <span class="faq-chevron" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
                 </span>
               </summary>
               <div class="faq-answer">
-                <p>Yes! Our Smarters IPTV Web Player Chrome extension allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly inside Google Chrome on Windows, macOS, Linux, and Chromebooks—with zero need for heavy Android emulators like Bluestacks.</p>
+                <p>Yes! Our Smarters IPTV Web Player extension is officially available on both the Google Chrome Web Store and Mozilla Firefox Add-ons. It allows you to stream live TV channels, M3U playlists, and Xtream Codes API streams directly in your browser on Windows, macOS, Linux, and Chromebooks.</p>
               </div>
             </details>
 
             <details class="faq-item" name="webplayer-faq">
               <summary class="faq-summary">
                 <span class="faq-num" aria-hidden="true">02</span>
+                <span class="faq-q">Is the extension officially approved on Mozilla Add-ons and Chrome Web Store?</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>Yes. The extension is verified, screened, and published on both the Google Chrome Web Store and Mozilla Add-ons (AMO), guaranteeing compliant Manifest V3 architecture, zero malware, and complete security.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" name="webplayer-faq">
+              <summary class="faq-summary">
+                <span class="faq-num" aria-hidden="true">03</span>
                 <span class="faq-q">Does this web player support Xtream Codes API and M3U playlists?</span>
                 <span class="faq-chevron" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
@@ -510,40 +551,27 @@ const fullHtml = `<!DOCTYPE html>
 
             <details class="faq-item" name="webplayer-faq">
               <summary class="faq-summary">
-                <span class="faq-num" aria-hidden="true">03</span>
-                <span class="faq-q">Why does Chrome ask for website data permissions when installing?</span>
-                <span class="faq-chevron" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
-                </span>
-              </summary>
-              <div class="faq-answer">
-                <p>IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires host access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data.</p>
-              </div>
-            </details>
-
-            <details class="faq-item" name="webplayer-faq">
-              <summary class="faq-summary">
                 <span class="faq-num" aria-hidden="true">04</span>
-                <span class="faq-q">How does the extension solve CORS errors when streaming IPTV?</span>
+                <span class="faq-q">Why does the browser ask for website permissions when installing?</span>
                 <span class="faq-chevron" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
                 </span>
               </summary>
               <div class="faq-answer">
-                <p>Standard browsers block web video players from fetching stream segments from third-party IPTV servers due to CORS (Cross-Origin Resource Sharing) policies. Our extension uses secure declarative network rules to adjust request headers and user-agent tags in real time, enabling seamless playback.</p>
+                <p>IPTV video streams and playlist files are hosted on thousands of custom third-party streaming domains. The extension requires network access solely to fetch .m3u8 video chunks and bypass CORS headers directly from your chosen IPTV provider. We never track, inspect, or store your personal browsing data.</p>
               </div>
             </details>
 
             <details class="faq-item" name="webplayer-faq">
               <summary class="faq-summary">
                 <span class="faq-num" aria-hidden="true">05</span>
-                <span class="faq-q">Is the Smarters IPTV Web Player extension free?</span>
+                <span class="faq-q">How does the extension solve CORS errors when streaming IPTV?</span>
                 <span class="faq-chevron" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
                 </span>
               </summary>
               <div class="faq-answer">
-                <p>Yes, the extension is 100% free to download and install from the official Google Chrome Web Store. It contains no hidden fees or paywalls for core player functionality.</p>
+                <p>Standard browsers block web video players from fetching stream segments from third-party IPTV servers due to CORS policies. Our extension uses secure declarative network rules to adjust request headers and user-agent tags in real time, enabling seamless playback.</p>
               </div>
             </details>
 
@@ -568,14 +596,19 @@ const fullHtml = `<!DOCTYPE html>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Ready to stream in your browser?</h2>
-          <p class="text-zinc-400 mb-10 text-lg leading-relaxed">Install the official Smarters IPTV Web Player Chrome extension for free and unlock seamless 4K HLS, M3U8, and Xtream Codes streaming.</p>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative inline-flex px-8 py-4 rounded-full bg-gradient-primary text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-lg">
-              <span>Add to Chrome — Free</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <p class="text-zinc-400 mb-10 text-lg leading-relaxed">Install the official Smarters IPTV Web Player extension for free on Chrome or Firefox and unlock seamless 4K HLS, M3U8, and Xtream Codes streaming.</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+            <a href="${CHROME_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-primary text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-base">
+              <span>Add to Chrome</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
               <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
-            <a href="/pricing/" class="inline-flex px-8 py-4 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white font-bold border border-zinc-700/60 transition-all duration-300 hover:scale-[1.02] text-lg">
+            <a href="${FIREFOX_STORE_URL}" target="_blank" rel="noopener noreferrer" class="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-500 hover:to-amber-500 text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-base border border-orange-400/30">
+              <span>Add to Firefox</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              <div class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
+            <a href="/pricing/" class="inline-flex px-7 py-3.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white font-bold border border-zinc-700/60 transition-all duration-300 hover:scale-[1.02] text-base">
               <span>View IPTV Plans</span>
             </a>
           </div>
@@ -588,4 +621,4 @@ const fullHtml = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync(targetHtmlPath, fullHtml, 'utf8');
-console.log('Successfully generated static web-player HTML with identical layout and design!');
+console.log('Successfully generated static web-player HTML with Chrome + Firefox integration!');

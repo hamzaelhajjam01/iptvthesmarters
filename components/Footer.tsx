@@ -168,6 +168,17 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 </a>
               </li>
               <li>
+                <a
+                  href="https://addons.mozilla.org/addon/smarters-iptv-web-player/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors tappable flex items-center gap-1.5"
+                >
+                  <span>Web Player (Firefox)</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">Free</span>
+                </a>
+              </li>
+              <li>
                 <Link href={`${prefix}web-player/`} className="hover:text-white transition-colors tappable">
                   Web Player Guide
                 </Link>
