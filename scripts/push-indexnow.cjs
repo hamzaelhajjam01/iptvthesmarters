@@ -34,7 +34,8 @@ const CORE_URLS = [
   `https://${HOST}/contact/`,
   `https://${HOST}/privacy/`,
   `https://${HOST}/terms/`,
-  `https://${HOST}/refund/`
+  `https://${HOST}/refund/`,
+  `https://${HOST}/web-player/`
 ];
 
 function extractUrlsFromXml(filePath) {
