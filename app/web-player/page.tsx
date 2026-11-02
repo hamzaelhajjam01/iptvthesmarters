@@ -5,23 +5,26 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChromeIcon from '@/components/icons/ChromeIcon';
 import FirefoxIcon from '@/components/icons/FirefoxIcon';
+import EdgeIcon from '@/components/icons/EdgeIcon';
 
 const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk';
 const FIREFOX_STORE_URL =
   'https://addons.mozilla.org/addon/smarters-iptv-web-player/';
+const EDGE_STORE_URL =
+  'https://microsoftedge.microsoft.com/addons/detail/smarters-iptv-web-player-/cppncpjdopgkhnbdbccjipfmelaififg';
 
 export const metadata: Metadata = {
-  title: 'Smarters IPTV Web Player — Chrome & Firefox IPTV Extension',
+  title: 'Smarters IPTV Web Player — Chrome, Firefox & Edge IPTV Extension',
   description:
-    'Free Smarters IPTV web player extension for Google Chrome & Mozilla Firefox. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, Linux & Chromebook with anti-freeze 4K playback and zero CORS errors.',
+    'Free Smarters IPTV web player extension for Google Chrome, Mozilla Firefox & Microsoft Edge. Stream live TV, HLS .m3u8 playlists, and Xtream Codes API on Windows, Mac, Linux & Chromebook with anti-freeze 4K playback and zero CORS errors.',
   alternates: {
     canonical: 'https://thesmartersiptv.com/web-player/',
   },
   openGraph: {
-    title: 'Smarters IPTV Web Player — Official Chrome & Firefox Extension',
+    title: 'Smarters IPTV Web Player — Official Chrome, Firefox & Edge Extension',
     description:
-      'Fast, free web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API. Watch IPTV directly in Chrome & Firefox on PC, Mac & Linux.',
+      'Fast, free web player for HLS (.m3u8) streams, IPTV M3U playlists, and Xtream Codes API. Watch IPTV directly in Chrome, Firefox & Edge on PC, Mac & Linux.',
     url: 'https://thesmartersiptv.com/web-player/',
     siteName: 'IPTV Smarters Pro',
     type: 'website',
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Smarters IPTV Web Player — Official Chrome & Firefox Extension',
     description:
-      'Watch IPTV online in your browser. Free HLS, M3U & Xtream Codes web player extension for Chrome & Firefox.',
+      'Watch IPTV online in your browser. Free HLS, M3U & Xtream Codes web player extension for Chrome, Firefox & Edge.',
   },
 };
 
@@ -238,7 +241,7 @@ export default function WebPlayerPage() {
             </h1>
             <p className="text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
               Stream live TV channels, HLS (.m3u8) video playlists, and Xtream Codes API directly in{' '}
-              <strong>Google Chrome</strong> &amp; <strong>Mozilla Firefox</strong>.
+              <strong>Google Chrome</strong>, <strong>Mozilla Firefox</strong> &amp; <strong>Microsoft Edge</strong>.
               Enjoy lag-free, anti-freeze streaming on <strong>Windows</strong>, <strong>macOS</strong>, and{' '}
               <strong>Linux</strong> with zero emulator setup.
             </p>
@@ -317,6 +320,45 @@ export default function WebPlayerPage() {
               >
                 <FirefoxIcon className="w-6 h-6 shrink-0" style={{ width: '24px', height: '24px', flexShrink: 0 }} />
                 <span className="tracking-tight">Add to Firefox</span>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    padding: '2px 8px',
+                    borderRadius: '9999px',
+                    background: 'rgba(255, 255, 255, 0.22)',
+                    border: '1px solid rgba(255, 255, 255, 0.35)',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    fontWeight: 800,
+                  }}
+                >
+                  Free
+                </span>
+              </a>
+
+              <a
+                href={EDGE_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(2,132,199,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '14px 26px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #06b6d4 100%)',
+                  border: '1px solid rgba(125, 211, 252, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(2, 132, 199, 0.35)',
+                  margin: '4px',
+                }}
+              >
+                <EdgeIcon className="w-6 h-6 shrink-0" style={{ width: '24px', height: '24px', flexShrink: 0 }} />
+                <span className="tracking-tight">Add to Edge</span>
                 <span
                   style={{
                     fontSize: '11px',
@@ -485,6 +527,17 @@ export default function WebPlayerPage() {
                   >
                     <FirefoxIcon className="w-4 h-4 shrink-0" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
                     <span>Firefox Add-on</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <span className="text-zinc-600">•</span>
+                  <a
+                    href={EDGE_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-semibold text-xs transition-colors"
+                  >
+                    <EdgeIcon className="w-4 h-4 shrink-0" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                    <span>Edge Add-on</span>
                     <span aria-hidden="true">↗</span>
                   </a>
                 </div>
@@ -674,6 +727,20 @@ export default function WebPlayerPage() {
                 className="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-500 hover:to-amber-500 text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-base border border-orange-400/30"
               >
                 <span>Add to Firefox</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </a>
+
+              <a
+                href={EDGE_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-700 hover:from-sky-500 hover:to-cyan-500 text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.35)] text-base border border-cyan-400/30"
+              >
+                <span>Add to Edge</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
                   <path d="M5 12h14"></path>
                   <path d="m12 5 7 7-7 7"></path>

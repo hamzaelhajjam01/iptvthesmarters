@@ -179,6 +179,17 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 </a>
               </li>
               <li>
+                <a
+                  href="https://microsoftedge.microsoft.com/addons/detail/smarters-iptv-web-player-/cppncpjdopgkhnbdbccjipfmelaififg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors tappable flex items-center gap-1.5"
+                >
+                  <span>Web Player (Edge)</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">Free</span>
+                </a>
+              </li>
+              <li>
                 <Link href={`${prefix}web-player/`} className="hover:text-white transition-colors tappable">
                   Web Player Guide
                 </Link>

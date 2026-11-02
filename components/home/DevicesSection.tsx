@@ -1,6 +1,7 @@
 import React from 'react';
 import ChromeIcon from '@/components/icons/ChromeIcon';
 import FirefoxIcon from '@/components/icons/FirefoxIcon';
+import EdgeIcon from '@/components/icons/EdgeIcon';
 
 interface DeviceItem {
   title: string;
@@ -10,7 +11,7 @@ interface DeviceItem {
   links?: {
     href: string;
     text: string;
-    type: 'chrome' | 'firefox';
+    type: 'chrome' | 'firefox' | 'edge';
   }[];
 }
 
@@ -63,6 +64,11 @@ const DEVICES: DeviceItem[] = [
         href: 'https://addons.mozilla.org/addon/smarters-iptv-web-player/',
         text: 'Firefox',
         type: 'firefox',
+      },
+      {
+        href: 'https://microsoftedge.microsoft.com/addons/detail/smarters-iptv-web-player-/cppncpjdopgkhnbdbccjipfmelaififg',
+        text: 'Edge',
+        type: 'edge',
       },
     ],
     icon: (
@@ -122,6 +128,8 @@ export default function DevicesSection() {
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all shadow-sm hover:scale-105 ${
                         item.type === 'firefox'
                           ? 'bg-zinc-900/90 hover:bg-zinc-800 border border-orange-500/40 hover:border-orange-500 text-orange-200 hover:text-white'
+                          : item.type === 'edge'
+                          ? 'bg-zinc-900/90 hover:bg-zinc-800 border border-cyan-500/40 hover:border-cyan-500 text-cyan-200 hover:text-white'
                           : 'bg-zinc-900/90 hover:bg-zinc-800 border border-blue-500/40 hover:border-blue-500 text-blue-200 hover:text-white'
                       }`}
                       style={{
@@ -136,8 +144,10 @@ export default function DevicesSection() {
                     >
                       {item.type === 'chrome' ? (
                         <ChromeIcon className="w-3.5 h-3.5 shrink-0" style={{ width: '14px', height: '14px', flexShrink: 0 }} />
-                      ) : (
+                      ) : item.type === 'firefox' ? (
                         <FirefoxIcon className="w-3.5 h-3.5 shrink-0" style={{ width: '14px', height: '14px', flexShrink: 0 }} />
+                      ) : (
+                        <EdgeIcon className="w-3.5 h-3.5 shrink-0" style={{ width: '14px', height: '14px', flexShrink: 0 }} />
                       )}
                       <span>{item.text}</span>
                     </a>
