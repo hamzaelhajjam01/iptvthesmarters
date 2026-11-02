@@ -29,7 +29,7 @@ def package_browser(target_browser, zip_filename):
     with open(manifest_src, 'r', encoding='utf-8') as mf:
         manifest = json.load(mf)
 
-    if target_browser == 'chrome':
+    if target_browser in ('chrome', 'edge'):
         manifest['background'] = {
             'service_worker': 'background.js'
         }
@@ -66,4 +66,5 @@ def package_browser(target_browser, zip_filename):
 if __name__ == '__main__':
     package_browser('chrome', 'smarters-iptv-web-player-v1.0.1.zip')
     package_browser('firefox', 'smarters-iptv-firefox-v1.0.1.zip')
+    package_browser('edge', 'smarters-iptv-edge-v1.0.1.zip')
     print('Packaging complete.')

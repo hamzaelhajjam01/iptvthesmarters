@@ -53,7 +53,7 @@ function buildPackage(targetBrowser, zipName) {
   const manifestPath = path.join(tempDir, 'manifest.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-  if (targetBrowser === 'chrome') {
+  if (targetBrowser === 'chrome' || targetBrowser === 'edge') {
     manifest.background = {
       service_worker: 'background.js'
     };
@@ -77,4 +77,5 @@ function buildPackage(targetBrowser, zipName) {
 
 buildPackage('chrome', 'smarters-iptv-web-player-v1.0.1.zip');
 buildPackage('firefox', 'smarters-iptv-firefox-v1.0.1.zip');
+buildPackage('edge', 'smarters-iptv-edge-v1.0.1.zip');
 console.log('Packaging complete.');
