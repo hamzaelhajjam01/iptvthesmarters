@@ -276,7 +276,7 @@ export default function WebPlayerPage() {
                   margin: '4px',
                 }}
               >
-                <ChromeIcon className="w-6 h-6 shrink-0" />
+                <ChromeIcon className="w-6 h-6 shrink-0" style={{ width: '24px', height: '24px', flexShrink: 0 }} />
                 <span className="tracking-tight">Add to Chrome</span>
                 <span
                   style={{
@@ -315,7 +315,7 @@ export default function WebPlayerPage() {
                   margin: '4px',
                 }}
               >
-                <FirefoxIcon className="w-6 h-6 shrink-0" />
+                <FirefoxIcon className="w-6 h-6 shrink-0" style={{ width: '24px', height: '24px', flexShrink: 0 }} />
                 <span className="tracking-tight">Add to Firefox</span>
                 <span
                   style={{
@@ -472,7 +472,7 @@ export default function WebPlayerPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-semibold text-xs transition-colors"
                   >
-                    <ChromeIcon className="w-4 h-4 shrink-0" />
+                    <ChromeIcon className="w-4 h-4 shrink-0" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
                     <span>Chrome Store</span>
                     <span aria-hidden="true">↗</span>
                   </a>
@@ -483,7 +483,7 @@ export default function WebPlayerPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-orange-400 hover:text-orange-300 font-semibold text-xs transition-colors"
                   >
-                    <FirefoxIcon className="w-4 h-4 shrink-0" />
+                    <FirefoxIcon className="w-4 h-4 shrink-0" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
                     <span>Firefox Add-on</span>
                     <span aria-hidden="true">↗</span>
                   </a>

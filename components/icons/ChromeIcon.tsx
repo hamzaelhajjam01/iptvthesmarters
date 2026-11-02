@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function ChromeIcon({ className = 'w-5 h-5 shrink-0' }: { className?: string }) {
+export default function ChromeIcon({ className = 'w-5 h-5 shrink-0', style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className={className} aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className={className} style={style} aria-hidden="true">
       <defs>
         <linearGradient id="chrome-grad-a" x1="3.2173" y1="15" x2="44.7812" y2="15" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#d93025" />

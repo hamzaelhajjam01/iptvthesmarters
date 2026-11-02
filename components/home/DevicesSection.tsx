@@ -135,9 +135,9 @@ export default function DevicesSection() {
                       }}
                     >
                       {item.type === 'chrome' ? (
-                        <ChromeIcon className="w-3.5 h-3.5 shrink-0" />
+                        <ChromeIcon className="w-3.5 h-3.5 shrink-0" style={{ width: '14px', height: '14px', flexShrink: 0 }} />
                       ) : (
-                        <FirefoxIcon className="w-3.5 h-3.5 shrink-0" />
+                        <FirefoxIcon className="w-3.5 h-3.5 shrink-0" style={{ width: '14px', height: '14px', flexShrink: 0 }} />
                       )}
                       <span>{item.text}</span>
                     </a>

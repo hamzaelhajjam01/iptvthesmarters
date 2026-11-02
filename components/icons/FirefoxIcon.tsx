@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function FirefoxIcon({ className = 'w-5 h-5 shrink-0' }: { className?: string }) {
+export default function FirefoxIcon({ className = 'w-5 h-5 shrink-0', style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={className} aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={className} style={style} aria-hidden="true">
       <defs>
         <radialGradient id="ff-grad-g" cx="210%" cy="-100%" r="290%">
           <stop offset=".1" stopColor="#ffe226" />
