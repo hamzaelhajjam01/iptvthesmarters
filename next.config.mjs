@@ -50,6 +50,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/guides/how-to-setup-iptv-smarters-pro-on-firestick/',
+        destination: '/guides/install-iptv-smarters-pro-on-firestick/',
+        permanent: true,
+      },
+      {
+        source: '/:lang/guides/how-to-setup-iptv-smarters-pro-on-firestick/',
+        destination: '/:lang/guides/install-iptv-smarters-pro-on-firestick/',
+        permanent: true,
+      },
+      {
         source: '/itemap.xml',
         destination: '/sitemap.xml',
         permanent: true,

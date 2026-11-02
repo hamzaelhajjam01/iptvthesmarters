@@ -152,7 +152,7 @@ export default function Footer({ currentLang = 'en' }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`${prefix}guides/how-to-setup-iptv-smarters-pro-on-firestick/`} className="hover:text-white transition-colors tappable">
+                <Link href={`${prefix}guides/install-iptv-smarters-pro-on-firestick/`} className="hover:text-white transition-colors tappable">
                   Best IPTV for Firestick
                 </Link>
               </li>
