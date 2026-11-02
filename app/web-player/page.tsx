@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ChromeIcon from '@/components/icons/ChromeIcon';
+import FirefoxIcon from '@/components/icons/FirefoxIcon';
 
 const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/smarters-iptv-web-player/abgjeecgdimjgimljendbajiepppdjlk';
@@ -242,39 +244,127 @@ export default function WebPlayerPage() {
             </p>
 
             {/* CTAs with Dual Browser Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10">
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '16px',
+                marginBottom: '2.5rem',
+              }}
+            >
               <a
                 href={CHROME_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-primary text-white font-bold flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-sm sm:text-base"
+                className="group relative inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(37,99,235,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '14px 26px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%)',
+                  border: '1px solid rgba(147, 197, 253, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(37, 99, 235, 0.35)',
+                  margin: '4px',
+                }}
               >
-                <svg className="w-5 h-5 text-cyan-300 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                </svg>
-                <span>Add to Chrome — Free</span>
-                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <ChromeIcon className="w-6 h-6 shrink-0" />
+                <span className="tracking-tight">Add to Chrome</span>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    padding: '2px 8px',
+                    borderRadius: '9999px',
+                    background: 'rgba(255, 255, 255, 0.22)',
+                    border: '1px solid rgba(255, 255, 255, 0.35)',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    fontWeight: 800,
+                  }}
+                >
+                  Free
+                </span>
               </a>
 
               <a
                 href={FIREFOX_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-500 hover:to-amber-500 text-white font-bold flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-sm sm:text-base border border-orange-400/30"
+                className="group relative inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(234,88,12,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '14px 26px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%)',
+                  border: '1px solid rgba(253, 186, 116, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(234, 88, 12, 0.35)',
+                  margin: '4px',
+                }}
               >
-                <svg className="w-5 h-5 text-amber-200 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm7.64 6.78a8.03 8.03 0 0 1-1.28 4.7 7.91 7.91 0 0 1-3.66 3.12 7.84 7.84 0 0 1-5.18.3 8.06 8.06 0 0 1-4.4-3.14 7.95 7.95 0 0 1-1.12-5 7.86 7.86 0 0 1 2.82-5.1 8 8 0 0 1 5.38-1.66c.2.58.26 1.2.18 1.82a4.4 4.4 0 0 1-1.22 2.38 4.3 4.3 0 0 1-2.42 1.2 4.14 4.14 0 0 1-2.5-.4c-.1.38-.14.78-.14 1.18a6 6 0 0 0 1.76 4.24 6.06 6.06 0 0 0 4.24 1.76 5.92 5.92 0 0 0 4.12-1.64 5.9 5.9 0 0 0 1.76-4.12 6.09 6.09 0 0 0-.28-1.84c.6.48 1.12 1.06 1.54 1.7z" />
-                </svg>
-                <span>Add to Firefox — Free</span>
-                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <FirefoxIcon className="w-6 h-6 shrink-0" />
+                <span className="tracking-tight">Add to Firefox</span>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    padding: '2px 8px',
+                    borderRadius: '9999px',
+                    background: 'rgba(255, 255, 255, 0.22)',
+                    border: '1px solid rgba(255, 255, 255, 0.35)',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    fontWeight: 800,
+                  }}
+                >
+                  Free
+                </span>
               </a>
 
               <Link
                 href="/pricing/"
-                className="group w-full sm:w-auto px-7 py-3.5 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm text-white font-bold hover:bg-zinc-800 hover:border-zinc-700 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-zinc-200 hover:text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '14px 24px',
+                  borderRadius: '9999px',
+                  background: 'rgba(24, 24, 27, 0.85)',
+                  border: '1px solid rgba(63, 63, 70, 0.8)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  backdropFilter: 'blur(10px)',
+                  margin: '4px',
+                }}
               >
                 <span>View 4K Plans</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-arrow-right transition-transform group-hover:translate-x-1"
+                >
                   <path d="M5 12h14"></path>
                   <path d="m12 5 7 7-7 7"></path>
                 </svg>
@@ -375,13 +465,14 @@ export default function WebPlayerPage() {
                     Add Smarters IPTV Web Player in one click from the Chrome Web Store or Mozilla Add-ons.
                   </p>
                 </div>
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center justify-center gap-4" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <a
                     href={CHROME_STORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-semibold text-xs transition-colors"
+                    className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-semibold text-xs transition-colors"
                   >
+                    <ChromeIcon className="w-4 h-4 shrink-0" />
                     <span>Chrome Store</span>
                     <span aria-hidden="true">↗</span>
                   </a>
@@ -390,8 +481,9 @@ export default function WebPlayerPage() {
                     href={FIREFOX_STORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-orange-400 hover:text-orange-300 font-semibold text-xs transition-colors"
+                    className="inline-flex items-center gap-1.5 text-orange-400 hover:text-orange-300 font-semibold text-xs transition-colors"
                   >
+                    <FirefoxIcon className="w-4 h-4 shrink-0" />
                     <span>Firefox Add-on</span>
                     <span aria-hidden="true">↗</span>
                   </a>
