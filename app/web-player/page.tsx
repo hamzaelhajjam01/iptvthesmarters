@@ -698,61 +698,123 @@ export default function WebPlayerPage() {
         {/* Bottom Conversion CTA */}
         <section className="py-16 text-center border-t border-zinc-900/50 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
               Ready to stream in your browser?
             </h2>
             <p className="text-zinc-400 mb-10 text-lg leading-relaxed">
-              Install the official Smarters IPTV Web Player extension for free on Chrome or Firefox and unlock seamless 4K HLS, M3U8, and Xtream Codes streaming.
+              Install the official Smarters IPTV Web Player extension for free on Chrome, Firefox, or Edge and unlock seamless 4K HLS, M3U8, and Xtream Codes streaming.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+            <div
+              className="flex flex-wrap items-center justify-center gap-4"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '14px',
+                margin: '0 auto',
+              }}
+            >
               <a
                 href={CHROME_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-primary text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(123,63,228,0.3)] text-base"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(37,99,235,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '12px 24px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%)',
+                  border: '1px solid rgba(147, 197, 253, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(37, 99, 235, 0.35)',
+                  margin: '6px',
+                }}
               >
+                <ChromeIcon className="w-5 h-5 shrink-0" style={{ width: '20px', height: '20px', flexShrink: 0 }} />
                 <span>Add to Chrome</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </a>
 
               <a
                 href={FIREFOX_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 hover:from-orange-500 hover:to-amber-500 text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.35)] text-base border border-orange-400/30"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(234,88,12,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '12px 24px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%)',
+                  border: '1px solid rgba(253, 186, 116, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(234, 88, 12, 0.35)',
+                  margin: '6px',
+                }}
               >
+                <FirefoxIcon className="w-5 h-5 shrink-0" style={{ width: '20px', height: '20px', flexShrink: 0 }} />
                 <span>Add to Firefox</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </a>
 
               <a
                 href={EDGE_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex px-7 py-3.5 rounded-full bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-700 hover:from-sky-500 hover:to-cyan-500 text-white font-bold items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.35)] text-base border border-cyan-400/30"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base shadow-[0_8px_30px_rgba(2,132,199,0.35)]"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  padding: '12px 24px',
+                  borderRadius: '9999px',
+                  background: 'linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #06b6d4 100%)',
+                  border: '1px solid rgba(125, 211, 252, 0.4)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  boxShadow: '0 8px 30px rgba(2, 132, 199, 0.35)',
+                  margin: '6px',
+                }}
               >
+                <EdgeIcon className="w-5 h-5 shrink-0" style={{ width: '20px', height: '20px', flexShrink: 0 }} />
                 <span>Add to Edge</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-                <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </a>
 
               <Link
                 href="/pricing/"
-                className="inline-flex px-7 py-3.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white font-bold border border-zinc-700/60 transition-all duration-300 hover:scale-[1.02] text-base"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-zinc-200 hover:text-white font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] text-sm sm:text-base"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '12px 22px',
+                  borderRadius: '9999px',
+                  background: 'rgba(24, 24, 27, 0.85)',
+                  border: '1px solid rgba(63, 63, 70, 0.8)',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  backdropFilter: 'blur(10px)',
+                  margin: '6px',
+                }}
               >
                 <span>View IPTV Plans</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right transition-transform group-hover:translate-x-1">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
               </Link>
             </div>
           </div>
