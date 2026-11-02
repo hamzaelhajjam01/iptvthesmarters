@@ -1,3 +1,66 @@
+// Ensure declarativeNetRequest rules are dynamically scoped to this extension
+(function ensureDynamicDNR() {
+  const api = typeof chrome !== 'undefined' && chrome.declarativeNetRequest
+    ? chrome
+    : (typeof browser !== 'undefined' && browser.declarativeNetRequest ? browser : null);
+  if (!api || !api.declarativeNetRequest || !api.declarativeNetRequest.updateDynamicRules) return;
+  try {
+    const runtimeUrl = api.runtime && api.runtime.getURL ? api.runtime.getURL('') : '';
+    const extensionHost = runtimeUrl ? new URL(runtimeUrl).hostname : '';
+    const initiatorDomains = ['thesmartersiptv.com', 'localhost'];
+    if (extensionHost && !initiatorDomains.includes(extensionHost)) initiatorDomains.unshift(extensionHost);
+    const excludedDomains = [
+      'youtube.com', 'googlevideo.com', 'ytimg.com', 'youtu.be',
+      'google.com', 'googleapis.com', 'gstatic.com', 'googleusercontent.com',
+      'netflix.com', 'nflxvideo.net', 'spotify.com', 'twitch.tv', 'vimeo.com'
+    ];
+    api.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: [1001, 1002],
+      addRules: [
+        {
+          id: 1001,
+          priority: 2,
+          action: {
+            type: 'modifyHeaders',
+            responseHeaders: [
+              { header: 'Access-Control-Allow-Origin', operation: 'set', value: '*' },
+              { header: 'Access-Control-Allow-Methods', operation: 'set', value: 'GET, HEAD, OPTIONS' },
+              { header: 'Access-Control-Allow-Headers', operation: 'set', value: '*' }
+            ]
+          },
+          condition: {
+            urlFilter: '*',
+            initiatorDomains,
+            excludedInitiatorDomains: excludedDomains,
+            excludedRequestDomains: excludedDomains,
+            resourceTypes: ['xmlhttprequest', 'media', 'other']
+          }
+        },
+        {
+          id: 1002,
+          priority: 2,
+          action: {
+            type: 'modifyHeaders',
+            requestHeaders: [
+              { header: 'User-Agent', operation: 'set', value: 'IPTVSmartersPro' },
+              { header: 'sec-ch-ua', operation: 'remove' },
+              { header: 'sec-ch-ua-mobile', operation: 'remove' },
+              { header: 'sec-ch-ua-platform', operation: 'remove' }
+            ]
+          },
+          condition: {
+            urlFilter: '*',
+            initiatorDomains,
+            excludedInitiatorDomains: excludedDomains,
+            excludedRequestDomains: excludedDomains,
+            resourceTypes: ['xmlhttprequest', 'media', 'other']
+          }
+        }
+      ]
+    }).catch(() => {});
+  } catch (e) {}
+})();
+
 // Smarters IPTV Web Player - HeroUI Full Tab Controller (Manifest V3)
 document.addEventListener('DOMContentLoaded', () => {
   const video = document.getElementById('fullVideoPlayer');

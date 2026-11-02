@@ -1,60 +1,73 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const cp = require('child_process');
 
 const rootDir = path.resolve(__dirname, '..');
 const extDir = path.join(rootDir, 'chrome-extension');
-const stageDir = path.join(rootDir, 'temp_stage_zip');
-const zipFile = path.join(rootDir, 'smarters-iptv-web-player-v1.0.0.zip');
+const tempDir = path.join(rootDir, 'temp_pack_v101');
 
-if (fs.existsSync(stageDir)) {
-  fs.rmSync(stageDir, { recursive: true, force: true });
+// Ensure clean temp dir
+if (fs.existsSync(tempDir)) {
+  fs.rmSync(tempDir, { recursive: true, force: true });
 }
-if (fs.existsSync(zipFile)) {
-  fs.rmSync(zipFile, { force: true });
-}
+fs.mkdirSync(tempDir, { recursive: true });
 
-fs.mkdirSync(stageDir, { recursive: true });
-
-// Production files to copy
+// Files to copy
 const filesToCopy = [
   'manifest.json',
-  'popup.html',
-  'popup.css',
-  'popup.js',
+  'background.js',
+  'rules.json',
   'player.html',
   'player.css',
   'player.js',
-  'rules.json'
+  'popup.html',
+  'popup.css',
+  'popup.js'
 ];
 
-filesToCopy.forEach(f => {
-  fs.copyFileSync(path.join(extDir, f), path.join(stageDir, f));
-});
+for (const file of filesToCopy) {
+  const src = path.join(extDir, file);
+  const dst = path.join(tempDir, file);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dst);
+  } else {
+    console.error(`Missing file: ${src}`);
+  }
+}
 
-// Copy directories
-function copyDir(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      copyDir(srcPath, destPath);
+// Copy dirs
+function copyDir(srcDir, dstDir) {
+  fs.mkdirSync(dstDir, { recursive: true });
+  for (const item of fs.readdirSync(srcDir)) {
+    const s = path.join(srcDir, item);
+    const d = path.join(dstDir, item);
+    if (fs.statSync(s).isDirectory()) {
+      copyDir(s, d);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      fs.copyFileSync(s, d);
     }
   }
 }
 
-copyDir(path.join(extDir, 'icons'), path.join(stageDir, 'icons'));
-copyDir(path.join(extDir, 'lib'), path.join(stageDir, 'lib'));
+copyDir(path.join(extDir, 'icons'), path.join(tempDir, 'icons'));
+copyDir(path.join(extDir, 'lib'), path.join(tempDir, 'lib'));
 
-// Use bsdtar (tar.exe) to create POSIX forward-slash ZIP archive
-execSync(`tar.exe -a -c -f "${zipFile}" -C "${stageDir}" *`, { stdio: 'inherit' });
+console.log('Copied all extension files to temp dir.');
 
-// Cleanup staging
-fs.rmSync(stageDir, { recursive: true, force: true });
+// Create zips using PowerShell's ZipFile
+const zipChrome = path.join(rootDir, 'smarters-iptv-web-player-v1.0.1.zip');
+const zipFirefox = path.join(rootDir, 'smarters-iptv-firefox-v1.0.1.zip');
 
-const stats = fs.statSync(zipFile);
-console.log(`Success! Package created: ${zipFile} (${(stats.size / 1024).toFixed(1)} KB)`);
+if (fs.existsSync(zipChrome)) fs.unlinkSync(zipChrome);
+if (fs.existsSync(zipFirefox)) fs.unlinkSync(zipFirefox);
+
+const psCommand = `powershell -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory('${tempDir.replace(/\\/g, '/')}', '${zipChrome.replace(/\\/g, '/')}'); [System.IO.Compression.ZipFile]::CreateFromDirectory('${tempDir.replace(/\\/g, '/')}', '${zipFirefox.replace(/\\/g, '/')}');"`;
+
+cp.execSync(psCommand);
+console.log('Zips created:');
+console.log(' -', zipChrome, fs.statSync(zipChrome).size, 'bytes');
+console.log(' -', zipFirefox, fs.statSync(zipFirefox).size, 'bytes');
+
+// Clean temp
+fs.rmSync(tempDir, { recursive: true, force: true });
+console.log('Cleaned temp dir.');
