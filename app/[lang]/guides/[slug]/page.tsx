@@ -128,7 +128,7 @@ export default function LocalizedGuidePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header currentLang={params.lang} guideSlug={params.slug} />
-      <main className="flex-1" dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <main className="flex-1" dir={params.lang === "ar" ? "rtl" : "ltr"} dangerouslySetInnerHTML={{ __html: mainHtml }} />
       <Footer currentLang={params.lang} />
     </>
   );

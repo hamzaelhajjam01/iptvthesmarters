@@ -53,10 +53,23 @@ for (const [slug, data] of Object.entries(allData)) {
 
   // 1. Build Desktop TOC
   const desktopTocHtml = `<ul class="space-y-3 text-sm" id="toc-list">\n` +
-    data.toc.map(item => `                  <li>\n                    <a href="${item.href}" class="text-zinc-400 hover:text-blue-400 transition-colors line-clamp-2">${item.title}</a>\n                  </li>`).join('\n') +
+    data.toc.map(item => `                  <li>\n                    <a href="${item.href}" class="text-zinc-400 hover:text-blue-400 transition-colors line-clamp-2">${item.text || item.title}</a>\n                  </li>`).join('\n') +
     `\n                </ul>`;
 
   html = html.replace(/<ul class="space-y-3 text-sm" id="toc-list">[\s\S]*?<\/ul>/i, desktopTocHtml);
+
+  // Replace desktop aside "Contents" title with Arabic "محتويات الدليل"
+  html = html.replace(/(<aside[\s\S]*?<h2[^>]*>[\s\S]*?<\/svg>\s*)Contents(\s*<\/h2>)/i, '$1محتويات الدليل$2');
+
+  // Strip dangling un-opened English sidebar promo blocks that break layout and close container prematurely
+  const ghostRegex = /\s*<h3 class="text-white font-bold text-lg mb-3 mt-4">Top-Rated 4K IPTV<\/h3>[\s\S]*?<a href="\/pricing\/"[^>]*>Get Best IPTV 4K Plan →<\/a>\s*<\/div>/gi;
+  html = html.replace(ghostRegex, '');
+
+  // Ensure container has justify-center for centered layout
+  html = html.replace(
+    /py-16 md:py-24 flex flex-col lg:flex-row gap-12 lg:gap-16 items-start relative lg:flex-row-reverse(?!\s+justify-center)/g,
+    'py-16 md:py-24 flex flex-col lg:flex-row gap-12 lg:gap-16 items-start relative lg:flex-row-reverse justify-center'
+  );
 
   // 2. Build Mobile TOC
   const mobileTocHtml = `<details class="lg:hidden bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-4 mb-10">
@@ -71,7 +84,7 @@ for (const [slug, data] of Object.entries(allData)) {
                   <span class="text-zinc-500 text-xs">انقر للتوسيع</span>
                 </summary>
                 <ul class="space-y-3 text-sm mt-4 pt-4 border-t border-zinc-800/50">
-${data.toc.map(item => `                  <li>\n                    <a href="${item.href}" class="text-zinc-400 hover:text-blue-400 transition-colors">${item.title}</a>\n                  </li>`).join('\n')}
+${data.toc.map(item => `                  <li>\n                    <a href="${item.href}" class="text-zinc-400 hover:text-blue-400 transition-colors">${item.text || item.title}</a>\n                  </li>`).join('\n')}
                 </ul>
               </details>`;
 
@@ -88,17 +101,19 @@ ${data.toc.map(item => `                  <li>\n                    <a href="${i
   const proseReplacement = `<div class="prose">\n${translatedProse}\n              </div>\n              <div id="faq"`;
   html = html.replace(/<div class="prose">[\s\S]*?<\/div>\s*<div id="faq"/i, proseReplacement);
 
-  // 5. FAQ section items replacement
-  const faqItemsHtml = `<div class="space-y-6">\n` +
-    data.faqs.map((faq, idx) => `                  <div class="reveal-on-scroll bg-zinc-900/30 border border-zinc-800/60 rounded-2xl p-6">
-                    <h3 class="text-xl font-bold text-white mb-3" id="section-${data.toc.length + idx}">${faq.q}</h3>
-                    <p class="text-zinc-400 leading-relaxed">${faq.a}</p>
-                  </div>`).join('\n') +
-    `\n                </div>`;
+  // 5. Clean and replace entire FAQ section (prevents duplicates, trailing undefined, and broken divs)
+  const faqBlockHtml = `<div id="faq" class="mt-16 pt-12 border-t border-zinc-900/50 scroll-mt-32">
+                <h2 class="text-3xl font-bold text-white mb-8 tracking-tight">الأسئلة الشائعة والمتكررة</h2>
+                <div class="space-y-6">
+${data.faqs.map((faq, idx) => `                  <div class="reveal-on-scroll bg-zinc-900/30 border border-zinc-800/60 rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-3" id="section-${data.toc.length + idx}">${faq.question || faq.q}</h3>
+                    <p class="text-zinc-400 leading-relaxed">${faq.answer || faq.a}</p>
+                  </div>`).join('\n')}
+                </div>
+              </div>`;
 
-  html = html.replace(/<div id="faq"[\s\S]*?<div class="space-y-6">[\s\S]*?<\/div>\s*<\/div>/i, (match) => {
-    return match.replace(/<div class="space-y-6">[\s\S]*?<\/div>/i, faqItemsHtml);
-  });
+  const faqRegex = /<div id="faq"[\s\S]*?(?=\s*(?:<div class="[^"]*lg:hidden\s+mt-12|<\/article>))/i;
+  html = html.replace(faqRegex, faqBlockHtml);
 
   // 6. JSON-LD Schema FAQPage update
   html = html.replace(/(<script type="application\/ld\+json">[\s\S]*?<\/script>)/gi, (scriptTag) => {
@@ -111,10 +126,10 @@ ${data.toc.map(item => `                  <li>\n                    <a href="${i
         if (faqGraph) {
           faqGraph.mainEntity = data.faqs.map(f => ({
             '@type': 'Question',
-            name: f.q,
+            name: f.question || f.q,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: f.a
+              text: f.answer || f.a
             }
           }));
           return `<script type="application/ld+json">\n${JSON.stringify(parsed, null, 2)}\n</script>`;
