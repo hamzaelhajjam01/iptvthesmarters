@@ -318,8 +318,8 @@ export const GUIDES: GuideItem[] = [
   {
     "slug": "iptv-smarters-pro-on-iphone-ios",
     "category": "devices",
-    "title": "IPTV Smarters Pro on iPhone &amp; iOS: Complete Setup",
-    "desc": "Get IPTV Smarters Pro running on iPhone and iPad via the App Store, plus fixes for the most common iOS playback issues.",
+    "title": "IPTV Smarters Pro for iPhone & iPad: iOS Setup (2026)",
+    "desc": "Set up IPTV Smarters Pro on iPhone and iPad from the App Store and add your login in minutes, plus quick fixes for the most common iOS playback problems.",
     "readTime": "5 min read",
     "translations": {
       "fr": {
@@ -331,8 +331,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Offizielle Installation über den App Store für alle modernen Apple-Geräte."
       },
       "es": {
-        "title": "Cómo Instalar IPTV Smarters Pro en iPhone, iPad y Apple TV",
-        "desc": "Tutorial para descargar y configurar la app oficial desde la App Store de Apple."
+        "title": "IPTV Smarters Pro para iPhone y iPad: Instalación (2026)",
+        "desc": "Instala IPTV Smarters Pro en iPhone y iPad desde la App Store y añade tu acceso en minutos, con soluciones a los fallos de reproducción más comunes en iOS."
       },
       "ar": {
         "title": "طريقة تثبيت وتشغيل IPTV Smarters Pro على آيفون وآيباد وآبل تي في",
@@ -351,8 +351,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Guia oficial para configurar a aplicação nos equipamentos Apple via App Store."
       },
       "pt-br": {
-        "title": "Como Instalar IPTV Smarters Pro no iPhone, iPad e Apple TV",
-        "desc": "Aprenda a baixar e configurar o app no ecossistema iOS da Apple com facilidade."
+        "title": "IPTV Smarters Pro no iPhone e iPad: Instalação (2026)",
+        "desc": "Instale o IPTV Smarters Pro no iPhone e iPad pela App Store e adicione seu login em minutos, com correções para os erros de reprodução mais comuns no iOS."
       },
       "pl": {
         "title": "Jak Zainstalować IPTV Smarters Pro na iPhone, iPad i Apple TV",
@@ -668,8 +668,8 @@ export const GUIDES: GuideItem[] = [
   {
     "slug": "is-iptv-smarters-pro-free",
     "category": "comparisons",
-    "title": "Is IPTV Smarters Pro Free? App Cost vs Subscription",
-    "desc": "Understand the difference between the free IPTV Smarters Pro app client and the paid Xtream Codes IPTV subscription required for live channels.",
+    "title": "Is IPTV Smarters Pro Free? App Cost vs Subscription (2026)",
+    "desc": "Is IPTV Smarters Pro free? We explain exactly what the free app includes and why you still need a paid Xtream Codes subscription for live channels — no surprises.",
     "readTime": "6 min read",
     "translations": {
       "fr": {
@@ -681,8 +681,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Der Unterschied zwischen dem kostenlosen Player und dem kostenpflichtigen IPTV-Abonnement verständlich erklärt."
       },
       "es": {
-        "title": "¿Es Gratis IPTV Smarters Pro? (Costo de la App vs Suscripción)",
-        "desc": "Conoce la diferencia entre el reproductor gratuito IPTV Smarters Pro y el abono necesario para los canales."
+        "title": "¿IPTV Smarters Pro es Gratis? App vs Suscripción (2026)",
+        "desc": "¿IPTV Smarters Pro es realmente gratis? Te explicamos qué incluye la app gratuita y por qué necesitas una suscripción de pago para ver los canales en vivo."
       },
       "ar": {
         "title": "هل تطبيق IPTV Smarters Pro مجاني؟ (الفرق بين التطبيق واشتراك القنوات)",
@@ -701,8 +701,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Entenda a distinção entre a aplicação gratuita e a subscrição de canais necessária para streaming."
       },
       "pt-br": {
-        "title": "O IPTV Smarters Pro é Grátis? (Aplicativo vs Assinatura)",
-        "desc": "Saiba a diferença entre o app gratuito de reprodução e a assinatura necessária para liberar canais."
+        "title": "O IPTV Smarters Pro é Grátis? App vs Assinatura (2026)",
+        "desc": "O IPTV Smarters Pro é mesmo grátis? Explicamos o que o app gratuito inclui e por que você ainda precisa de uma assinatura paga para assistir aos canais ao vivo."
       },
       "pl": {
         "title": "Czy IPTV Smarters Pro jest Darmowe? (Aplikacja a Subskrypcja)",
@@ -768,8 +768,8 @@ export const GUIDES: GuideItem[] = [
   {
     "slug": "iptv-smarters-pro-keeps-buffering-fixes",
     "category": "troubleshooting",
-    "title": "IPTV Smarters Pro Keeps Buffering: 7 Fixes That Actually Work",
-    "desc": "Stop the endless spinning wheel. Learn how to increase playback buffer sizes, change video decoders, and bypass ISP throttling.",
+    "title": "IPTV Smarters Pro Buffering? 7 Fixes That Actually Work (2026)",
+    "desc": "Stop IPTV Smarters Pro buffering and freezing. 7 proven fixes for buffer size, video decoder, VPN and ISP throttling that get your streams running smoothly again.",
     "readTime": "8 min read",
     "translations": {
       "fr": {
@@ -781,8 +781,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Schluss mit ständigen Unterbrechungen. 7 bewährte Methoden gegen Ruckeln und Zwischenspeichern."
       },
       "es": {
-        "title": "IPTV Smarters Pro se Traba o Congela: 7 Soluciones Rápidas",
-        "desc": "Elimina los cortes y problemas de buffering en IPTV Smarters Pro con estas 7 soluciones comprobadas."
+        "title": "IPTV Smarters Pro se Traba o Congela: 7 Soluciones (2026)",
+        "desc": "Elimina los cortes y el buffering en IPTV Smarters Pro con 7 soluciones probadas: tamaño de búfer, decodificador de vídeo, VPN y límites del operador."
       },
       "ar": {
         "title": "حل مشكلة التقطيع والتهنيج في تطبيق IPTV Smarters Pro (7 حلول مجربة)",
@@ -801,8 +801,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Elimine o buffering e paragens constantes no IPTV Smarters Pro com estas dicas práticas."
       },
       "pt-br": {
-        "title": "IPTV Smarters Pro Travando ou Congelando: 7 Dicas que Resolvem",
-        "desc": "Acabe com travamentos e lentidão no IPTV Smarters Pro com configurações simples e rápidas."
+        "title": "IPTV Smarters Pro Travando? 7 Dicas que Resolvem (2026)",
+        "desc": "Acabe com travamentos e buffering no IPTV Smarters Pro com 7 soluções testadas: tamanho de buffer, decodificador de vídeo, VPN e limitação da operadora."
       },
       "pl": {
         "title": "IPTV Smarters Pro Zacina się i Buforuje: 7 Skutecznych Rozwiązań",
@@ -1018,8 +1018,8 @@ export const GUIDES: GuideItem[] = [
   {
     "slug": "how-to-add-m3u-playlist-iptv-smarters-pro",
     "category": "setup",
-    "title": "How to Add an M3U Playlist to IPTV Smarters Pro",
-    "desc": "Learn how to import massive M3U URLs into Smarters Pro and how to bypass memory limitations on older streaming devices.",
+    "title": "How to Add an M3U Playlist to IPTV Smarters Pro (2026)",
+    "desc": "Add any M3U or M3U8 URL to IPTV Smarters Pro in a few steps. Our 2026 walkthrough covers importing large playlists and fixing loading errors on Firestick and Android TV.",
     "readTime": "6 min read",
     "translations": {
       "fr": {
@@ -1031,8 +1031,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "So importieren Sie M3U-Links und Wiedergabelisten ohne Speicherprobleme in Smarters Pro."
       },
       "es": {
-        "title": "Cómo Agregar una Lista M3U en IPTV Smarters Pro",
-        "desc": "Aprende a importar listas de reproducción M3U o enlaces URL en IPTV Smarters Pro."
+        "title": "Cómo Agregar una Lista M3U en IPTV Smarters Pro (2026)",
+        "desc": "Importa cualquier lista o URL M3U en IPTV Smarters Pro paso a paso, y aprende a corregir los errores de carga en Firestick y Android TV."
       },
       "ar": {
         "title": "طريقة إضافة وتشغيل قائمة قنوات M3U في IPTV Smarters Pro",
@@ -1051,8 +1051,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Saiba como importar listas M3U ou ficheiros URL para o leitor IPTV Smarters Pro."
       },
       "pt-br": {
-        "title": "Como Adicionar Lista M3U no IPTV Smarters Pro",
-        "desc": "Aprenda a carregar listas M3U ou links URL no IPTV Smarters Pro sem travamentos."
+        "title": "Como Adicionar Lista M3U no IPTV Smarters Pro (2026)",
+        "desc": "Carregue qualquer lista ou URL M3U no IPTV Smarters Pro passo a passo e saiba como corrigir erros de carregamento no Firestick e Android TV."
       },
       "pl": {
         "title": "Jak Dodać Listę M3U do IPTV Smarters Pro",
@@ -1668,8 +1668,8 @@ export const GUIDES: GuideItem[] = [
   {
     "slug": "iptv-smarters-pro-for-pc-mac-setup",
     "category": "devices",
-    "title": "IPTV Smarters Pro for PC and Mac: Complete Setup Guide",
-    "desc": "Stream on your desktop. A complete setup guide for the native Windows and macOS versions of IPTV Smarters Pro.",
+    "title": "IPTV Smarters Pro for PC: Windows & Mac Setup (2026)",
+    "desc": "Download and install IPTV Smarters Pro on Windows 10/11 and macOS, then log in with Xtream Codes. A full desktop setup guide with fixes for common playback issues.",
     "readTime": "8 min read",
     "translations": {
       "fr": {
@@ -1681,8 +1681,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Genießen Sie 4K Streaming am Computer mit unserer einfachen Installationsanleitung."
       },
       "es": {
-        "title": "Cómo Instalar IPTV Smarters Pro en PC Windows y Mac",
-        "desc": "Disfruta de tus canales favoritos en la pantalla de tu ordenador con esta guía."
+        "title": "IPTV Smarters Pro para PC: Windows y Mac (Guía 2026)",
+        "desc": "Descarga e instala IPTV Smarters Pro en Windows 10/11 y macOS y accede con Xtream Codes. Guía completa para PC con soluciones a los problemas más habituales."
       },
       "ar": {
         "title": "طريقة تشغيل وتثبيت IPTV Smarters Pro على الكمبيوتر (ويندوز وماك)",
@@ -1701,8 +1701,8 @@ export const GUIDES: GuideItem[] = [
         "desc": "Assista a canais em direto no ecrã do seu computador com este tutorial prático."
       },
       "pt-br": {
-        "title": "Como Instalar IPTV Smarters Pro no PC Windows e Mac",
-        "desc": "Veja como assistir canais de TV direto no computador com excelente qualidade."
+        "title": "IPTV Smarters Pro no PC: Windows e Mac (Guia 2026)",
+        "desc": "Baixe e instale o IPTV Smarters Pro no Windows 10/11 e macOS e faça login com Xtream Codes. Guia completo para PC com correções dos problemas mais comuns."
       },
       "pl": {
         "title": "Jak Zainstalować IPTV Smarters Pro na PC z Windows i Mac",

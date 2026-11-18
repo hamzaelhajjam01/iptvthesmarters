@@ -266,10 +266,10 @@ export default function RootHomePage() {
       <main className="flex-1">
         <HeroSection />
         <VodSection />
+        <PricingSection />
         <FeaturesSection />
         <SetupWalkthrough />
         <DevicesSection />
-        <PricingSection />
         <TrustHighlights />
         <FaqSection />
         <KnowledgeHubSection />

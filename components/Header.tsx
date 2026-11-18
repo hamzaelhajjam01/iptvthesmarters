@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ALL_LOCALES } from '@/data/locales';
 import { TRANSLATIONS } from '@/data/translations';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface HeaderProps {
   currentLang?: string;
@@ -216,6 +217,9 @@ export default function Header({ currentLang = 'en', guideSlug }: HeaderProps) {
                 </svg>
               </span>
             </Link>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Language Selector */}
             <details className="lang-switch">
