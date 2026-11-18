@@ -340,3 +340,1045 @@ html, body {
     gap: 2rem !important; /* 32px */
   }
 }
+
+/* =========================================================================
+   THEME SYSTEM — light is the default; add class "dark" on <html> for dark.
+   The site was authored dark-first with Tailwind v4 color tokens
+   (e.g. .bg-zinc-900 => var(--color-zinc-900)). We flip those tokens for
+   light mode so every existing utility + opacity variant re-themes at once.
+   ========================================================================= */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* LIGHT (default): remap the dark-scale tokens to a light palette */
+html:not(.dark) {
+  --color-black: #ffffff;     /* page background (bg-black / bg-black/xx) */
+  --color-zinc-950: #f3f4f6;  /* deepest sections */
+  --color-zinc-900: #ffffff;  /* cards & panels */
+  --color-zinc-800: #e4e4e7;  /* borders / subtle surfaces */
+  --color-zinc-700: #d4d4d8;  /* stronger borders */
+  --color-zinc-600: #4b5563;  /* muted text */
+  --color-zinc-500: #52525b;  /* muted text (passes WCAG AA 5.6:1) */
+  --color-zinc-400: #52525b;  /* secondary text */
+  --color-zinc-300: #3f3f46;  /* secondary-strong text */
+  --color-zinc-200: #27272a;  /* near-primary text */
+  --color-zinc-100: #18181b;
+  --color-white: #18181b;     /* primary text (text-white / white/xx) */
+
+  /* Accent tokens flipped to rich, high-contrast values for light surfaces */
+  --color-purple-400: #6d28d9;  /* rich purple text (contrast > 6:1) */
+  --color-purple-300: #5f15cd;
+  --color-blue-400: #0369a1;    /* rich blue text (contrast > 5.2:1) */
+  --color-blue-300: #0284c7;
+  --color-cyan-400: #0e7490;    /* rich cyan text (contrast > 4.6:1) */
+  --color-cyan-300: #0891b2;
+
+  /* Ambient dark backgrounds flipped to light pastel tints for light mode */
+  --color-blue-950: #eff6ff;
+  --color-cyan-950: #ecfeff;
+  --color-purple-950: #faf5ff;
+  --color-indigo-950: #eef2ff;
+  --color-slate-900: #f8fafc;
+}
+
+/* Exceptions: places where white/black were meant literally */
+html:not(.dark) .bg-white { background-color: #ffffff !important; }
+html:not(.dark) .text-black { color: #18181b !important; }
+/* Keep brand gradient text readable in light mode */
+html:not(.dark) .text-gradient { filter: saturate(1.05); }
+
+/* Smooth cross-fade when switching themes */
+html, body,
+.site-header-blur, .site-footer,
+section, header, footer, .media-card, .faq-item {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+/* ---- Theme toggle button ---- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: #e4e4e7;
+  cursor: pointer;
+  transition: all .2s ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  color: #fff;
+  border-color: rgba(168,85,247,.6);
+  background: rgba(123,63,228,.22);
+  box-shadow: 0 0 18px rgba(123,63,228,.35);
+}
+html:not(.dark) .theme-toggle {
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.04);
+  color: #3f3f46;
+}
+html:not(.dark) .theme-toggle:hover {
+  color: #5F15CD;
+  border-color: rgba(123,63,228,.45);
+  background: rgba(123,63,228,.10);
+  box-shadow: 0 0 16px rgba(123,63,228,.20);
+}
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+html:not(.dark) .theme-toggle .icon-sun { display: block; }
+html:not(.dark) .theme-toggle .icon-moon { display: none; }
+
+/* Base element overrides (main.css sets an unlayered body{background:#000}) */
+html:not(.dark) body {
+  background-color: #ffffff;
+  color: #18181b;
+}
+html:not(.dark) .grain-overlay { opacity: 0.25; mix-blend-mode: multiply; }
+
+/* =========================================================================
+   LIGHT MODE — named component overrides (components authored with literal
+   dark colors that don't read the Tailwind color tokens).
+   ========================================================================= */
+html:not(.dark) {
+  /* Hero heading forced white -> dark */
+  --_ignore: 0;
+}
+html:not(.dark) .hero-title { color: #18181b !important; }
+html:not(.dark) .hero-kicker { color: #0e7490 !important; }
+
+/* Hero stage full bleed — unconstrain from product-pages.css main > section */
+.hero-stage,
+main > section.hero-stage,
+main > .hero-stage {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-inline: 0 !important;
+}
+
+/* ---- Hero stage: Full-width purple gradient in light mode ---- */
+html:not(.dark) .hero-stage {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-inline: 0 !important;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(123, 63, 228, 0.22) 0%, rgba(147, 51, 234, 0.10) 45%, rgba(255, 255, 255, 0) 85%),
+    linear-gradient(180deg, #f8f3ff 0%, #ffffff 85%) !important;
+}
+html:not(.dark) .hero-beam-1,
+html:not(.dark) .hero-beam-2 {
+  opacity: 0 !important;
+}
+html:not(.dark) .hero-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(123, 63, 228, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(123, 63, 228, 0.08) 1px, transparent 1px) !important;
+  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 20%, #000 0%, transparent 80%) !important;
+  mask-image: radial-gradient(ellipse 95% 75% at 50% 20%, #000 0%, transparent 80%) !important;
+  opacity: 0.65 !important;
+}
+
+/* ---- Hero visual / Player widget: White mode in light mode ---- */
+html:not(.dark) .hero-panel {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow:
+    0 24px 60px -15px rgba(123, 63, 228, 0.14),
+    0 12px 28px -8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+html:not(.dark) .hero-panel::before {
+  background: linear-gradient(180deg, rgba(123, 63, 228, 0.07) 0%, transparent 100%) !important;
+}
+html:not(.dark) .hero-panel-topbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+html:not(.dark) .hero-panel-label {
+  color: #71717a !important;
+  font-weight: 600 !important;
+}
+html:not(.dark) .hero-live-badge {
+  color: #e11d48 !important;
+  background: rgba(225, 29, 72, 0.08) !important;
+  border-color: rgba(225, 29, 72, 0.22) !important;
+}
+html:not(.dark) .hero-live-dot {
+  background: #e11d48 !important;
+}
+
+/* Channel Tiles in White Mode */
+html:not(.dark) .hero-tile {
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .hero-tile-name {
+  color: #18181b !important;
+  font-weight: 700 !important;
+}
+html:not(.dark) .hero-tile-blue {
+  background: linear-gradient(150deg, #eff6ff 0%, #ffffff 100%) !important;
+  border-color: rgba(59, 130, 246, 0.22) !important;
+  color: #2563eb !important;
+}
+html:not(.dark) .hero-tile-purple {
+  background: linear-gradient(150deg, #faf5ff 0%, #ffffff 100%) !important;
+  border-color: rgba(147, 51, 234, 0.22) !important;
+  color: #7c3aed !important;
+}
+html:not(.dark) .hero-tile-cyan {
+  background: linear-gradient(150deg, #ecfeff 0%, #ffffff 100%) !important;
+  border-color: rgba(6, 182, 212, 0.22) !important;
+  color: #0891b2 !important;
+}
+html:not(.dark) .hero-tile-emerald {
+  background: linear-gradient(150deg, #f0fdf4 0%, #ffffff 100%) !important;
+  border-color: rgba(16, 185, 129, 0.22) !important;
+  color: #059669 !important;
+}
+html:not(.dark) .hero-tile-amber {
+  background: linear-gradient(150deg, #fffbeb 0%, #ffffff 100%) !important;
+  border-color: rgba(245, 158, 11, 0.22) !important;
+  color: #d97706 !important;
+}
+html:not(.dark) .hero-tile-rose {
+  background: linear-gradient(150deg, #fff1f2 0%, #ffffff 100%) !important;
+  border-color: rgba(244, 63, 94, 0.22) !important;
+  color: #e11d48 !important;
+}
+
+/* Marquee pills in player */
+html:not(.dark) .hero-marquee-pill {
+  color: #52525b !important;
+  background: #f4f4f5 !important;
+  border-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Floating hero chips -> light glass cards */
+html:not(.dark) .hero-chip {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .hero-chip-icon {
+  background: rgba(123, 63, 228, 0.12) !important;
+  color: #6d28d9 !important;
+}
+html:not(.dark) .hero-chip-num {
+  color: #18181b !important;
+  font-weight: 800 !important;
+}
+html:not(.dark) .hero-chip-label {
+  color: #52525b !important;
+  font-weight: 500 !important;
+}
+
+/* VOD cards */
+html:not(.dark) .media-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06) !important;
+}
+html:not(.dark) .media-poster-wrap { background: #f3f4f6 !important; }
+html:not(.dark) .media-body { background: #ffffff !important; }
+html:not(.dark) .media-title { color: #18181b !important; }
+html:not(.dark) .media-genre,
+html:not(.dark) .media-year { color: #52525b !important; }
+
+/* Carousel arrows */
+html:not(.dark) .carousel-btn {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  color: #3f3f46 !important;
+}
+html:not(.dark) .carousel-btn:hover {
+  background: rgba(123, 63, 228, 0.10) !important;
+  color: #5F15CD !important;
+}
+
+/* Pricing: device toggle + plan cards */
+html:not(.dark) .device-toggle {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .device-tab:not(.is-active) {
+  color: #52525b !important;
+}
+html:not(.dark) .device-tab:not(.is-active):hover {
+  color: #18181b !important;
+}
+html:not(.dark) .device-tab.is-active {
+  color: #ffffff !important;
+}
+html:not(.dark) .device-tab.is-active .device-tab-bg {
+  background: #5f15cd !important;
+}
+html:not(.dark) .plan-carousel-item,
+html:not(.dark) .plan-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07) !important;
+}
+html:not(.dark) .plan-name,
+html:not(.dark) .plan-price-amount { color: #18181b !important; }
+html:not(.dark) .plan-kicker { color: #52525b !important; }
+html:not(.dark) .plan-features li,
+html:not(.dark) .plan-features li span {
+  color: #27272a !important;
+}
+html:not(.dark) .plan-features .feat-check svg {
+  color: #5f15cd !important;
+}
+html:not(.dark) .plan-discount-chip {
+  color: #047857 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.28) !important;
+}
+html:not(.dark) .plan-card.is-hero .plan-discount-chip {
+  color: #5f15cd !important;
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.28) !important;
+}
+html:not(.dark) .plan-card.is-hero .buy-now-btn {
+  background: linear-gradient(135deg, #7b3fe4, #5f15cd) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(123, 63, 228, 0.28) !important;
+}
+html:not(.dark) .plan-card.is-hero .buy-now-btn:hover {
+  box-shadow: 0 16px 32px rgba(123, 63, 228, 0.40) !important;
+}
+html:not(.dark) .plan-device-lock-badge {
+  color: #52525b !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+html:not(.dark) .plan-divider {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.10), transparent) !important;
+}
+
+/* Premium / diamond panel */
+html:not(.dark) .diamond-panel {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .diamond-title,
+html:not(.dark) .diamond-price { color: #18181b !important; }
+html:not(.dark) .diamond-rate { color: #52525b !important; }
+html:not(.dark) .diamond-rate strong { color: #18181b !important; }
+html:not(.dark) .diamond-features li,
+html:not(.dark) .diamond-features li span {
+  color: #27272a !important;
+}
+html:not(.dark) .diamond-more { color: #52525b !important; }
+html:not(.dark) .diamond-btn {
+  background: linear-gradient(135deg, #7b3fe4, #5f15cd) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(123, 63, 228, 0.28) !important;
+}
+html:not(.dark) .diamond-btn:hover {
+  box-shadow: 0 16px 32px rgba(123, 63, 228, 0.40) !important;
+}
+
+/* FAQ (All Pages) */
+html:not(.dark) .faq-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .faq-item[open] {
+  background: #ffffff !important;
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  box-shadow: 0 8px 24px rgba(123, 63, 228, 0.08) !important;
+}
+html:not(.dark) .faq-summary,
+html:not(.dark) .faq-q {
+  color: #18181b !important;
+}
+html:not(.dark) .faq-item[open] .faq-q {
+  color: #5f15cd !important;
+}
+html:not(.dark) .faq-num {
+  background: rgba(123, 63, 228, 0.08) !important;
+  border-color: rgba(123, 63, 228, 0.20) !important;
+  color: #5f15cd !important;
+}
+html:not(.dark) .faq-item[open] .faq-num {
+  background: rgba(123, 63, 228, 0.15) !important;
+  border-color: rgba(123, 63, 228, 0.45) !important;
+  color: #5f15cd !important;
+}
+html:not(.dark) .faq-chevron {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .faq-chevron svg {
+  color: #52525b !important;
+}
+html:not(.dark) .faq-item[open] .faq-chevron {
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  background: rgba(123, 63, 228, 0.10) !important;
+}
+html:not(.dark) .faq-item[open] .faq-chevron svg {
+  color: #5f15cd !important;
+}
+html:not(.dark) .faq-answer p {
+  color: #3f3f46 !important;
+}
+
+/* Language trigger & menu */
+html:not(.dark) .lang-trigger {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #27272a !important;
+}
+html:not(.dark) .lang-trigger:hover,
+html:not(.dark) .lang-trigger[aria-expanded="true"],
+html:not(.dark) details.lang-switch[open] > summary.lang-trigger {
+  color: #5f15cd !important;
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.45) !important;
+  box-shadow: 0 0 16px rgba(123, 63, 228, 0.20) !important;
+}
+html:not(.dark) .lang-trigger .lang-chevron {
+  color: #71717a !important;
+}
+html:not(.dark) .lang-trigger:hover .lang-chevron,
+html:not(.dark) details.lang-switch[open] > summary.lang-trigger .lang-chevron {
+  color: #5f15cd !important;
+}
+html:not(.dark) .lang-menu {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .lang-item { color: #27272a !important; }
+html:not(.dark) .lang-item:hover { background: rgba(123, 63, 228, 0.08) !important; color: #5f15cd !important; }
+
+/* Desktop header nav active/hover */
+html:not(.dark) .nav-link-active {
+  color: #5f15cd !important;
+}
+html:not(.dark) .site-nav-desktop .nav-link:hover {
+  color: #5f15cd !important;
+}
+
+/* Mobile menu toggle button */
+html:not(.dark) .menu-toggle {
+  color: #18181b !important;
+}
+html:not(.dark) .menu-icon,
+html:not(.dark) .menu-icon::before,
+html:not(.dark) .menu-icon::after {
+  background-color: #18181b !important;
+}
+
+/* Mobile drawer */
+html:not(.dark) .mobile-nav {
+  background: #ffffff !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.10) !important;
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15) !important;
+}
+html:not(.dark) .mobile-nav-row {
+  color: #3f3f46 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .mobile-nav-row:hover {
+  color: #5f15cd !important;
+  background: rgba(123, 63, 228, 0.06) !important;
+}
+html:not(.dark) .mobile-nav-row.mobile-nav-row-active,
+html:not(.dark) .mobile-nav-row-active {
+  color: #5f15cd !important;
+  background: rgba(123, 63, 228, 0.08) !important;
+}
+html:not(.dark) .mobile-lang-section {
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .mobile-lang-item {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  color: #27272a !important;
+}
+html:not(.dark) .mobile-lang-item:hover {
+  background: rgba(123, 63, 228, 0.08) !important;
+  color: #5f15cd !important;
+}
+html:not(.dark) .mobile-lang-item.is-active {
+  background: rgba(123, 63, 228, 0.12) !important;
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  color: #5f15cd !important;
+}
+
+/* Neutral "default" chips -> light in light mode */
+html:not(.dark) .heroui-chip-default {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #3f3f46 !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+html:not(.dark) .heroui-chip-default:hover {
+  background: rgba(0, 0, 0, 0.09) !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+  color: #18181b !important;
+}
+
+/* Article prose (.prose) authored for dark bg -> readable on light */
+html:not(.dark) .prose h1,
+html:not(.dark) .prose h2,
+html:not(.dark) .prose h3,
+html:not(.dark) .prose h4,
+html:not(.dark) .prose h5,
+html:not(.dark) .prose h6,
+html:not(.dark) .prose strong,
+html:not(.dark) .prose th,
+html:not(.dark) .prose b { color: #18181b !important; }
+html:not(.dark) .prose p,
+html:not(.dark) .prose li,
+html:not(.dark) .prose td,
+html:not(.dark) .prose blockquote { color: #3f3f46 !important; }
+html:not(.dark) .prose a { color: #5F15CD !important; }
+html:not(.dark) .prose code {
+  color: #5F15CD !important;
+  background: rgba(123, 63, 228, 0.08) !important;
+}
+html:not(.dark) .prose blockquote {
+  border-left-color: rgba(123, 63, 228, 0.35) !important;
+}
+html:not(.dark) .prose hr { border-color: rgba(0, 0, 0, 0.10) !important; }
+
+/* =========================================================================
+   LIGHT MODE — Gradient Banner & Callout Cards
+   Fixes dark/metallic gradient cards (like the Consumer Protection card on
+   /iptv-services, guide recommendation cards, etc.) to have clean, high-contrast light surfaces.
+   ========================================================================= */
+
+/* The IPTV Services Consumer Protection card & all from-blue-950/via-zinc-900/to-cyan-950 banners */
+html:not(.dark) [class*="from-blue-950"][class*="to-cyan-950"],
+html:not(.dark) .from-blue-950\/80.via-zinc-900.to-cyan-950\/80 {
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #ecfeff 100%) !important;
+  border-color: rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.08) !important;
+}
+
+/* Gradient utility stops in light mode: convert dark 950/900 gradient stops to soft light pastel tints */
+html:not(.dark) .from-blue-950\/80,
+html:not(.dark) .from-blue-950\/40,
+html:not(.dark) .from-blue-950 {
+  --tw-gradient-from: #f0f7ff !important;
+}
+html:not(.dark) .to-cyan-950\/80,
+html:not(.dark) .to-cyan-950\/40,
+html:not(.dark) .to-cyan-950 {
+  --tw-gradient-to: #ecfeff !important;
+}
+html:not(.dark) .from-purple-950\/40,
+html:not(.dark) .from-purple-950\/30,
+html:not(.dark) .from-purple-950 {
+  --tw-gradient-from: #faf5ff !important;
+}
+html:not(.dark) .to-blue-950\/40,
+html:not(.dark) .to-blue-950 {
+  --tw-gradient-to: #eff6ff !important;
+}
+html:not(.dark) .to-indigo-950\/40,
+html:not(.dark) .to-indigo-950 {
+  --tw-gradient-to: #eef2ff !important;
+}
+html:not(.dark) .from-purple-900\/30,
+html:not(.dark) .from-purple-900\/20,
+html:not(.dark) .from-purple-900 {
+  --tw-gradient-from: #faf5ff !important;
+}
+html:not(.dark) .to-blue-900\/20,
+html:not(.dark) .to-blue-900 {
+  --tw-gradient-to: #eff6ff !important;
+}
+html:not(.dark) .via-violet-900\/20 {
+  --tw-gradient-via: #f5f3ff !important;
+}
+html:not(.dark) .via-zinc-900\/60,
+html:not(.dark) .via-zinc-900\/80,
+html:not(.dark) .via-zinc-900 {
+  --tw-gradient-via: #ffffff !important;
+}
+html:not(.dark) .to-zinc-900\/60,
+html:not(.dark) .to-zinc-900\/40,
+html:not(.dark) .to-zinc-900 {
+  --tw-gradient-to: #ffffff !important;
+}
+html:not(.dark) .from-zinc-900\/40,
+html:not(.dark) .from-zinc-900 {
+  --tw-gradient-from: #ffffff !important;
+}
+
+/* Gradient card borders */
+html:not(.dark) .border-blue-500\/30,
+html:not(.dark) .border-blue-500\/20 {
+  border-color: rgba(37, 99, 235, 0.22) !important;
+}
+html:not(.dark) .border-purple-500\/30,
+html:not(.dark) .border-purple-500\/20,
+html:not(.dark) .border-purple-800\/30 {
+  border-color: rgba(123, 63, 228, 0.22) !important;
+}
+
+/* Text and headings inside banner cards */
+html:not(.dark) [class*="from-blue-950"] h2,
+html:not(.dark) [class*="from-blue-950"] h3,
+html:not(.dark) [class*="from-purple-950"] h2,
+html:not(.dark) [class*="from-purple-950"] h3,
+html:not(.dark) [class*="from-purple-900"] h2,
+html:not(.dark) [class*="from-purple-900"] h3 {
+  color: #18181b !important;
+}
+html:not(.dark) [class*="from-blue-950"] p,
+html:not(.dark) [class*="from-purple-950"] p,
+html:not(.dark) [class*="from-purple-900"] p {
+  color: #3f3f46 !important;
+}
+
+/* Badges on banner cards */
+html:not(.dark) .bg-blue-500\/20 {
+  background-color: rgba(37, 99, 235, 0.10) !important;
+  border-color: rgba(37, 99, 235, 0.25) !important;
+}
+html:not(.dark) .text-blue-400 {
+  color: #0369a1 !important;
+}
+
+/* CTA buttons inside cards: ensure white text on colored/gradient buttons */
+html:not(.dark) a.bg-blue-600,
+html:not(.dark) button.bg-blue-600,
+html:not(.dark) a.bg-purple-600,
+html:not(.dark) button.bg-purple-600,
+html:not(.dark) a[class*="bg-gradient-"][class*="from-purple-600"],
+html:not(.dark) a[class*="bg-gradient-"][class*="from-blue-600"] {
+  color: #ffffff !important;
+}
+html:not(.dark) a.bg-blue-600 *,
+html:not(.dark) button.bg-blue-600 *,
+html:not(.dark) a.bg-purple-600 *,
+html:not(.dark) button.bg-purple-600 *,
+html:not(.dark) a[class*="bg-gradient-"][class*="from-purple-600"] *,
+html:not(.dark) a[class*="bg-gradient-"][class*="from-blue-600"] * {
+  color: #ffffff !important;
+}
+
+/* HeroUI in-content callout banner (in guides) */
+html:not(.dark) .heroui-callout {
+  background: linear-gradient(135deg, #fbf8ff 0%, #ffffff 100%) !important;
+  border: 1px solid rgba(123, 63, 228, 0.22) !important;
+  box-shadow: 0 10px 30px -5px rgba(123, 63, 228, 0.10), 0 0 0 1px rgba(123, 63, 228, 0.05) !important;
+}
+html:not(.dark) .heroui-callout::before {
+  background: radial-gradient(circle, rgba(123, 63, 228, 0.10) 0%, transparent 70%) !important;
+}
+html:not(.dark) .heroui-callout-chip {
+  background: rgba(123, 63, 228, 0.10) !important;
+  color: #6d28d9 !important;
+  border-color: rgba(123, 63, 228, 0.25) !important;
+}
+html:not(.dark) .heroui-callout-title,
+html:not(.dark) .heroui-callout h1,
+html:not(.dark) .heroui-callout h2,
+html:not(.dark) .heroui-callout h3,
+html:not(.dark) .heroui-callout h4,
+html:not(.dark) .heroui-callout strong,
+html:not(.dark) .heroui-callout b {
+  color: #18181b !important;
+}
+html:not(.dark) .heroui-callout-desc,
+html:not(.dark) .heroui-callout p,
+html:not(.dark) .heroui-callout li,
+html:not(.dark) .heroui-callout .heroui-callout-text {
+  color: #3f3f46 !important;
+}
+html:not(.dark) .heroui-callout-desc a,
+html:not(.dark) .heroui-callout a:not(.heroui-callout-btn) {
+  color: #6d28d9 !important;
+  font-weight: 700 !important;
+}
+html:not(.dark) .heroui-callout-btn {
+  background: linear-gradient(135deg, #7b3fe4, #5f15cd) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .heroui-callout-btn * {
+  color: #ffffff !important;
+}
+html:not(.dark) .heroui-callout-meta {
+  color: #52525b !important;
+}
+
+/* Guide & article tables in light mode (eliminates dark-on-dark table cells) */
+html:not(.dark) table {
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+html:not(.dark) table thead,
+html:not(.dark) table th {
+  background-color: #f4f4f5 !important;
+  color: #18181b !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+html:not(.dark) table tbody tr {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) table tbody tr:nth-child(even) {
+  background-color: #fafafa !important;
+}
+html:not(.dark) table td {
+  background-color: transparent !important;
+  color: #27272a !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) table td strong,
+html:not(.dark) table td b {
+  color: #18181b !important;
+}
+
+/* Channels page: cards/inputs use hardcoded arbitrary hex (bg-[#0f172a]) that
+   bypasses the color tokens — light-mode overrides. */
+html:not(.dark) .channel-card,
+html:not(.dark) .bg-\[\#0f172a\] {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+html:not(.dark) .border-\[\#334155\]\/60,
+html:not(.dark) .border-\[\#334155\]\/40,
+html:not(.dark) .border-\[\#334155\] { border-color: rgba(0, 0, 0, 0.12) !important; }
+html:not(.dark) .channel-card,
+html:not(.dark) .channel-card * { color: #18181b !important; }
+/* Search inputs with dark arbitrary backgrounds */
+html:not(.dark) input.bg-\[\#0f172a\],
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="search"] {
+  background-color: #ffffff !important;
+  color: #18181b !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+html:not(.dark) input::placeholder { color: #9ca3af !important; }
+
+/* =========================================================================
+   LIGHT MODE — product pages (.kw-* system from product-pages.css, injected
+   into products/[slug] and similar). Flip the palette vars + dark text.
+   ========================================================================= */
+html:not(.dark) {
+  --kw-bg: #ffffff;
+  --kw-card: #ffffff;
+  --kw-line: rgba(0, 0, 0, 0.10);
+}
+/* Copy cards */
+html:not(.dark) .kw-copy section {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+}
+html:not(.dark) .kw-copy section:hover { border-color: rgba(123, 63, 228, 0.35) !important; }
+/* Headings & strong -> dark */
+html:not(.dark) .kw-hero h1,
+html:not(.dark) .kw-copy h2,
+html:not(.dark) .plans h2,
+html:not(.dark) .faq h2,
+html:not(.dark) .plans > h2,
+html:not(.dark) .kw-plan h3,
+html:not(.dark) .kw-plan > strong { color: #18181b !important; }
+/* Body copy -> readable grey */
+html:not(.dark) .kw-hero p,
+html:not(.dark) .kw-copy p,
+html:not(.dark) .plans > p,
+html:not(.dark) .faq-answer,
+html:not(.dark) .kw-plan ul,
+html:not(.dark) .kw-plan small { color: #3f3f46 !important; }
+/* Plan cards -> light */
+html:not(.dark) .kw-plan {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07) !important;
+}
+html:not(.dark) .kw-plan:hover {
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10), 0 0 24px rgba(123, 63, 228, 0.12) !important;
+}
+/* Related topics */
+html:not(.dark) .related-topics { border-top-color: rgba(0, 0, 0, 0.10) !important; }
+html:not(.dark) .related-card { color: #27272a !important; }
+html:not(.dark) .related-card:hover { background: rgba(123, 63, 228, 0.06) !important; color: #5F15CD !important; }
+/* Breadcrumbs */
+html:not(.dark) .breadcrumbs { color: #71717a !important; }
+
+/* =========================================================================
+   LIGHT MODE — HeroUI/glass card token system (unified card surface used by
+   .plan-card, .kw-copy section, .faq-item, .related-card, .diamond-panel, etc.
+   These are driven by !important token rules, so flip the tokens.)
+   ========================================================================= */
+html:not(.dark) {
+  --heroui-background: #ffffff;
+  --heroui-content1: #ffffff;   /* card surface */
+  --heroui-content2: #f4f4f6;   /* elevated surface */
+  --heroui-content3: #e4e4e7;
+  --heroui-content4: #d4d4d8;
+  --heroui-foreground: #18181b; /* primary text */
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+/* Soften the shared card group's hardcoded dark border + shadow in light mode */
+html:not(.dark) .plan-card,
+html:not(.dark) .pricing-diamond-slot .diamond-panel,
+html:not(.dark) .kw-plan,
+html:not(.dark) .kw-copy section,
+html:not(.dark) .faq-item,
+html:not(.dark) .related-card {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 28px -4px rgba(0, 0, 0, 0.10) !important;
+}
+
+/* =========================================================================
+   LIGHT MODE — Setup modal (#smarters-setup-modal, .ssm-*). Self-contained
+   dark dialog; re-theme its surfaces for light. (Order & trial modals are
+   already light.) Scrim stays dark.
+   ========================================================================= */
+html:not(.dark) #smarters-setup-modal {
+  background: linear-gradient(145deg, #ffffff, #f6f4fb 62%) !important;
+  color: #1c1726 !important;
+  border-color: rgba(149, 99, 237, 0.30) !important;
+}
+html:not(.dark) .ssm-head { border-bottom-color: rgba(0, 0, 0, 0.08) !important; }
+html:not(.dark) .ssm-close {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  color: #52525b !important;
+}
+html:not(.dark) .ssm-close:hover { background: #5f15cd !important; color: #fff !important; }
+html:not(.dark) .ssm-label { color: #6b7280 !important; }
+html:not(.dark) .ssm-device,
+html:not(.dark) .ssm-method {
+  background: #ffffff !important;
+  color: #3f3f46 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+/* Keep selected states (purple) as designed */
+html:not(.dark) .ssm-device[aria-selected="true"] { color: #fff !important; }
+html:not(.dark) .ssm-method[aria-selected="true"] {
+  background: rgba(123, 63, 228, 0.10) !important;
+  color: #5f15cd !important;
+}
+
+/* Setup modal — restore selected-device purple (my .ssm-device bg override hit it)
+   and theme the step rows for light. */
+html:not(.dark) .ssm-device[aria-selected="true"] {
+  background: linear-gradient(135deg, #7b3fe4, #5f15cd) !important;
+  border-color: #8f58ec !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .ssm-steps li {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #3f3f46 !important;
+}
+
+/* Directory category filter pills (.quick-tab-btn) -> light */
+html:not(.dark) .quick-tab-btn {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: #52525b !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+html:not(.dark) .quick-tab-btn:hover,
+html:not(.dark) .quick-tab-btn.is-active {
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  color: #5f15cd !important;
+}
+
+/* Directory resource cards (.heroui-card) -> light */
+html:not(.dark) .heroui-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px -6px rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .heroui-card:hover {
+  border-color: rgba(123, 63, 228, 0.35) !important;
+}
+
+/* Knowledge-hub card headings were forced white; cards are light now -> dark text.
+   (Scoped to the hub only; .guide-card-title stays white on its dark cover images.) */
+html:not(.dark) #seo-knowledge-hub a.group h3 { color: #18181b !important; }
+html:not(.dark) #seo-knowledge-hub a.group p { color: #52525b !important; }
+
+/* Channels page category tabs (.channel-tab-btn, arbitrary dark hex) -> light.
+   Active tab keeps its purple bg but needs white text restored (token flip
+   darkened its text-white). */
+html:not(.dark) .channel-tab-btn:not(.is-active) {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: #52525b !important;
+}
+html:not(.dark) .channel-tab-btn:not(.is-active):hover {
+  background-color: rgba(0, 0, 0, 0.09) !important;
+  color: #18181b !important;
+}
+html:not(.dark) .channel-tab-btn.is-active { color: #ffffff !important; }
+
+/* Hero section typography & chips in light mode */
+html:not(.dark) .hero-kicker {
+  color: #0891b2 !important;
+}
+html:not(.dark) .hero-sub {
+  color: #3f3f46 !important;
+}
+html:not(.dark) .hero-trust {
+  color: #52525b !important;
+}
+html:not(.dark) .hero-marquee-pill {
+  color: #3f3f46 !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .hero-chip-label {
+  color: #52525b !important;
+}
+html:not(.dark) .eyebrow {
+  color: #5f15cd !important;
+}
+html:not(.dark) .pricing-currency-note {
+  color: #52525b !important;
+}
+html:not(.dark) .heroui-chip.heroui-chip-primary {
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.25) !important;
+  color: #5f15cd !important;
+}
+
+/* HARD RULE 3: Restore white text on solid/gradient colored action buttons & badges */
+html:not(.dark) .btn-buy-now,
+html:not(.dark) .buy-now-btn,
+html:not(.dark) .kw-badge,
+html:not(.dark) .bg-blue-600,
+html:not(.dark) .bg-blue-500,
+html:not(.dark) .bg-purple-600,
+html:not(.dark) .bg-purple-500,
+html:not(.dark) .bg-emerald-600,
+html:not(.dark) .bg-gradient-primary,
+html:not(.dark) a.bg-blue-600,
+html:not(.dark) button.bg-blue-600,
+html:not(.dark) a.bg-purple-600,
+html:not(.dark) button.bg-purple-600,
+html:not(.dark) [class*="bg-blue-600"],
+html:not(.dark) [class*="bg-purple-600"] {
+  color: #ffffff !important;
+}
+html:not(.dark) .btn-buy-now *,
+html:not(.dark) .buy-now-btn *,
+html:not(.dark) .bg-blue-600 *,
+html:not(.dark) .bg-purple-600 * {
+  color: #ffffff !important;
+}
+
+/* Knowledge-hub category pills */
+html:not(.dark) #seo-knowledge-hub .flex-wrap a {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.10) !important;
+  color: #3f3f46 !important;
+}
+html:not(.dark) #seo-knowledge-hub .flex-wrap a:hover {
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.40) !important;
+  color: #5f15cd !important;
+}
+
+/* Setup modal headings & kicker polish */
+html:not(.dark) .ssm-head h2 {
+  color: #18181b !important;
+}
+html:not(.dark) .ssm-head p {
+  color: #52525b !important;
+}
+html:not(.dark) .ssm-kicker {
+  color: #5f15cd !important;
+  background: rgba(123, 63, 228, 0.10) !important;
+  border-color: rgba(123, 63, 228, 0.30) !important;
+}
+
+/* Footer light mode polish */
+html:not(.dark) footer,
+html:not(.dark) footer p,
+html:not(.dark) .site-footer p {
+  color: #52525b !important;
+}
+html:not(.dark) footer strong,
+html:not(.dark) .site-footer strong,
+html:not(.dark) footer h2,
+html:not(.dark) footer h3,
+html:not(.dark) .site-footer h2,
+html:not(.dark) .site-footer h3 {
+  color: #18181b !important;
+}
+html:not(.dark) footer ul li a,
+html:not(.dark) .site-footer ul li a {
+  color: #52525b !important;
+}
+html:not(.dark) footer ul li a:hover,
+html:not(.dark) .site-footer ul li a:hover {
+  color: #18181b !important;
+}
+html:not(.dark) footer .border-zinc-900,
+html:not(.dark) .site-footer .border-zinc-900 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) footer .bg-cyan-500\/20 {
+  background-color: rgba(14, 116, 144, 0.12) !important;
+  color: #0e7490 !important;
+  border-color: rgba(14, 116, 144, 0.25) !important;
+}
+html:not(.dark) footer .bg-blue-500\/20 {
+  background-color: rgba(29, 78, 216, 0.12) !important;
+  color: #1d4ed8 !important;
+  border-color: rgba(29, 78, 216, 0.25) !important;
+}
+html:not(.dark) footer .bg-orange-500\/20 {
+  background-color: rgba(194, 65, 12, 0.12) !important;
+  color: #c2410c !important;
+  border-color: rgba(194, 65, 12, 0.25) !important;
+}
+html:not(.dark) footer .bg-purple-500\/20 {
+  background-color: rgba(109, 40, 217, 0.12) !important;
+  color: #6d28d9 !important;
+  border-color: rgba(109, 40, 217, 0.25) !important;
+}
+html:not(.dark) .footer-top-glow {
+  opacity: 0.15 !important;
+}
+
+/* Reseller page CTA button gradient */
+a[href="#pricing-tiers"] {
+  background: linear-gradient(135deg, #7b3fe4, #4f46e5) !important;
+  color: #ffffff !important;
+}
+
+/* Footer WhatsApp CTA button gradient */
+footer a[href*="wa.me"] {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+  color: #ffffff !important;
+}
+footer a[href*="wa.me"] * {
+  color: #ffffff !important;
+}
+
+/* Directory cyan badges & tags in light mode */
+html:not(.dark) .bg-cyan-950\/80 {
+  background-color: rgba(14, 116, 144, 0.10) !important;
+  border-color: rgba(14, 116, 144, 0.25) !important;
+  color: #0e7490 !important;
+}
+html:not(.dark) .bg-zinc-950 {
+  background-color: #f3f4f6 !important;
+}
+html:not(.dark) .border-zinc-800\/80 {
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+
+

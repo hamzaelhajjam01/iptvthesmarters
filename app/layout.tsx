@@ -38,6 +38,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();",
+          }}
+        />
         <link rel="stylesheet" href="/assets/css/brand-fonts.css" />
         <link rel="stylesheet" href="/assets/css/inter.css" />
         <link rel="stylesheet" href="/assets/css/arabic-font.css" />
